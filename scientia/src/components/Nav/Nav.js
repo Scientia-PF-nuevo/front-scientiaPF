@@ -2,21 +2,31 @@ import React from "react";
 import './Nav.css';
 import { Link } from "react-router-dom";
 
+// Logo
+import logo from '../../images/logo.png';
+
 export default function Nav () {
     return (
-        <div>
-            <ul>
-                <li>
-                    <Link to='/home'>
-                        Home
+        <div className='container'> 
+            <div className='containLogo'>
+                <Link to='/home'>
+                    <img className='logoNav' src={logo} alt='logo Scientia' />
+                </Link>
+            </div>
+            <nav className='containerNav'>
+                <div className='containLi'>
+                    <Link className='linkNav' to='/home'>
+                        <li className='liNav'>
+                            Home
+                        </li>
                     </Link>
-                </li>
-                <li>
-                    <Link to='/about'>
-                        About
+                    <Link className='linkNav' to='/about'>
+                        <li className='liNav'>
+                            About
+                        </li>
                     </Link>
-                </li>
-            </ul>
+                </div>
+            </nav>
         </div>
     );
 };
