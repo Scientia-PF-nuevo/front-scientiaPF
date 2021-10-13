@@ -1,0 +1,9 @@
+export const GET_ALL_COURSES = 'GET_ALL_COURSES';
+export const GET_USERS = 'GET_USERS';
+export const GET_ADMINS = 'GET_ADMINS';
+export const SEARCH_BY_NAME = 'SEARCH_BY_NAME',
+export const GET_FAVORITE_COURSES = 'GET_FAVORITE_COURSES';
+export const GET_COURSE_DETAILS = 'GET_COURSE_DETAILS';
+export const FILTER_BY = 'FILTER_BY';
+export const ORDER_BY = 'ORDER_BY';
+export const GET_GENRES_COURSES = 'GET_GENRES_COURSES'
