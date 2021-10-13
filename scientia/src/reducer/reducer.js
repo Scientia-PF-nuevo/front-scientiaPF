@@ -86,27 +86,33 @@ export default function rootReducer(state = initialState, action) {
                     };
 
             case ORDER_BY:
-                if(action.payload === 'A-Z'){
-                    return {...state, filteredCourses: [...state.filteredCourses].sort((prev, next) => {
-                        if(prev.name > next.name) return 1
-                        if(prev.name < next.name) return -1
-                        return 0
-                    })}}
-                if(action.payload === 'Z-A'){
-                    return {...state, filteredCourses: [...state.filteredCourses].sort((prev, next) => {
-                        if(prev.name > next.name) return -1
-                        if(prev.name < next.name) return 1
-                        return 0
-                    })}}
-                if(action.payload === 'desc'){
-                    return {...state, filteredCourses: [...state.filteredCourses].sort((prev,next) => prev.rating - next.rating)}
-                   }
-                if(action.payload === 'asc'){
-                    return {...state, filteredCourses: [...state.filteredCourses].sort((prev,next) => next.rating - prev.rating)}
+                    if(action.payload === 'A-Z'){
+                        return {...state, filteredCourses: [...state.filteredCourses].sort((prev, next) => {
+                            if(prev.name > next.name) return 1
+                            if(prev.name < next.name) return -1
+                            return 0
+                        })}}
+                    if(action.payload === 'Z-A'){
+                        return {...state, filteredCourses: [...state.filteredCourses].sort((prev, next) => {
+                            if(prev.name > next.name) return -1
+                            if(prev.name < next.name) return 1
+                            return 0
+                        })}}
+                    if(action.payload === 'desc'){
+                        return {...state, filteredCourses: [...state.filteredCourses].sort((prev,next) => prev.rating - next.rating)}
                     }
+                    if(action.payload === 'asc'){
+                        return {...state, filteredCourses: [...state.filteredCourses].sort((prev,next) => next.rating - prev.rating)}
+                    }
+                    if(action.payload === '0-9'){
+                        return {...state, filteredCourses: [...state.filteredCourses].sort((prev,next) => prev.releaseDate - next.releaseDate)}
+                       }
+                    if(action.payload === '9-0'){
+                        return {...state, filteredCourses: [...state.filteredCourses].sort((prev,next) => next.releaseDate - prev.releaseDate)}
+                        }
                 else {
                     return {...state, filteredCourses: state.coursesBackup}
-                    };
+                };
 
         default: 
             return state;
