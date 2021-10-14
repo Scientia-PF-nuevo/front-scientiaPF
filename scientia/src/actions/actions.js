@@ -8,7 +8,9 @@ import { GET_ALL_COURSES,
          GET_GENRES_COURSES,
          SEARCH_BY_NAME,
          FILTER_BY,
-         ORDER_BY } from './constants.js';
+         ORDER_BY, 
+         LOGIN,
+         LOGEADO} from './constants.js';
 
 
 //* Trae todos los cursos (DB + API)
@@ -107,5 +109,18 @@ export function orderBy(order) {
 export function filterBy(order) {
     return function (dispatch) {
         dispatch({type: FILTER_BY, payload: order})
+    }
+}
+
+export function logear(data){
+    return {
+        type: LOGIN,
+        payload: data
+    }
+}
+
+export function logeado (){
+    return {
+        type: LOGEADO
     }
 }
