@@ -4,8 +4,27 @@ import * as actionCreators from './../../actions/actions'
 import s from './login.module.css'
 import { bindActionCreators } from 'redux';
 import { Modal, Button } from 'react-bootstrap'
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
 
 function Login(props) {
+
+    function autenticarConGoogle() {
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                const user = result.user;
+                props.logear(user)
+                props.logeado()
+                handleShow()
+            }).catch((error) => {
+                const errorCode = error.code;
+                return errorCode
+            });
+    }
 
     const [state, setState] = useState({ email: '', password: '', remember: false })
     const [show, setShow] = useState(false);
@@ -28,10 +47,15 @@ function Login(props) {
         handleShow()
     }
 
+    function submitGoogle(e) {
+        e.preventDefault()
+        autenticarConGoogle();
+    }
+
     return (
         <>
             <div className={s.contenedorFormLogin}>
-                <form onSubmit={handleSubmit}>
+                <form>
                     <div className="mb-3">
                         <label htmlFor="exampleInputEmail1" className="form-label">Correo electrónico</label>
                         <input name="email" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChange} />
@@ -45,8 +69,8 @@ function Login(props) {
                         <label className="form-check-label" htmlFor="exampleCheck1">Permanecer logeado</label>
                     </div>
                     <div className={s.botones}>
-                        <button type="submit" className="btn btn-primary btn-lg">Entrar</button>
-                        <button type="submit" className="btn btn-outline-primary btn-lg">Entrar con Google</button>
+                        <button onClick={handleSubmit} type="submit" className="btn btn-primary btn-lg">Entrar</button>
+                        <button onClick={submitGoogle} type="submit" className="btn btn-outline-primary btn-lg">Entrar con Google</button>
                     </div>
                 </form>
             </div>
@@ -54,7 +78,7 @@ function Login(props) {
                 <Modal.Header closeButton>
                     <Modal.Title>Inicio de Sesión</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{props.login ? `Bienvenido ${props.users[0]}!` : 'Revisa tus credenciales'}</Modal.Body>
+                <Modal.Body>{props.user ? `Bienvenido ${props.user.displayName}!` : 'Revisa tus credenciales'}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleClose}>
                         Ok!
@@ -72,7 +96,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     return {
         login: state.login,
-        users: state.users
+        user: state.user
     }
 }
 

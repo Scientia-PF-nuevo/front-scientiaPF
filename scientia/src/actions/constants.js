@@ -8,3 +8,4 @@ export const FILTER_BY = 'FILTER_BY';
 export const ORDER_BY = 'ORDER_BY';
 export const GET_GENRES_COURSES = 'GET_GENRES_COURSES'
 export const LOGIN = 'LOGIN'
+export const LOGEADO = 'LOGEADO'

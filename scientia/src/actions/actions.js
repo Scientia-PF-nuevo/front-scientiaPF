@@ -9,7 +9,8 @@ import { GET_ALL_COURSES,
          SEARCH_BY_NAME,
          FILTER_BY,
          ORDER_BY, 
-         LOGIN} from './constants.js';
+         LOGIN,
+         LOGEADO} from './constants.js';
 
 
 //* Trae todos los cursos (DB + API)
@@ -115,5 +116,11 @@ export function logear(data){
     return {
         type: LOGIN,
         payload: data
+    }
+}
+
+export function logeado (){
+    return {
+        type: LOGEADO
     }
 }

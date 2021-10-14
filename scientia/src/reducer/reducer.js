@@ -8,7 +8,8 @@ import {
     GET_GENRES_COURSES,
     FILTER_BY,
     ORDER_BY,
-    LOGIN
+    LOGIN,
+    LOGEADO
 } from '../actions/constants';
 
 
@@ -22,7 +23,8 @@ const initialState = {
     courseDetails: {},
     favoritesCourses: [],
     filteredCourses: [],
-    login: false
+    login: false,
+    user: {}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -122,6 +124,11 @@ export default function rootReducer(state = initialState, action) {
             };
 
         case LOGIN:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case LOGEADO:
             return {
                 ...state,
                 login: true
