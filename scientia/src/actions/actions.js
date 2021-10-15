@@ -123,6 +123,9 @@ export function setCourseToAprove (payload) {
     catch(error){
         console.log("Error", error)
 
+    }
+}
+
 export function logear(data){
     return {
         type: LOGIN,
