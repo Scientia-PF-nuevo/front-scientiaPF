@@ -10,7 +10,8 @@ import { GET_ALL_COURSES,
          FILTER_BY,
          ORDER_BY, 
          LOGIN,
-         LOGEADO} from './constants.js';
+         LOGEADO,
+         SET_COURSE_TOAPROVE } from './constants.js';
 
 
 //* Trae todos los cursos (DB + API)
@@ -28,7 +29,7 @@ export function getAllCourses() {
 export function searchByName(name) {
     return function (dispatch) {
         return axios.get(`http://localhost:3001/courses?name=${name}`)
-       
+
         .then(res => {
 
             dispatch({ type: SEARCH_BY_NAME, payload: res.data });
@@ -111,6 +112,16 @@ export function filterBy(order) {
         dispatch({type: FILTER_BY, payload: order})
     }
 }
+
+export function setCourseToAprove (payload) {
+    try {
+        return {
+            type: SET_COURSE_TOAPROVE,
+            payload
+        }
+    }
+    catch(error){
+        console.log("Error", error)
 
 export function logear(data){
     return {

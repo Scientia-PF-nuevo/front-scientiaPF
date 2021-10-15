@@ -25,6 +25,11 @@ export default function Nav () {
                             About
                         </li>
                     </Link>
+                    <Link className='linkNav' to='/form'>
+                        <li className='liNav'>
+                            Form
+                        </li>
+                    </Link>
                 </div>
             </nav>
         </div>
