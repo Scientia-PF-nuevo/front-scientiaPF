@@ -24,6 +24,10 @@ export default function Nav () {
                         <li className='liNav'>
                             About
                         </li>
+                    </Link><Link className='linkNav' to='/signup'>
+                        <li className='liNav'>
+                            Sign Up
+                        </li>
                     </Link>
                 </div>
             </nav>
