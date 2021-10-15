@@ -8,7 +8,9 @@ import { GET_ALL_COURSES,
          GET_GENRES_COURSES,
          SEARCH_BY_NAME,
          FILTER_BY,
-         ORDER_BY,
+         ORDER_BY, 
+         LOGIN,
+         LOGEADO,
          SET_COURSE_TOAPROVE } from './constants.js';
 
 
@@ -120,5 +122,16 @@ export function setCourseToAprove (payload) {
     }
     catch(error){
         console.log("Error", error)
+
+export function logear(data){
+    return {
+        type: LOGIN,
+        payload: data
+    }
+}
+
+export function logeado (){
+    return {
+        type: LOGEADO
     }
 }
