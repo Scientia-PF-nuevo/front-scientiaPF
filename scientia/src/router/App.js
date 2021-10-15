@@ -10,6 +10,7 @@ import About from '../components/About/About';
 import Nav from '../components/Nav/Nav';
 import Footer from '../components/Footer/Footer';
 import Cart from '../components/Cart/Cart';
+import Form from '../components/Form/Form';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
       <Route exact path='/cart'>
         <Cart />
       </Route>
+
+      <Route exact path='/form' component={Form}/>
 
       <Footer />
     </Router>
