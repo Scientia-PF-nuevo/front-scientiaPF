@@ -28,7 +28,7 @@ function CourseList({courses}) {
 
 const mapStateToProps = (state) => {
     return {
-        courses: state.allCourses
+        courses: state.rootReducer.allCourses
     }
 }
 
