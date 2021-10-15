@@ -6,6 +6,7 @@ import { GET_ALL_COURSES,
          GET_FAVORITE_COURSES,
          GET_COURSE_DETAILS,
          GET_GENRES_COURSES,
+         ADD_CART,
          SEARCH_BY_NAME,
          FILTER_BY,
          ORDER_BY, 
@@ -122,5 +123,12 @@ export function logear(data){
 export function logeado (){
     return {
         type: LOGEADO
+    }
+}
+
+export function addCart (data){
+    return {
+        type: ADD_CART,
+        payload: data
     }
 }

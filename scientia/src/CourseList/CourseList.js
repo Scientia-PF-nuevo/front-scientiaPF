@@ -4,14 +4,15 @@ import CourseCard from '../components/CourseCard/CourseCard'
 
 function CourseList({courses}) {
   return (
-    <div className="course-div">
+    <div className="course-div-cards">
       {courses.length > 1 ? (
         courses.map((course) => (
           <CourseCard
             key={course.id}
             id={course.id}
             name={course.name}
-            // rating={g.rating}
+            // rating={course.rating}
+            // release={course.release}
             price={course.price}
             url={course.url}
             category={course.category}

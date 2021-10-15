@@ -8,6 +8,7 @@ import {
     GET_GENRES_COURSES,
     FILTER_BY,
     ORDER_BY,
+    ADD_CART,
     LOGIN,
     LOGEADO
 } from '../actions/constants';
@@ -24,7 +25,8 @@ const initialState = {
     favoritesCourses: [],
     filteredCourses: [],
     login: false,
-    user: {}
+    user: {},
+    cart: [],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -138,6 +140,12 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 login: true
+            }
+
+        case ADD_CART:
+            return {
+                ...state,
+                cart: state.cart.concat(action.payload)
             }
         default:
             return state;
