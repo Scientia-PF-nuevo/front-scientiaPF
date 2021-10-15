@@ -10,6 +10,7 @@ import About from '../components/About/About';
 import Nav from '../components/Nav/Nav';
 import Footer from '../components/Footer/Footer';
 import Form from '../components/Form/Form';
+import Cart from '../components/Cart/Cart';
 
 function App() {
   return (
@@ -24,7 +25,12 @@ function App() {
         <About />
       </Route>
 
+
       <Route exact path='/form' component={Form}/>
+
+      <Route exact path='/cart'>
+        <Cart />
+      </Route>
 
       <Footer />
     </Router>
