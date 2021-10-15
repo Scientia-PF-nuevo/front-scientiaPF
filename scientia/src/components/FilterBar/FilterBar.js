@@ -28,17 +28,17 @@ function FilterBy({orderBy, filterBy, filteredCourses}) {
             </select>
             <select  className="selectCont" onChange={handleSelect2} name="" id="">
                 <option className="option" value="default">ORDEN...</option>
-                <optgroup className="optionGroup" label="Rating">
-                    <option className="option" value="asc">Mayor a Menor</option>
-                    <option className="option" value="desc">Menor a Mayor</option>
+                <optgroup className="optionGroup" label="Price">
+                    <option className="option" value="asc">Menor a Mayor</option>
+                    <option className="option" value="desc">Mayor a Menor</option>
                 </optgroup>               
                 <optgroup className="optionGroup" label="Alphabetic">
                     <option className="option" value="A-Z">A - Z</option>
                     <option className="option" value="Z-A">Z - A</option>
                 </optgroup>
                 <optgroup className="optionGroup" label="ReleaseDate">
-                    <option className="option" value="0-9">A - Z</option>
-                    <option className="option" value="9-0">Z - A</option>
+                    <option className="option" value="new">Mas Recientes</option>
+                    <option className="option" value="old">Menos Recientes</option>
                 </optgroup>
             </select>
         </div>

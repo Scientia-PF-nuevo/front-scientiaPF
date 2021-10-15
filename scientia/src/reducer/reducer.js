@@ -97,7 +97,7 @@ export default function rootReducer(state = initialState, action) {
         case ORDER_BY:
             if (action.payload === 'A-Z') {
                 return {
-                    ...state, filteredCourses: [...state.filteredCourses].sort((prev, next) => {
+                    ...state, allCourses: [...state.coursesBackup].sort((prev, next) => {
                         if (prev.name > next.name) return 1
                         if (prev.name < next.name) return -1
                         return 0
@@ -106,7 +106,7 @@ export default function rootReducer(state = initialState, action) {
             }
             if (action.payload === 'Z-A') {
                 return {
-                    ...state, filteredCourses: [...state.filteredCourses].sort((prev, next) => {
+                    ...state, allCourses: [...state.coursesBackup].sort((prev, next) => {
                         if (prev.name > next.name) return -1
                         if (prev.name < next.name) return 1
                         return 0
@@ -114,10 +114,16 @@ export default function rootReducer(state = initialState, action) {
                 }
             }
             if (action.payload === 'desc') {
-                return { ...state, filteredCourses: [...state.filteredCourses].sort((prev, next) => prev.rating - next.rating) }
+                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => prev.price - next.price) }
             }
             if (action.payload === 'asc') {
-                return { ...state, filteredCourses: [...state.filteredCourses].sort((prev, next) => next.rating - prev.rating) }
+                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => next.price - prev.price) }
+            }
+            if (action.payload === 'new') {
+                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => prev.createAt - next.createAt) }
+            }
+            if (action.payload === 'old') {
+                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => next.createAt - prev.createAt) }
             }
             else {
                 return { ...state, filteredCourses: state.coursesBackup }

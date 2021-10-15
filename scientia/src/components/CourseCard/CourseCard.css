@@ -1,0 +1,18 @@
+.container-course {
+
+    border: 1px solid black;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: beige;
+    width: 200px;
+
+}
+
+
+.Link {
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    box-shadow: 3px 2px 3px 1px #1411d1;
+}
