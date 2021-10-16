@@ -11,6 +11,8 @@ import Nav from '../components/Nav/Nav';
 import Footer from '../components/Footer/Footer';
 import Cart from '../components/Cart/Cart';
 import Form from '../components/Form/Form';
+import SignUp from '../components/SignUp/SignUp';
+import Success from '../components/SignUp/Success';
 
 function App() {
   return (
@@ -30,6 +32,14 @@ function App() {
       </Route>
 
       <Route exact path='/form' component={Form}/>
+
+      <Route exact path='/signup'>
+        <SignUp />
+      </Route>
+
+      <Route exact path='/signup/success'>
+        <Success />
+      </Route>
 
       <Footer />
     </Router>
