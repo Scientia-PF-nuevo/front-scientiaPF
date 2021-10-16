@@ -96,7 +96,8 @@ export default function rootReducer(state = initialState, action) {
                     })
                 }
             };
-
+        
+            //! Ordena alfabeticamente
         case ORDER_BY:
             if (action.payload === 'A-Z') {
                 return {
@@ -116,18 +117,32 @@ export default function rootReducer(state = initialState, action) {
                     })
                 }
             }
+
+            //! Ordena por valor del curso (asc o desc)
             if (action.payload === 'desc') {
                 return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => prev.price - next.price) }
             }
             if (action.payload === 'asc') {
                 return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => next.price - prev.price) }
             }
+
+            //! Ordena por fecha (new o old)
             if (action.payload === 'new') {
-                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => prev.createAt - next.createAt) }
+                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => prev.date - next.date) }
             }
             if (action.payload === 'old') {
-                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => next.createAt - prev.createAt) }
+                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => next.date - prev.date) }
             }
+
+            //! Ordena por Rating (best o worst)
+            if (action.payload === 'worst') {
+                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => prev.score - next.score) }
+            }
+            if (action.payload === 'best') {
+                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => next.score - prev.score) }
+            }
+
+            //! Orden por default como llega de la DB
             else {
                 return { ...state, filteredCourses: state.coursesBackup }
             };
