@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import CustomizedBadges from "../Cart/customCart";
 
 // Logo
-import logo from '../../images/logo.png';
+import logo from '../../images/icon.png';
 
 export default function Nav () {
     return (

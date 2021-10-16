@@ -5,7 +5,7 @@
     padding: 20px;
     border-radius: 10px;
     background-color: beige;
-    width: 240px;
+    width: 280px;
 
 }
 
@@ -43,8 +43,6 @@
 .link {
     width: 80px;
     height: 30px;
-    border-radius: 20px;
-    box-shadow: 3px 2px 3px 1px #1411d1;
     margin-right: 5px;
 }
 
