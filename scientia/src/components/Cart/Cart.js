@@ -12,7 +12,7 @@ export function Cart() {
 
 function mapStateToProps(state) {
     return {
-        cart: state.cart
+        cart: state.rootReducer.cart
     }
 }
 

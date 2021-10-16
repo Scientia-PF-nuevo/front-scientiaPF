@@ -28,6 +28,8 @@ export default function Nav () {
                     <Link className='linkNav' to='/cart'>
                         <li className='liNav'>
                             Cart
+                        </li>
+                        </Link>
                     <Link className='linkNav' to='/form'>
                         <li className='liNav'>
                             Form
