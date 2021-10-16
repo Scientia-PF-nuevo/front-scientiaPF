@@ -1,6 +1,8 @@
 import React from "react";
 import './Nav.css';
 import { Link } from "react-router-dom";
+// import { FiShoppingCart } from "@react-icons/all-files/fi/FiShoppingCart";
+import CustomizedBadges from "../Cart/customCart";
 
 // Logo
 import logo from '../../images/logo.png';
@@ -25,16 +27,16 @@ export default function Nav () {
                             About
                         </li>
                     </Link>
-                    <Link className='linkNav' to='/cart'>
-                        <li className='liNav'>
-                            Cart
-                        </li>
-                        </Link>
                     <Link className='linkNav' to='/form'>
                         <li className='liNav'>
                             Form
                         </li>
                     </Link>
+                    <Link className='linkNav' to='/cart'>
+                        <li className='liNav'>
+                            <CustomizedBadges />
+                        </li>
+                        </Link>
                 </div>
             </nav>
         </div>
