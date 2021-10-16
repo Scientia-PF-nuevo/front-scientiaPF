@@ -29,8 +29,8 @@ function FilterBy({orderBy, filterBy, filteredCourses}) {
             <select  className="selectCont" onChange={handleSelect2} name="" id="">
                 <option className="option" value="default">ORDEN...</option>
                 <optgroup className="optionGroup" label="Price">
-                    <option className="option" value="asc">Mayor a Menor</option>
-                    <option className="option" value="desc">Menor a Mayor</option>
+                    <option className="option" value="asc">Menor a Mayor</option>
+                    <option className="option" value="desc">Mayor a Menor</option>
                 </optgroup>               
                 <optgroup className="optionGroup" label="Alphabetic">
                     <option className="option" value="A-Z">A - Z</option>

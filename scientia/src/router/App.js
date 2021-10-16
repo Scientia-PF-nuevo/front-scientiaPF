@@ -11,7 +11,6 @@ import Nav from '../components/Nav/Nav';
 import Footer from '../components/Footer/Footer';
 import Cart from '../components/Cart/Cart';
 import Form from '../components/Form/Form';
-import Cart from '../components/Cart/Cart';
 
 function App() {
   return (
