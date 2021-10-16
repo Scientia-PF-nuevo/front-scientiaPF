@@ -9,6 +9,7 @@ import {
     FILTER_BY,
     ORDER_BY,
     ADD_CART,
+    REMOVE_CART,
     LOGIN,
     LOGEADO
 } from '../actions/constants';
@@ -61,7 +62,7 @@ export default function rootReducer(state = initialState, action) {
         case SEARCH_BY_NAME:
             return {
                 ...state,
-                courseByName: action.payload
+                allCourses: action.payload
             };
 
         case GET_COURSE_DETAILS:
@@ -146,6 +147,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 cart: state.cart.concat(action.payload)
+            }
+        case REMOVE_CART:
+            return {
+                ...state, 
+                cart: state.cart.filter((course) => course.id !== action.payload)
             }
         default:
             return state;

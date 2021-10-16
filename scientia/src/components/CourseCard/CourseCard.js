@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom'
 import './CourseCard.css'
 import {connect} from 'react-redux'
 import {addCart} from '../../actions/actions'
+import { Card, Button } from 'react-bootstrap'
 // import {noImage} from '../../assets/noimage.jpg'
 
 
 function CourseCard(props) {
-    const {name, url, id, price, categories, addCart, score, date} = props
+    const {name, url, id, price, categories, description, addCart, score, date} = props
     
     return (
       <div className="container-course">
-        <div className="title-course">{name.toUpperCase()}</div>
+        <div className="title-course">{name && name.toUpperCase()}</div>
         <div className="course-div-card">
           {url ? (
             <img src={`${url}`} alt="Course" className="Img"></img>
@@ -29,7 +30,7 @@ function CourseCard(props) {
         <div className="info-price-div">
           {
             <p>
-              <strong>Score</strong>: ★ {`${Math.ceil(score)}`}
+              <strong>Score</strong>: ★ {`${score && Math.ceil(score)}`}
             </p>
           }
         </div>
@@ -42,7 +43,7 @@ function CourseCard(props) {
         </div>
         <div className="info-cat-div">
         <p>
-              <strong>Category</strong>: ★ {`${categories.toUpperCase()}`}
+              <strong>Category</strong>: ★ {`${categories && categories.toUpperCase()}`}
         </p>
         </div>
         <div className='button-container'>

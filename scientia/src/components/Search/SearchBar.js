@@ -1,10 +1,10 @@
 import {React, useState} from 'react'
 import { connect } from 'react-redux'
-import { searchByName } from '../../actions/actions'
+import { searchByName, getAllCourses } from '../../actions/actions'
 import './SearchBar.css'
 
 
-function SearchBar({searchByName}) {
+function SearchBar({searchByName, getAllCourses}) {
 
     const [input, setInput] = useState({
         buscar: ''
@@ -36,8 +36,11 @@ function SearchBar({searchByName}) {
         <button className="btn" onClick={handleOnClick}>
           Buscar
         </button>
+        <button className="btn" onClick={() => getAllCourses()}>
+          Todos
+        </button>
       </div>
     );
 }
 
-export default connect(null, { searchByName })(SearchBar)
+export default connect(null, { searchByName, getAllCourses })(SearchBar)

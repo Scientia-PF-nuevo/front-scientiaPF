@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Table, CloseButton } from 'react-bootstrap';
+import { removeCart } from '../../actions/actions';
 import './Cart.css'
 
 
 
 
-export function Cart({cart}) {
+export function Cart({cart, removeCart}) {
 
     function Total() {
         let result = cart.reduce((a, b) => ({price: a.price + b.price})).price
@@ -24,15 +25,15 @@ export function Cart({cart}) {
             <th>Quitar</th>
           </tr>
         </thead>
-        {cart.length > 1 ? (
+        {cart.length >= 1 ? (
         cart.map((course) => (
             <tbody>
           <tr>
           <td>{course.id}</td>
-          <td>{course.name.toUpperCase()}</td>
+          <td>{course.name && course.name.toUpperCase()}</td>
           <td>${course.price}</td>
           <td>{Total()}</td>
-          <td>{<CloseButton/>}</td>
+          <td>{<CloseButton onClick={() => removeCart(course.id)} />}</td>
         </tr>
         </tbody>
         ))
@@ -52,4 +53,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Cart)
+export default connect(mapStateToProps, {removeCart})(Cart)
