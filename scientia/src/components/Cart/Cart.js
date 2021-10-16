@@ -19,6 +19,16 @@ export function Cart({cart}) {
             </div>
           );
     
+
+import CourseCard from '../CourseCard/CourseCard'
+
+export function Cart() {
+    return (
+        <div>
+            <h1>CART</h1>
+        </div>
+    )
+
 }
 
 function mapStateToProps(state) {
