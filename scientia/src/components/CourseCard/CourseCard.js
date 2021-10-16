@@ -7,11 +7,19 @@ import {addCart} from '../../actions/actions'
 
 
 function CourseCard(props) {
+
+    const {name, url, id, price, categories, addCart, score, date} = props
+    
+    return (
+      <div className="container-course">
+        <div className="title-course">{name.toUpperCase()}</div>
+
     const {name, url, id, price, category, addCart, rating, release} = props
     
     return (
       <div className="container-course">
         <div className="title-course">{name}</div>
+
         <div className="course-div-card">
           {url ? (
             <img src={`${url}`} alt="Course" className="Img"></img>
@@ -22,22 +30,44 @@ function CourseCard(props) {
         <div className="info-price-div">
           {
             <p>
-              <strong>Price</strong>: ★ {`${price}`}
+              <strong>Price</strong>: $$ {`${price}`}
             </p>
           }
         </div>
+
+        <div className="info-price-div">
+          {
+            <p>
+              <strong>Score</strong>: {`${Math.ceil(score)}`}
+            </p>
+          }
+        </div>
+        <div className="info-price-div">
+          {
+            <p>
+              <strong>Date</strong>: {`${date}`}
+            </p>
+          }
+        </div>
+
         <div className="info-cat-div">
         <p>
-              <strong>category</strong>: ★ {`${category}`}
+              <strong>category</strong>: {`${categories.toUpperCase()}`}
         </p>
         </div>
         <div className='button-container'>
           {id && (
             <Link to={`/courses/${id}`}>
+              <button className="link">DETAILS</button>
+            </Link>
+          )}
+          {id && <button className="add" onClick={() => addCart({name: name, id: id, price: price})}>ADD</button>}
+
               <button className="link">Details</button>
             </Link>
           )}
           {id && <button className="add" onClick={() => addCart({name: name, id: id, price: price})}>Add</button>}
+
         </div>
       </div>
     );

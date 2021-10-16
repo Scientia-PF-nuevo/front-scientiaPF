@@ -11,11 +11,11 @@ function CourseList({courses}) {
             key={course.id}
             id={course.id}
             name={course.name}
-            // rating={course.rating}
-            // release={course.release}
+            score={course.score}
+            date={course.date}
             price={course.price}
             url={course.url}
-            category={course.category}
+            categories={course.categories}
           />
         ))
       ) : (
@@ -29,7 +29,7 @@ function CourseList({courses}) {
 
 const mapStateToProps = (state) => {
     return {
-        courses: state.allCourses
+        courses: state.rootReducer.allCourses
     }
 }
 
