@@ -79,24 +79,13 @@ export default function rootReducer(state = initialState, action) {
             };
 
         case FILTER_BY:
+            console.log(action)
             if (action.payload === 'default') {
-                return { ...state, filteredCourses: state.coursesBackup }
+                return { ...state, allCourses: state.coursesBackup }
+            } else {
+                return { ...state, allCourses: state.coursesBackup.filter((course) => (action.payload) === course.categories) }
             }
-            if (action.payload === 'DB') {
-                return { ...state, filteredCourses: state.coursesBackup.filter((course) => (typeof course.id) === 'string') }
-            }
-            if (action.payload === 'API') {
-                return { ...state, filteredCourses: state.coursesBackup.filter((course) => (typeof course.id) === 'number') }
-            }
-            else {
-                return {
-                    ...state, filteredCourses: state.coursesBackup.filter((course) => {
-                        return course.genres.find((genre) => {
-                            return genre === action.payload
-                        })
-                    })
-                }
-            };
+            
         
             //! Ordena alfabeticamente
         case ORDER_BY:

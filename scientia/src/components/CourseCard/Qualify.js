@@ -21,6 +21,7 @@ export default function TextRating({score}) {
         width: 200,
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center'
       }}
     >
       <Rating

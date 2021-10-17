@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 import CustomizedBadges from "../Cart/customCart";
 
 // Logo
-import logo from '../../images/icon.png';
+// import logo from '../../images/icon.png';
 
 export default function Nav () {
     return (
         <div className='container'> 
             <div className='containLogo'>
-                <Link to='/home'>
+                {/* <Link to='/home'>
                     <img className='logoNav' src={logo} alt='logo Scientia' />
-                </Link>
+                </Link> */}
             </div>
             <nav className='containerNav'>
                 <div className='containLi'>
@@ -28,7 +28,7 @@ export default function Nav () {
                     </Link>
                     <Link className='linkNav' to='/form'>
                         <li className='liNav'>
-                            Form
+                            Add Course
                         </li>
                     </Link>
                     <Link className='linkNav' to='/cart'>
