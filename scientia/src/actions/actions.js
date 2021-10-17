@@ -13,6 +13,7 @@ import { GET_ALL_COURSES,
          ORDER_BY, 
          LOGIN,
          LOGEADO,
+         ADD_DETAILS,
          SET_COURSE_TOAPROVE } from './constants.js';
 
 
@@ -35,6 +36,7 @@ export function searchByName(name) {
         .then(res => {
 
             dispatch({ type: SEARCH_BY_NAME, payload: res.data });
+            console.log(res.data)
         })
         .catch(err => {return err})
     }
@@ -151,6 +153,13 @@ export function addCart (data){
 export function removeCart (id){
     return {
         type:REMOVE_CART,
+        payload: id
+    }
+}
+
+export function addDetails (id){
+    return {
+        type: ADD_DETAILS,
         payload: id
     }
 }

@@ -11,9 +11,12 @@ import Nav from '../components/Nav/Nav';
 import Footer from '../components/Footer/Footer';
 import Cart from '../components/Cart/Cart';
 import Form from '../components/Form/Form';
+import Details from '../components/Details/Details';
 
 function App() {
   return (
+    <div className='container-app'>
+
     <Router>
       <Nav />
 
@@ -29,10 +32,15 @@ function App() {
         <Cart />
       </Route>
 
+      <Route exact path='/details'>
+        <Details />
+      </Route>
+
       <Route exact path='/form' component={Form}/>
 
       <Footer />
     </Router>
+    </div>
   );
 }
 

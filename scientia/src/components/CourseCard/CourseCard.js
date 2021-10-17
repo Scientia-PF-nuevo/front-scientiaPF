@@ -2,12 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './CourseCard.css'
 import {connect} from 'react-redux'
-import {addCart} from '../../actions/actions'
+import {addCart, addDetails} from '../../actions/actions'
 import TextRating from './Qualify'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
-import { Alert } from 'react-alert'
 
 
 function CourseCard(props) {
@@ -22,6 +21,7 @@ function CourseCard(props) {
       score,
       date,
       cart,
+      addDetails
     } = props;
 
 
@@ -69,8 +69,8 @@ function CourseCard(props) {
         <TextRating score={score} />
         <div className="button-container">
           {id && (
-            <Link to={`/courses/${id}`}>
-              <HelpOutlineOutlinedIcon className="button-detail"/>
+            <Link to={`/details`}>
+              <HelpOutlineOutlinedIcon onClick={()=> addDetails(id)}/>
             </Link>
           )}
           {id && (
@@ -91,4 +91,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {addCart})(CourseCard);
+export default connect(mapStateToProps, {addCart, addDetails})(CourseCard);

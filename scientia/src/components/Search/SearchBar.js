@@ -17,6 +17,9 @@ function SearchBar({searchByName, getAllCourses}) {
     }
 
     const handleOnClick = () => {
+        if ( input.buscar.length < 3 ) {
+          return alert('ingrese mas de 3 digitos')
+        }
         searchByName(input.buscar)
         setInput({
             buscar: ''
