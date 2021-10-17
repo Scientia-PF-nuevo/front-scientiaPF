@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import CourseCard from '../components/CourseCard/CourseCard'
+import './CourseList.css'
 
 function CourseList({ courses }) {
 
