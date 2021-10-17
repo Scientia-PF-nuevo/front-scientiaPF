@@ -12,13 +12,24 @@ import Footer from '../components/Footer/Footer';
 import Cart from '../components/Cart/Cart';
 import Form from '../components/Form/Form';
 import Details from '../components/Details/Details';
+import Login from '../components/Login/Login.jsx'
+import SignUp from '../components/SignUp/SignUp';
 
 function App() {
   return (
     <div className='container-app'>
 
     <Router>
+      
       <Nav />
+
+      <Route exact path='/'>
+        <Login />
+      </Route>
+
+      <Route exact path='/signup'>
+        <SignUp />
+      </Route>
 
       <Route exact path='/home'>
         <Home />
