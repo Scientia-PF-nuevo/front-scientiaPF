@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as actionCreators from './../../actions/actions'
 import s from './login.module.css'
 import { bindActionCreators } from 'redux';
+import {Link} from 'react-router-dom'
 import { Modal, Button } from 'react-bootstrap'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
@@ -57,20 +58,21 @@ function Login(props) {
             <div className={s.contenedorFormLogin}>
                 <form>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Correo electrónico</label>
+                        <label htmlFor="exampleInputEmail1" className="form-label">E-mail</label>
                         <input name="email" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChange} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
+                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                         <input name="password" type="password" className="form-control" id="exampleInputPassword1" onChange={handleChange} />
                     </div>
                     <div className="mb-3 form-check">
                         <input name="remember" type="checkbox" className="form-check-input" id="exampleCheck1" onChange={handleChange} />
-                        <label className="form-check-label" htmlFor="exampleCheck1">Permanecer logeado</label>
+                        <label className="form-check-label" htmlFor="exampleCheck1">Keep Login</label>
                     </div>
                     <div className={s.botones}>
-                        <button onClick={handleSubmit} type="submit" className="btn btn-primary btn-lg">Entrar</button>
-                        <button onClick={submitGoogle} type="submit" className="btn btn-outline-primary btn-lg">Entrar con Google</button>
+                        <button onClick={handleSubmit} type="submit" className="btn btn-primary btn-lg">Enter</button>
+                        <button onClick={submitGoogle} type="submit" className="btn btn-outline-primary btn-lg">Register with Google</button>
+                        <Link to='/signup' className="btn btn-outline-primary btn-lg">Register with email</Link>
                     </div>
                 </form>
             </div>
@@ -95,8 +97,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
-        user: state.user
+        login: state.rootReducer.login,
+        user: state.rootReducer.user
     }
 }
 

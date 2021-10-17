@@ -21,11 +21,6 @@ export default function Nav () {
                             Home
                         </li>
                     </Link>
-                    <Link className='linkNav' to='/about'>
-                        <li className='liNav'>
-                            About
-                        </li>
-                    </Link>
                     <Link className='linkNav' to='/form'>
                         <li className='liNav'>
                             Add Course
@@ -36,6 +31,16 @@ export default function Nav () {
                             <CustomizedBadges />
                         </li>
                         </Link>
+                        <Link className='linkNav' to='/'>
+                        <li className='liNav'>
+                            Sign in
+                        </li>
+                    </Link>
+                    <Link className='linkNav' to='/about'>
+                        <li className='liNav'>
+                            About
+                        </li>
+                    </Link>
                 </div>
             </nav>
         </div>

@@ -12,7 +12,7 @@
     color: hsl(0, 99%, 36%);
 }
 
-form {
+.div-signup form {
     width: 100%;
     margin-bottom: 14px;
     display: flex;
@@ -31,14 +31,14 @@ form {
     margin: 10px 10px 10px 10px;
 }
 
-label {
+.div-signup label {
     width: 100%;
 }
 
-input {
+.div-signup input {
     width: 100%;
 }
 
-button {
+.div-signup button {
     width: 300px;
 }
