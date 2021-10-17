@@ -69,7 +69,7 @@ function CourseCard(props) {
         <TextRating score={score} />
         <div className="button-container">
           {id && (
-            <Link to={`/details`}>
+            <Link to="/details">
               <HelpOutlineOutlinedIcon onClick={()=> addDetails(id)}/>
             </Link>
           )}

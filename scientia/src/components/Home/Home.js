@@ -18,7 +18,6 @@ export function Home ({getAllCourses, getGenresCourses}) {
     return (
         <>
             <SearchBar />
-            <FilterBy />
         <div className='home-container'>
             <CourseList />
         </div>

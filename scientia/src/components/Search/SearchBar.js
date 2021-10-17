@@ -1,5 +1,6 @@
 import {React, useState} from 'react'
 import { connect } from 'react-redux'
+import FilterBar from '../FilterBar/FilterBar'
 import { searchByName, getAllCourses } from '../../actions/actions'
 import './SearchBar.css'
 
@@ -27,21 +28,22 @@ function SearchBar({searchByName, getAllCourses}) {
     }
 
     return (
-      <div className="searchbar-div">
+      <div className="wrapper">
         <input
-          className="bar-btn"
+          className="search"
           name="buscar"
-          placeholder="buscá tu curso por nombre..."
+          placeholder="Search by name..."
           onChange={handleInputChange}
           value={input.buscar}
           autoComplete="off"
         ></input>
-        <button className="btn" onClick={handleOnClick}>
-          Buscar
+        <button className="search-icon" onClick={handleOnClick}>
+          Search
         </button>
-        <button className="btn" onClick={() => getAllCourses()}>
-          Todos
+        <button className="search-icon" onClick={() => getAllCourses()}>
+          Reset
         </button>
+        <FilterBar/>
       </div>
     );
 }

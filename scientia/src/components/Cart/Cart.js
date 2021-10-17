@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Table, CloseButton, ButtonToolbar } from 'react-bootstrap';
-import { removeCart } from '../../actions/actions';
+import { removeCart, addDetails } from '../../actions/actions';
+import {Link} from 'react-router-dom'
 import './Cart.css'
 
 
 
 
-export function Cart({cart, removeCart}) {
+export function Cart({cart, removeCart, addDetails}) {
 
     var result=0;
     var taxs=0;
@@ -37,7 +38,7 @@ export function Cart({cart, removeCart}) {
             <tbody>
           <tr>
           <td>{course.id}</td>
-          <td>{course.name && course.name.toUpperCase()}</td>
+          <td><Link to="/details" onClick={()=> addDetails(course.id)}>{course.name && course.name.toUpperCase()}</Link></td>
           <td>${course.price}</td>
           <td>{Total()}</td>
           <td>{<CloseButton onClick={() => removeCart(course.id)} />}</td>
@@ -67,4 +68,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {removeCart})(Cart)
+export default connect(mapStateToProps, {removeCart, addDetails})(Cart)
