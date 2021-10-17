@@ -4,7 +4,16 @@ import CourseCard from '../components/CourseCard/CourseCard'
 
 function CourseList({ courses }) {
 
-  return typeof courses !== "undefined" && courses.length > 1 ? (
+  if (courses.length === 1) {
+    var arrCourse = []
+    arrCourse.push(courses)
+  }
+
+  return courses === "" ? (
+    <div>
+      <h1> NO ENCONTRADO </h1>
+    </div>
+  ) : typeof courses !== "undefined" && courses.length >= 1 ? (
     courses.map((course) => (
       <CourseCard
         key={course.id}
@@ -18,21 +27,10 @@ function CourseList({ courses }) {
         description={course.description}
       />
     ))
-  ) : courses.length <= 1 ? (
-    <div>
-      <h1>Cargando</h1>
-    </div>
   ) : (
-    <CourseCard
-      key={courses.id}
-      id={courses.id}
-      name={courses.name}
-      score={courses.score}
-      date={courses.date}
-      price={courses.price}
-      url={courses.url}
-      categories={courses.categories}
-    />
+    <div>
+      <h1>Cargando...</h1>
+    </div>
   );
 }
 

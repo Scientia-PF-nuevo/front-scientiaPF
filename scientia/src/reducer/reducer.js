@@ -11,6 +11,7 @@ import {
     ADD_CART,
     REMOVE_CART,
     LOGIN,
+    ADD_DETAILS,
     LOGEADO
 } from '../actions/constants';
 
@@ -22,7 +23,7 @@ const initialState = {
     courseByName: [],
     coursesByGenre: [],
     coursesBackup: [],
-    courseDetails: {},
+    courseDetails: [],
     favoritesCourses: [],
     filteredCourses: [],
     login: false,
@@ -168,6 +169,12 @@ export default function rootReducer(state = initialState, action) {
                 ...state, 
                 cart: state.cart.filter((course) => course.id !== action.payload)
             }
+
+            case ADD_DETAILS:
+                return {
+                    ...state, 
+                    courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
+                }
         default:
             return state;
     }

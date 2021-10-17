@@ -1,7 +1,6 @@
 import React from "react";
 import './Nav.css';
 import { Link } from "react-router-dom";
-// import { FiShoppingCart } from "@react-icons/all-files/fi/FiShoppingCart";
 import CustomizedBadges from "../Cart/customCart";
 
 // Logo
