@@ -1,0 +1,15 @@
+.form-div-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-div-container form {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+}
+
+.form-div-container input {
+    margin: 10px;
+}
+

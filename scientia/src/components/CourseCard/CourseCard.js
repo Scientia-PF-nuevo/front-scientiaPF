@@ -36,7 +36,7 @@ function CourseCard(props) {
     
     return (
       <div className="container-course">
-        <div className="title-course">{name && name.toUpperCase()}</div>
+        <div className="title-course"><h5>{name && name.toUpperCase()}</h5></div>
         <div className="course-div-card">
           {url ? (
             <img src={`${url}`} alt="Course" className="Img"></img>

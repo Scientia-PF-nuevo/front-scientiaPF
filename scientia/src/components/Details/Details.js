@@ -18,6 +18,7 @@ import { connect } from 'react-redux'
 import TextRating from '../CourseCard/Qualify';
 import {addCart} from '../../actions/actions'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import './Details.css'
 
 
 const ExpandMore = styled((props) => {
@@ -35,7 +36,9 @@ function Details({details,addCart, cart}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const detailsRender = details[0] 
-  const { date, name, description, price, url, categories, id, score } = detailsRender
+
+  const { name, description, price, url, categories, id, score, date } = detailsRender
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -51,7 +54,8 @@ function Details({details,addCart, cart}) {
   }
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <div className="details-div">
+    <Card sx={{ maxWidth: 700 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -64,24 +68,24 @@ function Details({details,addCart, cart}) {
           </IconButton>
         }
         title={name && name.toUpperCase()}
-        subheader={`Release Date: ${date && date}`}
+        subheader={`Price: $${price}`}
       />
       <CardMedia
         component="img"
-        height="194"
+        height="500"
         image={url}
         alt="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {`Price: $${price}`}
-        </Typography>
-        <TextRating score={score} />
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.primary">
           {categories && `CATEGORY: ${categories.toUpperCase()}`}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body3" color="text.primary">
+        {`Release Date: ${date ? date : "SIN FECHA"}`}
+        </Typography>
+        <Typography variant="body2" color="text.primary">
           {description}
+        <TextRating score={score} />
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -109,7 +113,7 @@ function Details({details,addCart, cart}) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
+          <Typography paragraph>Details:</Typography>
           <Typography paragraph>
             Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
             aside for 10 minutes.
@@ -123,20 +127,14 @@ function Details({details,addCart, cart}) {
             stirring often until thickened and fragrant, about 10 minutes. Add
             saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
           </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is absorbed,
-            15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without
-            stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don’t open.)
-          </Typography>
+  
           <Typography>
             Set aside off of the heat to let rest for 10 minutes, and then serve.
           </Typography>
         </CardContent>
       </Collapse>
     </Card>
+    </div>
   );
 }
 

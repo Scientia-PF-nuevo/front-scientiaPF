@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Table, CloseButton } from 'react-bootstrap';
+import { Table, CloseButton, ButtonToolbar } from 'react-bootstrap';
 import { removeCart } from '../../actions/actions';
 import './Cart.css'
 
@@ -9,20 +9,27 @@ import './Cart.css'
 
 export function Cart({cart, removeCart}) {
 
+    var result=0;
+    var taxs=0;
+    var total=0;
     function Total() {
-        let result = cart.reduce((a, b) => ({price: a.price + b.price})).price
-        return `$ ${result}`;
+      result = cart.reduce((a, b) => ({price: a.price + b.price})).price
+      taxs = result * 0.21;
+      total= result + taxs;
+      return `$ ${result}`;
     }
+    
     return (
+        <>
         <div className="cart-div">
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Course</th>
+            <th>ID</th>
+            <th>Course Name</th>
             <th>Price</th>
-            <th>Total</th>
-            <th>Quitar</th>
+            <th>Sub-Total</th>
+            <th>Remove</th>
           </tr>
         </thead>
         {cart.length >= 1 ? (
@@ -39,11 +46,18 @@ export function Cart({cart, removeCart}) {
         ))
       ) : (
         <div>
-          {/* <img className="loading" src={loading} alt=""></img> */}
         </div>
       )}
       </Table>
         </div>
+        <p>SUB - TOTAL: $ {result}</p>
+        <p>TAXs: $ {taxs}</p>
+        <p>TOTAL: $ {total}</p>
+        <button> CONFIRM ORDER </button>
+        <br></br>
+        <br></br>
+        <button> CONFIRM LATER </button>
+        </>
     );
 }
 

@@ -42,7 +42,8 @@ export function searchByName(name) {
     }
 }
 
-//* Trae los detalles del curso pedido por PARAMS por (params :ID)
+//! NO HAY ENDPOIND CREADO EN EL BACK AUN - 
+//!Trae los detalles del curso pedido por PARAMS por (params :ID)
 export function getCourseDetail(id) {
     return function (dispatch) {
         axios.get(`http://localhost:3001/course/${id}`)
@@ -58,7 +59,7 @@ export function getCourseDetail(id) {
 //* Trae todos los cursos por generos
 export function getGenresCourses(){
 	return function(dispatch){
-		axios.get(`http://localhost:3001/genres`)
+		axios.get(`http://localhost:3001/courses/allcategories`)
         .then(res => {
 
             dispatch({ type: GET_GENRES_COURSES, payload: res.data });

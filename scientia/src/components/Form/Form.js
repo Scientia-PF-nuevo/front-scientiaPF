@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-
+import './Form.css'
 import { useDispatch } from 'react-redux';
-
 import { setCourseToAprove } from '../../actions/actions';
 
 export default function Form (props) {
@@ -56,7 +55,7 @@ export default function Form (props) {
     };
 
     return (
-        <div>
+        <div className="form-div-container">
 
             <form>
                 <input required 
@@ -65,6 +64,7 @@ export default function Form (props) {
                 value={course.name}
                 placeholder='Course name...'
                 name="name" 
+                autocomplete="off"
                 onChange={e => handleChange(e)} />
                 
                 <input required 
@@ -73,6 +73,7 @@ export default function Form (props) {
                 value={course.description}
                 placeholder='Course description...'
                 name="description" 
+                autocomplete="off"
                 onChange={e => handleChange(e)} />
 
                 <label>Course price USD:</label>
@@ -82,6 +83,7 @@ export default function Form (props) {
                 value={course.price}
                 name="price" 
                 min = "1"
+                autocomplete="off"
                 onChange={e => handleChange(e)} />
 
                 <input required 
@@ -90,6 +92,7 @@ export default function Form (props) {
                 value={course.url}
                 placeholder='Course url...'
                 name="url" 
+                autocomplete="off"
                 onChange={e => handleChange(e)} />
 
                 <input required 
@@ -98,6 +101,7 @@ export default function Form (props) {
                 value={course.category}
                 placeholder='Course category...'
                 name="category" 
+                autocomplete="off"
                 onChange={e => handleChange(e)} />
             </form>
 

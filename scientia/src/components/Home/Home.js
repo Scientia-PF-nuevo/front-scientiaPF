@@ -3,14 +3,15 @@ import './Home.css';
 import SearchBar from "../Search/SearchBar";
 import FilterBy from '../FilterBar/FilterBar'
 import CourseList from "../../CourseList/CourseList";
-import { getAllCourses } from '../../actions/actions'
+import { getAllCourses, getGenresCourses } from '../../actions/actions'
 import { connect } from "react-redux";
 
 
-export function Home ({getAllCourses}) {
+export function Home ({getAllCourses, getGenresCourses}) {
 
     useEffect(()=> {
         getAllCourses()
+        getGenresCourses()
     }, [])
 
 
@@ -25,4 +26,4 @@ export function Home ({getAllCourses}) {
     );
 };
 
-export default connect(null, { getAllCourses })(Home)
+export default connect(null, { getAllCourses, getGenresCourses })(Home)

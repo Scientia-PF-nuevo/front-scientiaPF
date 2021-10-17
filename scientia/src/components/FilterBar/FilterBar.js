@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { orderBy, filterBy } from '../../actions/actions'
 import './FilterBar.css'
 
-function FilterBy({orderBy, filterBy, filteredCourses}) {
+function FilterBy({orderBy, filterBy, coursesByGenre}) {
 
     const handleSelect = (e) => {
         filterBy(e.target.value)
@@ -15,19 +15,13 @@ function FilterBy({orderBy, filterBy, filteredCourses}) {
     return (
         <div className='container-div'>
             <select  className="selectCont" onChange={handleSelect} name="" id="">
-                <option className="option" value="default">TODOS LOS CURSOS</option>
-                <optgroup className="optionGroup" label="DataBase">
-                    <option className="option" value="DB">CREADOS</option>
+                <option className="option" value="default">FILTER BY...</option>         
+                <optgroup className="optionGroup" label="CATEGORIES">
+                     {coursesByGenre && coursesByGenre.map(g => <option key={g.name} value={g.name}>{g.name.toUpperCase()}</option>)}
                 </optgroup>
-                <optgroup className="optionGroup" label="API">
-                    <option className="option" value="API">API</option>
-                </optgroup>              
-                <optgroup className="optionGroup" label="GENRES">
-                    {/* {filteredCourses && filteredCourses.map(g => <option key={g.name} value={g.name}>{g.name}</option>)} */} //TODO definir propiedades primero
-                </optgroup>                
             </select>
             <select  className="selectCont" onChange={handleSelect2} name="" id="">
-                <option className="option" value="default">ORDEN...</option>
+                <option className="option" value="default">ORDER BY...</option>
                 <optgroup className="optionGroup" label="Price">
                     <option className="option" value="asc">Expensive</option>
                     <option className="option" value="desc">Cheaper</option>
@@ -52,7 +46,7 @@ function FilterBy({orderBy, filterBy, filteredCourses}) {
 const mapStateToProps = (state) => {
     return {
 
-        filteredCourses: state.filteredCourses
+        coursesByGenre: state.rootReducer.coursesByGenre
     }
 }
 
