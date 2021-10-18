@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as actionCreators from './../../actions/actions'
 import s from './login.module.css'
 import { bindActionCreators } from 'redux';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Modal, Button, Spinner } from 'react-bootstrap'
 
 function Login(props) {

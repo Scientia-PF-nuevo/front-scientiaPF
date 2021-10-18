@@ -1,292 +1,313 @@
 import React from 'react';
 import axios from 'axios';
 import './SignUp.css';
+import { connect } from 'react-redux'
+import * as actionCreators from './../../actions/actions'
+import { bindActionCreators } from 'redux';
 
-const SignUp = () => {
+const SignUp = (props) => {
 
-    const [values, setValues] = React.useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        phone: '',
-        country: '',
-        province: '',
-        city: '',
-        address: '',
-        postalcode: ''
-    })
-   
-    const [validations, setValidations] = React.useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-    })
-    
-    const validateAll = () => {
-      const { firstName, lastName } = values
-      const validations = { firstName: '', lastName: '', email: '', password: ''  }
-      let isValid = true
-      
-      if (!firstName) {
-        validations.firstName = 'First Name is required'
-        isValid = false
-      }
-      
-      if (firstName && firstName.length < 3 || firstName.length > 50) {
-        validations.firstName = 'Name must contain between 3 and 50 characters'
-        isValid = false
-      }
-      
-      if (!lastName) {
-        validations.lastName = 'Last Name is required'
-        isValid = false
-      }
-      
-      if (lastName && firstName.length < 3 || firstName.length > 50) {
-        validations.lastName = 'Last must contain between 3 and 50 characters'
-        isValid = false
-      }
+  const [values, setValues] = React.useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    phone: '',
+    country: '',
+    province: '',
+    city: '',
+    address: '',
+    postalcode: ''
+  })
 
-      if (!email) {
-        validations.email = 'Email is required'
-        isValid = false
-      }
-      
-      if (email && !/\S+@\S+\.\S+/.test(email)) {
-        validations.email = 'Email format must be as example@mail.com'
-        isValid = false
-      }
+  const [validations, setValidations] = React.useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  })
 
-      if (!password) {
-        validations.password = 'Password is required'
-        isValid = false
-      }
-      
-      if (password && !/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(password)) {
-        validations.password = 'Password format must be as $@$!%*?&'
-        isValid = false
-      }
+  const validateAll = () => {
+    const { firstName, lastName } = values
+    const validations = { firstName: '', lastName: '', email: '', password: '' }
+    let isValid = true
 
-      if (!isValid) {
-        setValidations(validations)
-      }
-      
-      return isValid
+    if (!firstName) {
+      validations.firstName = 'First Name is required'
+      isValid = false
     }
-  
-    const validateOne = (e) => {
-      const { name } = e.target
-      const value = values[name]
-      let message = ''
-      
-      if (!value) {
-        message = `${name} is required`
-      }
-      
-      if (value && name === 'firstName' && (value.length < 3 || value.length > 50)) {
-        message = 'First Name must contain between 3 and 50 characters'
-      }
-  
-      if (value && name === 'lastName' && (value.length < 3 || value.length > 50)) {
-        message = 'Last Name must contain between 3 and 50 characters'
-      }
 
-      if (value && name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
-        message = 'Email format must be as henry@mail.com'
-      }
-
-      if (value && name === 'password' && !/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(value)) {
-        message = 'The password must be •8 to 16 characters •at least one digit •at least one lowercase •at least one uppercase.'
-      }
-      
-      setValidations({...validations, [name]: message })
+    if (firstName && firstName.length < 3 || firstName.length > 50) {
+      validations.firstName = 'Name must contain between 3 and 50 characters'
+      isValid = false
     }
-    
-    const handleChange = (e) => {
-      const { name, value } = e.target
-      setValues({...values, [name]: value })
+
+    if (!lastName) {
+      validations.lastName = 'Last Name is required'
+      isValid = false
     }
-  
-    const handleSubmit = (e) => {
-      e.preventDefault()
-    
-      
-      const isValid = validateAll()
-      
-      if (!isValid) {
-        return false
-      }
-    
-      axios.post('http://localhost:3001/users/register', values);
-      window.location.href = 'http://localhost:3000/signup/success';
+
+    if (lastName && firstName.length < 3 || firstName.length > 50) {
+      validations.lastName = 'Last must contain between 3 and 50 characters'
+      isValid = false
     }
-    
-    const { firstName, lastName, email, password, phone, country, city, province, address, postalcode } = values
-  
-    const { 
-      firstName: firstNameVal, 
-      lastName: lastNameVal,
-      email: emailVal,
-      password: passwordVal
-    } = validations
-    
-      return (
-        <div class="div-signup" >
-                <h1 id="h1">Sign Up</h1>
-                <form>
-                    <div class="form-row">
-                        <div>
-                            <label>*First Name:
-                                <input
-                                    class="form-control"
-                                    type="text"
-                                    name="firstName"
-                                    value={firstName}
-                                    placeholder="Henry"
-                                    onChange={handleChange}
-                                    onBlur={validateOne}
-                                />
-                            </label>
-                            <div class="legend">{firstNameVal}</div>
-                        </div>
-                        
-                        <div>
-                            <label>*Last Name:
-                                <input
-                                class="form-control"
-                                type="text"
-                                name="lastName"
-                                value={lastName}
-                                placeholder="Boom"
-                                onChange={handleChange}
-                                onBlur={validateOne}
-                                />
-                            </label>
-                            <div class="legend"v>{lastNameVal}</div>
-                        </div>
-                        
-                        <div>
-                            <label>*Email:
-                                <input
-                                class="form-control"
-                                type="email"
-                                name="email"
-                                value={email}
-                                placeholder="henry@mail.com"
-                                onChange={handleChange}
-                                onBlur={validateOne}
-                                />
-                            </label>
-                            <div class="legend">{emailVal}</div>
-                        </div>
 
-                        <div>
-                            <label>*Password:
-                                <input
-                                class="form-control"
-                                type="password"
-                                name="password"
-                                value={password}
-                                placeholder="***********"
-                                onChange={handleChange}
-                                onBlur={validateOne}
-                                />
-                            </label>
-                            <div class="legend">{passwordVal}</div>
-                        </div>
+    if (!email) {
+      validations.email = 'Email is required'
+      isValid = false
+    }
 
-                        <div >
-                            <label>Phone:
-                                <input
-                                class="form-control"
-                                type="number"
-                                name="phone"
-                                value={phone}
-                                placeholder="4382929282"
-                                onChange={handleChange}
-                                onBlur={validateOne}
-                                />
-                            </label>
-                        </div>
+    if (email && !/\S+@\S+\.\S+/.test(email)) {
+      validations.email = 'Email format must be as example@mail.com'
+      isValid = false
+    }
 
-                        <div>
-                            <label>Country:
-                                <input
-                                class="form-control"
-                                type="text"
-                                name="country"
-                                value={country}
-                                placeholder="Argentina" 
-                                onChange={handleChange}
-                                onBlur={validateOne}
-                                />
-                            </label>
-                        </div>
+    if (!password) {
+      validations.password = 'Password is required'
+      isValid = false
+    }
 
-                        <div>
-                            <label>Province:
-                                <input
-                                class="form-control"
-                                type="text"
-                                name="province"
-                                value={province}
-                                placeholder="Ciudad de Buenos Aires" 
-                                onChange={handleChange}
-                                onBlur={validateOne}
-                                />
-                            </label>
-                        </div>
+    if (password && !/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(password)) {
+      validations.password = 'Password format must be as $@$!%*?&'
+      isValid = false
+    }
 
-                        <div>
-                            <label>City:
-                                <input
-                                class="form-control"
-                                type="text"
-                                name="city"
-                                value={city}
-                                placeholder="Mar del Plata"
-                                onChange={handleChange}
-                                onBlur={validateOne}
-                                />
-                            </label>
-                        </div>
+    if (!isValid) {
+      setValidations(validations)
+    }
 
-                        <div>
-                            <label>Address:
-                                <input
-                                class="form-control"
-                                type="text"
-                                name="address"
-                                value={address}
-                                placeholder="Av. Santa Fe 4362"
-                                onChange={handleChange}
-                                onBlur={validateOne}
-                                />
-                            </label>
-                        </div>
-
-                        <div>
-                            <label>Postal Code:
-                                <input
-                                class="form-control"
-                                type="text"
-                                name="postalcode"
-                                value={postalcode}
-                                placeholder="B7600"
-                                onChange={handleChange}
-                                onBlur={validateOne}
-                                />
-                            </label>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" onSubmit={handleSubmit} type="submit">Submit</button>
-                    <button class="btn btn-outline-primary" type="submit">Register with Google</button>
-                    <p><b>Already have an account? <a href="#">Sign-In</a></b></p>
-                </form>
-        </div>
-      )
+    return isValid
   }
 
-  export default SignUp;
+  const validateOne = (e) => {
+    const { name } = e.target
+    const value = values[name]
+    let message = ''
+
+    if (!value) {
+      message = `${name} is required`
+    }
+
+    if (value && name === 'firstName' && (value.length < 3 || value.length > 50)) {
+      message = 'First Name must contain between 3 and 50 characters'
+    }
+
+    if (value && name === 'lastName' && (value.length < 3 || value.length > 50)) {
+      message = 'Last Name must contain between 3 and 50 characters'
+    }
+
+    if (value && name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
+      message = 'Email format must be as henry@mail.com'
+    }
+
+    if (value && name === 'password' && !/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(value)) {
+      message = 'The password must be •8 to 16 characters •at least one digit •at least one lowercase •at least one uppercase.'
+    }
+
+    setValidations({ ...validations, [name]: message })
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setValues({ ...values, [name]: value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+
+    const isValid = validateAll()
+
+    if (!isValid) {
+      return false
+    }
+
+    axios.post('http://localhost:3001/users/newuser', values);
+    window.location.href = 'http://localhost:3000/signup/success';
+  }
+
+  const submitWithGoogle = async (e) => {
+    e.preventDefault()
+    let prop = 'register'
+    await props.autenticarConGoogle(prop)
+    window.location.href = 'http://localhost:3000/signup/success';
+  }
+
+  const { firstName, lastName, email, password, phone, country, city, province, address, postalcode } = values
+
+  const {
+    firstName: firstNameVal,
+    lastName: lastNameVal,
+    email: emailVal,
+    password: passwordVal
+  } = validations
+
+  return (
+    <div className="div-signup" >
+      <h1 id="h1">Sign Up</h1>
+      <form>
+        <div className="form-row">
+          <div>
+            <label>*First Name:
+              <input
+                className="form-control"
+                type="text"
+                name="firstName"
+                value={firstName}
+                placeholder="Henry"
+                onChange={handleChange}
+                onBlur={validateOne}
+              />
+            </label>
+            <div className="legend">{firstNameVal}</div>
+          </div>
+
+          <div>
+            <label>*Last Name:
+              <input
+                className="form-control"
+                type="text"
+                name="lastName"
+                value={lastName}
+                placeholder="Boom"
+                onChange={handleChange}
+                onBlur={validateOne}
+              />
+            </label>
+            <div className="legend" v>{lastNameVal}</div>
+          </div>
+
+          <div>
+            <label>*Email:
+              <input
+                className="form-control"
+                type="email"
+                name="email"
+                value={email}
+                placeholder="henry@mail.com"
+                onChange={handleChange}
+                onBlur={validateOne}
+              />
+            </label>
+            <div className="legend">{emailVal}</div>
+          </div>
+
+          <div>
+            <label>*Password:
+              <input
+                className="form-control"
+                type="password"
+                name="password"
+                value={password}
+                placeholder="***********"
+                onChange={handleChange}
+                onBlur={validateOne}
+              />
+            </label>
+            <div className="legend">{passwordVal}</div>
+          </div>
+
+          <div >
+            <label>Phone:
+              <input
+                className="form-control"
+                type="number"
+                name="phone"
+                value={phone}
+                placeholder="4382929282"
+                onChange={handleChange}
+                onBlur={validateOne}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>Country:
+              <input
+                className="form-control"
+                type="text"
+                name="country"
+                value={country}
+                placeholder="Argentina"
+                onChange={handleChange}
+                onBlur={validateOne}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>Province:
+              <input
+                className="form-control"
+                type="text"
+                name="province"
+                value={province}
+                placeholder="Ciudad de Buenos Aires"
+                onChange={handleChange}
+                onBlur={validateOne}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>City:
+              <input
+                className="form-control"
+                type="text"
+                name="city"
+                value={city}
+                placeholder="Mar del Plata"
+                onChange={handleChange}
+                onBlur={validateOne}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>Address:
+              <input
+                className="form-control"
+                type="text"
+                name="address"
+                value={address}
+                placeholder="Av. Santa Fe 4362"
+                onChange={handleChange}
+                onBlur={validateOne}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>Postal Code:
+              <input
+                className="form-control"
+                type="text"
+                name="postalcode"
+                value={postalcode}
+                placeholder="B7600"
+                onChange={handleChange}
+                onBlur={validateOne}
+              />
+            </label>
+          </div>
+        </div>
+        <button className="btn btn-primary" onClick={handleSubmit} type="submit">Submit</button>
+        <button className="btn btn-outline-primary" onClick={submitWithGoogle} type="submit">Register with Google</button>
+        <p><b>Already have an account? <a href="#">Sign-In</a></b></p>
+      </form>
+    </div>
+  )
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch)
+}
+
+function mapStateToProps(state) {
+  return {
+    user: state.rootReducer.user
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

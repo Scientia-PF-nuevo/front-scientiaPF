@@ -169,7 +169,7 @@ export function addDetails(id) {
     }
 }
 
-export function autenticarConGoogle() {
+export function autenticarConGoogle(prop) {
     return function (dispatch) {
         const auth = getAuth();
         const provider = new GoogleAuthProvider();
@@ -179,10 +179,24 @@ export function autenticarConGoogle() {
                 const token = credential.accessToken;
                 const user = result.user;
                 dispatch(logear(user))
+                if (prop === 'register') {
+                    dispatch(register(user))
+                }
             })
             .catch((error) => {
                 const errorCode = error.code;
                 return errorCode
             });
     }
+}
+
+export function register(user) {
+    let nombre = user.displayName.split(" ")
+    let values = {
+        firstName: nombre[0],
+        lastName: nombre[nombre.length - 1],
+        email: user.email,
+        password: user.uid,
+    }
+    axios.post('http://localhost:3001/users/newuser', values);
 }
