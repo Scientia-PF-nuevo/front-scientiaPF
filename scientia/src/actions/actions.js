@@ -144,7 +144,8 @@ function logear(data) {
 
 function logeado() {
     return {
-        type: LOGEADO
+        type: LOGEADO,
+        payload: true
     }
 }
 

@@ -5,13 +5,18 @@ import s from './login.module.css'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom'
 import { Modal, Button, Spinner } from 'react-bootstrap'
+import { Redirect } from "react-router-dom"
 
 function Login(props) {
 
     const [state, setState] = useState({ email: '', password: '', remember: false })
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    console.log(props.login)
+    const handleClose = () => {
+        setShow(false)
+        window.location.href = 'http://localhost:3000/home';
+    };
     const handleShow = () => setShow(true);
 
     function handleChange(e) {
