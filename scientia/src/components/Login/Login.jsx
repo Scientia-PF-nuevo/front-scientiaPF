@@ -4,28 +4,9 @@ import * as actionCreators from './../../actions/actions'
 import s from './login.module.css'
 import { bindActionCreators } from 'redux';
 import {Link} from 'react-router-dom'
-import { Modal, Button } from 'react-bootstrap'
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import { Modal, Button, Spinner } from 'react-bootstrap'
 
 function Login(props) {
-
-    function autenticarConGoogle() {
-        const auth = getAuth();
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                const user = result.user;
-                props.logear(user)
-                props.logeado()
-                handleShow()
-            }).catch((error) => {
-                const errorCode = error.code;
-                return errorCode
-            });
-    }
 
     const [state, setState] = useState({ email: '', password: '', remember: false })
     const [show, setShow] = useState(false);
@@ -48,9 +29,10 @@ function Login(props) {
         handleShow()
     }
 
-    function submitGoogle(e) {
+    async function submitGoogle(e) {
         e.preventDefault()
-        autenticarConGoogle();
+        props.autenticarConGoogle()
+        handleShow()
     }
 
     return (
@@ -71,8 +53,8 @@ function Login(props) {
                     </div>
                     <div className={s.botones}>
                         <button onClick={handleSubmit} type="submit" className="btn btn-primary btn-lg">Enter</button>
-                        <button onClick={submitGoogle} type="submit" className="btn btn-outline-primary btn-lg">Register with Google</button>
-                        <Link to='/signup' className="btn btn-outline-primary btn-lg">Register with email</Link>
+                        <button onClick={submitGoogle} type="submit" className="btn btn-outline-primary btn-lg">Login with Google</button>
+                        <Link to='/signup' className="btn btn-outline-primary btn-lg">Register</Link>
                     </div>
                 </form>
             </div>
@@ -80,7 +62,7 @@ function Login(props) {
                 <Modal.Header closeButton>
                     <Modal.Title>Inicio de Sesión</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{props.user ? `Bienvenido ${props.user.displayName}!` : 'Revisa tus credenciales'}</Modal.Body>
+                <Modal.Body>{props.user.displayName ? `Bienvenido ${props.user.displayName}!` : <Spinner animation="border" variant="primary" />}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleClose}>
                         Ok!

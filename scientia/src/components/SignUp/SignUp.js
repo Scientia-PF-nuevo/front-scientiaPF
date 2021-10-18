@@ -135,7 +135,7 @@ const SignUp = () => {
       return (
         <div class="div-signup" >
                 <h1 id="h1">Sign Up</h1>
-                <form onSubmit={handleSubmit}>
+                <form>
                     <div class="form-row">
                         <div>
                             <label>*First Name:
@@ -281,7 +281,8 @@ const SignUp = () => {
                             </label>
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" onSubmit={handleSubmit} type="submit">Submit</button>
+                    <button class="btn btn-outline-primary" type="submit">Register with Google</button>
                     <p><b>Already have an account? <a href="#">Sign-In</a></b></p>
                 </form>
         </div>
