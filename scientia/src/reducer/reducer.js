@@ -145,8 +145,8 @@ export default function rootReducer(state = initialState, action) {
         case LOGEADO:
             return {
                 ...state,
-                login: true
-            }
+                login: action.payload
+            } 
 
         case ADD_CART:
             return {
