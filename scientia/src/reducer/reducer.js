@@ -140,14 +140,9 @@ export default function rootReducer(state = initialState, action) {
         case LOGIN:
             return {
                 ...state,
-                user: action.payload
+                user: action.payload,
+                login: true
             }
-        case LOGEADO:
-            return {
-                ...state,
-                login: action.payload
-            } 
-
         case ADD_CART:
             return {
                 ...state,
