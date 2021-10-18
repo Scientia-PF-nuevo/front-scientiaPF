@@ -11,11 +11,11 @@ function Login(props) {
 
     const [state, setState] = useState({ email: '', password: '', remember: false })
     const [show, setShow] = useState(false);
+    const [redir, setRedir] = useState(false)
 
-    console.log(props.login)
     const handleClose = () => {
         setShow(false)
-        window.location.href = 'http://localhost:3000/home';
+        setRedir(true)
     };
     const handleShow = () => setShow(true);
 
@@ -33,6 +33,8 @@ function Login(props) {
         await props.logear(state)
         handleShow()
     }
+
+    console.log(props.login)
 
     async function submitGoogle(e) {
         e.preventDefault()
@@ -63,17 +65,21 @@ function Login(props) {
                     </div>
                 </form>
             </div>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Inicio de Sesión</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{props.user.displayName ? `Bienvenido ${props.user.displayName}!` : <Spinner animation="border" variant="primary" />}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
-                        Ok!
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            {redir ?
+                <Redirect to="/home" />
+                :
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Inicio de Sesión</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{props.user.displayName ? `Bienvenido ${props.user.displayName}!` : <Spinner animation="border" variant="primary" />}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>
+                            Ok!
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            }
         </>
     )
 }

@@ -134,18 +134,11 @@ export function setCourseToAprove(payload) {
     }
 }
 
-function logear(data) {
-    logeado()
+export function logear(data) {
+    console.log('logear')
     return {
         type: LOGIN,
         payload: data
-    }
-}
-
-function logeado() {
-    return {
-        type: LOGEADO,
-        payload: true
     }
 }
 
