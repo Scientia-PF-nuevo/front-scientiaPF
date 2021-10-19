@@ -1,11 +1,13 @@
 import React from 'react';
-import axios from 'axios';
 import './SignUp.css';
 import { connect } from 'react-redux'
 import * as actionCreators from './../../actions/actions'
 import { bindActionCreators } from 'redux';
+import { useDispatch } from "react-redux";
+import { createUser } from '../../actions/actions';
 
 const SignUp = (props) => {
+  const dispatch = useDispatch();
 
   const [values, setValues] = React.useState({
     firstName: '',
@@ -122,15 +124,13 @@ const SignUp = (props) => {
       return false
     }
 
-    axios.post('http://localhost:3001/users/newuser', values);
-    window.location.href = 'http://localhost:3000/signup/success';
+    dispatch(createUser(values));
   }
 
   const submitWithGoogle = async (e) => {
     e.preventDefault()
     let prop = 'register'
     await props.autenticarConGoogle(prop)
-    window.location.href = 'http://localhost:3000/signup/success';
   }
 
   const { firstName, lastName, email, password, phone, country, city, province, address, postalcode } = values
@@ -293,7 +293,7 @@ const SignUp = (props) => {
         </div>
         <button className="btn btn-primary" onClick={handleSubmit} type="submit">Submit</button>
         <button className="btn btn-outline-primary" onClick={submitWithGoogle} type="submit">Register with Google</button>
-        <p><b>Already have an account? <a href="#">Sign-In</a></b></p>
+        <p><b>Already have an account? <a href="http://localhost:3000/login">Sign-In</a></b></p>
       </form>
     </div>
   )
