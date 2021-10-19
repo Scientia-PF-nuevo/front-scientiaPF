@@ -16,7 +16,8 @@ import {
     LOGIN,
     LOGEADO,
     ADD_DETAILS,
-    SET_COURSE_TOAPROVE
+    SET_COURSE_TOAPROVE,
+    NEW_USER
 } from './constants.js';
 
 
@@ -183,6 +184,7 @@ export function autenticarConGoogle(prop) {
     }
 }
 
+//*Crea nuevo usuario desde google
 export function register(user) {
     let nombre = user.displayName.split(" ")
     let values = {
@@ -191,5 +193,22 @@ export function register(user) {
         email: user.email,
         password: user.uid,
     }
-    axios.post('http://localhost:3001/users/newuser', values);
+    axios.post('http://localhost:3001/users/register', values);
+    window.location.href = 'http://localhost:3000/success';
+}
+
+//*Crea nuevo usuario directo
+export function createUser (user) {
+    console.log('Entré al action')
+    return function(dispatch){
+        console.log('Entré al action dispatch')
+        return axios.post('http://localhost:3001/users/register', user)
+        .then((response) => {
+            dispatch({
+                type: NEW_USER,
+                payload: response.data
+            })
+            window.location.href = 'http://localhost:3000/success';
+        })
+    }
 }
