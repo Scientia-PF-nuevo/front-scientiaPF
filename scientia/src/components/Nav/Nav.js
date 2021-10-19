@@ -26,6 +26,11 @@ export default function Nav () {
                             Add Course
                         </li>
                     </Link>
+                    <Link className='linkNav' to='/mylearning'>
+                        <li className='liNav'>
+                            My learning
+                        </li>
+                    </Link>
                     <Link className='linkNav' to='/cart'>
                         <li className='liNav'>
                             <CustomizedBadges />
