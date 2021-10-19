@@ -122,7 +122,7 @@ const SignUp = (props) => {
       return false
     }
 
-    axios.post('http://localhost:3001/users/newuser', values);
+    axios.post('http://localhost:3001/users/register', values);
     window.location.href = 'http://localhost:3000/signup/success';
   }
 
