@@ -125,7 +125,6 @@ const SignUp = (props) => {
     }
 
     dispatch(createUser(values));
-  }
 
   const submitWithGoogle = async (e) => {
     e.preventDefault()

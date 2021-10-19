@@ -136,7 +136,6 @@ export function setCourseToAprove(payload) {
 }
 
 export function logear(data) {
-    console.log('logear')
     return {
         type: LOGIN,
         payload: data

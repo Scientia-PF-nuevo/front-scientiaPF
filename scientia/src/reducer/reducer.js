@@ -86,9 +86,9 @@ export default function rootReducer(state = initialState, action) {
             } else {
                 return { ...state, allCourses: state.coursesBackup.filter((course) => (action.payload) === course.categories) }
             }
-            
-        
-            //! Ordena alfabeticamente
+
+
+        //! Ordena alfabeticamente
         case ORDER_BY:
             if (action.payload === 'A-Z') {
                 return {
@@ -151,7 +151,7 @@ export default function rootReducer(state = initialState, action) {
             }
         case REMOVE_CART:
             return {
-                ...state, 
+                ...state,
                 cart: state.cart.filter((course) => course.id !== action.payload)
             }
 

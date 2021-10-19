@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from './../../actions/actions'
 import s from './login.module.css'
@@ -12,6 +12,11 @@ function Login(props) {
     const [state, setState] = useState({ email: '', password: '', remember: false })
     const [show, setShow] = useState(false);
     const [redir, setRedir] = useState(false)
+    const [logeo, setLogeo] = useState('')
+
+    useEffect(() => {
+        props.getUsers();
+    }, [])
 
     const handleClose = () => {
         setShow(false)
@@ -30,16 +35,34 @@ function Login(props) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        await props.logear(state)
+        let filtrado = props.users.filter(el => el.email === state.email)
+        if (filtrado.length > 0) {
+            if (filtrado[0].password === state.password) {
+                setLogeo(`Bienvenido!`);
+                await props.logear(state)
+            } else {
+                setLogeo(`Contraseña Incorrecta!`);
+            }
+        } else {
+            setLogeo(`Email Incorrecto!`);
+        }
         handleShow()
     }
-
-    console.log(props.login)
 
     async function submitGoogle(e) {
         e.preventDefault()
         props.autenticarConGoogle()
         handleShow()
+    }
+
+    function mensajeModel(){
+        if (props.user.displayName) {
+            return `Bienvenido ${props.user.displayName}!`
+        }
+        if (logeo){
+            return logeo
+        }
+        return <Spinner animation="border" variant="primary" />
     }
 
     return (
@@ -72,7 +95,7 @@ function Login(props) {
                     <Modal.Header closeButton>
                         <Modal.Title>Inicio de Sesión</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>{props.user.displayName ? `Bienvenido ${props.user.displayName}!` : <Spinner animation="border" variant="primary" />}</Modal.Body>
+                    <Modal.Body>{mensajeModel()}</Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={handleClose}>
                             Ok!
@@ -91,7 +114,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     return {
         login: state.rootReducer.login,
-        user: state.rootReducer.user
+        user: state.rootReducer.user,
+        users: state.rootReducer.users
     }
 }
 
