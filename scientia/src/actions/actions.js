@@ -8,8 +8,11 @@ import {
     GET_FAVORITE_COURSES,
     GET_COURSE_DETAILS,
     GET_GENRES_COURSES,
+    CONFIRM_ORDER,
+    PENDING_ORDER,
     ADD_CART,
     REMOVE_CART,
+    CLEAR_CART,
     SEARCH_BY_NAME,
     FILTER_BY,
     ORDER_BY,
@@ -153,6 +156,37 @@ export function removeCart(id) {
     return {
         type: REMOVE_CART,
         payload: id
+    }
+}
+
+export function clearCart() {
+    return {
+        type: CLEAR_CART
+    }
+}
+
+
+//* Confirma un CURSO a la DB (COMPLETA)
+export function confirmOrder(userCart) {
+    return function (dispatch) {
+        axios.post(`http://localhost:3001/order/${userCart.email}`, {state:"completa", courseId: userCart.courseId})
+            .then(res => {
+
+                dispatch({ type: CONFIRM_ORDER, payload: res.data });
+            })
+            .catch(err => { return err })
+    }
+}
+
+//* Confirma un CURSO a la DB (PENDIENTE)
+export function pendingOrder(userCart) {
+    return function (dispatch) {
+        axios.post(`http://localhost:3001/order/${userCart.email}`, {state:"creada", courseId: userCart.courseId})
+            .then(res => {
+
+                dispatch({ type: PENDING_ORDER, payload: res.data });
+            })
+            .catch(err => { return err })
     }
 }
 

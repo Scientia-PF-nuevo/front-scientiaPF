@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import './Home.css';
 import SearchBar from "../Search/SearchBar";
-import FilterBy from '../FilterBar/FilterBar'
 import CourseList from "../../CourseList/CourseList";
-import { getAllCourses, getGenresCourses } from '../../actions/actions'
+import { getAllCourses, getGenresCourses, getUsers } from '../../actions/actions'
 import { connect } from "react-redux";
 
 
-export function Home ({getAllCourses, getGenresCourses}) {
+export function Home ({getAllCourses, getGenresCourses, getUsers}) {
 
     useEffect(()=> {
         getAllCourses()
         getGenresCourses()
+        getUsers()
     }, [])
 
 
@@ -25,4 +25,4 @@ export function Home ({getAllCourses, getGenresCourses}) {
     );
 };
 
-export default connect(null, { getAllCourses, getGenresCourses })(Home)
+export default connect(null, { getAllCourses, getGenresCourses, getUsers })(Home)

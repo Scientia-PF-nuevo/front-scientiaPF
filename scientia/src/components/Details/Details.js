@@ -13,6 +13,8 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { connect } from 'react-redux'
 import TextRating from '../CourseCard/Qualify';
@@ -39,6 +41,24 @@ function Details({details,addCart, cart}) {
 
   const { name, description, price, url, categories, id, score, date } = detailsRender
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  
+  const MyOptions = [
+    "EJEMPLO 1",
+    "EJEMPLO 2",
+    "EJEMPLO 3",
+    "EJEMPLO 4",
+  ];
+  
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  
+  const open = Boolean(anchorEl);
+  
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -63,9 +83,23 @@ function Details({details,addCart, cart}) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
+          <>
+          <IconButton aria-label="settings" onClick={handleClick}>
             <MoreVertIcon />
           </IconButton>
+          <Menu 
+        anchorEl={anchorEl} 
+        keepMounted onClose={handleClose} 
+        open={open}>
+        {MyOptions.map((option) => (
+          <MenuItem
+            key={option} 
+            onClick={handleClose}>
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
+      </>
         }
         title={name && name.toUpperCase()}
         subheader={`Price: $${price}`}

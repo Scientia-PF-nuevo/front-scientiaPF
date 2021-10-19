@@ -9,7 +9,10 @@ import {
     FILTER_BY,
     ORDER_BY,
     ADD_CART,
+    CLEAR_CART,
     REMOVE_CART,
+    CONFIRM_ORDER,
+    PENDING_ORDER,
     LOGIN,
     ADD_DETAILS,
     LOGEADO,
@@ -30,6 +33,8 @@ const initialState = {
     login: false,
     user: {},
     cart: [],
+    orderConfirm: [],
+    pendingOrders: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -154,6 +159,24 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 cart: state.cart.filter((course) => course.id !== action.payload)
             }
+
+        case CLEAR_CART:
+            return {
+                ...state, 
+                cart: []
+            }   
+
+        case CONFIRM_ORDER:
+            return {
+                ...state, 
+                orderConfirm: action.payload
+            }
+
+        case PENDING_ORDER:
+            return {
+                ...state, 
+                pendingOrders: action.payload
+            }    
 
             case ADD_DETAILS:
                 return {

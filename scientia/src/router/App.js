@@ -14,6 +14,7 @@ import Form from '../components/Form/Form';
 import Details from '../components/Details/Details';
 import Login from '../components/Login/Login.jsx'
 import SignUp from '../components/SignUp/SignUp';
+import MyLearning from '../components/myLearning/myLearning';
 import Success from '../components/SignUp/Success';
 
 function App() {
@@ -32,6 +33,11 @@ function App() {
         <SignUp />
       </Route>
 
+
+      <Route exact path='/mylearning'>
+        <MyLearning />
+      </Route>
+    
       <Route exact path='/success'>
         <Success />
       </Route>

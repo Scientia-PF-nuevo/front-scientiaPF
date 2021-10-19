@@ -1,14 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Table, CloseButton, ButtonToolbar } from 'react-bootstrap';
-import { removeCart, addDetails } from '../../actions/actions';
+import {
+  removeCart,
+  addDetails,
+  confirmOrder,
+  pendingOrder,
+  clearCart,
+} from "../../actions/actions";
 import {Link} from 'react-router-dom'
 import './Cart.css'
 
 
+var userIDCounter = 0;  //! SOLO PARA TESTING
 
-
-export function Cart({cart, removeCart, addDetails}) {
+export function Cart({cart,users, removeCart, addDetails, confirmOrder, pendingOrder, clearCart}) {
 
     var result=0;
     var taxs=0;
@@ -18,6 +24,43 @@ export function Cart({cart, removeCart, addDetails}) {
       taxs = result * 0.21;
       total= result + taxs;
       return `$ ${result}`;
+    }
+
+    const handledSubmitOrder = () => {
+
+      const userCart = {
+        email: "",
+        courseId: []
+      }
+
+      if (cart.length >=1 && users.length >=1) {
+        userIDCounter++  //! SOLO PARA TESTING
+        userCart.courseId = cart.map((course) => course.id )
+        userCart.email = users[userIDCounter].email //! SOLO PARA TESTING
+  
+        confirmOrder(userCart)
+        alert("ORDER PROCESS OK ORDER:.......")
+        clearCart()
+        
+      }
+    }
+
+    const handledPendingOrder = () => {
+
+      const userCart = {
+        email: "",
+        courseId: []
+      }
+
+      if (cart.length >=1 && users.length >=1) {
+        userIDCounter++  //! SOLO PARA TESTING
+        userCart.courseId = cart.map((course) => course.id )
+        userCart.email = users[userIDCounter].email  //! SOLO PARA TESTING
+  
+        pendingOrder(userCart)
+        alert("SAVED ORDER")
+        clearCart()
+      }
     }
     
     return (
@@ -54,18 +97,25 @@ export function Cart({cart, removeCart, addDetails}) {
         <p>SUB - TOTAL: $ {result}</p>
         <p>TAXs: $ {taxs}</p>
         <p>TOTAL: $ {total}</p>
-        <button> CONFIRM ORDER </button>
+        <button onClick={handledSubmitOrder}> CONFIRM ORDER </button>
         <br></br>
         <br></br>
-        <button> CONFIRM LATER </button>
+        <button onClick={handledPendingOrder}> CONFIRM LATER </button>
         </>
     );
 }
 
 function mapStateToProps(state) {
     return {
-        cart: state.rootReducer.cart
+        cart: state.rootReducer.cart,
+        users: state.rootReducer.users
     }
 }
 
-export default connect(mapStateToProps, {removeCart, addDetails})(Cart)
+export default connect(mapStateToProps, {
+  removeCart,
+  addDetails,
+  confirmOrder,
+  pendingOrder,
+  clearCart,
+})(Cart);
