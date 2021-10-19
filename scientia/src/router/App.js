@@ -15,6 +15,7 @@ import Details from '../components/Details/Details';
 import Login from '../components/Login/Login.jsx'
 import SignUp from '../components/SignUp/SignUp';
 import MyLearning from '../components/myLearning/myLearning';
+import Success from '../components/SignUp/Success';
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
       
       <Nav />
 
-      <Route exact path='/'>
+      <Route exact path='/login'>
         <Login />
       </Route>
 
@@ -32,8 +33,13 @@ function App() {
         <SignUp />
       </Route>
 
+
       <Route exact path='/mylearning'>
         <MyLearning />
+      </Route>
+    
+      <Route exact path='/success'>
+        <Success />
       </Route>
 
       <Route exact path='/home'>

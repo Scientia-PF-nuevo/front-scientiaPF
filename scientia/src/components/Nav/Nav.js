@@ -36,7 +36,7 @@ export default function Nav () {
                             <CustomizedBadges />
                         </li>
                         </Link>
-                        <Link className='linkNav' to='/'>
+                        <Link className='linkNav' to='/login'>
                         <li className='liNav'>
                             Sign in
                         </li>

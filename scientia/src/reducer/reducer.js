@@ -15,7 +15,8 @@ import {
     PENDING_ORDER,
     LOGIN,
     ADD_DETAILS,
-    LOGEADO
+    LOGEADO,
+    NEW_USER
 } from '../actions/constants';
 
 
@@ -90,9 +91,9 @@ export default function rootReducer(state = initialState, action) {
             } else {
                 return { ...state, allCourses: state.coursesBackup.filter((course) => (action.payload) === course.categories) }
             }
-            
-        
-            //! Ordena alfabeticamente
+
+
+        //! Ordena alfabeticamente
         case ORDER_BY:
             if (action.payload === 'A-Z') {
                 return {
@@ -145,14 +146,9 @@ export default function rootReducer(state = initialState, action) {
         case LOGIN:
             return {
                 ...state,
-                user: action.payload
-            }
-        case LOGEADO:
-            return {
-                ...state,
+                user: action.payload,
                 login: true
             }
-
         case ADD_CART:
             return {
                 ...state,
@@ -160,7 +156,7 @@ export default function rootReducer(state = initialState, action) {
             }
         case REMOVE_CART:
             return {
-                ...state, 
+                ...state,
                 cart: state.cart.filter((course) => course.id !== action.payload)
             }
 
@@ -186,6 +182,11 @@ export default function rootReducer(state = initialState, action) {
                 return {
                     ...state, 
                     courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
+                }
+            case NEW_USER: 
+                return {
+                    ...state,
+                    user: action.payload
                 }
         default:
             return state;
