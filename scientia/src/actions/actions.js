@@ -17,7 +17,7 @@ import {
     FILTER_BY,
     ORDER_BY,
     LOGIN,
-    LOGEADO,
+    LOGOUT,
     ADD_DETAILS,
     SET_COURSE_TOAPROVE,
     NEW_USER
@@ -26,8 +26,8 @@ import {
 
 //* Trae todos los cursos (DB + API)
 export function getAllCourses() {
-    return function (dispatch) {
-        return axios.get('http://localhost:3001/courses/')
+    return async function (dispatch) {
+        return await axios.get('http://localhost:3001/courses/')
             .then(res => {
                 dispatch({ type: GET_ALL_COURSES, payload: res.data })
             })
@@ -169,7 +169,7 @@ export function clearCart() {
 //* Confirma un CURSO a la DB (COMPLETA)
 export function confirmOrder(userCart) {
     return function (dispatch) {
-        axios.post(`http://localhost:3001/order/${userCart.email}`, {state:"completa", courseId: userCart.courseId})
+        axios.post(`http://localhost:3001/order/${userCart.email}`, { state: "completa", courseId: userCart.courseId })
             .then(res => {
 
                 dispatch({ type: CONFIRM_ORDER, payload: res.data });
@@ -181,7 +181,7 @@ export function confirmOrder(userCart) {
 //* Confirma un CURSO a la DB (PENDIENTE)
 export function pendingOrder(userCart) {
     return function (dispatch) {
-        axios.post(`http://localhost:3001/order/${userCart.email}`, {state:"creada", courseId: userCart.courseId})
+        axios.post(`http://localhost:3001/order/${userCart.email}`, { state: "creada", courseId: userCart.courseId })
             .then(res => {
 
                 dispatch({ type: PENDING_ORDER, payload: res.data });
@@ -232,17 +232,22 @@ export function register(user) {
 }
 
 //*Crea nuevo usuario directo
-export function createUser (user) {
-    console.log('Entré al action')
-    return function(dispatch){
-        console.log('Entré al action dispatch')
-        return axios.post('http://localhost:3001/users/register', user)
-        .then((response) => {
-            dispatch({
-                type: NEW_USER,
-                payload: response.data
+export function createUser(user) {
+    return async function (dispatch) {
+        return await axios.post('http://localhost:3001/users/register', user)
+            .then((response) => {
+                dispatch({
+                    type: NEW_USER,
+                    payload: response.data
+                })
+                window.location.href = 'http://localhost:3000/success';
             })
-            window.location.href = 'http://localhost:3000/success';
-        })
+    }
+}
+
+export function logout() {
+    return {
+        type: LOGOUT,
+        payload: false
     }
 }

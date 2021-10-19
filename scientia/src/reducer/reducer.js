@@ -15,7 +15,7 @@ import {
     PENDING_ORDER,
     LOGIN,
     ADD_DETAILS,
-    LOGEADO,
+    LOGOUT,
     NEW_USER
 } from '../actions/constants';
 
@@ -162,32 +162,38 @@ export default function rootReducer(state = initialState, action) {
 
         case CLEAR_CART:
             return {
-                ...state, 
+                ...state,
                 cart: []
-            }   
+            }
 
         case CONFIRM_ORDER:
             return {
-                ...state, 
+                ...state,
                 orderConfirm: action.payload
             }
 
         case PENDING_ORDER:
             return {
-                ...state, 
+                ...state,
                 pendingOrders: action.payload
-            }    
+            }
 
-            case ADD_DETAILS:
-                return {
-                    ...state, 
-                    courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
-                }
-            case NEW_USER: 
-                return {
-                    ...state,
-                    user: action.payload
-                }
+        case ADD_DETAILS:
+            return {
+                ...state,
+                courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
+            }
+        case NEW_USER:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                user: {},
+                login: action.payload
+            }
         default:
             return state;
     }

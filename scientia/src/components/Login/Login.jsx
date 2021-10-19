@@ -39,7 +39,9 @@ function Login(props) {
         if (filtrado.length > 0) {
             if (filtrado[0].password === state.password) {
                 setLogeo(`Bienvenido!`);
-                await props.logear(state)
+                let nombreCompleto = (filtrado[0].firstName + ' ' + filtrado[0].lastName)
+                let usuario = { email: filtrado[0].email, displayName: nombreCompleto, photoURL: '', remember: state.remember }
+                await props.logear(usuario)
             } else {
                 setLogeo(`Contraseña Incorrecta!`);
             }
@@ -55,11 +57,11 @@ function Login(props) {
         handleShow()
     }
 
-    function mensajeModel(){
+    function mensajeModel() {
         if (props.user.displayName) {
             return `Bienvenido ${props.user.displayName}!`
         }
-        if (logeo){
+        if (logeo) {
             return logeo
         }
         return <Spinner animation="border" variant="primary" />
