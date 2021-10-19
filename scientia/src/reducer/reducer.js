@@ -12,7 +12,8 @@ import {
     REMOVE_CART,
     LOGIN,
     ADD_DETAILS,
-    LOGEADO
+    LOGEADO,
+    NEW_USER
 } from '../actions/constants';
 
 
@@ -158,6 +159,11 @@ export default function rootReducer(state = initialState, action) {
                 return {
                     ...state, 
                     courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
+                }
+            case NEW_USER: 
+                return {
+                    ...state,
+                    user: action.payload
                 }
         default:
             return state;
