@@ -12,8 +12,7 @@ import * as actionCreators from './../../actions/actions'
 
 function Nav(props) {
     const imagenPerfil = props.user.photoURL
-
-
+    
     if (props.user.displayName) {
         let inicialNombre = props.user.displayName.split(' ')[0][0]
         let inicialApellido = props.user.displayName.split(' ')[1][0]
