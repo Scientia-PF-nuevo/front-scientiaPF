@@ -16,6 +16,7 @@ import Login from '../components/Login/Login.jsx'
 import SignUp from '../components/SignUp/SignUp';
 import MyLearning from '../components/myLearning/myLearning';
 import Success from '../components/SignUp/Success';
+import ResponsivePlayer from '../components/Player/Player';
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
         <SignUp />
       </Route>
 
+      <Route exact path='/player'>
+        <ResponsivePlayer />
+      </Route>
 
       <Route exact path='/mylearning'>
         <MyLearning />
