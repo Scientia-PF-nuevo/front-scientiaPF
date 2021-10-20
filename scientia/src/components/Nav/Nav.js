@@ -11,11 +11,15 @@ import * as actionCreators from './../../actions/actions'
 // import logo from '../../images/icon.png';
 
 function Nav(props) {
+    const imagenPerfil = props.user.photoURL
+    
     if (props.user.displayName) {
         let inicialNombre = props.user.displayName.split(' ')[0][0]
         let inicialApellido = props.user.displayName.split(' ')[1][0]
         var iniciales = inicialNombre + inicialApellido
     }
+
+    
     return (
         <div className='container'>
             <div className='containLogo'>
@@ -73,7 +77,7 @@ function Nav(props) {
                         props.user.photoURL ?
                             <Link className='linkNav' to='/perfil'>
                                 <li className='liNav'>
-                                    <Avatar alt="Remy Sharp" src={props.user.photoURL} />
+                                    <Avatar alt="" src={imagenPerfil} />
                                 </li>
                             </Link>
                             :
