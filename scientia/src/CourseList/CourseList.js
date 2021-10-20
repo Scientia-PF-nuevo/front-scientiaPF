@@ -14,7 +14,9 @@ function CourseList({ courses }) {
     <div>
       <h1> NO ENCONTRADO </h1>
     </div>
-  ) : typeof courses !== "undefined" && courses.length >= 1 ? (
+  ) : 
+    
+  typeof courses !== "undefined" && courses.length >= 1 ? (
     courses.map((course) => (
       <CourseCard
         key={course.id}
