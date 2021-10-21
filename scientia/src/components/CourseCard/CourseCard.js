@@ -30,7 +30,7 @@ function CourseCard(props) {
        if(alreadyAdded) {
            return;
       } else {
-        addCart({ name: name, id: id, price: price })
+        addCart({ name: name, id: id, price: price, url: url })
       }
     }
     

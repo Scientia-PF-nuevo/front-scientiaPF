@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import CourseCard from '../CourseCard/CourseCard'
 import TrainningCard from '../TrainningCard/TrainningCard'
 import './myLearning.css'
-import {Carousel} from '../../Carousel/Carousel'
 
 function MyLearning({courses}) {
     if (courses.length === 1) {

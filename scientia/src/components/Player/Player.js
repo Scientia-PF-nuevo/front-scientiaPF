@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
 import './Player.css'
+import Comments from '../Comments/Comments'
 
 
 const ResponsivePlayer = () => {
@@ -39,6 +40,7 @@ const ResponsivePlayer = () => {
   }
    
       return (
+        <>
         <div className="player-wrapper">
           <ReactPlayer
             className="react-player"
@@ -61,6 +63,8 @@ const ResponsivePlayer = () => {
           />
     
         </div>
+        <Comments/>
+        </>
       );
     
 }
