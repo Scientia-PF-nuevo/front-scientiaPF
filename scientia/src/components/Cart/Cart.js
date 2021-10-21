@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Table, CloseButton, ButtonToolbar } from 'react-bootstrap';
+import Button from '@mui/material/Button';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import TextField from '@mui/material/TextField';
+import { Table, CloseButton } from 'react-bootstrap';
 import {
   removeCart,
   addDetails,
@@ -60,48 +63,70 @@ export function Cart({cart,users, removeCart, addDetails, confirmOrder, pendingO
         pendingOrder(userCart)
         alert("SAVED ORDER")
         clearCart()
+        
       }
     }
     
     return (
-        <>
+      <>
         <div className="cart-div">
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Course Name</th>
-            <th>Price</th>
-            <th>Sub-Total</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        {cart.length >= 1 ? (
-        cart.map((course) => (
-            <tbody>
-          <tr>
-          <td>{course.id}</td>
-          <td><Link to="/details" onClick={()=> addDetails(course.id)}>{course.name && course.name.toUpperCase()}</Link></td>
-          <td>${course.price}</td>
-          <td>{Total()}</td>
-          <td>{<CloseButton onClick={() => removeCart(course.id)} />}</td>
-        </tr>
-        </tbody>
-        ))
-      ) : (
-        <div>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th style={{ textAlign: "center" }}>Course</th>
+                <th style={{ textAlign: "center" }}>Course Name</th>
+                <th style={{ textAlign: "center" }}>Price</th>
+                <th style={{ textAlign: "center" }}>CUPON</th>
+                <th style={{ textAlign: "center" }}>Sub-Total</th>
+                <th style={{ textAlign: "center" }}>Remove</th>
+              </tr>
+            </thead>
+            {cart.length >= 1 ? (
+              cart.map((course) => (
+                <tbody className="tbody-div">
+                  <tr style={{ }}>
+                    <td className="photo-div">
+                      <img className="cart-img" src={course.url} />
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      <Link
+                        to="/details"
+                        onClick={() => addDetails(course.id)}
+                        className="link-div-cart"
+                      >
+                        {course.name && course.name.toUpperCase()}
+                      </Link>
+                    </td>
+                    <td style={{ textAlign: "center" }}>${course.price}</td>
+                    <td style={{ textAlign: "center" }}>
+                    <TextField id="standard-basic" label="ID Number" variant="standard" />
+                      <Button color="secondary">Validar</Button>
+                    </td>
+                    <td style={{ textAlign: "center" }}>{Total()}</td>
+                    <td style={{ textAlign: "center" }}>
+                      {
+                        <DeleteRoundedIcon
+                          onClick={() => removeCart(course.id)}
+                          style={{ cursor: "pointer" }}
+                        />
+                      }
+                    </td>
+                  </tr>
+                </tbody>
+              ))
+            ) : (
+              <div></div>
+            )}
+          </Table>
         </div>
-      )}
-      </Table>
-        </div>
-        <p>SUB - TOTAL: $ {result}</p>
-        <p>TAXs: $ {taxs}</p>
-        <p>TOTAL: $ {total}</p>
-        <button onClick={handledSubmitOrder}> CONFIRM ORDER </button>
+        <p><strong>SUB - TOTAL:</strong> $ {result}</p>
+        <p><strong>TAXs:</strong> $ {taxs}</p>
+        <p><strong>TOTAL:</strong> $ {total}</p>
+        <button className="confirm-button" onClick={handledSubmitOrder}> CONFIRM ORDER </button>
         <br></br>
         <br></br>
-        <button onClick={handledPendingOrder}> CONFIRM LATER </button>
-        </>
+        <button className="confirm-button-later" onClick={handledPendingOrder}> CONFIRM LATER </button>
+      </>
     );
 }
 
