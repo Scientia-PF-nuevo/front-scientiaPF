@@ -2,14 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './TrainningCard.css'
 import {connect} from 'react-redux'
+import Button from '@mui/material/Button';
+import TextRating from '../../components/CourseCard/Qualify'
 import {addDetails} from '../../actions/actions'
 import LinearWithValueLabel from '../Progress/Progress'
-import RadioGroupRating from '../RatingUser/RatingUser'
 
 function TrainningCard(props) {
     const {
       name,
       url,
+      score,
       categories,
     } = props;
     
@@ -28,42 +30,29 @@ function TrainningCard(props) {
         <div className="info-price-div">
           {
             <p>
-              <strong>STATE</strong>: {/*{`${price}`}*/} STARTED
+              <strong>STATE</strong>:  STARTED
             </p>
           }
         </div>
-        {/* <div className="info-price-div">
-          {
-            <p>
-              <strong>Date</strong>: {`${date}`}
-            </p>
-          }
-        </div> */}
         <div className="info-cat-div">
           <p>
             <strong>Category</strong>:{" "}
             {`${categories && categories.toUpperCase()}`}
           </p>
         </div>
-        {/* <TextRating score={score} /> */}
           <LinearWithValueLabel/>
         <div className="button-container">
 
-          <Link to='/player'>
-          <button>PLAY COURSE</button>
+          <Link to='/player' style= {{textDecoration:"none"}}>
+          <Button variant="contained" color="success">PLAY COURSE</Button>
           </Link>
         </div>
         <div className="rating-div">
-            <RadioGroupRating/>
+        <TextRating score={score} />
         </div>
       </div>
     );
 }
 
-function mapStateToProps(state) {
-  return {
-    cart : state.rootReducer.cart
-  }
-}
 
-export default connect(mapStateToProps, {addDetails})(TrainningCard);
+export default connect(null, {addDetails})(TrainningCard);

@@ -1,3 +1,4 @@
-.course-div-cards {
+.my-learning-div {
+    display: flex;
     flex-wrap: wrap;
 }
