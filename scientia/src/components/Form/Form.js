@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './Form.css'
 import { useDispatch } from 'react-redux';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 import { setCourseToAprove } from '../../actions/actions';
 
 export default function Form (props) {
@@ -56,38 +59,56 @@ export default function Form (props) {
 
     return (
         <div className="form-div-container">
-
             <form>
-                <input required 
-                className='placeHolder' 
-                type="text" 
+            <h1>ADD NEW COURSE</h1>
+            <br></br>
+                <TextField required 
+                // className='placeHolder'
+                // type="text" 
+                style={{marginBottom:"10px"}}
+                id="outlined-required"
+                label="COURSE NAME"
                 value={course.name}
-                placeholder='Course name...'
+                    // placeholder='Nombre...'
+                defaultValue="Hello World"
                 name="name" 
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
                 
-                <input required 
-                className='placeHolder' 
-                type="text" 
+                <TextField required 
+                style={{marginBottom:"10px"}}
+                id="outlined-required"
+                label="Price (Dollars)"
+                defaultValue="Hello World"
+                // className='placeHolder' 
+                type="number" 
+                // value={course.price}
+                name="price" 
+                // min = "1"
+                autocomplete="off"
+                onChange={e => handleChange(e)} />
+
+                <TextField required 
+                // className='placeHolder' 
+                // type="text"
+                style={{marginBottom:"10px"}}
+                id="outlined-required"
+                label="URL IMAGE"
+                defaultValue="Hello World"
                 value={course.description}
-                placeholder='Course description...'
+                // placeholder='Course description...'
                 name="description" 
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
 
-                <label>Course price USD:</label>
-                <input required 
-                className='placeHolder' 
-                type="number" 
-                value={course.price}
-                name="price" 
-                min = "1"
-                autocomplete="off"
-                onChange={e => handleChange(e)} />
+                {/* <label>Course price USD:</label> */}
 
-                <input required 
-                className='placeHolder' 
+                <TextField required 
+                style={{marginBottom:"10px"}}
+                id="outlined-required"
+                label="URL VIDEO"
+                defaultValue="Hello World"
+                // className='placeHolder' 
                 type="text" 
                 value={course.url}
                 placeholder='Course url...'
@@ -95,19 +116,23 @@ export default function Form (props) {
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
 
-                <input required 
-                className='placeHolder' 
+                <TextField required 
+                   style={{marginBottom:"10px"}}
+                id="outlined-required"
+                label="CATEGORY"
+                defaultValue="Hello World"
+                // className='placeHolder' 
                 type="category" 
                 value={course.category}
                 placeholder='Course category...'
                 name="category" 
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
+            <div className='containerbtSub'>
+                <input className="form-button" type='submit' onClick={e=>handleSubmit(e)}/>
+            </div>
             </form>
 
-            <div className='containerbtSub'>
-                <input className='btnSub' type='submit' onClick={e=>handleSubmit(e)}/>
-            </div>
 
         </div>
     );
