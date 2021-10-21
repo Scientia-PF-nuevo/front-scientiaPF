@@ -17,19 +17,20 @@ import './Cart.css'
 
 var userIDCounter = 0;  //! SOLO PARA TESTING
 
-export function Cart({cart,users, removeCart, addDetails, confirmOrder, pendingOrder, clearCart}) {
+export function Cart({cart,users,userStatus, removeCart, addDetails, confirmOrder, pendingOrder, clearCart}) {
 
     var result=0;
     var taxs=0;
     var total=0;
     function Total() {
       result = cart.reduce((a, b) => ({price: a.price + b.price})).price
-      taxs = result * 0.21;
+      taxs = parseFloat((result * 0.21).toFixed(2));
       total= result + taxs;
       return `$ ${result}`;
     }
 
     const handledSubmitOrder = () => {
+
 
       const userCart = {
         email: "",
@@ -133,7 +134,8 @@ export function Cart({cart,users, removeCart, addDetails, confirmOrder, pendingO
 function mapStateToProps(state) {
     return {
         cart: state.rootReducer.cart,
-        users: state.rootReducer.users
+        users: state.rootReducer.users,
+        userStatus: state.rootReducer.login
     }
 }
 
