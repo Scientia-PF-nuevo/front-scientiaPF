@@ -1,0 +1,15 @@
+.div-favorite {
+    
+    background-color: rgb(194, 126, 0);
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+}
+
+.favorite {
+    
+    margin-top: 60px;
+    font-size: 40px;
+}

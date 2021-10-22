@@ -21,6 +21,13 @@ import Sidebar from '../components/Profiles/UserPanel/UserPanel';
 import Dashboard from '../components/Profiles/UserPanel/Dashboard/Dashboard';
 import MyCourses from '../components/Profiles/UserPanel/MyCourses/MyCourses';
 import MyFavorites from '../components/Profiles/UserPanel/MyFavorites/MyFavorites';
+import AdminSidebar from '../components/Profiles/AdminPanel/AdminPanel';
+import AdminDashboard from '../components/Profiles/AdminPanel/Dashboard/AdminDashboard';
+import UserManagement from '../components/Profiles/AdminPanel/UserManagement/UserManagement';
+import CourseManagement from '../components/Profiles/AdminPanel/CourseManagement/CourseManagement';
+import Statistics from '../components/Profiles/AdminPanel/Statistics/Statistics';
+
+
 
 function App() {
   return (
@@ -68,6 +75,10 @@ function App() {
 
       <Route exact path='/form' component={Form}/>
 
+      {
+      
+      console.log(window.location)
+      }
       <div className="div-app">
         <Route path='/userprofile'>
           <Sidebar />
@@ -83,6 +94,28 @@ function App() {
 
         <Route exact path='/userprofile/myfavorites'>
           <MyFavorites />
+        </Route>
+      </div>
+
+      <div className="div-app-admin">
+        <Route path='/adminprofile'>
+          <AdminSidebar />
+        </Route>
+
+        <Route exact path='/adminprofile'>
+          <AdminDashboard />
+        </Route>
+
+        <Route exact path='/adminprofile/user-management'>
+          <UserManagement />
+        </Route>
+
+        <Route exact path='/adminprofile/course-management'>
+          <CourseManagement />
+        </Route>
+
+        <Route exact path='/adminprofile/statistics'>
+          <Statistics />
         </Route>
       </div>
 

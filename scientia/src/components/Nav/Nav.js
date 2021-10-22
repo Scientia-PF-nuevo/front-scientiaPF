@@ -34,6 +34,11 @@ function Nav(props) {
                             Home
                         </li>
                     </Link>
+                    <Link className='linkNav' to='/adminprofile'>
+                        <li className='liNav'>
+                            Admin Panel
+                        </li>
+                    </Link>
                     {
                         props.user.displayName ?
                             <Link className='linkNav' to='/form'>
