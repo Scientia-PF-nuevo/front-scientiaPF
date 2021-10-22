@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import Button from '@mui/material/Button';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import TextField from '@mui/material/TextField';
-import { Table, CloseButton } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
+import { Table } from 'react-bootstrap';
 import {
   removeCart,
   addDetails,
@@ -14,11 +15,21 @@ import {
 import {Link} from 'react-router-dom'
 import './Cart.css'
 
+export function Cart(props) {
 
-var userIDCounter = 0;  //! SOLO PARA TESTING
+  let history = useHistory();
 
-export function Cart({cart,users,userStatus, removeCart, addDetails, confirmOrder, pendingOrder, clearCart}) {
-
+  const {
+    cart,
+    user,
+    login,
+    removeCart,
+    addDetails,
+    confirmOrder,
+    pendingOrder,
+    clearCart,
+  } = props;
+ 
     var result=0;
     var taxs=0;
     var total=0;
@@ -31,40 +42,83 @@ export function Cart({cart,users,userStatus, removeCart, addDetails, confirmOrde
 
     const handledSubmitOrder = () => {
 
+      if (user.bought_courses.length >= 1) {
+        var arrIDCourses = user.bought_courses.map((course) => course.courseId )
+      }
 
       const userCart = {
         email: "",
         courseId: []
       }
 
-      if (cart.length >=1 && users.length >=1) {
-        userIDCounter++  //! SOLO PARA TESTING
+      if (cart.length >=1 && login) {
         userCart.courseId = cart.map((course) => course.id )
-        userCart.email = users[userIDCounter].email //! SOLO PARA TESTING
+        userCart.email = user.email
+
+        var matchedIDs = []
+        var sameId = false;
+        for (let i=0; i <userCart.courseId.length; i++ ) {
+          for (let j=0; j<arrIDCourses.length; j++ ){
+            if (userCart.courseId[i] === arrIDCourses[j]){
+              var sameId = true;
+              matchedIDs.push(userCart.courseId[i])
+            }
+          }
+        }
+
+        if (sameId) {
+          alert("Ya posees este curso " + " ID: " + matchedIDs)
+        } else {
+          confirmOrder(userCart)
+          alert("ORDER PROCESS:.......")
+          clearCart()
+        }
   
-        confirmOrder(userCart)
-        alert("ORDER PROCESS OK ORDER:.......")
-        clearCart()
-        
+      } 
+      
+      else if (!login){
+        history.push("/login")
       }
     }
 
     const handledPendingOrder = () => {
 
+      if (user.bought_courses.length >= 1) {
+        var arrIDCourses = user.bought_courses.map((course) => course.courseId )
+      }
+
       const userCart = {
         email: "",
         courseId: []
       }
 
-      if (cart.length >=1 && users.length >=1) {
-        userIDCounter++  //! SOLO PARA TESTING
+      if (cart.length >=1 && login) {
         userCart.courseId = cart.map((course) => course.id )
-        userCart.email = users[userIDCounter].email  //! SOLO PARA TESTING
+        userCart.email = user.email
+
+        var matchedIDs = []
+        var sameId = false;
+        for (let i=0; i <userCart.courseId.length; i++ ) {
+          for (let j=0; j<arrIDCourses.length; j++ ){
+            if (userCart.courseId[i] === arrIDCourses[j]){
+              var sameId = true;
+              matchedIDs.push(userCart.courseId[i])
+            }
+          }
+        }
+
+        if (sameId) {
+          alert("Ya posees este curso " + " ID: " + matchedIDs)
+        } else {
+          pendingOrder(userCart)
+          alert("PENDING ORDER:.......")
+          clearCart()
+        }
   
-        pendingOrder(userCart)
-        alert("SAVED ORDER")
-        clearCart()
-        
+      } 
+
+      else if (!login){
+        history.push("/login")
       }
     }
     
@@ -98,12 +152,12 @@ export function Cart({cart,users,userStatus, removeCart, addDetails, confirmOrde
                         {course.name && course.name.toUpperCase()}
                       </Link>
                     </td>
-                    <td style={{ textAlign: "center" }}>${course.price}</td>
+                    <td style={{ textAlign: "center" }}><h3 style={{color:"red"}}>${course.price}</h3><p>ID: {course.id && course.id}</p></td>
                     <td style={{ textAlign: "center" }}>
                     <TextField id="standard-basic" label="ID Number" variant="standard" />
                       <Button color="secondary">Validar</Button>
                     </td>
-                    <td style={{ textAlign: "center" }}>{Total()}</td>
+                    <td style={{ textAlign: "center" }}><h3 style={{color:"red"}}>{Total()}</h3></td>
                     <td style={{ textAlign: "center" }}>
                       {
                         <DeleteRoundedIcon
@@ -134,8 +188,9 @@ export function Cart({cart,users,userStatus, removeCart, addDetails, confirmOrde
 function mapStateToProps(state) {
     return {
         cart: state.rootReducer.cart,
-        users: state.rootReducer.users,
-        userStatus: state.rootReducer.login
+        user: state.rootReducer.userInfo.usuario,
+        userStatus: state.rootReducer.login,
+        login: state.rootReducer.login
     }
 }
 

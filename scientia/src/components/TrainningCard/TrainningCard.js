@@ -4,16 +4,27 @@ import './TrainningCard.css'
 import {connect} from 'react-redux'
 import Button from '@mui/material/Button';
 import TextRating from '../../components/CourseCard/Qualify'
-import {addDetails} from '../../actions/actions'
+import {addDetails, setInfoVideoPlaying} from '../../actions/actions'
 import LinearWithValueLabel from '../Progress/Progress'
 
 function TrainningCard(props) {
     const {
+      id,
       name,
       url,
       score,
       categories,
+      setInfoVideoPlaying
     } = props;
+
+    const info = {
+      id: id,
+      url: url,
+    }
+
+    const handleVideoSubmit = () => {
+      setInfoVideoPlaying(info)
+    }
     
     return (
       <div className="container-course">
@@ -30,7 +41,7 @@ function TrainningCard(props) {
         <div className="info-price-div">
           {
             <p>
-              <strong>STATE</strong>:  STARTED
+              <strong>STATE</strong>:  STARTED {id}
             </p>
           }
         </div>
@@ -44,7 +55,7 @@ function TrainningCard(props) {
         <div className="button-container">
 
           <Link to='/player' style= {{textDecoration:"none"}}>
-          <Button variant="contained" color="success">PLAY COURSE</Button>
+          <Button onClick={handleVideoSubmit} variant="contained" color="success">PLAY COURSE</Button>
           </Link>
         </div>
         <div className="rating-div">
@@ -55,4 +66,4 @@ function TrainningCard(props) {
 }
 
 
-export default connect(null, {addDetails})(TrainningCard);
+export default connect(null, {addDetails, setInfoVideoPlaying})(TrainningCard);

@@ -2,19 +2,47 @@ import React from 'react'
 import ReactPlayer from 'react-player'
 import './Player.css'
 import Comments from '../Comments/Comments'
+import { connect } from 'react-redux'
+import {updateInfoVideo} from '../../actions/actions'
 
 
-const ResponsivePlayer = () => {
+const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
 
   const [state, setState] = React.useState ({
     playing: false, 
-    ended: false
+    ended: false,
+    videoTime: 0,
   })
 
   const [duration, setDuration] = React.useState ({})
 
-  console.log(state)
-  console.log(duration)
+  // verifica el estado del curso
+  var videoStatus = 'bought';
+  if (state.playing && state.ended){
+    videoStatus = 'completed';
+  } else if(state.playing) {
+    videoStatus = 'started';
+  }
+
+  //redondea los segundos.
+   var time = 0;
+  if (duration.playedSeconds > 0) {
+    time = parseInt(duration.playedSeconds)
+  }
+
+  const videoInfo = { 
+    courseId: info.id, 
+    state: videoStatus, 
+    timeWatched:time, 
+    lenghtVideo:state.videoTime, 
+    email: user.email
+  };
+
+ 
+
+  // console.log(videoInfo)
+  // console.log(state)
+  // console.log(duration)
 
   const handlePlay = () => {
     // console.log('onPlay')
@@ -38,6 +66,20 @@ const ResponsivePlayer = () => {
       setDuration(duration)
     }
   }
+
+  console.log(info.id)
+
+  var startHere=0;
+  if(user.bought_courses.length >= 1) {
+    startHere = user.bought_courses.filter((course) => course.courseId === info.id)
+  }
+
+  if (startHere[0].timeWatched > 0) {
+    startHere = startHere[0].timeWatched
+  }
+
+  console.log(startHere)
+
    
       return (
         <>
@@ -48,7 +90,7 @@ const ResponsivePlayer = () => {
             config={{ 
               youtube: {
                 playerVars: {
-                  start: 330 // setea el timepo de avance del video.
+                  start: startHere // setea el timepo de avance del video.
                 }
               }
             }}
@@ -61,12 +103,19 @@ const ResponsivePlayer = () => {
             onEnded={handleEnded}
             onDuration={handleDurationTime}
           />
-    
         </div>
+        <button onClick={()=> updateInfoVideo(videoInfo)}>FETCH UPDATE INFO</button>
         <Comments/>
         </>
       );
     
 }
 
-export default ResponsivePlayer;
+function mapStateToProps(state) {
+  return {
+    info: state.rootReducer.videoPlaying,
+    user: state.rootReducer.userInfo.usuario
+  }
+}
+
+export default connect(mapStateToProps, {updateInfoVideo})(ResponsivePlayer);
