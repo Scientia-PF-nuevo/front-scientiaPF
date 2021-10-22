@@ -1,6 +1,7 @@
 import {
     GET_ALL_COURSES,
     GET_USERS,
+    GET_USER_INFO,
     GET_ADMINS,
     GET_FAVORITE_COURSES,
     GET_COURSE_DETAILS,
@@ -16,7 +17,9 @@ import {
     LOGIN,
     ADD_DETAILS,
     LOGOUT,
-    NEW_USER
+    NEW_USER,
+    SET_VIDEO,
+    VIDEO_PLAYING
 } from '../actions/constants';
 
 
@@ -32,9 +35,12 @@ const initialState = {
     filteredCourses: [],
     login: false,
     user: {},
+    userInfo: {},
     cart: [],
     orderConfirm: [],
-    pendingOrders: []
+    pendingOrders: [],
+    videoUpdated: "",
+    videoPlaying: {}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -52,6 +58,12 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 users: action.payload
+            };
+
+        case GET_USER_INFO:
+            return {
+                 ...state,
+                 userInfo: action.payload
             };
 
         case GET_ADMINS:
@@ -187,6 +199,18 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 user: action.payload
+            }
+
+        case SET_VIDEO:
+            return {
+                ...state,
+                videoUpdated: action.payload
+            }
+
+        case VIDEO_PLAYING:
+            return {
+                ...state,
+                videoPlaying: action.payload
             }
         case LOGOUT:
             return {

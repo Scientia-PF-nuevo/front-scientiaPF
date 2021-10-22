@@ -4,6 +4,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {
     GET_ALL_COURSES,
     GET_USERS,
+    GET_USER_INFO,
     GET_ADMINS,
     GET_FAVORITE_COURSES,
     GET_COURSE_DETAILS,
@@ -20,7 +21,9 @@ import {
     LOGOUT,
     ADD_DETAILS,
     SET_COURSE_TOAPROVE,
-    NEW_USER
+    NEW_USER,
+    SET_VIDEO,
+    VIDEO_PLAYING
 } from './constants.js';
 
 
@@ -82,6 +85,19 @@ export function getUsers() {
             .then(res => {
 
                 dispatch({ type: GET_USERS, payload: res.data });
+            })
+            .catch(err => { return err })
+    }
+}
+
+//* Trae todos los datos de un usuario en particular (DB)
+export function getUserInfo(email) {
+    console.log(email)
+    return function (dispatch) {
+        axios.get(`http://localhost:3001/users/${email}`)
+            .then(res => {
+
+                dispatch({ type: GET_USER_INFO, payload: res.data });
             })
             .catch(err => { return err })
     }
@@ -197,6 +213,13 @@ export function addDetails(id) {
     }
 }
 
+export function setInfoVideoPlaying(info) {
+    return {
+        type: VIDEO_PLAYING,
+        payload: info
+    }
+}
+
 export function autenticarConGoogle(prop) {
     return function (dispatch) {
         const auth = getAuth();
@@ -241,6 +264,21 @@ export function createUser(user) {
                     payload: response.data
                 })
                 window.location.href = 'http://localhost:3000/success';
+            })
+    }
+}
+
+//*Actualizad el estado del video
+export function updateInfoVideo(info) {
+    const {email, ...others} = info
+    console.log(others)
+    return async function (dispatch) {
+        return await axios.put(`http://localhost:3001/courses/${email}`, others)
+            .then((response) => {
+                dispatch({
+                    type: SET_VIDEO,
+                    payload: response.data
+                })
             })
     }
 }

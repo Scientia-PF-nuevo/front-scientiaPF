@@ -1,5 +1,6 @@
 export const GET_ALL_COURSES = 'GET_ALL_COURSES';
 export const GET_USERS = 'GET_USERS';
+export const GET_USER_INFO = 'GET_USER_INFO'
 export const GET_ADMINS = 'GET_ADMINS';
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
 export const GET_FAVORITE_COURSES = 'GET_FAVORITE_COURSES';
@@ -17,3 +18,5 @@ export const CONFIRM_ORDER = 'CONFIRM_ORDER'
 export const PENDING_ORDER = 'PENDING_ORDER'
 export const CLEAR_CART = 'CLEAR_CART'
 export const NEW_USER = 'NEW_USER'
+export const SET_VIDEO = 'SET_VIDEO'
+export const VIDEO_PLAYING = 'VIDEO_PLAYING'
