@@ -2,6 +2,7 @@ import React from 'react';
 import './UserManagement.css';
 import { connect } from 'react-redux'
 import CircularProgress from '@mui/material/CircularProgress';
+import UsersTable from './Table/Table';
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -22,28 +23,8 @@ const UserManagement = ({myCourses}) => {
     </div>
     ) : 
     typeof myCourses !== "undefined" && myCourses.length >= 1 ? (
-      <div className="div-usermanagement" style={{ width: 1060 }}>
-      <Carousel show={3}>
-      {myCourses.map((myCourse) => (
-        <div>
-          <div style={{padding: 8}}>
-        <Card style={{width: '95%', height: '340px', marginTop: 80, marginLeft: 10, marginRight: 10, background: "#373737", color: "white" }}>
-        <CardMedia
-          component="img"
-          height="240"
-          image={myCourse.url}
-          alt={myCourse.name}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-          <h2>{myCourse.name}</h2>
-          </Typography>
-        </CardContent>
-      </Card>
-      </div>
-      </div>
-      ))}
-     </Carousel>
+      <div className="div-usermanagement">
+        <UsersTable />
       </div>
     ) : (
     <div className="div-usermanagement">

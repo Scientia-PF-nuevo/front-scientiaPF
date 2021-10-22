@@ -1,9 +1,9 @@
 .div-admindashboard {
     display: grid;
-    color: white;
+    color: rgb(43, 43, 43);
     justify-content:center;
     justify-items: center;
-    background-color: rgb(194, 142, 0);
+    background-color: rgb(209, 209, 209);
     width: 100%;
     padding: 50px;
 }

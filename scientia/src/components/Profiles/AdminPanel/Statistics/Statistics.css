@@ -1,4 +1,7 @@
 .div-adminstatistics {
-    
-    background-color: rgb(194, 126, 0);
+    width: 100%;
+    background-color: rgb(209, 209, 209);
+    display: grid;
+    justify-content: center;
+    align-content: center;
 }

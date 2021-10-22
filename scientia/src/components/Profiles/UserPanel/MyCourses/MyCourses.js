@@ -53,6 +53,7 @@ const MyCourses = ({myCourses}) => {
 }
 
     const mapStateToProps = (state) => {
+      console.log(state.rootReducer)
     return {
         myCourses: state.rootReducer.allCourses
     }

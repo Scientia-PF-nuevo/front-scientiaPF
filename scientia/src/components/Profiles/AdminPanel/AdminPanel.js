@@ -15,7 +15,7 @@ function AdminPanel () {
   return (
     <div className='container-app-admin'>
     <Router>
-      <div className="div-app">
+      <div className="div-app-admin">
       <Route path='/adminprofile'>
           <AdminSidebar />
         </Route>

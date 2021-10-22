@@ -1,15 +1,10 @@
 .div-coursesmanagement {
-    
-    background-color: rgb(194, 126, 0);
+    width: 100%;
+    background-color: rgb(209, 209, 209);
     text-align: center;
+    padding: 40px 20px 20px 20px;
 }
 
 p {
     font-size: 20px;
-}
-
-.favorite {
-    
-    margin-top: 60px;
-    font-size: 40px;
 }

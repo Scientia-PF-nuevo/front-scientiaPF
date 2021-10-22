@@ -22,28 +22,8 @@ const UserManagement = ({myCourses}) => {
     </div>
     ) : 
     typeof myCourses !== "undefined" && myCourses.length >= 1 ? (
-      <div className="div-adminstatistics" style={{ width: 1060 }}>
-      <Carousel show={3}>
-      {myCourses.map((myCourse) => (
-        <div>
-          <div style={{padding: 8}}>
-        <Card style={{width: '95%', height: '340px', marginTop: 80, marginLeft: 10, marginRight: 10, background: "#373737", color: "white" }}>
-        <CardMedia
-          component="img"
-          height="240"
-          image={myCourse.url}
-          alt={myCourse.name}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-          <h2>{myCourse.name}</h2>
-          </Typography>
-        </CardContent>
-      </Card>
-      </div>
-      </div>
-      ))}
-     </Carousel>
+      <div className="div-adminstatistics">
+        <img src="https://images.vexels.com/media/users/3/206056/isolated/preview/9af07a2936f83c0318f29730f5907423-creciente-trazo-de-barras-de-grafico.png"/>
       </div>
     ) : (
     <div className="div-adminstatistics">
