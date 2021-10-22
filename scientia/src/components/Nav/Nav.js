@@ -75,14 +75,14 @@ function Nav(props) {
                     }
                     {
                         props.user.photoURL ?
-                            <Link className='linkNav' to='/perfil'>
+                            <Link className='linkNav' to='/userprofile'>
                                 <li className='liNav'>
                                     <Avatar alt="" src={imagenPerfil} />
                                 </li>
                             </Link>
                             :
                             props.user.displayName ?
-                                <Link className='linkNav' to='/login'>
+                                <Link className='linkNav' to='/userprofile'>
                                     <li className='liNav'>
                                         <Avatar sx={{ bgcolor: 'orange' }}>{iniciales}</Avatar>
                                     </li>
