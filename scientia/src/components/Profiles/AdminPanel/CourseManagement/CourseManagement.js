@@ -20,11 +20,11 @@ const CourseManagement = ({myFavorites}) => {
 
   return myFavorites === "" ? (
     <div>
-      <h1 > X </h1>
+      <h1></h1>
     </div>
     ) : 
     typeof myFavorites !== "undefined" && myFavorites.length >= 1 ? (
-        <div className="div-favorite" style={{ width: 1060 }}>
+        <div className="div-coursesmanagement" style={{ width: 1060 }}>
         <h2 className="favorite">★ Start learning with your favorite courses</h2>
         <Carousel show={4}>
         {myFavorites.map((myFavorites) => (
@@ -55,7 +55,7 @@ const CourseManagement = ({myFavorites}) => {
           </Carousel>
       </div>
     ) : (
-    <div className="div-mycourses">
+    <div className="div-coursesmanagement">
       <CircularProgress disableShrink />
     </div>
   );

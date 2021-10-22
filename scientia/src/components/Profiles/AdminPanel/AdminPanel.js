@@ -1,72 +1,65 @@
 import React from 'react';
-import {
-  CDBSidebar,
-  CDBSidebarContent,
-  CDBSidebarFooter,
-  CDBSidebarHeader,
-  CDBSidebarMenu,
-  CDBSidebarMenuItem,
-} from 'cdbreact';
 import './AdminPanel.css'
-import { Link } from "react-router-dom";
 
+// Router
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
- 
-const AdminSidebar = () => {   
+// Components
+import AdminSidebar from './AdminSidebar/AdminSidebar';
+import AdminDashboard from './Dashboard/AdminDashboard';
+import UserManagement from './UserManagement/UserManagement';
+import CourseManagement from './CourseManagement/CourseManagement';
+import Statistics from './Statistics/Statistics';
 
+function AdminPanel () {
   return (
-      
-    <div className="div-sidebar">
-    <div>
-      <CDBSidebar textColor="#fff" backgroundColor="#333" >
-        <CDBSidebarHeader >
-          <a
-            href="#"
-            className="text-decoration-none"
-            style={{ color: 'inherit' }}
-          >
-            Admin Profile
-          </a>
-        </CDBSidebarHeader>
- 
-        <CDBSidebarContent className="sidebar-content">
-          <CDBSidebarMenu>
-            <div>
-              <Link to="/adminprofile" >
-                <CDBSidebarMenuItem  icon="user">Dashboard</CDBSidebarMenuItem>
-              </Link>
-            </div>
-            <div>
-              <Link to="/adminprofile/user-management" >
-                <CDBSidebarMenuItem  icon="table">User Management</CDBSidebarMenuItem>
-              </Link>
-            </div>
-            <div>
-              <Link to="/adminprofile/course-management" >
-                <CDBSidebarMenuItem icon="sticky-note">Course Management</CDBSidebarMenuItem>
-              </Link>
-            </div>
-            <div>
-              <Link to="/adminprofile/statistics" >
-                <CDBSidebarMenuItem icon="th">Statistics</CDBSidebarMenuItem>
-              </Link>
-            </div>
-          </CDBSidebarMenu>
-        </CDBSidebarContent>
- 
-        <CDBSidebarFooter style={{ textAlign: 'center' }}>
-          <div
-            style={{
-              padding: '20px 5px',
-            }}
-          >
-          </div>
-        </CDBSidebarFooter>
-      </CDBSidebar>
-    </div> 
-    
+    <div className='container-app-admin'>
+    <Router>
+      <div className="div-app">
+      <Route path='/adminprofile'>
+          <AdminSidebar />
+        </Route>
+
+        <Route exact path='/adminprofile'>
+          <AdminDashboard />
+        </Route>
+
+        <Route exact path='/adminprofile/user-management'>
+          <UserManagement />
+        </Route>
+
+        <Route exact path='/adminprofile/course-management'>
+          <CourseManagement />
+        </Route>
+
+        <Route exact path='/adminprofile/statistics'>
+          <Statistics />
+        </Route>
+      </div>
+    </Router>
     </div>
   );
-};
- 
-export default AdminSidebar;
+}
+
+export default AdminPanel;
+
+
+
+
+{/* <div className="div-app">
+        <Route path='/userprofile'>
+          <Sidebar />
+        </Route>
+
+        <Route exact path='/userprofile'>
+          <Dashboard />
+        </Route>
+
+        <Route exact path='/userprofile/mycourses'>
+          <MyCourses />
+        </Route>
+
+        <Route exact path='/userprofile/myfavorites'>
+          <MyFavorites />
+        </Route>
+      </div> */}

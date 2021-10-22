@@ -18,11 +18,11 @@ const UserManagement = ({myCourses}) => {
 
   return myCourses === "" ? (
     <div>
-      <h1 > X </h1>
+      <h1></h1>
     </div>
     ) : 
     typeof myCourses !== "undefined" && myCourses.length >= 1 ? (
-      <div className="div-mycourses" style={{ width: 1060 }}>
+      <div className="div-usermanagement" style={{ width: 1060 }}>
       <Carousel show={3}>
       {myCourses.map((myCourse) => (
         <div>
@@ -46,7 +46,7 @@ const UserManagement = ({myCourses}) => {
      </Carousel>
       </div>
     ) : (
-    <div className="div-mycourses">
+    <div className="div-usermanagement">
       <CircularProgress disableShrink />
     </div>
   );

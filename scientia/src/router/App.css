@@ -1,17 +1,3 @@
 .container-app {
     margin: 10px
 }
-
-.div-app {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 500px;
-}
-
-.div-app-admin {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 700px;
-}

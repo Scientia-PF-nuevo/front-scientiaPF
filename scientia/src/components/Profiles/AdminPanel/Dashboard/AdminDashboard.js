@@ -13,9 +13,9 @@ const AdminDashboard = (props) => {
       var iniciales = inicialNombre + inicialApellido
     }
     return (
-      <div className="div-dashboard">
+      <div className="div-admindashboard">
           <h1>You're welcome!</h1>
-          <Avatar sx={{ width: 200, height: 200, bgcolor: 'orange', fontSize: 100 }}>{iniciales}</Avatar>
+          <Avatar sx={{ width: 200, height: 200, bgcolor: '#090062', fontSize: 100 }}>{iniciales}</Avatar>
 
             <h2>{props.user.displayName}</h2>
             <h3>{props.user.email}</h3> 

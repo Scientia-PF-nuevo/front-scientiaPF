@@ -1,67 +1,39 @@
 import React from 'react';
-import {
-  CDBSidebar,
-  CDBSidebarContent,
-  CDBSidebarFooter,
-  CDBSidebarHeader,
-  CDBSidebarMenu,
-  CDBSidebarMenuItem,
-} from 'cdbreact';
-import './UserPanel.css'
-import { Link } from "react-router-dom";
+import './UserPanel.css';
 
+// Router
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
- 
-const Sidebar = () => {   
+// Components
+import UserSidebar from './UserSidebar/UserSidebar';
+import Dashboard from './Dashboard/Dashboard';
+import MyCourses from './MyCourses/MyCourses';
+import MyFavorites from './MyFavorites/MyFavorites';
 
+function UserPanel () {
   return (
-      
-    <div className="div-sidebar">
-    <div>
-      <CDBSidebar textColor="#fff" backgroundColor="#333" >
-        <CDBSidebarHeader >
-          <a
-            href="#"
-            className="text-decoration-none"
-            style={{ color: 'inherit' }}
-          >
-            User Profile
-          </a>
-        </CDBSidebarHeader>
- 
-        <CDBSidebarContent className="sidebar-content">
-          <CDBSidebarMenu>
-              <div>
-            <Link to="/userprofile" >
-              <CDBSidebarMenuItem  icon="user">Dashboard</CDBSidebarMenuItem>
-            </Link>
-            </div>
-            <div>
-            <Link to="/userprofile/mycourses" >
-              <CDBSidebarMenuItem  icon="table">My Learning</CDBSidebarMenuItem>
-            </Link>
-            </div>
-            <div>
-            <Link to="/userprofile/myfavorites" >
-              <CDBSidebarMenuItem icon="sticky-note">My favorites</CDBSidebarMenuItem>
-              </Link>
-              </div>
-          </CDBSidebarMenu>
-        </CDBSidebarContent>
- 
-        <CDBSidebarFooter style={{ textAlign: 'center' }}>
-          <div
-            style={{
-              padding: '20px 5px',
-            }}
-          >
-          </div>
-        </CDBSidebarFooter>
-      </CDBSidebar>
-    </div> 
-    
+    <div className='container-app'>
+    <Router>
+      <div className="div-app">
+        <Route path='/userprofile'>
+          <UserSidebar />
+        </Route>
+
+        <Route exact path='/userprofile'>
+          <Dashboard />
+        </Route>
+
+        <Route exact path='/userprofile/mycourses'>
+          <MyCourses />
+        </Route>
+
+        <Route exact path='/userprofile/myfavorites'>
+          <MyFavorites />
+        </Route>
+      </div>
+    </Router>
     </div>
   );
-};
- 
-export default Sidebar;
+}
+
+export default UserPanel;
