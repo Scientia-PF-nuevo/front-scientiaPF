@@ -14,6 +14,7 @@ export default function Form (props) {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.rootReducer.coursesByGenre);
     const user = useSelector(state => state.rootReducer.user);
+    //console.log(user.email)
    
     
      const [course, setCourse] = useState({
