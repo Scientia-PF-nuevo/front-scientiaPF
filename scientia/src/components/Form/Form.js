@@ -52,13 +52,13 @@ export default function Form (props) {
             return alert ('People should know the category of the course');
         }
         dispatch(setCourseToAprove(course));
-        alert('Course created, waiting for the admin approval');
+        
         setCourse({
             name: '',
             description: '',
             price: 0,
             url: '',
-            urlVideo:'',
+            urlVideo:'',    
             category: ''
         });
 
