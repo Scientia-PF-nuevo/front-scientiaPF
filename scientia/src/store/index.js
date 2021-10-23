@@ -11,6 +11,7 @@ import combineReducers from '../reducer/combineReducers';
 
 // export default store
 
+
 function saveToLocalStorage(state) {
   const serializedState = JSON.stringify(state);
   localStorage.setItem('state', serializedState);
