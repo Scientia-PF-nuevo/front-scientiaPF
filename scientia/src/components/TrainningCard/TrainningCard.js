@@ -8,10 +8,12 @@ import {addDetails, setInfoVideoPlaying} from '../../actions/actions'
 import LinearWithValueLabel from '../Progress/Progress'
 
 function TrainningCard(props) {
+  
     const {
       id,
       name,
       url,
+      urlVideo,
       score,
       categories,
       setInfoVideoPlaying
@@ -19,7 +21,7 @@ function TrainningCard(props) {
 
     const info = {
       id: id,
-      url: url,
+      url: urlVideo,
     }
 
     const handleVideoSubmit = () => {

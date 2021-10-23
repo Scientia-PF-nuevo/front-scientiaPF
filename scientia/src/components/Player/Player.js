@@ -86,7 +86,7 @@ const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
         <div className="player-wrapper">
           <ReactPlayer
             className="react-player"
-            url="https://www.youtube.com/watch?v=PkZNo7MFNFg"
+            url={info.url}
             config={{ 
               youtube: {
                 playerVars: {
@@ -114,7 +114,7 @@ const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
 function mapStateToProps(state) {
   return {
     info: state.rootReducer.videoPlaying,
-    user: state.rootReducer.userInfo.usuario
+    user: state.rootReducer.userInfo
   }
 }
 
