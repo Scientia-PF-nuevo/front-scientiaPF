@@ -21,6 +21,7 @@ import Sidebar from '../components/Profiles/UserPanel/UserPanel';
 import Dashboard from '../components/Profiles/UserPanel/Dashboard/Dashboard';
 import MyCourses from '../components/Profiles/UserPanel/MyCourses/MyCourses';
 import MyFavorites from '../components/Profiles/UserPanel/MyFavorites/MyFavorites';
+import Payment from '../components/Payment/payment';
 
 function App() {
   return (
@@ -64,6 +65,10 @@ function App() {
 
       <Route exact path='/details'>
         <Details />
+      </Route>
+
+      <Route exact path='/payment'>
+        <Payment />
       </Route>
 
       <Route exact path='/form' component={Form}/>

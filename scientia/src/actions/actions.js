@@ -92,11 +92,9 @@ export function getUsers() {
 
 //* Trae todos los datos de un usuario en particular (DB)
 export function getUserInfo(email) {
-    console.log(email)
     return function (dispatch) {
-        axios.get(`http://localhost:3001/users/${email}`)
+        axios.get(`http://localhost:3001/users/email/${email}`)
             .then(res => {
-
                 dispatch({ type: GET_USER_INFO, payload: res.data });
             })
             .catch(err => { return err })

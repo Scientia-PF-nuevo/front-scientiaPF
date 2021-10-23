@@ -61,6 +61,7 @@ export default function rootReducer(state = initialState, action) {
             };
 
         case GET_USER_INFO:
+            console.log('aca ->', action.payload)
             return {
                  ...state,
                  userInfo: action.payload
