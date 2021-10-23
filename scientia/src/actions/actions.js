@@ -14,6 +14,7 @@ import {
     ADD_CART,
     REMOVE_CART,
     CLEAR_CART,
+    CLEAR_CART_TO_PAY,
     SEARCH_BY_NAME,
     FILTER_BY,
     ORDER_BY,
@@ -174,8 +175,14 @@ export function removeCart(id) {
 }
 
 export function clearCart() {
+
     return {
         type: CLEAR_CART
+    }
+}
+export function clearCartToPay() {
+    return {
+        type: CLEAR_CART_TO_PAY
     }
 }
 

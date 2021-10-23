@@ -19,7 +19,8 @@ import {
     LOGOUT,
     NEW_USER,
     SET_VIDEO,
-    VIDEO_PLAYING
+    VIDEO_PLAYING,
+    CLEAR_CART_TO_PAY
 } from '../actions/constants';
 
 
@@ -37,6 +38,7 @@ const initialState = {
     user: {},
     userInfo: {},
     cart: [],
+    cartToPay: [],
     orderConfirm: [],
     pendingOrders: [],
     videoUpdated: "",
@@ -61,7 +63,6 @@ export default function rootReducer(state = initialState, action) {
             };
 
         case GET_USER_INFO:
-            console.log('aca ->', action.payload)
             return {
                  ...state,
                  userInfo: action.payload
@@ -163,20 +164,29 @@ export default function rootReducer(state = initialState, action) {
                 login: true
             }
         case ADD_CART:
+            let agregar_carrito = state.cart.concat(action.payload)
             return {
                 ...state,
-                cart: state.cart.concat(action.payload)
+                cart: agregar_carrito,
+                cartToPay: agregar_carrito
             }
         case REMOVE_CART:
+            let remover_carrito = state.cart.filter((course) => course.id !== action.payload)
             return {
                 ...state,
-                cart: state.cart.filter((course) => course.id !== action.payload)
+                cart: remover_carrito,
+                cartToPay: remover_carrito
             }
 
         case CLEAR_CART:
             return {
                 ...state,
                 cart: []
+            }
+        case CLEAR_CART_TO_PAY:
+            return {
+                ...state,
+                cartToPay: []
             }
 
         case CONFIRM_ORDER:

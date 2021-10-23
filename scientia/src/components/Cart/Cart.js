@@ -56,7 +56,7 @@ export function Cart(props) {
     if (usuario && usuario.length >= 1) {
       var arrIDCourses = usuario.map((course) => course.courseId)
     }
-
+ 
     const userCart = {
       email: "",
       courseId: []
@@ -81,6 +81,7 @@ export function Cart(props) {
         alert("Ya posees este curso " + " ID: " + matchedIDs)
       } else {
         confirmOrder(userCart)
+        clearCart()
         setRedirect(true)
       }
 

@@ -3,18 +3,16 @@ import useScript from "./useScript";
 import { formConfig } from "./formConfig.js";
 import { useSelector } from 'react-redux'
 
-export default function useMercadoPago() {
+export default function useMercadoPago(carrito, correo) {
     const [resultPayment, setResultPayment] = useState(undefined);
 
-    const usuario = useSelector(state => state.rootReducer)
     let total = 0
-    usuario.cart ? usuario.cart.forEach(el => total += el.price) : total = 0
+    carrito ? carrito.forEach(el => total += el.price) : total = 0
     
     const { MercadoPago } = useScript(
         "https://sdk.mercadopago.com/js/v2",
         "MercadoPago"
     );
-
     useEffect(() => {
         if (MercadoPago) {
             const mp = new MercadoPago('TEST-9f4d92e0-d422-4df9-b9e1-fdee86585688');
@@ -33,12 +31,10 @@ export default function useMercadoPago() {
 
                     onSubmit: (event) => {
                         event.preventDefault();
-
                         const {
                             paymentMethodId: payment_method_id,
                             issuerId: issuer_id,
                             cardholderEmail: email,
-                            amount,
                             token,
                             installments,
                             identificationNumber,
@@ -47,7 +43,7 @@ export default function useMercadoPago() {
 
                         fetch(
 
-                            `http://localhost:3001/purchase/${usuario.user.email}`,
+                            `http://localhost:3001/purchase/${correo}`,
                             {
                                 // entry point backend
                                 method: "POST",
@@ -65,7 +61,7 @@ export default function useMercadoPago() {
                                     installments: Number(installments),
                                     description: "Descripción del producto",
                                     payer: {
-                                        email,
+                                        email:correo,
                                         identification: {
                                             type: identificationType,
                                             number: identificationNumber,

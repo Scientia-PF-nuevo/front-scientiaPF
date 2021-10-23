@@ -4,10 +4,10 @@ export const formConfig = {
         id: "form-checkout__cardholderName",
         placeholder: "Titular de la tarjeta",
     },
-    // cardholderEmail: {
-    //     id: "form-checkout__cardholderEmail",
-    //     placeholder: "E-mail",
-    // },
+    cardholderEmail: {
+        id: "form-checkout__cardholderEmail",
+        placeholder: "E-mail",
+    },
     cardNumber: {
         id: "form-checkout__cardNumber",
         placeholder: "Número de la tarjeta",

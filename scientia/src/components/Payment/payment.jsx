@@ -5,7 +5,7 @@ import Card from "react-credit-cards";
 import s from './tarjeta.module.css'
 import { Modal, Button, Spinner } from 'react-bootstrap'
 import { Redirect } from "react-router-dom"
-import { clearCart, confirmOrder } from "../../actions/actions";
+import { clearCartToPay, confirmOrder } from "../../actions/actions";
 import { connect, useSelector } from "react-redux";
 
 
@@ -19,12 +19,12 @@ const INITIAL_STATE = {
     issuer: "",
 };
 
-function MercadoPagoForm() {
+function MercadoPagoForm(props) {
     const [state, setState] = useState(INITIAL_STATE);
     const [show, setShow] = useState(false);
     const [redir, setRedir] = useState(false)
 
-    const cart = useSelector(state => state.rootReducer.cart)
+    // const cart = useSelector(state => state.rootReducer.cartToPay)
 
     const handleClose = () => {
         setShow(false)
@@ -32,7 +32,7 @@ function MercadoPagoForm() {
     };
     const handleShow = () => setShow(true);
 
-    const resultPayment = useMercadoPago();
+    const resultPayment = useMercadoPago(props.cartToPay, props.user.email);
 
     const handleInputChange = (e) => {
         setState({
@@ -43,8 +43,7 @@ function MercadoPagoForm() {
 
     function mensajeModel() {
         if (resultPayment) {
-            clearCart()
-            confirmOrder(cart)
+            clearCartToPay()
             return `Pagado con éxito!`
         }
         return <Spinner animation="border" variant="primary" />
@@ -106,12 +105,12 @@ function MercadoPagoForm() {
                         onChange={handleInputChange}
                         onFocus={handleInputFocus}
                     />
-                    {/* <input
+                    <input
                         type="email"
                         name="cardholderEmail"
                         id="form-checkout__cardholderEmail"
                         onFocus={handleInputFocus}
-                    /> */}
+                    />
                 </div>
                 <div className="form-control">
                     <select
@@ -141,9 +140,9 @@ function MercadoPagoForm() {
                     {/* {resultPayment ?
                         <p> Pagado con éxito!</p>
                         : */}
-                        <button type="submit" id="form-checkout__submit" onClick={handleShow}>
-                            Pagar
-                        </button>
+                    <button type="submit" id="form-checkout__submit" onClick={handleShow}>
+                        Pagar
+                    </button>
                     {/* } */}
                 </div>
                 {/* <progress value="0" className="progress-bar">
@@ -157,9 +156,11 @@ function MercadoPagoForm() {
                     </Modal.Header>
                     <Modal.Body>{mensajeModel()}</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={handleClose}>
-                            Ok!
-                        </Button>
+                        {
+                            resultPayment &&
+                            <Button variant="primary" onClick={handleClose}>
+                                Ok!
+                            </Button>}
                     </Modal.Footer>
                 </Modal>
             }
@@ -170,4 +171,11 @@ function MercadoPagoForm() {
     );
 }
 
-export default connect (null, {confirmOrder, clearCart}) (MercadoPagoForm)
+function mapStateToProps(state) {
+    return {
+        cartToPay: state.rootReducer.cartToPay,
+        user: state.rootReducer.user,
+    }
+}
+
+export default connect(mapStateToProps, { confirmOrder, clearCartToPay })(MercadoPagoForm)
