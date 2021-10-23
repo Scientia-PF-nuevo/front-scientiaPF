@@ -143,7 +143,7 @@ export function filterBy(order) {
 
 export function setCourseToAprove(payload) {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/courses/newcourse`)
+        axios.post(`http://localhost:3001/courses/newcourse`,payload)
             .then(res => {
 
                 dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
