@@ -142,14 +142,13 @@ export function filterBy(order) {
 }
 
 export function setCourseToAprove(payload) {
-    try {
-        return {
-            type: SET_COURSE_TOAPROVE,
-            payload
-        }
-    }
-    catch (error) {
-        console.log("Error", error)
+    return function (dispatch) {
+        axios.get(`http://localhost:3001/courses/newcourse`)
+            .then(res => {
+
+                dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
+            })
+            .catch(err => { return err })
 
     }
 }

@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Form.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import { setCourseToAprove } from '../../actions/actions';
+import { setCourseToAprove, getGenresCourses } from '../../actions/actions';
 
 export default function Form (props) {
 
+    useEffect(() => {
+        getGenresCourses()
+    }, [])
     const dispatch = useDispatch();
+    const categories = useSelector(state => state.rootReducer.coursesByGenre);
+    //console.log(categories);
 
     const [course, setCourse] = useState({
         name: '',
@@ -31,6 +36,9 @@ export default function Form (props) {
         if(course.name === '' || course.name === undefined) {
             return alert ('People should know the name of the course');
         }
+        if(course.name.length <= 25) {
+            return alert ('The Name cannot be longer than 25 characters');
+        }
         if(course.description === '' || course.description === undefined) {
             return alert ('People should know the description of the course');
         }
@@ -50,6 +58,7 @@ export default function Form (props) {
             description: '',
             price: 0,
             url: '',
+            urlVideo:'',
             category: ''
         });
 
@@ -116,7 +125,7 @@ export default function Form (props) {
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
 
-                <TextField required 
+                {/* <TextField required 
                    style={{marginBottom:"10px"}}
                 id="outlined-required"
                 label="CATEGORY"
@@ -127,7 +136,24 @@ export default function Form (props) {
                 placeholder='Course category...'
                 name="category" 
                 autocomplete="off"
-                onChange={e => handleChange(e)} />
+                onChange={e => handleChange(e)} /> */}
+
+              {  <select name="category" value={course.category} onChange={handleChange} >
+                 <option defaultValue="selected"></option>
+                {categories ? 
+                    categories.map((a)=>{
+                    console.log(a.name);
+                    
+                   return (
+                    <option> { a.name } </option>)}
+                            
+                           
+                    
+                ) : 
+                    null    
+                    }
+                </select>}
+
             <div className='containerbtSub'>
                 <input className="form-button" type='submit' onClick={e=>handleSubmit(e)}/>
             </div>
