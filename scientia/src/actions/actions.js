@@ -56,7 +56,7 @@ export function searchByName(name) {
 //!Trae los detalles del curso pedido por PARAMS por (params :ID)
 export function getCourseDetail(id) {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/course/${id}`)
+        axios.get(`http://localhost:3001/courses/${id}`)
             .then(res => {
 
                 dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
@@ -94,7 +94,7 @@ export function getUsers() {
 export function getUserInfo(email) {
     console.log(email)
     return function (dispatch) {
-        axios.get(`http://localhost:3001/users/${email}`)
+        axios.get(`http://localhost:3001/users/email/${email}`)
             .then(res => {
 
                 dispatch({ type: GET_USER_INFO, payload: res.data });
