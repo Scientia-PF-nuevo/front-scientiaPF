@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import * as actionCreators from './../../actions/actions'
+import {register} from './../../actions/actions'
 import s from './login.module.css'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom'
@@ -13,15 +14,46 @@ function Login(props) {
     const [show, setShow] = useState(false);
     const [redir, setRedir] = useState(false)
     const [logeo, setLogeo] = useState('')
-
+    const dispatch = useDispatch();
+    const userLoggin = props.user
+    //console.log(userLoggin)
     useEffect(() => {
         props.getUsers();
     }, [])
 
     const handleClose = () => {
-        setShow(false)
-        setRedir(true)
+        if(userLoggin){
+          let exist = false;
+          const checking=()=>{
+            props.users.forEach(user => {
+                //console.log(user)
+              if(user.email === userLoggin.email){
+                exist = true;
+              }
+            });
+            if(!exist){
+                console.log(userLoggin)
+              const obj = {
+                  "name": userLoggin.name,
+                  "lastName": userLoggin.email,
+                  "email": userLoggin.email,
+                  "password": userLoggin.token
+              }  
+
+            dispatch(register(userLoggin))
+            setShow(false)
+            setRedir(true)
+            
+            }else{
+            setShow(false)
+            setRedir(true)   
+            } 
+          }
+          checking()
+        }
+  
     };
+
     const handleShow = () => setShow(true);
 
     function handleChange(e) {
@@ -84,7 +116,7 @@ function Login(props) {
                         <label className="form-check-label" htmlFor="exampleCheck1">Keep Login</label>
                     </div>
                     <div className={s.botones}>
-                        <button onClick={handleSubmit} type="submit" className="btn btn-primary btn-lg">Enter</button>
+                        <button onClick={state.email && state.password && handleSubmit} disabled={!state.email || !state.password} type="submit" className="btn btn-primary btn-lg">Enter</button>
                         <button onClick={submitGoogle} type="submit" className="btn btn-outline-primary btn-lg">Login with Google</button>
                         <Link to='/signup' className="btn btn-outline-primary btn-lg">Register</Link>
                     </div>
