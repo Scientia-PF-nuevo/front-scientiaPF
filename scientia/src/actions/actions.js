@@ -270,7 +270,6 @@ export function createUser(user) {
 //*Actualizad el estado del video
 export function updateInfoVideo(info) {
     const {email, ...others} = info
-    console.log(others)
     return async function (dispatch) {
         return await axios.put(`http://localhost:3001/courses/${email}`, others)
             .then((response) => {

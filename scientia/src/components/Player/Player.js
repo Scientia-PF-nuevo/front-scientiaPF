@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import ReactPlayer from 'react-player'
 import './Player.css'
 import Comments from '../Comments/Comments'
@@ -16,58 +16,75 @@ const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
 
   const [duration, setDuration] = React.useState ({})
 
-  // verifica el estado del curso
-  var videoStatus = 'bought';
+  if (user.coursesAndData.length >= 1) {
+    var videoStatus = user.coursesAndData.filter((c) => c.course.courseId === info.id)
+    videoStatus = videoStatus[0].course.state
+  }
+
+  
+  //redondea los segundos.
+  if (user.coursesAndData.length >= 1){
+    var timeConvert = user.coursesAndData.filter((c) => c.course.courseId === info.id)
+    var totalTime = timeConvert.map((c) => c.course.timeWatched)
+    if (duration.playedSeconds > 0) {
+      totalTime[0] = parseInt(duration.playedSeconds)
+    }
+  }
+  
+  
   if (state.playing && state.ended){
     videoStatus = 'completed';
-  } else if(state.playing) {
+  } else if(state.playing && videoStatus !== "completed") {
     videoStatus = 'started';
   }
 
-  //redondea los segundos.
-   var time = 0;
-  if (duration.playedSeconds > 0) {
-    time = parseInt(duration.playedSeconds)
-  }
+
 
   const videoInfo = { 
     courseId: info.id, 
     state: videoStatus, 
-    timeWatched:time, 
+    timeWatched:totalTime[0], 
     lenghtVideo:state.videoTime, 
     email: user.email
   };
 
- 
-
-  // console.log(videoInfo)
-  // console.log(state)
-  // console.log(duration)
+  console.log("videoinfo", videoInfo)
 
   const handlePlay = () => {
-    // console.log('onPlay')
     setState( {...state, playing: true} )
   }
 
   const handleEnded = () => {
-    // console.log('onEnded')
     setState({...state, ended: true})
   }
 
   const handleDurationTime = (time) => {
-    // console.log('onEnded')
     setState({...state, videoTime: time})
   }
 
   const handleProgress = duration => {
-    // console.log('onProgress', s)
-    // We only want to update time slider if we are not currently seeking
     if (!duration.seeking) {
       setDuration(duration)
     }
   }
 
-  console.log(info.id)
+  useEffect(() => {
+    updateInfoVideo(videoInfo)
+    console.log("cambio1")
+  }, [duration])
+
+  useEffect(() => {
+    updateInfoVideo(videoInfo)
+    console.log("cambio2")
+    // console.log(duration)
+  }, [state.ended])
+
+  useEffect(() => {
+    updateInfoVideo(videoInfo)
+    console.log("cambio3")
+  }, [state])
+
+
 
   var startHere=0;
   if(user.bought_courses.length >= 1) {
@@ -78,9 +95,6 @@ const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
     startHere = startHere[0].timeWatched
   }
 
-  console.log(startHere)
-
-   
       return (
         <>
         <div className="player-wrapper">
@@ -101,10 +115,10 @@ const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
             controls={true}
             onPlay={handlePlay}
             onEnded={handleEnded}
+            progressInterval={10000}
             onDuration={handleDurationTime}
           />
         </div>
-        <button onClick={()=> updateInfoVideo(videoInfo)}>FETCH UPDATE INFO</button>
         <Comments/>
         </>
       );
