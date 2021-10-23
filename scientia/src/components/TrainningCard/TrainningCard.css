@@ -3,3 +3,12 @@
     justify-content: center;
     margin: 8px;
 }
+
+.title-course {
+    height: 35px;
+    margin-top: 10px;
+}
+
+.course-div-card {
+    margin-top: 10px;
+}

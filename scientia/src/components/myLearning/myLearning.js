@@ -4,8 +4,9 @@ import TrainningCard from '../TrainningCard/TrainningCard'
 import {getUserInfo} from '../../actions/actions'
 import './myLearning.css'
 
+    
 function MyLearning({courses,user, getUserInfo}) {
-
+  
   useEffect (()=> {
     
     getUserInfo(user.email)
@@ -16,25 +17,47 @@ function MyLearning({courses,user, getUserInfo}) {
         <div className="my-learning-div">
 
           {
-            courses === "" ? (
+            courses.coursesAndData.length === 0 ? (
           <div>
             <h1> SIN CURSOS COMPRADOS </h1>
           </div>
-        ) : typeof courses !== "undefined" && courses.length >= 1 ? (
+        ) : courses.coursesAndData.length >= 1 ? (
           
-          courses.map((course) => (
+          courses.coursesAndData.map((c) => {
+            let suma = 0;
+					  let average;
+					  const SCs = c.reviews.map((r, index) => {
+						suma = suma + r.score;						
+						average = suma / index;
+					});
+      
+
+          if (courses.coursesAndData.length >= 1) {
+           
+            var barProgress = 0;
+
+           var fullTime = c.course.lenghtVideo
+           var timeSaw = c.course.timeWatched
+           if (timeSaw >= 1) {
+
+           barProgress = Math.ceil(((timeSaw / fullTime) * 100))
+           }
+          }
+
+            return (
+            
             <TrainningCard
-              key={course.courseId}
-              id={course.courseId}
-              name={course.state}
-              score={course.price}
-              date={course.createdAt}
-              price={course.price}
-              url="https://www.tallermecanico.com.ar/wp-content/uploads/2018/08/blog10-960x500.jpg"
-              categories={course.owner}
-              description={course.owner}
+              key={c.course.courseId}
+              id={c.course.courseId}
+              name={c.course.courseName}
+              score={average}
+              state={c.course.state}
+              url={c.url}
+              urlVideo={c.urlVideo}
+              barProgress={barProgress}
             />
-          ))
+
+          )})
           
         ) : (
           <div>
@@ -49,7 +72,7 @@ function MyLearning({courses,user, getUserInfo}) {
     
     const mapStateToProps = (state) => {
         return {
-            courses: state.rootReducer.userInfo.usuario.bought_courses,
+            courses: state.rootReducer.userInfo,
             user: state.rootReducer.user
         }
     }

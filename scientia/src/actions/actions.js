@@ -57,7 +57,7 @@ export function searchByName(name) {
 //!Trae los detalles del curso pedido por PARAMS por (params :ID)
 export function getCourseDetail(id) {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/course/${id}`)
+        axios.get(`http://localhost:3001/courses/${id}`)
             .then(res => {
 
                 dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
@@ -141,14 +141,13 @@ export function filterBy(order) {
 }
 
 export function setCourseToAprove(payload) {
-    try {
-        return {
-            type: SET_COURSE_TOAPROVE,
-            payload
-        }
-    }
-    catch (error) {
-        console.log("Error", error)
+    return function (dispatch) {
+        axios.post(`http://localhost:3001/courses/newcourse`,payload)
+            .then(res => {
+
+                dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
+            })
+            .catch(err => { return err })
 
     }
 }
@@ -276,7 +275,6 @@ export function createUser(user) {
 //*Actualizad el estado del video
 export function updateInfoVideo(info) {
     const {email, ...others} = info
-    console.log(others)
     return async function (dispatch) {
         return await axios.put(`http://localhost:3001/courses/${email}`, others)
             .then((response) => {
