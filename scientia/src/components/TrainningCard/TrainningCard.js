@@ -15,8 +15,9 @@ function TrainningCard(props) {
       url,
       urlVideo,
       score,
-      categories,
-      setInfoVideoPlaying
+      state,
+      setInfoVideoPlaying,
+      barProgress
     } = props;
 
     const info = {
@@ -27,6 +28,7 @@ function TrainningCard(props) {
     const handleVideoSubmit = () => {
       setInfoVideoPlaying(info)
     }
+
     
     return (
       <div className="container-course">
@@ -43,17 +45,12 @@ function TrainningCard(props) {
         <div className="info-price-div">
           {
             <p>
-              <strong>STATE</strong>:  STARTED {id}
+              <strong>STATUS</strong>: {state && state.toUpperCase()}
             </p>
           }
         </div>
-        <div className="info-cat-div">
-          <p>
-            <strong>Category</strong>:{" "}
-            {`${categories && categories.toUpperCase()}`}
-          </p>
-        </div>
-          <LinearWithValueLabel/>
+
+          <LinearWithValueLabel barProgress={barProgress}/>
         <div className="button-container">
 
           <Link to='/player' style= {{textDecoration:"none"}}>
@@ -66,6 +63,7 @@ function TrainningCard(props) {
       </div>
     );
 }
+
 
 
 export default connect(null, {addDetails, setInfoVideoPlaying})(TrainningCard);

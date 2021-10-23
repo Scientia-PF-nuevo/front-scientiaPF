@@ -188,7 +188,7 @@ export function Cart(props) {
 function mapStateToProps(state) {
     return {
         cart: state.rootReducer.cart,
-        user: state.rootReducer.userInfo.usuario,
+        user: state.rootReducer.userInfo,
         userStatus: state.rootReducer.login,
         login: state.rootReducer.login
     }
