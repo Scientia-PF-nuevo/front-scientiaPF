@@ -33,7 +33,7 @@ function MercadoPagoForm(props) {
     const handleShow = () => setShow(true);
 
     const resultPayment = useMercadoPago(props.cartToPay, props.user.email);
-
+    console.log(resultPayment)
     const handleInputChange = (e) => {
         setState({
             ...state,
@@ -42,12 +42,15 @@ function MercadoPagoForm(props) {
     };
 
     function mensajeModel() {
-        console.log(resultPayment)
-        if (resultPayment) {
+        if (!resultPayment) {
+            return <Spinner animation="border" variant="primary" />
+        } else if (resultPayment.status !== 'approved') {
+            return `Hubo un error al procesar la compra`
+        } else {
             clearCartToPay()
-            return `Pagado con éxito!`
+            return 'Compra exitosa!'
         }
-        return <Spinner animation="border" variant="primary" />
+
     }
 
     const handleInputFocus = (e) => {
@@ -153,17 +156,10 @@ function MercadoPagoForm(props) {
                     ></select>
                 </div>
                 <div className={s.formControl}>
-                    {/* {resultPayment ?
-                        <p> Pagado con éxito!</p>
-                        : */}
                     <button className={s.button} type="submit" id="form-checkout__submit" onClick={handleShow}>
                         Pagar
                     </button>
-                    {/* } */}
                 </div>
-                {/* <progress value="0" className="progress-bar">
-                    Cargando...
-                </progress> */}
             </form>
             {
                 <Modal show={show} onHide={handleClose}>

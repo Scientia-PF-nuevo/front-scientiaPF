@@ -48,7 +48,6 @@ export function searchByName(name) {
             .then(res => {
 
                 dispatch({ type: SEARCH_BY_NAME, payload: res.data });
-                console.log(res.data)
             })
             .catch(err => { return err })
     }
