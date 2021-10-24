@@ -46,11 +46,11 @@ const UserSidebar = () => {
               <CDBSidebarMenuItem  icon="table">Shopping history</CDBSidebarMenuItem>
             </Link>
             </div>
-            <div>
+            {/* <div>
             <Link to="/userprofile/created-courses" >
               <CDBSidebarMenuItem  icon="table">Created Courses</CDBSidebarMenuItem>
             </Link>
-            </div>
+            </div> */}
           </CDBSidebarMenu>
         </CDBSidebarContent>
  

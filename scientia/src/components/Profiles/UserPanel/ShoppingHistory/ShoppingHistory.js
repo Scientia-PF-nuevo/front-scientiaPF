@@ -13,7 +13,7 @@ const ShoppingHistory = ({shoppingHistory}) => {
          <div id="global">
           <div id="mensajes">
           {shoppingHistory.map((shoppingHistory) => (
-              <SnackbarContent className="snack" message={shoppingHistory.name}  action={"Price: $" + shoppingHistory.price }/>
+              <SnackbarContent className="snack" message={shoppingHistory.course.courseName}  action={"Price: $" + shoppingHistory.course.price }/>
           ))}
           </div>
         </div>
@@ -30,7 +30,7 @@ const ShoppingHistory = ({shoppingHistory}) => {
 
     const mapStateToProps = (state) => {
     return {
-      shoppingHistory: state.rootReducer.allCourses
+      shoppingHistory: state.rootReducer.userInfo.coursesAndData
     }
   };
 
