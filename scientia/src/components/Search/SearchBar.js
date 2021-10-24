@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import { React, useState } from 'react'
 import { connect } from 'react-redux'
 import FilterBar from '../FilterBar/FilterBar'
 import FormGroup from '@mui/material/FormGroup';
@@ -10,139 +10,154 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { searchByName, getAllCourses } from '../../actions/actions'
+import { Modal, Button } from 'react-bootstrap'
 import './SearchBar.css'
 
 
-function SearchBar({searchByName, getAllCourses}) {
+function SearchBar({ searchByName, getAllCourses }) {
 
   const [expanded, setExpanded] = useState(false);
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-    const [input, setInput] = useState({
-        buscar: ''
-    })
+  const [input, setInput] = useState({
+    buscar: ''
+  })
 
-    const handleInputChange = function(e) {
-          setInput({
-          [e.target.name]: e.target.value
-        });
+  const handleInputChange = function (e) {
+    setInput({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const handleOnClick = () => {
+    if (input.buscar.length < 3) {
+      return handleShow()
     }
+    searchByName(input.buscar)
+    setInput({
+      buscar: ''
+    });
+  }
 
-    const handleOnClick = () => {
-        if ( input.buscar.length < 3 ) {
-          return alert('ingrese mas de 3 digitos')
-        }
-        searchByName(input.buscar)
-        setInput({
-            buscar: ''
-        });
-    }
+  return (
+    <div className="wrapper">
+      <input
+        className="search"
+        name="buscar"
+        placeholder="Search by name..."
+        onChange={handleInputChange}
+        value={input.buscar}
+        autoComplete="off"
+      ></input>
+      <button className="search-icon" onClick={handleOnClick}>
+        Search
+      </button>
+      <button className="search-icon" onClick={() => getAllCourses()}>
+        Reset
+      </button>
+      <FilterBar />
+      <br></br>
+      <h3>FILTER</h3>
+      <br></br>
 
-    return (
-      <div className="wrapper">
-        <input
-          className="search"
-          name="buscar"
-          placeholder="Search by name..."
-          onChange={handleInputChange}
-          value={input.buscar}
-          autoComplete="off"
-        ></input>
-        <button className="search-icon" onClick={handleOnClick}>
-          Search
-        </button>
-        <button className="search-icon" onClick={() => getAllCourses()}>
-          Reset
-        </button>
-        <FilterBar/>
-        <br></br>
-        <h3>FILTER</h3>
-        <br></br>
-    
-    <div>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
-          <strong>LEVEL</strong>
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          <FormGroup>
-      <FormControlLabel control={<Checkbox />} label="BEGINNER" />
-      <FormControlLabel control={<Checkbox />} label="MIDDLE" />
-      <FormControlLabel control={<Checkbox />} label="EXPERT" />
-    </FormGroup>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography><strong>PRICE</strong></Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          <FormGroup>
-      <FormControlLabel control={<Checkbox />} label="FREE" />
-      <FormControlLabel control={<Checkbox />} label="PAID" />
-    </FormGroup>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography><strong>LANGUAJE</strong></Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            <FormGroup>
-      <FormControlLabel control={<Checkbox />} label="SPANISH" />
-      <FormControlLabel control={<Checkbox />} label="ENGLISH" />
-      <FormControlLabel control={<Checkbox />} label="OTHERS" />
-    </FormGroup>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel4bh-content"
-          id="panel1bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
-          <strong>RANKING</strong>
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          <FormGroup>
-      <FormControlLabel control={<Checkbox />} label="SPANISH" />
-      <FormControlLabel control={<Checkbox />} label="ENGLISH" />
-      <FormControlLabel control={<Checkbox />} label="OTHERS" />
-      <FormControlLabel control={<Checkbox />} label="SPANISH" />
-      <FormControlLabel control={<Checkbox />} label="ENGLISH" />
-    </FormGroup>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-    </div>
+      <div>
+        <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1bh-content"
+            id="panel1bh-header"
+          >
+            <Typography sx={{ width: '33%', flexShrink: 0 }}>
+              <strong>LEVEL</strong>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <FormGroup>
+                <FormControlLabel control={<Checkbox />} label="BEGINNER" />
+                <FormControlLabel control={<Checkbox />} label="MIDDLE" />
+                <FormControlLabel control={<Checkbox />} label="EXPERT" />
+              </FormGroup>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2bh-content"
+            id="panel2bh-header"
+          >
+            <Typography><strong>PRICE</strong></Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <FormGroup>
+                <FormControlLabel control={<Checkbox />} label="FREE" />
+                <FormControlLabel control={<Checkbox />} label="PAID" />
+              </FormGroup>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel3bh-content"
+            id="panel3bh-header"
+          >
+            <Typography><strong>LANGUAJE</strong></Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <FormGroup>
+                <FormControlLabel control={<Checkbox />} label="SPANISH" />
+                <FormControlLabel control={<Checkbox />} label="ENGLISH" />
+                <FormControlLabel control={<Checkbox />} label="OTHERS" />
+              </FormGroup>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel4bh-content"
+            id="panel1bh-header"
+          >
+            <Typography sx={{ width: '33%', flexShrink: 0 }}>
+              <strong>RANKING</strong>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <FormGroup>
+                <FormControlLabel control={<Checkbox />} label="SPANISH" />
+                <FormControlLabel control={<Checkbox />} label="ENGLISH" />
+                <FormControlLabel control={<Checkbox />} label="OTHERS" />
+                <FormControlLabel control={<Checkbox />} label="SPANISH" />
+                <FormControlLabel control={<Checkbox />} label="ENGLISH" />
+              </FormGroup>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
       </div>
-    );
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Notificación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Ingrese más de 3 dígitos</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Ok!
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
 }
 
 export default connect(null, { searchByName, getAllCourses })(SearchBar)

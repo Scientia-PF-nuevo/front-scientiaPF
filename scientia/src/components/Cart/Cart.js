@@ -128,10 +128,9 @@ export function Cart(props) {
       }
 
       if (sameId) {
-        alert("Ya posees este curso " + " ID: " + matchedIDs)
+        handleShow()
       } else {
         pendingOrder(userCart)
-        alert("PENDING ORDER:.......")
         clearCart()
       }
 
