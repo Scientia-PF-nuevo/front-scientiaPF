@@ -111,10 +111,10 @@ function Login(props) {
                         <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                         <input name="password" type="password" className="form-control" id="exampleInputPassword1" onChange={handleChange} />
                     </div>
-                    <div className="mb-3 form-check">
+                    {/* <div className="mb-3 form-check">
                         <input name="remember" type="checkbox" className="form-check-input" id="exampleCheck1" onChange={handleChange} />
                         <label className="form-check-label" htmlFor="exampleCheck1">Keep Login</label>
-                    </div>
+                    </div> */}
                     <div className={s.botones}>
                         <button onClick={state.email && state.password && handleSubmit} disabled={!state.email || !state.password} type="submit" className="btn btn-primary btn-lg">Enter</button>
                         <button onClick={submitGoogle} type="submit" className="btn btn-outline-primary btn-lg">Login with Google</button>

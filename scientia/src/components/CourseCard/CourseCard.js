@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './CourseCard.css'
-import {connect} from 'react-redux'
-import {addCart, addDetails} from '../../actions/actions'
+import { connect } from 'react-redux'
+import { addCart, addDetails } from '../../actions/actions'
 import TextRating from './Qualify'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
@@ -10,32 +10,32 @@ import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 
 function CourseCard(props) {
-    const {
-      name,
-      url,
-      id,
-      price,
-      categories,
-      description,
-      addCart,
-      score,
-      date,
-      cart,
-      addDetails
-    } = props;
+  const {
+    name,
+    url,
+    id,
+    price,
+    categories,
+    description,
+    addCart,
+    score,
+    date,
+    cart,
+    addDetails
+  } = props;
 
 
-    const validarCart = (id) => {
-      const alreadyAdded = cart.some(courseID => courseID.id === id);
-       if(alreadyAdded) {
-           return;
-      } else {
-        addCart({ name: name, id: id, price: price, url: url })
-      }
+  const validarCart = (id) => {
+    const alreadyAdded = cart.some(courseID => courseID.id === id);
+    if (alreadyAdded) {
+      return;
+    } else {
+      addCart({ name: name, id: id, price: price, url: url })
     }
-    
-    return (
-      <div className="container-course">
+  }
+
+  return (
+    <div className="container-course">
       <div className="left-container">
         <div className="title-course"><h5>{name && name.toUpperCase()}</h5></div>
         <div className="course-div-card">
@@ -48,7 +48,7 @@ function CourseCard(props) {
           )}
         </div>
       </div>
-        <div className="detaiils-card-container">
+      <div className="detaiils-card-container">
         <div className="info-price-div">
           {
             <p>
@@ -74,10 +74,10 @@ function CourseCard(props) {
         <div className="button-container">
           {id && (
             <Link to="/details">
-              <HelpOutlineOutlinedIcon onClick={()=> addDetails(id)}/>
+              <HelpOutlineOutlinedIcon onClick={() => addDetails(id)} />
             </Link>
           )}
-          {id && (
+          { props.login && id && (
             <IconButton color="primary" aria-label="add to shopping cart">
               <AddShoppingCartIcon
                 onClick={() => validarCart(id)}
@@ -85,18 +85,19 @@ function CourseCard(props) {
             </IconButton>
           )}
         </div>
-        </div>
+      </div>
       <div className="description-container">
         <p>{description}</p>
       </div>
-      </div>
-    );
+    </div>
+  );
 }
 
 function mapStateToProps(state) {
   return {
-    cart : state.rootReducer.cart
+    cart: state.rootReducer.cart,
+    login: state.rootReducer.login,
   }
 }
 
-export default connect(mapStateToProps, {addCart, addDetails})(CourseCard);
+export default connect(mapStateToProps, { addCart, addDetails })(CourseCard);

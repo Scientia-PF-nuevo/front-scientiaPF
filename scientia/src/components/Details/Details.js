@@ -34,7 +34,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-function Details({details,addCart, cart}) {
+function Details({login, details,addCart, cart}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const detailsRender = details[0] 
@@ -123,7 +123,7 @@ function Details({details,addCart, cart}) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-      {id && (
+      {login && id && (
             <IconButton color="primary" aria-label="add to shopping cart">
               <AddShoppingCartIcon
                 onClick={() => validarCart(id)}
@@ -131,10 +131,10 @@ function Details({details,addCart, cart}) {
             </IconButton>
           )}
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          {/* <FavoriteIcon /> */}
         </IconButton>
         <IconButton aria-label="share">
-          <ShareIcon />
+          {/* <ShareIcon /> */}
         </IconButton>
         <ExpandMore
           expand={expanded}
@@ -175,7 +175,8 @@ function Details({details,addCart, cart}) {
 function mapStateToProps(state) {
     return {
         details: state.rootReducer.courseDetails,
-        cart : state.rootReducer.cart
+        cart : state.rootReducer.cart,
+        login: state.rootReducer.login,
     }
 }
 
