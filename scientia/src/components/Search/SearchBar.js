@@ -1,3 +1,4 @@
+
 import {React, useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import FilterBar from '../FilterBar/FilterBar'
@@ -9,13 +10,13 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import Rating from '@mui/material/Rating';
 import { searchByName, getAllCourses, getFilteredCourses } from '../../actions/actions'
 import './SearchBar.css'
 
 
 function SearchBar({searchByName, getAllCourses, getFilteredCourses}) {
-
   
   const [checked, setChecked] = useState({
     level1: false,
@@ -61,6 +62,7 @@ function SearchBar({searchByName, getAllCourses, getFilteredCourses}) {
   }, [checked])
   
   const [expanded, setExpanded] = useState(false);
+
   
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -70,21 +72,33 @@ function SearchBar({searchByName, getAllCourses, getFilteredCourses}) {
         buscar: ''
     })
 
-    const handleInputChange = function(e) {
-          setInput({
-          [e.target.name]: e.target.value
-        });
-    }
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true);
 
-    const handleOnClick = () => {
-        if ( input.buscar.length < 3 ) {
-          return alert('ingrese mas de 3 digitos')
-        }
-        searchByName(input.buscar)
-        setInput({
-            buscar: ''
-        });
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  const [input, setInput] = useState({
+    buscar: ''
+  })
+
+  const handleInputChange = function (e) {
+    setInput({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const handleOnClick = () => {
+    if (input.buscar.length < 3) {
+      return handleShow()
     }
+    searchByName(input.buscar)
+    setInput({
+      buscar: ''
+    });
+  }
 
     return (
       <div className="wrapper">
@@ -217,8 +231,22 @@ function SearchBar({searchByName, getAllCourses, getFilteredCourses}) {
             </AccordionDetails>
           </Accordion>
         </div>
+
+ 
       </div>
-    );
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Notificación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Ingrese más de 3 dígitos</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Ok!
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
 }
 
 export default connect(null, { searchByName, getAllCourses,getFilteredCourses })(SearchBar)

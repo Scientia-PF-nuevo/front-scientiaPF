@@ -117,7 +117,6 @@ export default function rootReducer(state = initialState, action) {
             };
 
         case FILTER_BY:
-            console.log(action)
             if (action.payload === 'default') {
                 return { ...state, allCourses: state.coursesBackup }
             } else {

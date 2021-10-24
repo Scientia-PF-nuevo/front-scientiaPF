@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux'
 
 export default function useMercadoPago(carrito, correo) {
     const [resultPayment, setResultPayment] = useState(undefined);
+    const [error, setError] = useState({ status: 0 })
 
     let total = 0
     carrito ? carrito.forEach(el => total += el.price) : total = 0
-    
+
     const { MercadoPago } = useScript(
         "https://sdk.mercadopago.com/js/v2",
         "MercadoPago"
@@ -21,12 +22,26 @@ export default function useMercadoPago(carrito, correo) {
                 autoMount: true,
                 form: formConfig,
                 callbacks: {
+                    onFormUnmounted: error => {
+                        if (error) return setError(error)
+                    },
+                    onIdentificationTypesReceived: (error) => {
+                        if (error) return setError(error)
+                    },
+                    onPaymentMethodsReceived: (error) => {
+                        if (error) return setError(error)
+                    },
+                    onIssuersReceived: (error) => {
+                        if (error) return setError(error)
+                    },
+                    onInstallmentsReceived: (error) => {
+                        if (error) return setError(error)
+                    },
+                    onCardTokenReceived: (error) => {
+                        if (error) return setError(error)
+                    },
                     onFormMounted: (error) => {
-                        if (error)
-                            return console.warn(
-                                "Form Mounted handling error: ",
-                                error
-                            );
+                        if (error) return setError(error)
                     },
 
                     onSubmit: (event) => {
@@ -41,9 +56,7 @@ export default function useMercadoPago(carrito, correo) {
                             identificationType,
                         } = cardForm.getCardFormData();
 
-                        fetch(
-
-                            `http://localhost:3001/purchase/${correo}`,
+                        fetch(`http://localhost:3001/purchase/${correo}`,
                             {
                                 // entry point backend
                                 method: "POST",
@@ -61,7 +74,7 @@ export default function useMercadoPago(carrito, correo) {
                                     installments: Number(installments),
                                     description: "Descripción del producto",
                                     payer: {
-                                        email:correo,
+                                        email: correo,
                                         identification: {
                                             type: identificationType,
                                             number: identificationNumber,
@@ -72,25 +85,12 @@ export default function useMercadoPago(carrito, correo) {
                         )
                             .then((res) => res.json())
                             .then((data) => setResultPayment(data))
-                            .catch((err) => {
-                                console.log(err)
-                                setResultPayment(err);
-                            });
+                            .catch((err) => setResultPayment(err));
                     },
-                    // onFetching: (resource) => {
-                    //     // Animate progress bar
-                    //     const progressBar =
-                    //         document.querySelector(".progress-bar");
-                    //     progressBar.removeAttribute("value");
-
-                    //     return () => {
-                    //         progressBar.setAttribute("value", "0");
-                    //     };
-                    // },
                 },
             });
         }
     }, [MercadoPago]);
-
+    if (error.status !== 0) return error
     return resultPayment;
 }

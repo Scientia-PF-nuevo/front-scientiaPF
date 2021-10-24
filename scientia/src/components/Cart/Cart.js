@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import TextField from '@mui/material/TextField';
 import { useHistory } from "react-router-dom";
@@ -16,13 +16,19 @@ import {
 import { Link } from 'react-router-dom'
 import './Cart.css'
 import { Redirect } from 'react-router'
+import { Modal, Button } from 'react-bootstrap'
+
 
 export function Cart(props) {
+  const [show, setShow] = useState(false);
+  const [redirect, setRedirect] = useState(false)
 
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   let history = useHistory();
 
-  const usuario = useSelector(state => state.rootReducer.cart)
+  const usuario = useSelector(state => state.rootReducer.userInfo.coursesAndData)
 
   const {
     cart,
@@ -35,11 +41,14 @@ export function Cart(props) {
     clearCart,
   } = props;
 
-  const [redirect, setRedirect] = useState(false)
 
   useEffect(() => {
     getUserInfo(user.email)
   }, [])
+
+  function mensajeModel(id) {
+    return `Ya posees el/los curso/s!`
+  }
 
   var result = 0;
   var taxs = 0;
@@ -54,9 +63,9 @@ export function Cart(props) {
   const handledSubmitOrder = () => {
 
     if (usuario && usuario.length >= 1) {
-      var arrIDCourses = usuario.map((course) => course.courseId)
+      var arrIDCourses = usuario.map((course) => course.course.courseId)
     }
- 
+
     const userCart = {
       email: "",
       courseId: []
@@ -71,14 +80,14 @@ export function Cart(props) {
       for (let i = 0; i < userCart.courseId.length; i++) {
         for (let j = 0; j < arrIDCourses.length; j++) {
           if (userCart.courseId[i] === arrIDCourses[j]) {
-            var sameId = true;
+            sameId = true;
             matchedIDs.push(userCart.courseId[i])
           }
         }
       }
 
       if (sameId) {
-        alert("Ya posees este curso " + " ID: " + matchedIDs)
+        handleShow()
       } else {
         confirmOrder(userCart)
         clearCart()
@@ -119,10 +128,9 @@ export function Cart(props) {
       }
 
       if (sameId) {
-        alert("Ya posees este curso " + " ID: " + matchedIDs)
+        handleShow()
       } else {
         pendingOrder(userCart)
-        alert("PENDING ORDER:.......")
         clearCart()
       }
 
@@ -191,7 +199,22 @@ export function Cart(props) {
       <button className="confirm-button" onClick={handledSubmitOrder}> CONFIRM ORDER </button>
       <br></br>
       <br></br>
+
       {/* <button className="confirm-button-later" onClick={handledPendingOrder}> CONFIRM LATER </button> */}
+
+
+//       <button className="confirm-button-later" onClick={handledPendingOrder}> CONFIRM LATER </button>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Inicio de Sesión</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{mensajeModel()}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Ok!
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       {redirect ? <Redirect to="/payment" /> : <></>}
     </>

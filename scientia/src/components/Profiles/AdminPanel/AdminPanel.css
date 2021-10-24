@@ -1,6 +1,6 @@
-.div-app {
+.div-app-admin {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 500px;
+    height: 700px;
 }

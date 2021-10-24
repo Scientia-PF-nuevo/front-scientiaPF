@@ -17,10 +17,8 @@ import SignUp from '../components/SignUp/SignUp';
 import MyLearning from '../components/myLearning/myLearning';
 import Success from '../components/SignUp/Success';
 import ResponsivePlayer from '../components/Player/Player';
-import Sidebar from '../components/Profiles/UserPanel/UserPanel';
-import Dashboard from '../components/Profiles/UserPanel/Dashboard/Dashboard';
-import MyCourses from '../components/Profiles/UserPanel/MyCourses/MyCourses';
-import MyFavorites from '../components/Profiles/UserPanel/MyFavorites/MyFavorites';
+import UserPanel from '../components/Profiles/UserPanel/UserPanel';
+import AdminPanel from '../components/Profiles/AdminPanel/AdminPanel';
 import Payment from '../components/Payment/payment';
 
 function App() {
@@ -73,24 +71,14 @@ function App() {
 
       <Route exact path='/form' component={Form}/>
 
-      <div className="div-app">
-        <Route path='/userprofile'>
-          <Sidebar />
-        </Route>
+      <Route path='/userprofile'>
+        <UserPanel />
+      </Route>
 
-        <Route exact path='/userprofile'>
-          <Dashboard />
-        </Route>
-
-        <Route exact path='/userprofile/mycourses'>
-          <MyCourses />
-        </Route>
-
-        <Route exact path='/userprofile/myfavorites'>
-          <MyFavorites />
-        </Route>
-      </div>
-
+      <Route path='/adminprofile'>
+        <AdminPanel />
+      </Route>
+      
       <Footer />
     </Router>
     </div>
