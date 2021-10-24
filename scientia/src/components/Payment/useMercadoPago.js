@@ -73,6 +73,7 @@ export default function useMercadoPago(carrito, correo) {
                             .then((res) => res.json())
                             .then((data) => setResultPayment(data))
                             .catch((err) => {
+                                console.log(err)
                                 setResultPayment(err);
                             });
                     },
