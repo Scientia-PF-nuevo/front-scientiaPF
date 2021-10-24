@@ -9,6 +9,7 @@ import {
     GET_FAVORITE_COURSES,
     GET_COURSE_DETAILS,
     GET_GENRES_COURSES,
+    GET_REVIEWS_BY_COURSEID,
     CONFIRM_ORDER,
     PENDING_ORDER,
     ADD_CART,
@@ -61,6 +62,19 @@ export function getCourseDetail(id) {
             .then(res => {
 
                 dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
+            })
+            .catch(err => { return err })
+
+    }
+}
+
+//* Trae las reviews de los cursos pedidos por ID 
+export function getCoursesReviewsById(id) {
+    return function (dispatch) {
+        axios.get(`http://localhost:3001/courses/id/${id}`)
+            .then(res => {
+
+                dispatch({ type: GET_REVIEWS_BY_COURSEID, payload: res.data });
             })
             .catch(err => { return err })
 

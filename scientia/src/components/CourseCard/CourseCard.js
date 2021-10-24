@@ -36,6 +36,7 @@ function CourseCard(props) {
     
     return (
       <div className="container-course">
+      <div className="left-container">
         <div className="title-course"><h5>{name && name.toUpperCase()}</h5></div>
         <div className="course-div-card">
           {url ? (
@@ -46,6 +47,8 @@ function CourseCard(props) {
             }
           )}
         </div>
+      </div>
+        <div className="detaiils-card-container">
         <div className="info-price-div">
           {
             <p>
@@ -53,6 +56,7 @@ function CourseCard(props) {
             </p>
           }
         </div>
+
         <div className="info-price-div">
           {
             <p>
@@ -81,6 +85,10 @@ function CourseCard(props) {
             </IconButton>
           )}
         </div>
+        </div>
+      <div className="description-container">
+        <p>{description}</p>
+      </div>
       </div>
     );
 }

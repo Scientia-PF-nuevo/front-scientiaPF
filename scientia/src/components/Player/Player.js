@@ -3,10 +3,16 @@ import ReactPlayer from 'react-player'
 import './Player.css'
 import Comments from '../Comments/Comments'
 import { connect } from 'react-redux'
+import {getCoursesReviewsById} from '../../actions/actions'
 import {updateInfoVideo} from '../../actions/actions'
 
 
-const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
+const ResponsivePlayer = ({updateInfoVideo, info, user, getCoursesReviewsById}) => {
+
+  useEffect(() => {
+    getCoursesReviewsById(info.id)
+  }, [])
+
 
   const [state, setState] = React.useState ({
     playing: false, 
@@ -70,18 +76,17 @@ const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
 
   useEffect(() => {
     updateInfoVideo(videoInfo)
-    console.log("cambio1")
+
   }, [duration])
 
   useEffect(() => {
     updateInfoVideo(videoInfo)
-    console.log("cambio2")
-    // console.log(duration)
+
   }, [state.ended])
 
   useEffect(() => {
     updateInfoVideo(videoInfo)
-    console.log("cambio3")
+
   }, [state])
 
 
@@ -93,8 +98,6 @@ const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
     startHere = startHere[0].course.timeWatched
     
   }
-
-  console.log(startHere)
 
       return (
         <>
@@ -120,7 +123,7 @@ const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
             onDuration={handleDurationTime}
           />
         </div>
-        <Comments/>
+        <Comments courseId={info.id}/>
         </>
       );
     
@@ -133,4 +136,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {updateInfoVideo})(ResponsivePlayer);
+export default connect(mapStateToProps, {updateInfoVideo, getCoursesReviewsById})(ResponsivePlayer);

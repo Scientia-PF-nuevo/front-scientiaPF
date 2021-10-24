@@ -1,8 +1,9 @@
 .wrapper {
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 100px;
+    min-width: 100px; */
+    position: fixed;
   }
 
   .search {

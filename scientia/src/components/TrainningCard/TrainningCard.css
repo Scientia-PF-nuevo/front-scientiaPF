@@ -1,14 +1,47 @@
+.container-course2 {
+    margin: 20px;
+    border: 1px solid rgb(228, 224, 224);
+    padding: 20px;
+    width: 800px;
+    height: 600px;
+}
+
 .rating-div {
     display: flex;
     justify-content: center;
     margin: 8px;
 }
 
-.title-course {
+.title-course2 {
     height: 35px;
     margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.course-div-card {
+.course-div-card2 {
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.course-div-card2 img {
+    width: 600px;
+    height: 350px;
+    padding-bottom: 30px;
+}
+
+.info-price-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
