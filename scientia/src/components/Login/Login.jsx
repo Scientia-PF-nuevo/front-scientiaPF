@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import * as actionCreators from './../../actions/actions'
-import {register} from './../../actions/actions'
+import { register } from './../../actions/actions'
 import s from './login.module.css'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom'
@@ -16,42 +16,44 @@ function Login(props) {
     const [logeo, setLogeo] = useState('')
     const dispatch = useDispatch();
     const userLoggin = props.user
-    //console.log(userLoggin)
+
     useEffect(() => {
         props.getUsers();
     }, [])
 
     const handleClose = () => {
-        if(userLoggin){
-          let exist = false;
-          const checking=()=>{
-            props.users.forEach(user => {
-                //console.log(user)
-              if(user.email === userLoggin.email){
-                exist = true;
-              }
-            });
-            if(!exist){
-                console.log(userLoggin)
-              const obj = {
-                  "name": userLoggin.name,
-                  "lastName": userLoggin.email,
-                  "email": userLoggin.email,
-                  "password": userLoggin.token
-              }  
+        if (logeo === 'Bienvenido!') {
+            let exist = false;
+            const checking = () => {
+                props.users.forEach(user => {
+                    if (user.email === userLoggin.email) {
+                        exist = true;
+                    }
+                });
+                if (!exist) {
+                    const obj = {
+                        "name": userLoggin.name,
+                        "lastName": userLoggin.email,
+                        "email": userLoggin.email,
+                        "password": userLoggin.token
+                    }
 
-            dispatch(register(userLoggin))
-            setShow(false)
-            setRedir(true)
-            
-            }else{
-            setShow(false)
-            setRedir(true)   
-            } 
-          }
-          checking()
+                    dispatch(register(userLoggin))
+                    setShow(false)
+                    setRedir(true)
+
+                } else {
+                    setShow(false)
+                    setRedir(true)
+                }
+            }
+            checking()
         }
-  
+        
+        if (props.user.displayName !== '' && props.user.displayName){
+            setRedir(true)
+        }
+        setShow(false)
     };
 
     const handleShow = () => setShow(true);
@@ -76,9 +78,11 @@ function Login(props) {
                 await props.logear(usuario)
             } else {
                 setLogeo(`Contraseña Incorrecta!`);
+                setRedir(false)
             }
         } else {
             setLogeo(`Email Incorrecto!`);
+            setRedir(false)
         }
         handleShow()
     }
@@ -86,7 +90,8 @@ function Login(props) {
     async function submitGoogle(e) {
         e.preventDefault()
         props.autenticarConGoogle()
-        handleShow()
+        let google = true
+        handleShow(google)
     }
 
     function mensajeModel() {
