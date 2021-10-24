@@ -5,7 +5,7 @@ import TextRating from '../CourseCard/Qualify';
 import { connect } from 'react-redux';
 
 
-function Comments(coursesReviews) {
+function Comments({coursesReviews}) {
   // if (coursesReviews.reviews && coursesReviews.reviews.length >= 1) {
 
   // }
