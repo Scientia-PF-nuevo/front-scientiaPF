@@ -256,7 +256,7 @@ export function register(user) {
             password: user.uid,
         }
         axios.post('http://localhost:3001/users/register', values);
-        window.location.href = 'http://localhost:3000/success';
+        // window.location.href = 'http://localhost:3000/success';
     }
 }
 
@@ -269,7 +269,7 @@ export function createUser(user) {
                     type: NEW_USER,
                     payload: response.data
                 })
-                window.location.href = 'http://localhost:3000/success';
+                window.location.href = 'http://localhost:3000/home';
             })
     }
 }

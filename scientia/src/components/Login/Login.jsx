@@ -14,6 +14,7 @@ function Login(props) {
     const [show, setShow] = useState(false);
     const [redir, setRedir] = useState(false)
     const [logeo, setLogeo] = useState('')
+    const [logGoogle, setGoogle] = useState(false)
     const dispatch = useDispatch();
     const userLoggin = props.user
 
@@ -22,7 +23,7 @@ function Login(props) {
     }, [])
 
     const handleClose = () => {
-        if (logeo === 'Bienvenido!') {
+        if (logGoogle) {
             let exist = false;
             const checking = () => {
                 props.users.forEach(user => {
@@ -31,13 +32,6 @@ function Login(props) {
                     }
                 });
                 if (!exist) {
-                    const obj = {
-                        "name": userLoggin.name,
-                        "lastName": userLoggin.email,
-                        "email": userLoggin.email,
-                        "password": userLoggin.token
-                    }
-
                     dispatch(register(userLoggin))
                     setShow(false)
                     setRedir(true)
@@ -88,6 +82,7 @@ function Login(props) {
     }
 
     async function submitGoogle(e) {
+        setGoogle(true)
         e.preventDefault()
         props.autenticarConGoogle()
         let google = true

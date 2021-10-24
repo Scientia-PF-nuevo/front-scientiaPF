@@ -42,6 +42,7 @@ function MercadoPagoForm(props) {
     };
 
     function mensajeModel() {
+        console.log(resultPayment)
         if (resultPayment) {
             clearCartToPay()
             return `Pagado con éxito!`
@@ -54,7 +55,7 @@ function MercadoPagoForm(props) {
     };
 
     return (
-        <div className="container">
+        <div className={s.container}>
             <Card
                 cvc={state.cvc}
                 expiry={state.cardExpirationMonth + state.cardExpirationYear}
@@ -64,18 +65,22 @@ function MercadoPagoForm(props) {
                 brand={state.issuer}
             />
 
-            <form id="form-checkout">
-                <div className="form-control">
+            <form className={s.form} id="form-checkout">
+                <div className={s.formControl}>
                     <input
-                        type="tel"
+                        maxLength="19"
+                        className={s.input}
+                        type="number"
                         name="cardNumber"
                         id="form-checkout__cardNumber"
                         onChange={handleInputChange}
                         onFocus={handleInputFocus}
                     />
                 </div>
-                <div className="form-control">
+                <div className={s.formControl}>
                     <input
+                        maxLength="2"
+                        className={s.input}
                         type="tel"
                         name="cardExpirationMonth"
                         id="form-checkout__cardExpirationMonth"
@@ -83,22 +88,27 @@ function MercadoPagoForm(props) {
                         onFocus={handleInputFocus}
                     />
                     <input
-                        type="tel"
+                        maxLength="2"
+                        className={s.input}
+                        type="number"
                         name="cardExpirationYear"
                         id="form-checkout__cardExpirationYear"
                         onChange={handleInputChange}
                         onFocus={handleInputFocus}
                     />
                     <input
-                        type="tel"
+                        maxLength="4"
+                        className={s.input}
+                        type="number"
                         name="cvc"
                         id="form-checkout__securityCode"
                         onChange={handleInputChange}
                         onFocus={handleInputFocus}
                     />
                 </div>
-                <div className="form-control">
+                <div className={s.formControl}>
                     <input
+                        className={s.input}
                         type="text"
                         name="cardholderName"
                         id="form-checkout__cardholderName"
@@ -106,41 +116,47 @@ function MercadoPagoForm(props) {
                         onFocus={handleInputFocus}
                     />
                     <input
+                        className={s.input}
                         type="email"
                         name="cardholderEmail"
                         id="form-checkout__cardholderEmail"
                         onFocus={handleInputFocus}
                     />
                 </div>
-                <div className="form-control">
+                <div className={s.formControl}>
                     <select
+                        className={s.select}
                         name="issuer"
                         id="form-checkout__issuer"
                         on
                     ></select>
                     <select
+                        className={s.select}
                         name="identificationType"
                         id="form-checkout__identificationType"
                     ></select>
                 </div>
-                <div className="form-control">
+                <div className={s.formControl}>
                     <input
-                        type="text"
+                        maxLength="8"
+                        className={s.input}
+                        type="number"
                         name="identificationNumber"
                         id="form-checkout__identificationNumber"
                     />
                 </div>
-                <div className="form-control">
+                <div className={s.formControl}>
                     <select
+                        className={s.select}
                         name="installments"
                         id="form-checkout__installments"
                     ></select>
                 </div>
-                <div className="form-control">
+                <div className={s.formControl}>
                     {/* {resultPayment ?
                         <p> Pagado con éxito!</p>
                         : */}
-                    <button type="submit" id="form-checkout__submit" onClick={handleShow}>
+                    <button className={s.button} type="submit" id="form-checkout__submit" onClick={handleShow}>
                         Pagar
                     </button>
                     {/* } */}
