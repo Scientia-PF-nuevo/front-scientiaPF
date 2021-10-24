@@ -23,7 +23,11 @@ export default function Form (props) {
         url: '',
         urlVideo:'',
         category: '',
-        email: user.email
+        email: user.email,
+        leng: '',
+        dif: '',
+        amount: 0,
+        percentage: 0
     });
 
     function handleChange (e) {
@@ -51,6 +55,12 @@ export default function Form (props) {
         if(course.category === '' || course.category === undefined) {
             return alert ('People should know the category of the course');
         }
+        if(course.leng === '' || course.leng === undefined) {
+            return alert ('People should know the lenguage of the course');
+        }
+        if(course.dif === '' || course.dif === undefined) {
+            return alert ('People should know the experience required for the course');
+        }
         dispatch(setCourseToAprove(course));
         
         setCourse({
@@ -59,7 +69,11 @@ export default function Form (props) {
             price: 0,
             url: '',
             urlVideo:'',    
-            category: ''
+            category: '',
+            leng: '',
+            dif: '',
+            amount: 0,
+            percentage: 0
         });
 
         // Redirect
@@ -79,7 +93,7 @@ export default function Form (props) {
                 label="COURSE NAME"
                 value={course.name}
                     // placeholder='Nombre...'
-                defaultValue="Hello World"
+                // defaultValue="Hello World"
                 name="name" 
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
@@ -88,7 +102,7 @@ export default function Form (props) {
                 style={{marginBottom:"10px"}}
                 id="outlined-required"
                 label="PRICE (Dollars)"
-                defaultValue="Hello World"
+                // defaultValue="Hello World"
                 // className='placeHolder' 
                 type="number" 
                 // value={course.price}
@@ -103,7 +117,7 @@ export default function Form (props) {
                 style={{marginBottom:"10px"}}
                 id="outlined-required"
                 label="DESCRIPTION"
-                defaultValue="Hello World"
+                // defaultValue="Hello World"
                 value={course.description}
                 // placeholder='Course description...'
                 name="description" 
@@ -116,7 +130,7 @@ export default function Form (props) {
                 style={{marginBottom:"10px"}}
                 id="outlined-required"
                 label="URL IMAGE"
-                defaultValue="Hello World"
+                // defaultValue="Hello World"
                 // className='placeHolder' 
                 type="text" 
                 value={course.url}
@@ -126,10 +140,10 @@ export default function Form (props) {
                 onChange={e => handleChange(e)} />
 
                <TextField required 
-                   style={{marginBottom:"10px"}}
+                style={{marginBottom:"10px"}}
                 id="outlined-required"
                 label="URL VIDEO"
-                defaultValue="Hello World"
+                // defaultValue="Hello World"
                 // className='placeHolder' 
                 type="category" 
                 value={course.urlVideo}
@@ -137,8 +151,8 @@ export default function Form (props) {
                 name="urlVideo" 
                 autocomplete="off"
                 onChange={e => handleChange(e)} /> 
-
-              {  <select name="category" value={course.category} onChange={handleChange} >
+ 
+              {  <select className='selector'  name="category" value={course.category} onChange={handleChange} >
                  <option defaultValue="selected"></option>
                 {categories ? 
                     categories.map((a)=>{
@@ -151,6 +165,44 @@ export default function Form (props) {
                     null    
                     }
                 </select>}
+
+                <select className='selector' name="leng" value={course.leng} onChange={handleChange} >
+                 <option defaultValue="selected"></option>
+                 <option> Español </option>
+                 <option> English </option>
+                 <option> Others </option>
+                </select>
+
+                <select className='selector' placeholder='Experience required...' name="dif" value={course.dif} onChange={handleChange} >
+                <option defaultValue="selected"></option>
+                 <option> Beginner </option>
+                 <option> Intermediate </option>
+                 <option> Advance </option>
+                </select>
+
+                <TextField required 
+                style={{marginBottom:"10px"}}
+                id="outlined-required"
+                label="Percentage"
+                // className='placeHolder' 
+                type="number" 
+                // value={course.price}
+                name="percentage" 
+                // min = "1"
+                autocomplete="off"
+                onChange={e => handleChange(e)} />
+
+                <TextField required 
+                style={{marginBottom:"10px"}}
+                id="outlined-required"
+                label="amount"
+                // className='placeHolder' 
+                type="number" 
+                // value={course.price}
+                name="amount" 
+                // min = "1"
+                autocomplete="off"
+                onChange={e => handleChange(e)} />
 
             <div className='containerbtSub'>
                 <input className="form-button" type='submit' onClick={e=>handleSubmit(e)}/>

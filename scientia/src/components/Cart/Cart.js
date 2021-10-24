@@ -191,7 +191,7 @@ export function Cart(props) {
       <button className="confirm-button" onClick={handledSubmitOrder}> CONFIRM ORDER </button>
       <br></br>
       <br></br>
-      <button className="confirm-button-later" onClick={handledPendingOrder}> CONFIRM LATER </button>
+      {/* <button className="confirm-button-later" onClick={handledPendingOrder}> CONFIRM LATER </button> */}
 
       {redirect ? <Redirect to="/payment" /> : <></>}
     </>

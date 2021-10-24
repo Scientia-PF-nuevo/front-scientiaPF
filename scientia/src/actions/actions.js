@@ -10,6 +10,8 @@ import {
     GET_COURSE_DETAILS,
     GET_GENRES_COURSES,
     GET_REVIEWS_BY_COURSEID,
+    GET_FILTERED_COURSES,
+    CREATE_REVIEW,
     CONFIRM_ORDER,
     PENDING_ORDER,
     ADD_CART,
@@ -37,6 +39,38 @@ export function getAllCourses() {
                 dispatch({ type: GET_ALL_COURSES, payload: res.data })
             })
             .catch(err => { return err })
+    }
+}
+
+//* Trae todos los cursos filtrados por valores de filtro (QUERY)
+export function getFilteredCourses(info) {
+    const {
+      level1,
+      level2,
+      level3,
+      price1,
+      price2,
+      languajes1,
+      languajes2,
+      languajes3,
+      ranking1,
+      ranking2,
+      ranking3,
+      ranking4,
+      ranking5,
+    } = info;
+    return async function (dispatch) {
+        console.log(info)
+        return await axios
+          .get(
+            `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&languajes1=${languajes1}&languajes2=${languajes2}&languajes3=${languajes3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}`
+          )
+          .then((res) => {
+            dispatch({ type: GET_FILTERED_COURSES, payload: res.data });
+          })
+          .catch((err) => {
+            return err;
+          });
     }
 }
 
@@ -306,5 +340,18 @@ export function logout() {
     return {
         type: LOGOUT,
         payload: false
+    }
+}
+
+//*Crea nueva review
+export function createReview(review) {
+    return async function (dispatch) {
+        return await axios.post('http://localhost:3001/courses/newreview', review)
+            .then((response) => {
+                dispatch({
+                    type: CREATE_REVIEW,
+                    payload: response.data
+                })
+            })
     }
 }
