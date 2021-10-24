@@ -1,0 +1,68 @@
+.div-userinfo {
+    width: 100%;
+    background-color: rgb(0, 139, 194);
+    /* background-color: rgb(255, 255, 255); */
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.p {
+    margin: 0;
+    text-align: left;
+}
+
+.favorite {
+    
+    margin-top: 60px;
+    font-size: 40px;
+}
+
+.box {
+    background-color: white;
+    border: white;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.div-favorite label {
+    text-align:left;
+}
+
+.input {
+    color: white;
+}
+
+.subdiv {
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    height: 90%;
+    background-color: white;
+}
+
+.div-in {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    display: grid;
+    justify-items: center;
+    
+}
+
+#bootstrap-input {
+    width: 100%;
+}
+
+.avatar {
+    display: grid;
+    justify-items: center;
+}
+
+.box {
+    padding: 0;
+    width: 90%;
+}
