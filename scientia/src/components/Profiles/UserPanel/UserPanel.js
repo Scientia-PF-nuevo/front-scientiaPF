@@ -7,8 +7,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 // Components
 import UserSidebar from './UserSidebar/UserSidebar';
 import Dashboard from './Dashboard/Dashboard';
-import MyCourses from './MyCourses/MyCourses';
-import MyFavorites from './MyFavorites/MyFavorites';
+import ShoppingHistory from './ShoppingHistory/ShoppingHistory';
+import MyProfile from './MyProfile/MyProfile';
 
 function UserPanel () {
   return (
@@ -23,12 +23,12 @@ function UserPanel () {
           <Dashboard />
         </Route>
 
-        <Route exact path='/userprofile/mycourses'>
-          <MyCourses />
+        <Route exact path='/userprofile/my-profile'>
+          <MyProfile />
         </Route>
 
-        <Route exact path='/userprofile/myfavorites'>
-          <MyFavorites />
+        <Route exact path='/userprofile/shopping-history'>
+          <ShoppingHistory />
         </Route>
       </div>
     </Router>

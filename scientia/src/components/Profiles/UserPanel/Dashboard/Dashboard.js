@@ -15,7 +15,7 @@ const Dashboard = (props) => {
     return (
       <div className="div-dashboard">
           <h1>You're welcome!</h1>
-          <Avatar sx={{ width: 200, height: 200, bgcolor: 'orange', fontSize: 100 }}>{iniciales}</Avatar>
+          <Avatar src={props.user.photoURL} sx={{ width: 130, height: 130, bgcolor: 'orange', fontSize: 100 }}></Avatar>
 
             <h2>{props.user.displayName}</h2>
             <h3>{props.user.email}</h3> 

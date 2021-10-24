@@ -1,5 +1,5 @@
-// import React from 'react';
-import './MyFavorites.css';
+import React from 'react';
+import './MyProfile.css';
 import { connect } from 'react-redux'
 import CircularProgress from '@mui/material/CircularProgress';
 import { alpha, styled } from '@mui/material/styles';
@@ -46,20 +46,9 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const MyFavorites = ({userInfo, photo}) => {
-  if (userInfo.length === 1) {
-    var arrCourse = []
-    arrCourse.push(userInfo)
-  }
+const MyProfile = ({userInfo, photo}) => {
 
-  console.log(photo)
-
-  return userInfo === "" ? (
-    <div>
-      <h1> X </h1>
-    </div>
-    ) : 
-    typeof userInfo !== "undefined" && userInfo ? (
+  return userInfo ? (
       <div className="div-userinfo">
         <div className="subdiv">
               
@@ -136,7 +125,6 @@ const MyFavorites = ({userInfo, photo}) => {
 }
 
     const mapStateToProps = (state) => {
-      console.log(state.rootReducer.userInfo)
     return {
       userInfo: state.rootReducer.userInfo,
       photo: state.rootReducer.user.photoURL
@@ -144,4 +132,4 @@ const MyFavorites = ({userInfo, photo}) => {
   };
 
 
-  export default connect(mapStateToProps, null)(MyFavorites)
+  export default connect(mapStateToProps, null)(MyProfile)
