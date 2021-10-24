@@ -65,7 +65,7 @@ const MyFavorites = ({userInfo, photo}) => {
               
          <h2>Profile</h2>
           <div className="div-in">
-            <Avatar className="avatar" src={photo} sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100,  }}></Avatar>
+            <Avatar className="avatar" src={photo} sx={{ width: 200, height: 200, bgcolor: 'orange', fontSize: 100,  }}></Avatar>
             <Box
               className="box"
               component="form"

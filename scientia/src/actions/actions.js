@@ -14,6 +14,7 @@ import {
     ADD_CART,
     REMOVE_CART,
     CLEAR_CART,
+    CLEAR_CART_TO_PAY,
     SEARCH_BY_NAME,
     FILTER_BY,
     ORDER_BY,
@@ -92,11 +93,9 @@ export function getUsers() {
 
 //* Trae todos los datos de un usuario en particular (DB)
 export function getUserInfo(email) {
-    console.log(email)
     return function (dispatch) {
         axios.get(`http://localhost:3001/users/email/${email}`)
             .then(res => {
-
                 dispatch({ type: GET_USER_INFO, payload: res.data });
             })
             .catch(err => { return err })
@@ -175,8 +174,14 @@ export function removeCart(id) {
 }
 
 export function clearCart() {
+
     return {
         type: CLEAR_CART
+    }
+}
+export function clearCartToPay() {
+    return {
+        type: CLEAR_CART_TO_PAY
     }
 }
 

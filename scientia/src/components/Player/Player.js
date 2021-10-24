@@ -48,7 +48,7 @@ const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
     email: user.email
   };
 
-  console.log("videoinfo", videoInfo)
+  // console.log("videoinfo", videoInfo)
 
   const handlePlay = () => {
     setState( {...state, playing: true} )
@@ -87,13 +87,14 @@ const ResponsivePlayer = ({updateInfoVideo, info, user}) => {
 
 
   var startHere=0;
-  if(user.bought_courses.length >= 1) {
-    startHere = user.bought_courses.filter((course) => course.courseId === info.id)
+  if(user.coursesAndData.length >= 1) {
+    
+    startHere = user.coursesAndData.filter((c) => c.course.courseId == info.id)
+    startHere = startHere[0].course.timeWatched
+    
   }
 
-  if (startHere[0].timeWatched > 0) {
-    startHere = startHere[0].timeWatched
-  }
+  console.log(startHere)
 
       return (
         <>

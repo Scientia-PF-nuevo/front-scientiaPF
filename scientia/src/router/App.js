@@ -19,8 +19,7 @@ import Success from '../components/SignUp/Success';
 import ResponsivePlayer from '../components/Player/Player';
 import UserPanel from '../components/Profiles/UserPanel/UserPanel';
 import AdminPanel from '../components/Profiles/AdminPanel/AdminPanel';
-
-
+import Payment from '../components/Payment/payment';
 
 function App() {
   return (
@@ -64,6 +63,10 @@ function App() {
 
       <Route exact path='/details'>
         <Details />
+      </Route>
+
+      <Route exact path='/payment'>
+        <Payment />
       </Route>
 
       <Route exact path='/form' component={Form}/>
