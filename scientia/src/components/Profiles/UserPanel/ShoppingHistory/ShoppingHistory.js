@@ -8,14 +8,12 @@ import AlertTitle from '@mui/material/AlertTitle';
 
 
 const ShoppingHistory = ({shoppingHistory}) => {
-
-  console.log('estoy en shopping')
   return shoppingHistory.length >= 1 ? (
       <div className="div-mycourses" style={{ width: 1060 }}>
          <div id="global">
           <div id="mensajes">
-          {shoppingHistory.map((shoppingHistory, index) => (
-              <SnackbarContent className="snack" message={shoppingHistory.name}  action={"Price: $" + shoppingHistory.price }/>
+          {shoppingHistory.map((shoppingHistory) => (
+              <SnackbarContent className="snack" message={shoppingHistory.course.courseName}  action={"Price: $" + shoppingHistory.course.price }/>
           ))}
           </div>
         </div>
