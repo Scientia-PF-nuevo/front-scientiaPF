@@ -5,6 +5,7 @@ import Comments from '../Comments/Comments'
 import { connect } from 'react-redux'
 import {getCoursesReviewsById} from '../../actions/actions'
 import {updateInfoVideo} from '../../actions/actions'
+import NewReview from '../Reviews/NewReview'
 
 
 const ResponsivePlayer = ({updateInfoVideo, info, user, getCoursesReviewsById}) => {
@@ -123,6 +124,7 @@ const ResponsivePlayer = ({updateInfoVideo, info, user, getCoursesReviewsById}) 
             onDuration={handleDurationTime}
           />
         </div>
+        <NewReview/>
         <Comments courseId={info.id}/>
         </>
       );
