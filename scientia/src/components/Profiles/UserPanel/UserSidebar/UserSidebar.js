@@ -37,15 +37,15 @@ const UserSidebar = () => {
             </Link>
             </div>
             <div>
+            <Link to="/userprofile/myfavorites" >
+              <CDBSidebarMenuItem icon="sticky-note">My profile</CDBSidebarMenuItem>
+              </Link>
+            </div>
+            <div>
             <Link to="/userprofile/mycourses" >
               <CDBSidebarMenuItem  icon="table">My Learning</CDBSidebarMenuItem>
             </Link>
             </div>
-            <div>
-            <Link to="/userprofile/myfavorites" >
-              <CDBSidebarMenuItem icon="sticky-note">My favorites</CDBSidebarMenuItem>
-              </Link>
-              </div>
           </CDBSidebarMenu>
         </CDBSidebarContent>
  

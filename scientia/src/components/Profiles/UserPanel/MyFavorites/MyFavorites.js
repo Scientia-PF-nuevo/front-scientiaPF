@@ -1,69 +1,145 @@
-import React from 'react';
+// import React from 'react';
 import './MyFavorites.css';
 import { connect } from 'react-redux'
 import CircularProgress from '@mui/material/CircularProgress';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActions } from '@mui/material';
-import Carousel from '../Carousel/Carousel';
+import { alpha, styled } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Avatar from '@mui/material/Avatar';
 
+const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  'label + &': {
+    marginTop: theme.spacing(3),
+  },
+  '& .MuiInputBase-input': {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    width: 'auto',
+    padding: '10px 12px',
+    transition: theme.transitions.create([
+      'border-color',
+      'background-color',
+      'box-shadow',
+    ]),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+      borderColor: theme.palette.primary.main,
+    },
+  },
+}));
 
-
-
-const MyFavorites = ({myFavorites}) => {
-  if (myFavorites.length === 1) {
+const MyFavorites = ({userInfo, photo}) => {
+  if (userInfo.length === 1) {
     var arrCourse = []
-    arrCourse.push(myFavorites)
+    arrCourse.push(userInfo)
   }
 
-  return myFavorites === "" ? (
+  console.log(photo)
+
+  return userInfo === "" ? (
     <div>
-      <h1 > X </h1>
+      <h1> X </h1>
     </div>
     ) : 
-    typeof myFavorites !== "undefined" && myFavorites.length >= 1 ? (
-        <div className="div-favorite" style={{ width: 1060 }}>
-        <h2 className="favorite">★ Start learning with your favorite courses</h2>
-        <Carousel show={4}>
-        {myFavorites.map((myFavorites) => (
-          <div>
-            <div style={{padding: 8}}>
-          <Card style={{width: '95%', height: '240px', marginTop: 70, marginLeft: 10, marginRight: 10, background: "white" }}>
-          <CardMedia
-            component="img"
-            height="140"
-            image={myFavorites.url}
-            alt={myFavorites.name}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-            <p>{myFavorites.name}</p>
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              ▪{myFavorites.categories}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">View</Button>
-          </CardActions>
-        </Card>
-        </div>
-        </div>
-         ))}
-          </Carousel>
+    typeof userInfo !== "undefined" && userInfo ? (
+      <div className="div-userinfo">
+        <div className="subdiv">
+              
+         <h2>Profile</h2>
+          <div className="div-in">
+            <Avatar className="avatar" src={photo} sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100,  }}></Avatar>
+            <Box
+              className="box"
+              component="form"
+              noValidate
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { sm: '1fr 1fr' },
+                gap: 2,
+              }}
+            >
+              <FormControl variant="standard">
+                <InputLabel shrink htmlFor="bootstrap-input">
+                  First Name
+                </InputLabel>
+                <BootstrapInput defaultValue={userInfo.firstName} id="bootstrap-input" />
+              </FormControl>
+              <FormControl variant="standard">
+                <InputLabel shrink htmlFor="bootstrap-input">
+                  Last Name
+                </InputLabel>
+                <BootstrapInput defaultValue={userInfo.lastName} id="bootstrap-input" />
+              </FormControl>
+              <FormControl variant="standard">
+                <InputLabel shrink htmlFor="bootstrap-input">
+                  Email
+                </InputLabel>
+                <BootstrapInput defaultValue={userInfo.email} id="bootstrap-input" />
+              </FormControl>
+              <FormControl variant="standard">
+                <InputLabel shrink htmlFor="bootstrap-input">
+                  Phone
+                </InputLabel>
+                <BootstrapInput defaultValue={userInfo.phone} id="bootstrap-input" />
+              </FormControl>
+              <FormControl variant="standard">
+                <InputLabel shrink htmlFor="bootstrap-input">
+                  Country
+                </InputLabel>
+                <BootstrapInput defaultValue={userInfo.country} id="bootstrap-input" />
+              </FormControl>
+              <FormControl variant="standard">
+                <InputLabel shrink htmlFor="bootstrap-input">
+                  Province
+                </InputLabel>
+                <BootstrapInput defaultValue={userInfo.province} id="bootstrap-input" />
+              </FormControl>
+              <FormControl variant="standard">
+                <InputLabel shrink htmlFor="bootstrap-input">
+                  City
+                </InputLabel>
+                <BootstrapInput defaultValue={userInfo.city} id="bootstrap-input" />
+              </FormControl>
+              <FormControl variant="standard">
+                <InputLabel shrink htmlFor="bootstrap-input">
+                  Postal Code
+                </InputLabel>
+                <BootstrapInput defaultValue={userInfo.postalcode} id="bootstrap-input" />
+              </FormControl>
+            </Box>
+          </div>
+          </div>
       </div>
     ) : (
-    <div className="div-mycourses">
+    <div className="div-userinfo">
       <CircularProgress disableShrink />
     </div>
   );
 }
 
     const mapStateToProps = (state) => {
+      console.log(state.rootReducer.userInfo)
     return {
-        myFavorites: state.rootReducer.allCourses
+      userInfo: state.rootReducer.userInfo,
+      photo: state.rootReducer.user.photoURL
     }
   };
 

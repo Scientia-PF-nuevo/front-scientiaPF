@@ -42,24 +42,3 @@ function AdminPanel () {
 }
 
 export default AdminPanel;
-
-
-
-
-{/* <div className="div-app">
-        <Route path='/userprofile'>
-          <Sidebar />
-        </Route>
-
-        <Route exact path='/userprofile'>
-          <Dashboard />
-        </Route>
-
-        <Route exact path='/userprofile/mycourses'>
-          <MyCourses />
-        </Route>
-
-        <Route exact path='/userprofile/myfavorites'>
-          <MyFavorites />
-        </Route>
-      </div> */}
