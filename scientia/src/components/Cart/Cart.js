@@ -60,6 +60,7 @@ export function Cart(props) {
     return `$ ${result}`;
   }
 
+
   const handledSubmitOrder = () => {
 
     if (usuario && usuario.length >= 1) {
@@ -77,11 +78,13 @@ export function Cart(props) {
 
       var matchedIDs = []
       var sameId = false;
-      for (let i = 0; i < userCart.courseId.length; i++) {
-        for (let j = 0; j < arrIDCourses.length; j++) {
-          if (userCart.courseId[i] === arrIDCourses[j]) {
-            sameId = true;
-            matchedIDs.push(userCart.courseId[i])
+      if (arrIDCourses) {
+        for (let i = 0; i < userCart.courseId.length; i++) {
+          for (let j = 0; j < arrIDCourses.length; j++) {
+            if (userCart.courseId[i] === arrIDCourses[j]) {
+              sameId = true;
+              matchedIDs.push(userCart.courseId[i])
+            }
           }
         }
       }

@@ -23,6 +23,7 @@ function MercadoPagoForm(props) {
     const [state, setState] = useState(INITIAL_STATE);
     const [show, setShow] = useState(false);
     const [redir, setRedir] = useState(false)
+    const [msg, setMsg] = useState(false)
 
     // const cart = useSelector(state => state.rootReducer.cartToPay)
 
@@ -30,7 +31,10 @@ function MercadoPagoForm(props) {
         setShow(false)
         setRedir(true)
     };
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true)
+        setTimeout(function () { setMsg('Al parecer hubo un error con el pago, vuelva a intentarlo') }, 7000);
+    };
 
     const resultPayment = useMercadoPago(props.cartToPay, props.user.email);
 
@@ -42,14 +46,18 @@ function MercadoPagoForm(props) {
     };
 
     function mensajeModel() {
-        if (!resultPayment) {
-            return <Spinner animation="border" variant="primary" />
-        } else if (resultPayment.status !== 'approved') {
-            clearCartToPay()
-            return `Hubo un error al procesar la compra`
+        if (msg !== 'Al parecer hubo un error con el pago, vuelva a intentarlo') {
+            if (!resultPayment) {
+                return <Spinner animation="border" variant="primary" />
+            } else if (resultPayment.status !== 'approved') {
+                clearCartToPay()
+                return setMsg(`Hubo un error al procesar la compra`)
+            } else {
+                clearCartToPay()
+                return setMsg('Compra exitosa!')
+            }
         } else {
-            clearCartToPay()
-            return 'Compra exitosa!'
+            return msg
         }
     }
 
@@ -169,7 +177,7 @@ function MercadoPagoForm(props) {
                     <Modal.Body>{mensajeModel()}</Modal.Body>
                     <Modal.Footer>
                         {
-                            resultPayment &&
+                            resultPayment || msg &&
                             <Button variant="primary" onClick={handleClose}>
                                 Ok!
                             </Button>}

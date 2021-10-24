@@ -12,14 +12,18 @@ import * as actionCreators from './../../actions/actions'
 
 function Nav(props) {
     const imagenPerfil = props.user.photoURL
-    
+
     if (props.user.displayName) {
         let inicialNombre = props.user.displayName.split(' ')[0][0]
         let inicialApellido = props.user.displayName.split(' ')[1][0]
         var iniciales = inicialNombre + inicialApellido
     }
 
-    
+    function desconectarse() {
+        props.clearCart()
+        props.logout()
+    }
+
     return (
         <div className='container'>
             <div className='containLogo'>
@@ -54,15 +58,20 @@ function Nav(props) {
                             :
                             <></>
                     }
-                    <Link className='linkNav' to='/cart'>
-                        <li className='liNav'>
-                            <CustomizedBadges />
-                        </li>
-                    </Link>
+                    {
+                        props.user.displayName ?
+                            <Link className='linkNav' to='/cart'>
+                                <li className='liNav'>
+                                    <CustomizedBadges />
+                                </li>
+                            </Link>
+                            :
+                            <></>
+                    }
                     {
                         props.user.displayName ?
                             <Link className='linkNav' to='/home'>
-                                <li className='liNav' onClick={props.logout} >
+                                <li className='liNav' onClick={desconectarse} >
                                     Log Out
                                 </li>
                             </Link>
