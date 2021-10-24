@@ -202,7 +202,11 @@ export function Cart(props) {
       <button className="confirm-button" onClick={handledSubmitOrder}> CONFIRM ORDER </button>
       <br></br>
       <br></br>
-      <button className="confirm-button-later" onClick={handledPendingOrder}> CONFIRM LATER </button>
+
+      {/* <button className="confirm-button-later" onClick={handledPendingOrder}> CONFIRM LATER </button> */}
+
+
+//       <button className="confirm-button-later" onClick={handledPendingOrder}> CONFIRM LATER </button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Inicio de Sesión</Modal.Title>
@@ -214,6 +218,7 @@ export function Cart(props) {
           </Button>
         </Modal.Footer>
       </Modal>
+
       {redirect ? <Redirect to="/payment" /> : <></>}
     </>
   );

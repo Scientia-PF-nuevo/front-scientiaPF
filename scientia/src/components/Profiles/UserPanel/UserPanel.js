@@ -9,6 +9,7 @@ import UserSidebar from './UserSidebar/UserSidebar';
 import Dashboard from './Dashboard/Dashboard';
 import ShoppingHistory from './ShoppingHistory/ShoppingHistory';
 import MyProfile from './MyProfile/MyProfile';
+import CreatedCourses from './CreatedCourses/CreatedCourses';
 
 function UserPanel () {
   return (
@@ -30,6 +31,10 @@ function UserPanel () {
         <Route exact path='/userprofile/shopping-history'>
           <ShoppingHistory />
         </Route>
+
+        {/* <Route exact path='/userprofile/created-courses'>
+          <CreatedCourses />
+        </Route> */}
       </div>
     </Router>
     </div>

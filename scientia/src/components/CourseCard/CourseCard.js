@@ -48,8 +48,8 @@ function CourseCard(props) {
           )}
         </div>
       </div>
-      <div className="detaiils-card-container">
-        <div className="info-price-div">
+        <div className="detaiils-card-container">
+        <div className="info-price-div2">
           {
             <p>
               <strong>Price</strong>: $ {`${price}`}
@@ -57,7 +57,7 @@ function CourseCard(props) {
           }
         </div>
 
-        <div className="info-price-div">
+        <div className="info-price-div2">
           {
             <p>
               <strong>Date</strong>: {`${date}`}

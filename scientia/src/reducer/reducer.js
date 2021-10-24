@@ -8,6 +8,8 @@ import {
     SEARCH_BY_NAME,
     GET_GENRES_COURSES,
     GET_REVIEWS_BY_COURSEID,
+    GET_FILTERED_COURSES,
+    CREATE_REVIEW,
     FILTER_BY,
     ORDER_BY,
     ADD_CART,
@@ -44,7 +46,8 @@ const initialState = {
     orderConfirm: [],
     pendingOrders: [],
     videoUpdated: "",
-    videoPlaying: {}
+    videoPlaying: {},
+    reviewCreated: {}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -98,7 +101,14 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 coursesReviews: action.payload
-            };    
+            }; 
+        
+            //*!! chequear
+        case GET_FILTERED_COURSES:
+            return {
+                ...state,
+                allCourses: action.payload
+            }; 
 
         case GET_GENRES_COURSES:
             return {
@@ -118,7 +128,7 @@ export default function rootReducer(state = initialState, action) {
         case ORDER_BY:
             if (action.payload === 'A-Z') {
                 return {
-                    ...state, allCourses: [...state.coursesBackup].sort((prev, next) => {
+                    ...state, allCourses: [...state.allCourses].sort((prev, next) => {
                         if (prev.name > next.name) return 1
                         if (prev.name < next.name) return -1
                         return 0
@@ -127,7 +137,7 @@ export default function rootReducer(state = initialState, action) {
             }
             if (action.payload === 'Z-A') {
                 return {
-                    ...state, allCourses: [...state.coursesBackup].sort((prev, next) => {
+                    ...state, allCourses: [...state.allCourses].sort((prev, next) => {
                         if (prev.name > next.name) return -1
                         if (prev.name < next.name) return 1
                         return 0
@@ -137,26 +147,26 @@ export default function rootReducer(state = initialState, action) {
 
             //! Ordena por valor del curso (asc o desc)
             if (action.payload === 'desc') {
-                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => prev.price - next.price) }
+                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => prev.price - next.price) }
             }
             if (action.payload === 'asc') {
-                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => next.price - prev.price) }
+                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => next.price - prev.price) }
             }
 
             //! Ordena por fecha (new o old)
             if (action.payload === 'new') {
-                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => prev.date - next.date) }
+                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => prev.date - next.date) }
             }
             if (action.payload === 'old') {
-                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => next.date - prev.date) }
+                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => next.date - prev.date) }
             }
 
             //! Ordena por Rating (best o worst)
             if (action.payload === 'worst') {
-                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => prev.score - next.score) }
+                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => prev.score - next.score) }
             }
             if (action.payload === 'best') {
-                return { ...state, allCourses: [...state.coursesBackup].sort((prev, next) => next.score - prev.score) }
+                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => next.score - prev.score) }
             }
 
             //! Orden por default como llega de la DB
@@ -201,6 +211,12 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 orderConfirm: action.payload
             }
+
+        case CREATE_REVIEW:
+            return {
+                ...state,
+                reviewCreated: action.payload
+            }   
 
         case PENDING_ORDER:
             return {
