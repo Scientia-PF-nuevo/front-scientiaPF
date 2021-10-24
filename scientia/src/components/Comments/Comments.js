@@ -6,9 +6,6 @@ import { connect } from 'react-redux';
 
 
 function Comments({coursesReviews}) {
-  // if (coursesReviews.reviews && coursesReviews.reviews.length >= 1) {
-
-  // }
 
   return (
     <div style={{ padding: 14, width: 800 }} className="comments-div">
