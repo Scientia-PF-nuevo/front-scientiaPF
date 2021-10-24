@@ -31,9 +31,9 @@ function TrainningCard(props) {
 
     
     return (
-      <div className="container-course">
-        <div className="title-course"><h5>{name && name.toUpperCase()}</h5></div>
-        <div className="course-div-card">
+      <div className="container-course2">
+        <div className="title-course2"><h5>{name && name.toUpperCase()}</h5></div>
+        <div className="course-div-card2">
           {url ? (
             <img src={`${url}`} alt="Course" className="Img"></img>
           ) : (
@@ -51,7 +51,7 @@ function TrainningCard(props) {
         </div>
 
           <LinearWithValueLabel barProgress={barProgress}/>
-        <div className="button-container">
+        <div className="button-container2">
 
           <Link to='/player' style= {{textDecoration:"none"}}>
           <Button onClick={handleVideoSubmit} variant="contained" color="success">PLAY COURSE</Button>

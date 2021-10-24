@@ -15,13 +15,13 @@ function FilterBy({orderBy, filterBy, coursesByGenre}) {
     return (
         <div className='container-div'>
             <select  className="selectCont" onChange={handleSelect} name="" id="">
-                <option className="option" value="default">FILTER BY...</option>         
-                <optgroup className="optionGroup" label="CATEGORIES">
+                <option className="option" value="default">CATEGORIES</option>         
+                <optgroup className="optionGroup" label="Select...">
                      {coursesByGenre && coursesByGenre.map(g => <option key={g.name} value={g.name}>{g.name.toUpperCase()}</option>)}
                 </optgroup>
             </select>
             <select  className="selectCont" onChange={handleSelect2} name="" id="">
-                <option className="option" value="default">ORDER BY...</option>
+                <option className="option" value="default">ORDER</option>
                 <optgroup className="optionGroup" label="Price">
                     <option className="option" value="asc">EXPENSIVE</option>
                     <option className="option" value="desc">CHEAPER</option>

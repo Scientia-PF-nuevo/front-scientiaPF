@@ -7,6 +7,7 @@ import {
     GET_COURSE_DETAILS,
     SEARCH_BY_NAME,
     GET_GENRES_COURSES,
+    GET_REVIEWS_BY_COURSEID,
     FILTER_BY,
     ORDER_BY,
     ADD_CART,
@@ -32,6 +33,7 @@ const initialState = {
     coursesByGenre: [],
     coursesBackup: [],
     courseDetails: [],
+    coursesReviews: [],
     favoritesCourses: [],
     filteredCourses: [],
     login: false,
@@ -91,6 +93,12 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 courseDetails: action.payload
             };
+
+        case GET_REVIEWS_BY_COURSEID:
+            return {
+                ...state,
+                coursesReviews: action.payload
+            };    
 
         case GET_GENRES_COURSES:
             return {

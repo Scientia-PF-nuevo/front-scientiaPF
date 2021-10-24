@@ -126,12 +126,6 @@ const SignUp = (props) => {
 
     dispatch(createUser(values));
   }
-  
-  const submitWithGoogle = async (e) => {
-    e.preventDefault()
-    let prop = 'register'
-    await props.autenticarConGoogle(prop)
-  }
 
   const { firstName, lastName, email, password, phone, country, city, province, address, postalcode } = values
 
@@ -292,7 +286,6 @@ const SignUp = (props) => {
           </div>
         </div>
         <button className="btn btn-primary" onClick={handleSubmit} type="submit">Submit</button>
-       {/*  <button className="btn btn-outline-primary" onClick={submitWithGoogle} type="submit">Register with Google</button> */}
         <p><b>Already have an account? <a href="http://localhost:3000/login">Sign-In</a></b></p>
       </form>
     </div>

@@ -9,6 +9,7 @@ import {
     GET_FAVORITE_COURSES,
     GET_COURSE_DETAILS,
     GET_GENRES_COURSES,
+    GET_REVIEWS_BY_COURSEID,
     CONFIRM_ORDER,
     PENDING_ORDER,
     ADD_CART,
@@ -61,6 +62,19 @@ export function getCourseDetail(id) {
             .then(res => {
 
                 dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
+            })
+            .catch(err => { return err })
+
+    }
+}
+
+//* Trae las reviews de los cursos pedidos por ID 
+export function getCoursesReviewsById(id) {
+    return function (dispatch) {
+        axios.get(`http://localhost:3001/courses/id/${id}`)
+            .then(res => {
+
+                dispatch({ type: GET_REVIEWS_BY_COURSEID, payload: res.data });
             })
             .catch(err => { return err })
 
@@ -142,7 +156,7 @@ export function filterBy(order) {
 
 export function setCourseToAprove(payload) {
     return function (dispatch) {
-        axios.post(`http://localhost:3001/courses/newcourse`,payload)
+        axios.post(`http://localhost:3001/courses/newcourse`, payload)
             .then(res => {
 
                 dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
@@ -247,15 +261,17 @@ export function autenticarConGoogle(prop) {
 
 //*Crea nuevo usuario desde google
 export function register(user) {
-    let nombre = user.displayName.split(" ")
-    let values = {
-        firstName: nombre[0],
-        lastName: nombre[nombre.length - 1],
-        email: user.email,
-        password: user.uid,
+    if (user.displayName) {
+        let nombre = user.displayName.split(" ")
+        let values = {
+            firstName: nombre[0],
+            lastName: nombre[nombre.length - 1],
+            email: user.email,
+            password: user.uid,
+        }
+        axios.post('http://localhost:3001/users/register', values);
+        // window.location.href = 'http://localhost:3000/success';
     }
-    axios.post('http://localhost:3001/users/register', values);
-    window.location.href = 'http://localhost:3000/success';
 }
 
 //*Crea nuevo usuario directo
@@ -267,14 +283,14 @@ export function createUser(user) {
                     type: NEW_USER,
                     payload: response.data
                 })
-                window.location.href = 'http://localhost:3000/success';
+                window.location.href = 'http://localhost:3000/home';
             })
     }
 }
 
 //*Actualizad el estado del video
 export function updateInfoVideo(info) {
-    const {email, ...others} = info
+    const { email, ...others } = info
     return async function (dispatch) {
         return await axios.put(`http://localhost:3001/courses/${email}`, others)
             .then((response) => {
