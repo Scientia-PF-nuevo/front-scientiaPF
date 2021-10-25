@@ -50,9 +50,9 @@ export function getFilteredCourses(info) {
       level3,
       price1,
       price2,
-      languajes1,
-      languajes2,
-      languajes3,
+      languaje1,
+      languaje2,
+      languaje3,
       ranking1,
       ranking2,
       ranking3,
@@ -63,7 +63,7 @@ export function getFilteredCourses(info) {
         console.log(info)
         return await axios
           .get(
-            `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&languajes1=${languajes1}&languajes2=${languajes2}&languajes3=${languajes3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}`
+            `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&languaje1=${languaje1}&languaje2=${languaje2}&languaje3=${languaje3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}`
           )
           .then((res) => {
             dispatch({ type: GET_FILTERED_COURSES, payload: res.data });
