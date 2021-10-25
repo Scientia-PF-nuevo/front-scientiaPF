@@ -76,13 +76,13 @@ function SearchBar({searchByName, getAllCourses, getFilteredCourses}) {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true);
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+  // const handleChange = (panel) => (event, isExpanded) => {
+  //   setExpanded(isExpanded ? panel : false);
+  // };
 
-  const [input, setInput] = useState({
-    buscar: ''
-  })
+  // const [input, setInput] = useState({
+  //   buscar: ''
+  // })
 
   const handleInputChange = function (e) {
     setInput({
@@ -234,18 +234,8 @@ function SearchBar({searchByName, getAllCourses, getFilteredCourses}) {
 
  
       </div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Notificación</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Ingrese más de 3 dígitos</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Ok!
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+
+    
   );
 }
 
