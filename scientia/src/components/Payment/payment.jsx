@@ -23,7 +23,8 @@ function MercadoPagoForm(props) {
     const [state, setState] = useState(INITIAL_STATE);
     const [show, setShow] = useState(false);
     const [redir, setRedir] = useState(false)
-    const [msg, setMsg] = useState(false)
+    const [msg, setMsg] = useState('')
+    const [showMsg, setShowMsg] = useState(false)
 
     // const cart = useSelector(state => state.rootReducer.cartToPay)
 
@@ -33,11 +34,14 @@ function MercadoPagoForm(props) {
     };
     const handleShow = () => {
         setShow(true)
-        setTimeout(function () { setMsg('Al parecer hubo un error con el pago, vuelva a intentarlo') }, 7000);
+        setTimeout(() => {
+            setShowMsg(true)
+            setShow(false)
+        }, 5000);
     };
 
     const resultPayment = useMercadoPago(props.cartToPay, props.user.email);
-
+    console.log('respuesta: ', resultPayment)
     const handleInputChange = (e) => {
         setState({
             ...state,
@@ -46,16 +50,12 @@ function MercadoPagoForm(props) {
     };
 
     function mensajeModel() {
-        if (msg !== 'Al parecer hubo un error con el pago, vuelva a intentarlo') {
-            if (!resultPayment) {
-                return <Spinner animation="border" variant="primary" />
-            } else if (resultPayment.status !== 'approved') {
+        if (msg === '') {
+            if (resultPayment) {
                 clearCartToPay()
-                return setMsg(`Hubo un error al procesar la compra`)
-            } else {
-                clearCartToPay()
-                return setMsg('Compra exitosa!')
+                setMsg(`Pagado con éxito!`)
             }
+            return <Spinner animation="border" variant="primary" />
         } else {
             return msg
         }
@@ -168,16 +168,24 @@ function MercadoPagoForm(props) {
                         Pagar
                     </button>
                 </div>
+                {showMsg ?
+                    resultPayment ?
+                        <p>{msg}</p>
+                        :
+                        <p>Hubo un error con el pago</p>
+                    :
+                    <></>
+                }
             </form>
             {
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Inicio de Sesión</Modal.Title>
+                        <Modal.Title>Procesando el pago</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>{mensajeModel()}</Modal.Body>
                     <Modal.Footer>
                         {
-                            resultPayment || msg &&
+                            (msg !== '') &&
                             <Button variant="primary" onClick={handleClose}>
                                 Ok!
                             </Button>}
