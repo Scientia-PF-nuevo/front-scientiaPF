@@ -10,21 +10,22 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { connect } from 'react-redux'
 import TextRating from '../CourseCard/Qualify';
-import {addCart} from '../../actions/actions'
+import {addCart, getCoursesReviewsById} from '../../actions/actions'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Comments from '../Comments/Comments';
 import './Details.css'
 
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
+
+
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
@@ -34,12 +35,25 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-function Details({login, details,addCart, cart}) {
+function Details({login, details,addCart, cart, getCoursesReviewsById}) {
+
+
   const [expanded, setExpanded] = React.useState(false);
 
   const detailsRender = details[0] 
 
-  const { name, description, price, url, categories, id, score, date } = detailsRender
+  const {
+    name,
+    description,
+    price,
+    url,
+    categories,
+    id,
+    score,
+    date,
+    level,
+    language,
+  } = detailsRender;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   
@@ -49,6 +63,10 @@ function Details({login, details,addCart, cart}) {
     "EJEMPLO 3",
     "EJEMPLO 4",
   ];
+
+  React.useEffect(() => {
+    getCoursesReviewsById(id)
+  }, [])
   
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -75,7 +93,7 @@ function Details({login, details,addCart, cart}) {
 
   return (
     <div className="details-div">
-    <Card sx={{ maxWidth: 700 }}>
+    <Card sx={{ maxWidth: 900 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -112,18 +130,30 @@ function Details({login, details,addCart, cart}) {
       />
       <CardContent>
         <Typography variant="body2" color="text.primary">
-          {categories && `CATEGORY: ${categories.toUpperCase()}`}
+        <strong>CATEGORY:</strong> {categories?.toUpperCase() || ""}
         </Typography>
-        <Typography variant="body3" color="text.primary">
-        {`Release Date: ${date ? date : "SIN FECHA"}`}
-        </Typography>
+        <br></br>
         <Typography variant="body2" color="text.primary">
-          {description}
-        <TextRating score={score} />
+        <strong>LEVEL:</strong> {level?.toUpperCase() || ""}
         </Typography>
+        <br></br>
+        <Typography variant="body2" color="text.primary">
+          <strong>LANGUAJE: </strong> {language?.toUpperCase() || ""}
+        </Typography>
+        <br></br>
+        <Typography variant="body3" color="text.primary">
+        <strong>DATE: </strong>{date ? date : "NO DATE"}
+        </Typography>
+        <br></br>
+        <br></br>
+        <Typography variant="body2" color="text.primary">
+          <strong>DESCRIPTION:</strong> {description ? description : "NO INFO"}
+        </Typography>
+        <br></br>
+        <TextRating score={score ? score : 0} />
       </CardContent>
       <CardActions disableSpacing>
-      {login && id && (
+      { (
             <IconButton color="primary" aria-label="add to shopping cart">
               <AddShoppingCartIcon
                 onClick={() => validarCart(id)}
@@ -146,26 +176,7 @@ function Details({login, details,addCart, cart}) {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Details:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-            large plate and set aside, leaving chicken and chorizo in the pan. Add
-            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-            stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-          </Typography>
-  
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
-        </CardContent>
+            <Comments/>
       </Collapse>
     </Card>
     </div>
@@ -180,4 +191,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {addCart})(Details)
+export default connect(mapStateToProps, {addCart,getCoursesReviewsById})(Details)

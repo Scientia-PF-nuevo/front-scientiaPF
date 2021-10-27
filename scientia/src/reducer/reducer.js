@@ -118,9 +118,9 @@ export default function rootReducer(state = initialState, action) {
 
         case FILTER_BY:
             if (action.payload === 'default') {
-                return { ...state, allCourses: state.coursesBackup }
+                return { ...state, allCourses: state.allCourses }
             } else {
-                return { ...state, allCourses: state.coursesBackup.filter((course) => (action.payload) === course.categories) }
+                return { ...state, allCourses: state.allCourses.filter((course) => (action.payload) === course.categories) }
             }
 
 

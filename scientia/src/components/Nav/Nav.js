@@ -59,14 +59,13 @@ function Nav(props) {
                             <></>
                     }
                     {
-                        props.user.displayName ?
+                    
                             <Link className='linkNav' to='/cart'>
                                 <li className='liNav'>
                                     <CustomizedBadges />
                                 </li>
                             </Link>
-                            :
-                            <></>
+                            
                     }
                     {
                         props.user.displayName ?
