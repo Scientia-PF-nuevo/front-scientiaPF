@@ -61,7 +61,7 @@ function CourseCard(props) {
         <div className="info-price-div2">
           {
             <p>
-              <strong>Languaje</strong>: {`${language}`}
+              <strong>Language</strong>: {`${language}`}
             </p>
           }
         </div>
