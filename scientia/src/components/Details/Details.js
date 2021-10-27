@@ -123,7 +123,7 @@ function Details({login, details,addCart, cart}) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-      {login && id && (
+      { (
             <IconButton color="primary" aria-label="add to shopping cart">
               <AddShoppingCartIcon
                 onClick={() => validarCart(id)}

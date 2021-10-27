@@ -93,7 +93,7 @@ function CourseCard(props) {
               <HelpOutlineOutlinedIcon onClick={() => addDetails(id)} />
             </Link>
           )}
-          { props.login && id && (
+          { (
             <IconButton color="primary" aria-label="add to shopping cart">
               <AddShoppingCartIcon
                 onClick={() => validarCart(id)}
