@@ -20,11 +20,13 @@ function NewReview({createReview, videoplaying, userInfo}) {
       };
 
     const review = {
-        comments: comments,
+    comments: comments,
 		score: score,
 		email: userInfo.email,
 		courseId: videoplaying.id
     }
+  
+    const [show, setShow] = React.useState(true)
 
     const handleSubmit = () => {
         if(review.comments !== "" && review.score >=1){
@@ -32,30 +34,43 @@ function NewReview({createReview, videoplaying, userInfo}) {
             setScore(0)
             setComments('')
             alert("Gracias por comentar!!!")
+            setShow(false)
+
         } else {
             alert("complete todos los campos")
         }
     }
 
+
     return (
-      <div className="reviews-container">
+      <>
+        {
+          (show) ? (
+            <div className="reviews-container">
         <Paper style={{ padding: "20px" }}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid justifyContent="left" item xs zeroMinWidth>
-              <h4 style={{marginBottom: "20px", textAlign: "left", color: "blue" }}>
+              <h4
+                style={{
+                  marginBottom: "20px",
+                  textAlign: "left",
+                  color: "blue",
+                }}
+              >
                 Leave a rating:
               </h4>
               <br></br>
               <p style={{ textAlign: "left" }}>Write a review:</p>
-              <TextField style={{ width: "750px", marginBottom: "20px" }}
-                 
-          multiline
-          maxRows={10}
-          value={comments}
-          onChange={handleChange}
-        />
+              <TextField
+                style={{ width: "750px", marginBottom: "20px" }}
+                multiline
+                maxRows={10}
+                value={comments}
+                onChange={handleChange}
+              />
               <Typography component="legend">Rate</Typography>
-              <Rating style={{ marginBottom: "20px" }}
+              <Rating
+                style={{ marginBottom: "20px" }}
                 name="simple-controlled"
                 value={score}
                 onChange={(event, newValue) => {
@@ -64,12 +79,20 @@ function NewReview({createReview, videoplaying, userInfo}) {
               />
             </Grid>
           </Grid>
-                <Button onClick={handleSubmit} variant="contained" endIcon={<SendIcon />}>
-        Send
-      </Button>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            endIcon={<SendIcon />}
+          >
+            Send
+          </Button>
           <Divider variant="fullWidth" style={{ margin: "10px 0" }} />
         </Paper>
       </div>
+          ) : (null)
+        }
+    
+      </>
     );
 }
 

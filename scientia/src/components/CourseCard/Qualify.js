@@ -13,7 +13,7 @@ const labels = {
 
 export default function TextRating({score}) {
 
-  const roundScore = Math.ceil(score)
+  const roundScore = Math.round(score)
 
   return (
     <Box
@@ -28,7 +28,7 @@ export default function TextRating({score}) {
         name="text-feedback"
         value={roundScore}
         readOnly
-        precision={0.5}
+        precision={1}
         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
       />
       <Box sx={{ ml: 2 }}>{labels[roundScore]}</Box>
