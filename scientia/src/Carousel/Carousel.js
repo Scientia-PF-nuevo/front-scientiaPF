@@ -1,67 +1,69 @@
-import React from 'react'
+import React from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import "./Carousel.css";
+export default function CarouselCourses(props) {
+  const { courses = [] } = props;
 
-export const Carousel = () => {
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+      slidesToSlide: 4, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
 
   return (
-    <div
-      style={{ maxHeight: '400px' }}
-      id='carouselExampleIndicators'
-      className='carousel slide overflow-hidden'
-      data-ride='carousel'
+    <Carousel
+      swipeable={true}
+      draggable={true}
+      showDots={true}
+      responsive={responsive}
+      ssr={true}
+      keyBoardControl={true}
+      containerClass="carousel-container"
+      removeArrowOnDeviceType={["tablet", "mobile"]}
+      dotListClass="custom-dot-list-style"
     >
-      <ol className='carousel-indicators'>
-        <li
-          data-target='#carouselExampleIndicators'
-          data-slide-to='0'
-          className='active'
-        ></li>
-        <li data-target='#carouselExampleIndicators' data-slide-to='1'></li>
-        <li data-target='#carouselExampleIndicators' data-slide-to='2'></li>
-      </ol>
-      <div className='carousel-inner'>
-        <div className='carousel-item active'>
+      {courses.map((course, index) => (
+        <div className="carousel-item-container">
           <img
-            src='https://http2.mlstatic.com/optimize/o:f_webp/resources/deals/exhibitors_resources/mco-home-desktop-slider-picture-aad1e028-0a9a-4ea7-b3f4-4bd3bfa92c0f.jpg'
-            className='d-block w-100'
-            style={{ maxHeight: '400px' }}
-            alt='...'
+            src={course.image}
+            alt={course.image}
+            className="carousel-item-image"
           />
+          <div className="carousel-item-info">
+            <h3 className="carousel-item-title">{course.name}</h3>
+            <p className="carousel-item-description">{course.description}</p>
+            <div className="carousel-item-features">
+              <span className="carousel-item-lenguaje-text">
+                Lenguaje: {course.lenguaje}
+              </span>
+              <span className="carousel-item-level-text">
+                Nivel: {course.level}
+              </span>
+            </div>
+            <div className="carousel-item-price">
+              <span className="carousel-item-price-text">
+                Precio: {course.price}
+              </span>
+              <span className="carousel-item-solds">
+                Total vendidos: {course.solds}
+              </span>
+            </div>
+          </div>
         </div>
-        <div className='carousel-item'>
-          <img
-            src='https://http2.mlstatic.com/optimize/o:f_webp/resources/exhibitors/MLA-aniversario/de35e170-e950-11ea-b3d2-23d954cc4cf0-home-slider_desktop.jpg'
-            className='d-block w-100'
-            style={{ maxHeight: '400px' }}
-            alt='...'
-          />
-        </div>
-        <div className='carousel-item'>
-          <img
-            src='https://http2.mlstatic.com/optimize/o:f_webp/resources/deals/exhibitors_resources/mla-home-desktop-slider-picture-e55607e0-6fa4-4506-82ef-8a683436cf9c.jpg'
-            className='d-block w-100'
-            style={{ maxHeight: '400px' }}
-            alt='...'
-          />
-        </div>
-      </div>
-      <a
-        className='carousel-control-prev'
-        href='#carouselExampleIndicators'
-        role='button'
-        data-slide='prev'
-      >
-        <span className='carousel-control-prev-icon' aria-hidden='true'></span>
-        <span className='sr-only'>Previous</span>
-      </a>
-      <a
-        className='carousel-control-next'
-        href='#carouselExampleIndicators'
-        role='button'
-        data-slide='next'
-      >
-        <span className='carousel-control-next-icon' aria-hidden='true'></span>
-        <span className='sr-only'>Next</span>
-      </a>
-    </div>
-  )
+      ))}
+    </Carousel>
+  );
 }
