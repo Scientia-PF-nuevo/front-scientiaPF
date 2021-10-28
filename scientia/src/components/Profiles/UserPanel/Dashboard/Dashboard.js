@@ -2,22 +2,24 @@ import React from 'react';
 import Avatar from '@mui/material/Avatar';
 
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
-import * as actionCreators from '../../../../actions/actions'
 import './Dashboard.css'
 
 const Dashboard = (props) => {
-    if (props.user.displayName) {
-      let inicialNombre = props.user.displayName.split(' ')[0][0]
-      let inicialApellido = props.user.displayName.split(' ')[1][0]
-      var iniciales = inicialNombre + inicialApellido
-    }
+      // let initialFirstName = props.user.firstName.charAt(0)
+      // let initialLastName = props.user.lastName.charAt(0)
+      // let initials = initialFirstName + initialLastName
+      let initials = "b"
+      
     return (
       <div className="div-dashboard">
           <h1>You're welcome!</h1>
-          <Avatar src={props.user.photoURL} sx={{ width: 130, height: 130, bgcolor: 'orange', fontSize: 100 }}></Avatar>
+         {
+          props.user.photoURL >= 1 ?
+          <Avatar src={props.user.photoURL} sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100 }}></Avatar> :
+          <Avatar sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100 }}>{initials}</Avatar>
+          }
 
-            <h2>{props.user.displayName}</h2>
+            <h2>{props.user.firstName + " " + props.user.lastName}</h2>
             <h3>{props.user.email}</h3> 
       </div>
     );
@@ -27,13 +29,9 @@ const Dashboard = (props) => {
 function mapStateToProps(state) {
     return {
         login: state.rootReducer.login,
-        user: state.rootReducer.user,
+        user: state.rootReducer.userInfo,
     }
     
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actionCreators, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps)(Dashboard)
