@@ -19,6 +19,8 @@ function CourseCard(props) {
     description,
     addCart,
     score,
+    level,
+    language,
     date,
     cart,
     addDetails
@@ -52,6 +54,20 @@ function CourseCard(props) {
         <div className="info-price-div2">
           {
             <p>
+              <strong>Level</strong>: {`${level}`}
+            </p>
+          }
+        </div>
+        <div className="info-price-div2">
+          {
+            <p>
+              <strong>Language</strong>: {`${language}`}
+            </p>
+          }
+        </div>
+        <div className="info-price-div2">
+          {
+            <p>
               <strong>Price</strong>: $ {`${price}`}
             </p>
           }
@@ -67,7 +83,7 @@ function CourseCard(props) {
         <div className="info-cat-div">
           <p>
             <strong>Category</strong>:{" "}
-            {`${categories && categories.toUpperCase()}`}
+            {`${categories && categories?.toUpperCase() || ""}`}
           </p>
         </div>
         <TextRating score={score} />
@@ -77,7 +93,7 @@ function CourseCard(props) {
               <HelpOutlineOutlinedIcon onClick={() => addDetails(id)} />
             </Link>
           )}
-          { props.login && id && (
+          { (
             <IconButton color="primary" aria-label="add to shopping cart">
               <AddShoppingCartIcon
                 onClick={() => validarCart(id)}

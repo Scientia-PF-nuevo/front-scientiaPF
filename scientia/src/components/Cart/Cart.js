@@ -56,7 +56,7 @@ export function Cart(props) {
   function Total() {
     result = cart.reduce((a, b) => ({ price: a.price + b.price })).price
     taxs = parseFloat((result * 0.21).toFixed(2));
-    total = result + taxs;
+    total = parseFloat(result + taxs).toFixed(1);
     return `$ ${result}`;
   }
 

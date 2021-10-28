@@ -4,6 +4,7 @@ import SearchBar from "../Search/SearchBar";
 import CourseList from "../../CourseList/CourseList";
 import { getAllCourses, getGenresCourses, getUsers,getUserInfo } from '../../actions/actions'
 import { connect } from "react-redux";
+import Carousel from '../../Carousel/Carousel'
 
 
 export function Home ({user,getUserInfo, getAllCourses, getGenresCourses, getUsers}) {
@@ -18,6 +19,7 @@ export function Home ({user,getUserInfo, getAllCourses, getGenresCourses, getUse
 
     return (
         <>
+        {/* <Carousel/> */}
             <SearchBar />
         <div className='home-container'>
             <CourseList />

@@ -28,6 +28,8 @@ function CourseList({ courses }) {
         url={course.url}
         categories={course.categories}
         description={course.description}
+        language={course.language}
+        level={course.level}
       />
     ))
   ) : (
