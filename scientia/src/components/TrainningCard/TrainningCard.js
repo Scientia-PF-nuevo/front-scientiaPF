@@ -54,7 +54,7 @@ function TrainningCard(props) {
         <div className="button-container2">
 
           <Link to='/player' style= {{textDecoration:"none"}}>
-          <Button onClick={handleVideoSubmit} variant="contained" color="success">PLAY COURSE</Button>
+          <button className="confirm-button3" onClick={handleVideoSubmit}>PLAY COURSE</button>
           </Link>
         </div>
         <div className="rating-div">

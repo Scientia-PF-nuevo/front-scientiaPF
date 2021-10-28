@@ -11,9 +11,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import RadioGroup, { useRadioGroup } from '@mui/material/RadioGroup';
+import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
-
 import Rating from '@mui/material/Rating';
 import { searchByName, getAllCourses, getFilteredCourses, orderBy } from '../../actions/actions'
 import './SearchBar.css'
@@ -21,8 +20,6 @@ import './SearchBar.css'
 
 function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCourses, orderBy}) {
   
-
-  // const [category, setCategory] = useState({category: false})
 
   const [checked, setChecked] = useState({
     level1: false,
