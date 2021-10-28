@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import CourseCard from '../components/CourseCard/CourseCard'
 import './CourseList.css'
 import Pagination from '../components/Pagination/Pagination'
+import noEncontrado from '../../src/assets/ahahah.gif'
+import { width } from '@mui/system'
 
 function CourseList({ courses }) {
 
@@ -23,6 +25,8 @@ function CourseList({ courses }) {
       currentCards = courses.slice(indexOfFirstCard, indexOfLastCard) //uso los indices para "fraccionar que juegos muestro"
   }
   
+  console.log(currentCards)
+
   const paginate = (pageNumber) => {
        setCurrentPage(pageNumber)
   }
@@ -40,9 +44,10 @@ function CourseList({ courses }) {
           paginate={paginate}
           currentPage={currentPage}
         />
-   { courses === "" ? (
-    <div>
-      <h1> NO ENCONTRADO </h1>
+   { typeof currentCards === "string" || currentCards.length === 0? (
+    <div className="not-found-course">
+      {/* <h1> NO ENCONTRADO </h1> */}
+      <img src={noEncontrado}></img>
     </div>
   ) : 
     
