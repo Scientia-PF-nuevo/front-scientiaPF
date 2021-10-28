@@ -1,16 +1,28 @@
-import { SET_COURSE_TOAPROVE } from '../actions/constants';
+import {
+    SET_COURSE_TOAPROVE,
+    GET_COURSES_TO_APPROVE,
+    APPROVE_COURSE,
+    REJECT_COURSE
+} from '../actions/constants';
 
 const initialState = {
-    courses: []
+    courses: [],
+    coursesToApprove: []
 }
 
-export default function reducerForm (state = initialState, action){
+export default function reducerForm(state = initialState, action) {
     switch (action.type) {
-        case SET_COURSE_TOAPROVE: 
+        case SET_COURSE_TOAPROVE:
             return {
+                ...state,
                 courses: [...state.courses, action.payload]
             }
-        default: 
+        case GET_COURSES_TO_APPROVE:
+            return {
+                ...state,
+                coursesToApprove: action.payload
+            }
+        default:
             return state;
     }
 };

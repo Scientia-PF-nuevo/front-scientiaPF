@@ -20,6 +20,7 @@ import ResponsivePlayer from '../components/Player/Player';
 import UserPanel from '../components/Profiles/UserPanel/UserPanel';
 import AdminPanel from '../components/Profiles/AdminPanel/AdminPanel';
 import Payment from '../components/Payment/payment';
+import PassCourses from '../components/PassCourses/PassCourses';
 
 function App() {
   return (
@@ -77,6 +78,10 @@ function App() {
 
       <Route path='/adminprofile'>
         <AdminPanel />
+      </Route>
+      
+      <Route path='/passCourses'>
+        <PassCourses />
       </Route>
       
       <Footer />
