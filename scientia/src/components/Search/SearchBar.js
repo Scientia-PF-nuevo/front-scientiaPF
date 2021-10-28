@@ -11,9 +11,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import RadioGroup, { useRadioGroup } from '@mui/material/RadioGroup';
+import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
-
 import Rating from '@mui/material/Rating';
 import { searchByName, getAllCourses, getFilteredCourses, orderBy } from '../../actions/actions'
 import './SearchBar.css'
@@ -21,8 +20,6 @@ import './SearchBar.css'
 
 function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCourses, orderBy}) {
   
-
-  // const [category, setCategory] = useState({category: false})
 
   const [checked, setChecked] = useState({
     level1: false,
@@ -92,6 +89,23 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
     setInput({
       buscar: ''
     });
+
+  }
+  const handleCleanFilters = () => {
+    setChecked( {level1: false,
+      level2: false,
+      level3: false,
+      price1: false,
+      price2: false,
+      languaje1: false,
+      languaje2: false,
+      languaje3: false,
+      ranking1: false,
+      ranking2: false,
+      ranking3: false,
+      ranking4: false,
+      ranking5: false,
+      category: "all"} )
   }
 
     return (
@@ -112,7 +126,7 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
         </button>
        
         <br></br>
-        <h3>FILTERS</h3>
+        <h3>FILTER BY</h3>
         <br></br>
 
         <div>
@@ -135,7 +149,7 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
                   <MyFormControlLabel
                     value="default"
                     label="ALL CATEGORIES"
-                    control={<Radio name="all" onChange={handleChangeCategory} />}
+                    control={<Radio checked={checked.category === "all" ? true : false} name="all" onChange={handleChangeCategory} />}
                   />
                   {coursesByGenre &&
                     coursesByGenre.map((g) => (
@@ -144,7 +158,7 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
                         name={g.name}
                         key={g.name}
                         label={g.name.toUpperCase()}
-                        control={<Radio name={g.name} onChange={handleChangeCategory} />}
+                        control={<Radio name={g.name} checked={checked.category === g.name ? true : false} onChange={handleChangeCategory} />}
                       />
                     ))}
                 </RadioGroup>
@@ -169,21 +183,21 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
                 <FormGroup>
                   <FormControlLabel
                     control={
-                      <Checkbox name="level1" onClick={handleChangeCheck} />
+                      <Checkbox checked={checked.level1} name="level1" onClick={handleChangeCheck} />
                     }
                     label="BEGINNER"
                     value="beginner"
                   />
                   <FormControlLabel
                     control={
-                      <Checkbox name="level2" onClick={handleChangeCheck} />
+                      <Checkbox checked={checked.level2} name="level2" onClick={handleChangeCheck} />
                     }
                     label="MIDDLE"
                     value="middle"
                   />
                   <FormControlLabel
                     control={
-                      <Checkbox name="level3" onClick={handleChangeCheck} />
+                      <Checkbox checked={checked.level3} name="level3" onClick={handleChangeCheck} />
                     }
                     label="EXPERT"
                     value="expert"
@@ -210,14 +224,14 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
                 <FormGroup>
                   <FormControlLabel
                     control={
-                      <Checkbox name="price1" onChange={handleChangeCheck} />
+                      <Checkbox checked={checked.price1} name="price1" onChange={handleChangeCheck} />
                     }
                     label="FREE"
                     value="free"
                   />
                   <FormControlLabel
                     control={
-                      <Checkbox name="price2" onChange={handleChangeCheck} />
+                      <Checkbox checked={checked.price2} name="price2" onChange={handleChangeCheck} />
                     }
                     label="PAID"
                     value="paid"
@@ -244,21 +258,21 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
                 <FormGroup>
                   <FormControlLabel
                     control={
-                      <Checkbox name="languaje1" onChange={handleChangeCheck} />
+                      <Checkbox checked={checked.languaje1} name="languaje1" onChange={handleChangeCheck} />
                     }
                     label="SPANISH"
                     value="spanish"
                   />
                   <FormControlLabel
                     control={
-                      <Checkbox name="languaje2" onChange={handleChangeCheck} />
+                      <Checkbox checked={checked.languaje2} name="languaje2" onChange={handleChangeCheck} />
                     }
                     label="ENGLISH"
                     value="english"
                   />
                   <FormControlLabel
                     control={
-                      <Checkbox name="languaje3" onChange={handleChangeCheck} />
+                      <Checkbox checked={checked.languaje3} name="languaje3" onChange={handleChangeCheck} />
                     }
                     label="OTHERS"
                     value="others"
@@ -286,6 +300,7 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
                   <FormControlLabel
                     control={
                       <Checkbox
+                      checked={checked.ranking1}
                         name="ranking1"
                         onChange={handleChangeCheck}
                         value={1}
@@ -296,6 +311,7 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
                   <FormControlLabel
                     control={
                       <Checkbox
+                      checked={checked.ranking2}
                         name="ranking2"
                         onChange={handleChangeCheck}
                         value={2}
@@ -306,6 +322,7 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
                   <FormControlLabel
                     control={
                       <Checkbox
+                        checked={checked.ranking3}
                         name="ranking3"
                         onChange={handleChangeCheck}
                         value={3}
@@ -316,6 +333,7 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
                   <FormControlLabel
                     control={
                       <Checkbox
+                       checked={checked.ranking4}
                         name="ranking4"
                         onChange={handleChangeCheck}
                         value={4}
@@ -326,6 +344,7 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
                   <FormControlLabel
                     control={
                       <Checkbox
+                       checked={checked.ranking5}
                         name="ranking5"
                         onChange={handleChangeCheck}
                         value={5}
@@ -337,6 +356,17 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
               </Typography>
             </AccordionDetails>
           </Accordion>
+          <br></br>
+
+          <div className="clearFilter-button-div">
+        <button className="clearFilter-button" onClick={handleCleanFilters}>
+          CLEAR FILTERS
+        </button>
+        </div>
+
+          <br></br>
+        <h3>ORDER BY</h3>
+        <br></br>
           <Accordion
             expanded={expanded === "panel5"}
             onChange={handleChange("panel5")}
