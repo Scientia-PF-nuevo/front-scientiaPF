@@ -39,6 +39,11 @@ function CourseCard(props) {
   return (
     <div className="container-course">
       <div className="left-container">
+          <IconButton color="primary" aria-label="add to shopping cart">
+              <AddShoppingCartIcon
+                onClick={() => validarCart(id)}
+              />
+            </IconButton>
         <div className="title-course"><h5>{name && name.toUpperCase()}</h5></div>
         <div className="course-div-card">
           {url ? (
@@ -54,14 +59,28 @@ function CourseCard(props) {
         <div className="info-price-div2">
           {
             <p>
-              <strong>Level</strong>: {`${level}`}
+              <strong>Level</strong>: {level ? level.toUpperCase() : "No level Defined"}
             </p>
           }
         </div>
         <div className="info-price-div2">
           {
             <p>
-              <strong>Language</strong>: {`${language}`}
+              <strong>Language</strong>: {language ? language.toUpperCase() : "No Language Defined"}
+            </p>
+          }
+        </div>
+
+        <div className="info-cat-div">
+          <p>
+            <strong>Category</strong>:{" "}
+            {`${categories && categories?.toUpperCase() || ""}`}
+          </p>
+        </div>
+        <div className="info-price-div2">
+          {
+            <p>
+              <strong>Date</strong>: {`${date}`}
             </p>
           }
         </div>
@@ -72,33 +91,22 @@ function CourseCard(props) {
             </p>
           }
         </div>
-
-        <div className="info-price-div2">
-          {
-            <p>
-              <strong>Date</strong>: {`${date}`}
-            </p>
-          }
-        </div>
-        <div className="info-cat-div">
-          <p>
-            <strong>Category</strong>:{" "}
-            {`${categories && categories?.toUpperCase() || ""}`}
-          </p>
-        </div>
         <TextRating score={score} />
         <div className="button-container">
           {id && (
             <Link to="/details">
-              <HelpOutlineOutlinedIcon onClick={() => addDetails(id)} />
+              <button className="confirm-button2" onClick={() => addDetails(id)} >DETAILS</button>
             </Link>
           )}
           { (
-            <IconButton color="primary" aria-label="add to shopping cart">
+          <>
+            {/* <IconButton color="primary" aria-label="add to shopping cart">
               <AddShoppingCartIcon
                 onClick={() => validarCart(id)}
               />
-            </IconButton>
+            </IconButton> */}
+            <button className="cart-button2"  onClick={() => validarCart(id)} >ADD CART</button>
+            </>
           )}
         </div>
       </div>
