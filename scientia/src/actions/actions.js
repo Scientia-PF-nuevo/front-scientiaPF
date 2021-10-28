@@ -304,7 +304,6 @@ export function register(user) {
             password: user.uid,
         }
         axios.post('http://localhost:3001/users/register', values);
-        // window.location.href = 'http://localhost:3000/success';
     }
 }
 
@@ -318,6 +317,19 @@ export function createUser(user) {
                     payload: response.data
                 })
                 window.location.href = 'http://localhost:3000/home';
+            })
+    }
+}
+
+//*Actualiza la info de perfil
+export function updateInfoUser(email) {
+    return async function (dispatch) {
+        return await axios.get(`http://localhost:3001/users/email/${email}`)
+            .then((response) => {
+                dispatch({
+                    type: GET_USER_INFO,
+                    payload: response.data
+                })
             })
     }
 }
