@@ -1,3 +1,7 @@
 .course-div-cards {
     flex-wrap: wrap;
 }
+
+.not-found-course img {
+    width: 1200px;
+}

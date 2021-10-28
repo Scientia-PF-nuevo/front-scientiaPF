@@ -41,7 +41,13 @@
     background-color: whitesmoke;
   }
 
-  .filter-icon {
+  .clearFilter-button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .clearFilter-button {
     border: 1px solid #009688;
     border-radius: 5px;
     height: 40px;
@@ -54,7 +60,7 @@
     width: 140px;
   }
 
-  .filter-icon :hover {
+  .clearFilter-button :hover {
     border: 1.5px solid #009688;
     background-color: rgb(33, 182, 90);
   }

@@ -6,7 +6,6 @@ import { addCart, addDetails } from '../../actions/actions'
 import TextRating from './Qualify'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 
 function CourseCard(props) {
@@ -100,11 +99,6 @@ function CourseCard(props) {
           )}
           { (
           <>
-            {/* <IconButton color="primary" aria-label="add to shopping cart">
-              <AddShoppingCartIcon
-                onClick={() => validarCart(id)}
-              />
-            </IconButton> */}
             <button className="cart-button2"  onClick={() => validarCart(id)} >ADD CART</button>
             </>
           )}
