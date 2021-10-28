@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     min-width: 100px; */
-    position: fixed;
+    position: fixed; 
   }
 
   .search {
@@ -58,3 +58,5 @@
     border: 1.5px solid #009688;
     background-color: rgb(33, 182, 90);
   }
+
+  @media ()

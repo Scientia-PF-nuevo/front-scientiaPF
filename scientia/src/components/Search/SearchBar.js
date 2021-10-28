@@ -14,6 +14,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Rating from '@mui/material/Rating';
 import { searchByName, getAllCourses, getFilteredCourses } from '../../actions/actions'
 import './SearchBar.css'
+import { positions } from '@mui/system';
 
 
 function SearchBar({searchByName, getAllCourses, getFilteredCourses}) {
@@ -51,8 +52,12 @@ function SearchBar({searchByName, getAllCourses, getFilteredCourses}) {
     ranking5: checked.ranking5 === true ? 5 : "",
   }
   
-  console.log(objFinal)
-  
+  // console.log(objFinal)
+  // window.onscroll = function() {
+  //   console.log("Vertical: " + window.scrollY);
+  // };
+
+
   const handleChangeCheck = (event) => {
     setChecked({...checked, [event.target.name]: event.target.checked});
   };
@@ -102,6 +107,17 @@ function SearchBar({searchByName, getAllCourses, getFilteredCourses}) {
 
     return (
       <div className="wrapper">
+        <script>{
+          window.onscroll = (function() {
+            var y = window.scrollY;
+            if (y >= 6210) {
+              console.log('entro')
+              const container = document.getElementsByClassName('wrapper')
+              container[0].style.position = "relative"
+            }
+          })
+        }
+      </script>
         <input
           className="search"
           name="buscar"
