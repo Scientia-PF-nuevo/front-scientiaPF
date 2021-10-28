@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './MyProfile.css';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -251,26 +251,26 @@ const MyProfile = ({userInfo, photo}) => {
     newPassword2: newPassword2Val
   } = validationsPassword
 
+  const [imageUrl, setImageUrl] = useState("");
+
   const cloud_name = "divya1qba";
   const upload_preset = "yfyfeypn"; 
-  const handleClickU = () => {
-    console.log('entré')
-  const { files } = document.querySelector(".app_uploadInput");
-  const formData = new FormData();
-  console.log(formData)
-  formData.append("file", files[0]);
-  formData.append("upload_preset", upload_preset);
-  const options = {
-    method: "POST",
-    body: formData,
+
+  const handleClickU = (e) => {
+      e.preventDefault()
+
+      const { files } = document.querySelector(".app_uploadInput");
+      const formData = new FormData();      
+      formData.append("file", files[0]);
+      formData.append("upload_preset", upload_preset);
+
+        return axios.post(`https://api.Cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
+          .then(function (response) {setImageUrl(response.data.secure_url)})
+          .catch(function(err) {console.log(err, 'este es el error')});
+
   };
-  console.log(formData)
-    return fetch(`https://api.Cloudinary.com/v1_1/${cloud_name}/image/upload`, options
-  )
-  .then((res) => res.json())
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err));
-  };
+
+  
 
   return userInfo ? (
       <div className="div-userinfo">
@@ -471,18 +471,24 @@ const MyProfile = ({userInfo, photo}) => {
               </div>
             </div>
 
-            <div>
-                {
-                userInfo.photoURL >= 1 ?
-                <Avatar src={userInfo.photoURL} sx={{ width: 180, height: 180, bgcolor: 'orange', fontSize: 100 }}></Avatar> :
-                <Avatar sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100 }}>{initials}</Avatar>
-                }
-              </div>
+              {
+               (userInfo.photoURL >= 1 || imageUrl >= 1) ?
+                <div className="avatar">
+                  <Avatar className="avatar-root" src={imageUrl || userInfo.photoURL} sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{}</Avatar>
+                  <div className="appp">
+                    <input id="image_uploads" type="file" className="app_uploadInput" accept="image/png, image/jpeg"/>
+                    <button className="app_uploadButton" onClick={handleClickU}>Upload</button>
+                  </div>
+                </div> :
+                <div className="avatar">
+                  <Avatar src={imageUrl} className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{initials}</Avatar>
+                  <div className="appp">
+                    <input id="image_uploads" type="file" className="app_uploadInput" accept="image/png, image/jpeg"/>
+                    <button className="app_uploadButton" onClick={handleClickU}>Upload</button>
+                  </div> 
+                </div>
+              }
               
-              <div className="appp">
-                <input type="file" className="app_uploadInput" />
-                <button className="app_uploadButton" onClick={handleClickU}>Upload</button>
-              </div>
             </form>           
           </div>
           </div>
