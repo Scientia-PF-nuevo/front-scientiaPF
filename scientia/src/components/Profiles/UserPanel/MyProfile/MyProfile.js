@@ -15,7 +15,6 @@ import { styled } from '@mui/material/styles';
 
 
 const MyProfile = ({userInfo, photo}) => {
-  console.log('userInfo', userInfo)
 
   const Root = styled('div')(({ theme }) => ({
     width: '100%',
@@ -215,7 +214,6 @@ const MyProfile = ({userInfo, photo}) => {
     }
 
     await axios.put(`http://localhost:3001/users/updateInfo/${email}`, values);
-    console.log('put exitoso')
 
     dispatch(getUserInfo(email));
   }
@@ -230,7 +228,6 @@ const MyProfile = ({userInfo, photo}) => {
     }
 
     await axios.put(`http://localhost:3001/users/updatePW/${email}`, changePassword);
-    console.log('put change password exitoso')
 
     dispatch(getUserInfo(email));
   }

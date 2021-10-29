@@ -18,7 +18,7 @@ const CreatedCourses = ({shoppingHistory}) => {
 }
 
     const mapStateToProps = (state) => {
-      console.log(state.rootReducer.userInfo.uploadedCourses)
+
     return {
       shoppingHistory: state.rootReducer.userInfo.uploadedCourses
       

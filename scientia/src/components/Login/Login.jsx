@@ -13,38 +13,14 @@ function Login(props) {
     const [state, setState] = useState({ email: '', password: '', remember: false })
     const [show, setShow] = useState(false);
     const [redir, setRedir] = useState(false)
-    const [logeo, setLogeo] = useState('')
-    const [logGoogle, setGoogle] = useState(false)
-    const dispatch = useDispatch();
-    const userLoggin = props.user
+    const [user, setUser] = useState(false)
 
     useEffect(() => {
-        props.getUsers();
-    }, [])
+        setUser(props.user)
+    }, [props.user])
 
     const handleClose = () => {
-        if (logGoogle) {
-            let exist = false;
-            const checking = () => {
-                props.users.forEach(user => {
-                    if (user.email === userLoggin.email) {
-                        exist = true;
-                    }
-                });
-                if (!exist) {
-                    dispatch(register(userLoggin))
-                    setShow(false)
-                    setRedir(true)
-
-                } else {
-                    setShow(false)
-                    setRedir(true)
-                }
-            }
-            checking()
-        }
-        
-        if (props.user.displayName !== '' && props.user.displayName){
+        if (user.firstName !== '' && user.firstName) {
             setRedir(true)
         }
         setShow(false)
@@ -63,38 +39,21 @@ function Login(props) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        let filtrado = props.users.filter(el => el.email === state.email)
-        if (filtrado.length > 0) {
-            if (filtrado[0].password === state.password) {
-                setLogeo(`Bienvenido!`);
-                let nombreCompleto = (filtrado[0].firstName + ' ' + filtrado[0].lastName)
-                let usuario = { email: filtrado[0].email, displayName: nombreCompleto, photoURL: '', remember: state.remember }
-                await props.logear(usuario)
-            } else {
-                setLogeo(`Contraseña Incorrecta!`);
-                setRedir(false)
-            }
-        } else {
-            setLogeo(`Email Incorrecto!`);
-            setRedir(false)
-        }
+        let normal = true
+        props.logear(state.email, state.password, normal)
         handleShow()
     }
 
     async function submitGoogle(e) {
-        setGoogle(true)
         e.preventDefault()
         props.autenticarConGoogle()
-        let google = true
-        handleShow(google)
+        handleShow()
     }
 
     function mensajeModel() {
-        if (props.user.displayName) {
-            return `Bienvenido ${props.user.displayName}!`
-        }
-        if (logeo) {
-            return logeo
+        //revisar display Name o first name
+        if (user.firstName) {
+            return `Bienvenido ${user.firstName}!`
         }
         return <Spinner animation="border" variant="primary" />
     }
