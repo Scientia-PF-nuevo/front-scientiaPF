@@ -52,7 +52,6 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
     getFilteredCourses(checked)
   }, [checked])
 
-  console.log("checked: ", checked)
   
   const [expanded, setExpanded] = useState(false);
 

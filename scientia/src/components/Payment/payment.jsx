@@ -41,7 +41,7 @@ function MercadoPagoForm(props) {
     };
 
     const resultPayment = useMercadoPago(props.cartToPay, props.user.email);
-    console.log('respuesta: ', resultPayment)
+    
     const handleInputChange = (e) => {
         setState({
             ...state,

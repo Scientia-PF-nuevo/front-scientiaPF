@@ -24,8 +24,6 @@ function CourseList({ courses }) {
   }else {
       currentCards = courses.slice(indexOfFirstCard, indexOfLastCard) //uso los indices para "fraccionar que juegos muestro"
   }
-  
-  console.log(currentCards)
 
   const paginate = (pageNumber) => {
        setCurrentPage(pageNumber)
