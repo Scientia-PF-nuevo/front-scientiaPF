@@ -1,7 +1,9 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import TextRating from "../components/CourseCard/Qualify";
 import "./Carousel.css";
+
 export default function CarouselCourses(props) {
   const { courses = [] } = props;
 
@@ -34,12 +36,12 @@ export default function CarouselCourses(props) {
       containerClass="carousel-container"
       removeArrowOnDeviceType={["tablet", "mobile"]}
       dotListClass="custom-dot-list-style"
-    >
+    > 
       {courses.map((course, index) => (
         <div className="carousel-item-container">
           <img
-            src={course.image}
-            alt={course.image}
+            src={course.url}
+            alt={course.url}
             className="carousel-item-image"
           />
           <div className="carousel-item-info">
@@ -47,7 +49,7 @@ export default function CarouselCourses(props) {
             <p className="carousel-item-description">{course.description}</p>
             <div className="carousel-item-features">
               <span className="carousel-item-lenguaje-text">
-                Lenguaje: {course.lenguaje}
+                Lenguaje: {course.language}
               </span>
               <span className="carousel-item-level-text">
                 Nivel: {course.level}
@@ -58,8 +60,11 @@ export default function CarouselCourses(props) {
                 Precio: {course.price}
               </span>
               <span className="carousel-item-solds">
-                Total vendidos: {course.solds}
+                Categoria: {course.categories}
               </span>
+            </div>
+            <div className="carousel-item-rating">
+              <TextRating score={course.score} />
             </div>
           </div>
         </div>
