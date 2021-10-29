@@ -13,9 +13,9 @@ import * as actionCreators from './../../actions/actions'
 function Nav(props) {
     const imagenPerfil = props.user.photoURL
 
-    if (props.user.displayName) {
-        let inicialNombre = props.user.displayName.split(' ')[0][0]
-        let inicialApellido = props.user.displayName.split(' ')[1][0]
+    if (props.user.firstName) {
+        let inicialNombre = props.user.firstName[0]
+        let inicialApellido = props.user.lastName[0]
         var iniciales = inicialNombre + inicialApellido
     }
 
@@ -39,7 +39,7 @@ function Nav(props) {
                         </li>
                     </Link>
                     {
-                        props.user.displayName ?
+                        props.user.firstName ?
                             <Link className='linkNav' to='/form'>
                                 <li className='liNav'>
                                     Add Course
@@ -49,7 +49,7 @@ function Nav(props) {
                             <></>
                     }
                     {
-                        props.user.displayName ?
+                        props.user.firstName ?
                             <Link className='linkNav' to='/mylearning'>
                                 <li className='liNav'>
                                     My learning
@@ -68,7 +68,7 @@ function Nav(props) {
                             
                     }
                     {
-                        props.user.displayName ?
+                        props.user.firstName ?
                             <Link className='linkNav' to='/home'>
                                 <li className='liNav' onClick={desconectarse} >
                                     Log Out
@@ -89,7 +89,7 @@ function Nav(props) {
                                 </li>
                             </Link>
                             :
-                            props.user.displayName ?
+                            props.user.firstName ?
                                 <Link className='linkNav' to='/userprofile'>
                                     <li className='liNav'>
                                         <Avatar sx={{ bgcolor: 'orange' }}>{iniciales}</Avatar>
