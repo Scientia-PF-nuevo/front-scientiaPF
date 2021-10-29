@@ -46,7 +46,6 @@ function CourseList({ courses }) {
         />
    { typeof currentCards === "string" || currentCards.length === 0? (
     <div className="not-found-course">
-      {/* <h1> NO ENCONTRADO </h1> */}
       <img src={noEncontrado}></img>
     </div>
   ) : 
@@ -65,6 +64,9 @@ function CourseList({ courses }) {
         description={course.description}
         language={course.language}
         level={course.level}
+        solds={course.solds}
+        numbersOfDiscounts={course.numbersOfDiscounts}
+        percentageDiscount={course.percentageDiscount}
       />
     ))
   ) : (
@@ -72,6 +74,12 @@ function CourseList({ courses }) {
       <h1>Cargando...</h1>
     </div>
   )}
+  <Pagination
+          cardPerPage={cardPerPage}
+          totalCards={courses.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
   </>
   )
 }

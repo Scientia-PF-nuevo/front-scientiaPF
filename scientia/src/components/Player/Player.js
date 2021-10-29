@@ -108,32 +108,36 @@ const ResponsivePlayer = ({updateInfoVideo, getUserInfo, info, user, getCoursesR
 
       return (
         <>
-        <div className="player-wrapper">
-          <ReactPlayer
-            className="react-player"
-            url={info.url}
-            config={{ 
-              youtube: {
-                playerVars: {
-                  start: startHere // setea el timepo de avance del video.
-                }
-              }
-            }}
-            width="100%"
-            height="100%"
-            onProgress={handleProgress}
-            playing={false} //SI inicia o no acutomaticamente
-            controls={true}
-            onPlay={handlePlay}
-            onEnded={handleEnded}
-            progressInterval={2000}
-            onDuration={handleDurationTime}
-          />
-        </div>
-        {
-          (userReview.length >= 1) ? (null) : (<NewReview/>)
-        }
-        <Comments courseId={info.id}/>
+          <div className="player-wrapper">
+            <ReactPlayer
+              className="react-player"
+              url={info.url}
+              config={{
+                youtube: {
+                  playerVars: {
+                    start: startHere, // setea el timepo de avance del video.
+                  },
+                },
+              }}
+              width="1280px"
+              height="720px"
+              onProgress={handleProgress}
+              playing={false} //SI inicia o no acutomaticamente
+              controls={true}
+              onPlay={handlePlay}
+              onEnded={handleEnded}
+              progressInterval={2000}
+              onDuration={handleDurationTime}
+            />
+          </div>
+
+          <div className="player-wrapper">
+            {userReview.length >= 1 ? null : <NewReview />}
+          </div>
+
+          <div className="player-wrapper">
+            <Comments courseId={info.id} />
+          </div>
         </>
       );
     
