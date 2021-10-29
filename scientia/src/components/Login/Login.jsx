@@ -71,11 +71,11 @@ function Login(props) {
                 let usuario = { email: filtrado[0].email, displayName: nombreCompleto, photoURL: '', remember: state.remember }
                 await props.logear(usuario)
             } else {
-                setLogeo(`Contraseña Incorrecta!`);
+                setLogeo(`Credenciales Incorrectas!`);
                 setRedir(false)
             }
         } else {
-            setLogeo(`Email Incorrecto!`);
+            setLogeo(`Credenciales Incorrectas!`);
             setRedir(false)
         }
         handleShow()
