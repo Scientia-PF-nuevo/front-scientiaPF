@@ -19,7 +19,7 @@ function MyLearning({courses,user, getUserInfo}) {
           {
             (courses.hasOwnProperty("coursesAndData")) ? courses.coursesAndData.length === 0 ? (
           <div>
-            <h1> SIN CURSOS COMPRADOS </h1>
+            <h1> NO COURSES GET </h1>
           </div>
         ) : courses.coursesAndData.length >= 1 ? (
           
@@ -61,7 +61,7 @@ function MyLearning({courses,user, getUserInfo}) {
           
         ) : (
           <div>
-            <h1>Cargando...</h1>
+            <h1>LOADING...</h1>
           </div>
         ) : 
         (

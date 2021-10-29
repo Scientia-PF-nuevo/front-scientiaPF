@@ -1,11 +1,12 @@
 import React from 'react'
-import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
+import { Divider, Grid, Paper } from "@material-ui/core";
 import './Comments.css'
 import TextRating from '../CourseCard/Qualify';
 import { connect } from 'react-redux';
 
 
 function Comments({coursesReviews}) {
+
 
   return (
     <div style={{ padding: 14, width: 800 }} className="comments-div">
@@ -55,7 +56,7 @@ function Comments({coursesReviews}) {
 
 function mapStateToProps(state) {
   return {
-    coursesReviews: state.rootReducer.coursesReviews
+    coursesReviews: state.rootReducer.coursesReviews,
   }
 }
 

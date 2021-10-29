@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './TrainningCard.css'
 import {connect} from 'react-redux'
-import Button from '@mui/material/Button';
 import TextRating from '../../components/CourseCard/Qualify'
 import {addDetails, setInfoVideoPlaying} from '../../actions/actions'
 import LinearWithValueLabel from '../Progress/Progress'

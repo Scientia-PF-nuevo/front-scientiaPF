@@ -88,11 +88,6 @@ export function Cart(props) {
         }
       }
 
-
-
-    
-
-
       if (sameId) {
         handleShow()
       } else {

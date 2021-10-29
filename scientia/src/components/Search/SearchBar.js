@@ -1,7 +1,6 @@
 
 import {React, useState, useEffect} from 'react'
 import { connect } from 'react-redux'
-import FilterBar from '../FilterBar/FilterBar'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MyFormControlLabel from '@mui/material/FormControlLabel';
@@ -52,7 +51,6 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
     getFilteredCourses(checked)
   }, [checked])
 
-  
   const [expanded, setExpanded] = useState(false);
 
   
@@ -356,7 +354,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
             </AccordionDetails>
           </Accordion>
           <br></br>
-          <p>COURSES FOUNDED: {allCourses && allCourses.length > 0 ? allCourses.length : 0}</p>
+          <p>COURSES FOUNDED: ({allCourses && allCourses.length > 0 ? allCourses.length : 0})</p>
 
           <div className="clearFilter-button-div">
         <button className="clearFilter-button" onClick={handleCleanFilters}>
@@ -415,12 +413,72 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
                 <RadioGroup name="use-radio-group" defaultValue="first">
                   <MyFormControlLabel
                     value="best"
-                    label="BEST"
+                    label="BEST RATING"
                     control={<Radio onChange={handleSelect2} />}
                   />
                   <MyFormControlLabel
                     value="worst"
-                    label="WORST"
+                    label="LESS RATING"
+                    control={<Radio onChange={handleSelect2} />}
+                  />
+                </RadioGroup>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel8"}
+            onChange={handleChange("panel8")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                <strong>ALPHABETIC</strong>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <RadioGroup name="use-radio-group" defaultValue="first">
+                  <MyFormControlLabel
+                    value="A-Z"
+                    label="A - Z"
+                    control={<Radio onChange={handleSelect2} />}
+                  />
+                  <MyFormControlLabel
+                    value="Z-A"
+                    label="Z - A"
+                    control={<Radio onChange={handleSelect2} />}
+                  />
+                </RadioGroup>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel9"}
+            onChange={handleChange("panel9")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                <strong>PRICE</strong>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <RadioGroup name="use-radio-group" defaultValue="first">
+                  <MyFormControlLabel
+                    value="desc"
+                    label="MOST CHEAPER"
+                    control={<Radio onChange={handleSelect2} />}
+                  />
+                  <MyFormControlLabel
+                    value="asc"
+                    label="MOST EXPENSIVE"
                     control={<Radio onChange={handleSelect2} />}
                   />
                 </RadioGroup>
@@ -428,8 +486,6 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
             </AccordionDetails>
           </Accordion>
         </div>
-        <br></br>
-        <FilterBar />
       </div>
       
     );
