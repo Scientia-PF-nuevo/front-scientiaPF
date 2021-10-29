@@ -33,7 +33,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-function Details({details,addCart, cart, getCoursesReviewsById}) {
+function Details({details,addCart, cart,login, userInfo, getCoursesReviewsById,addCartLogged}) {
 
 
   const [expanded, setExpanded] = React.useState(false);
@@ -45,14 +45,11 @@ function Details({details,addCart, cart, getCoursesReviewsById}) {
     description,
     price,
     url,
-    userInfo,
     categories,
     id,
     score,
     date,
-    login,
     level,
-    addCartLogged,
     language,
     percentageDiscount,
     solds
@@ -87,14 +84,18 @@ function Details({details,addCart, cart, getCoursesReviewsById}) {
   }
 
   const validarCart = (id) => {
-    const alreadyAdded = cart.some(courseID => courseID.id === id);
+    const alreadyAdded = cart.some(courseID => courseID.coursesId === id);
     if (alreadyAdded) {
       return;
     } else {
-      if (!login){
-        addCart({ name: name, id: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
-      } else {
+      console.log(login)
+      if (login){
         addCartLogged({ email: userInfo.email, name: name, id: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
+      
+      } else {
+        
+        addCart({ name: name, id: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
+
       }
     }
   }
