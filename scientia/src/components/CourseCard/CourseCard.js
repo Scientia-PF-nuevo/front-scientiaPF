@@ -67,6 +67,12 @@ function CourseCard(props) {
         </div>
       </div>
       <div className="detaiils-card-container">
+        <div className="info-cat-div">
+          <p>
+            <strong>Category</strong>:{" "}
+            {`${(categories && categories?.toUpperCase()) || ""}`}
+          </p>
+        </div>
         <div className="info-price-div2">
           <p>
             <strong>Level</strong>:{" "}
@@ -80,12 +86,6 @@ function CourseCard(props) {
           </p>
         </div>
 
-        <div className="info-cat-div">
-          <p>
-            <strong>Category</strong>:{" "}
-            {`${(categories && categories?.toUpperCase()) || ""}`}
-          </p>
-        </div>
         <div className="info-price-div2">
           <p>
             <strong>Date</strong>: {`${date}`}
