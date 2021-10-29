@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
-// import Button from '@mui/material/Button';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import TextField from '@mui/material/TextField';
 import { useHistory } from "react-router-dom";
@@ -54,9 +53,9 @@ export function Cart(props) {
   var taxs = 0;
   var total = 0;
   function Total() {
-    result = cart.reduce((a, b) => ({ price: a.price + b.price })).price
+    result = cart.reduce((a, b) => ({ offerPrice: a.offerPrice + b.offerPrice })).offerPrice
     taxs = parseFloat((result * 0.21).toFixed(2));
-    total = parseFloat(result + taxs).toFixed(1);
+    total = parseFloat(result + taxs).toFixed(2);
     return `$ ${result}`;
   }
 
@@ -88,6 +87,11 @@ export function Cart(props) {
           }
         }
       }
+
+
+
+    
+
 
       if (sameId) {
         handleShow()
@@ -160,6 +164,7 @@ export function Cart(props) {
           </thead>
           {cart.length >= 1 ? (
             cart.map((course) => (
+
               <tbody className="tbody-div">
                 <tr style={{}}>
                   <td className="photo-div">
@@ -174,12 +179,40 @@ export function Cart(props) {
                       {course.name && course.name.toUpperCase()}
                     </Link>
                   </td>
-                  <td style={{ textAlign: "center" }}><h3 style={{ color: "red" }}>${course.price}</h3><p>ID: {course.id && course.id}</p></td>
                   <td style={{ textAlign: "center" }}>
-                    <TextField id="standard-basic" label="ID Number" variant="standard" />
+                    {course.percentageDiscount > 0 ? (
+                      <>
+                        <h3
+                          style={{
+                            color: "red",
+                            textDecoration: "line-through",
+                          }}
+                        >
+                          ${course.price}
+                        </h3>
+                        <p>{course.percentageDiscount}% OFF</p>
+                        <h3 style={{ color: "green" }}>${course.price - ((course.percentageDiscount / 100) * course.price)}</h3>
+                      </>
+                    ) : (
+                      <>
+                        <h3 style={{ color: "green" }}>
+                          $
+                          {course.price}
+                        </h3>
+                      </>
+                    )}
+                  </td>
+                  <td style={{ textAlign: "center" }}>
+                    <TextField
+                      id="standard-basic"
+                      label="ID Number"
+                      variant="standard"
+                    />
                     <Button color="secondary">Validar</Button>
                   </td>
-                  <td style={{ textAlign: "center" }}><h3 style={{ color: "red" }}>{Total()}</h3></td>
+                  <td style={{ textAlign: "center" }}>
+                    <h3 style={{ color: "red" }}>{Total()}</h3>
+                  </td>
                   <td style={{ textAlign: "center" }}>
                     {
                       <DeleteRoundedIcon
@@ -196,10 +229,19 @@ export function Cart(props) {
           )}
         </Table>
       </div>
-      <p><strong>SUB - TOTAL:</strong> $ {result}</p>
-      <p><strong>TAXs:</strong> $ {taxs}</p>
-      <p><strong>TOTAL:</strong> $ {total}</p>
-      <button className="confirm-button" onClick={handledSubmitOrder}> CONFIRM ORDER </button>
+      <p>
+        <strong>SUB - TOTAL:</strong> $ {result}
+      </p>
+      <p>
+        <strong>TAXs (21%):</strong> $ {taxs}
+      </p>
+      <p>
+        <strong>TOTAL:</strong> $ {total}
+      </p>
+      <button className="confirm-button" onClick={handledSubmitOrder}>
+        {" "}
+        CONFIRM ORDER{" "}
+      </button>
       <br></br>
       <br></br>
 

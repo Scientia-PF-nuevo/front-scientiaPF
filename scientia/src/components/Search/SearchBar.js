@@ -18,7 +18,7 @@ import { searchByName, getAllCourses, getFilteredCourses, orderBy } from '../../
 import './SearchBar.css'
 
 
-function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCourses, orderBy}) {
+function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getFilteredCourses, orderBy}) {
   
 
   const [checked, setChecked] = useState({
@@ -357,6 +357,7 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
             </AccordionDetails>
           </Accordion>
           <br></br>
+          <p>COURSES FOUNDED: {allCourses && allCourses.length > 0 ? allCourses.length : 0}</p>
 
           <div className="clearFilter-button-div">
         <button className="clearFilter-button" onClick={handleCleanFilters}>
@@ -438,7 +439,8 @@ function SearchBar({coursesByGenre, searchByName, getAllCourses, getFilteredCour
 const mapStateToProps = (state) => {
   return {
 
-      coursesByGenre: state.rootReducer.coursesByGenre
+      coursesByGenre: state.rootReducer.coursesByGenre,
+      allCourses: state.rootReducer.allCourses
   }
 }
 

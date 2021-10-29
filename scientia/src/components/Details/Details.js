@@ -48,7 +48,9 @@ function Details({details,addCart, cart, getCoursesReviewsById}) {
     date,
     level,
     language,
+    percentageDiscount
   } = detailsRender;
+
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -61,12 +63,18 @@ function Details({details,addCart, cart, getCoursesReviewsById}) {
     setExpanded(!expanded);
   };
 
+  var offer = 0;
+  if (percentageDiscount > 0) {
+
+    offer = price - ((percentageDiscount / 100) * price)
+  }
+
   const validarCart = (id) => {
     const alreadyAdded = cart.some(courseID => courseID.id === id);
      if(alreadyAdded) {
          return;
     } else {
-      addCart({ name: name, id: id, price: price })
+      addCart({ name: name, id: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
     }
   }
 
@@ -82,7 +90,7 @@ function Details({details,addCart, cart, getCoursesReviewsById}) {
             </>
           }
           title={name && name.toUpperCase()}
-          subheader={`Price: $${price}`}
+          subheader={`Price: $${price - ((percentageDiscount / 100) * price)}`}
         />
         <CardMedia component="img" height="500" image={url} alt="Paella dish" />
         <CardContent>
