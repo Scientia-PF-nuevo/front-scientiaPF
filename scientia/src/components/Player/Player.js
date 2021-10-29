@@ -1,16 +1,18 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import ReactPlayer from 'react-player'
 import './Player.css'
 import Comments from '../Comments/Comments'
 import { connect } from 'react-redux'
 import {getCoursesReviewsById} from '../../actions/actions'
-import {updateInfoVideo} from '../../actions/actions'
+import {updateInfoVideo, getUserInfo} from '../../actions/actions'
 import NewReview from '../Reviews/NewReview'
 
 
-const ResponsivePlayer = ({updateInfoVideo, info, user, getCoursesReviewsById}) => {
+const ResponsivePlayer = ({updateInfoVideo, getUserInfo, info, user, getCoursesReviewsById}) => {
+
 
   useEffect(() => {
+    getUserInfo(user.email)
     getCoursesReviewsById(info.id)
   }, [])
 
@@ -24,7 +26,7 @@ const ResponsivePlayer = ({updateInfoVideo, info, user, getCoursesReviewsById}) 
   const [duration, setDuration] = React.useState ({})
 
   if (user.coursesAndData.length >= 1) {
-    var videoStatus = user.coursesAndData.filter((c) => c.course.courseId === info.id)
+    var videoStatus = user.coursesAndData?.filter((c) => c.course.courseId === info.id) || 'bought'
     videoStatus = videoStatus[0].course.state
   }
 
@@ -38,12 +40,17 @@ const ResponsivePlayer = ({updateInfoVideo, info, user, getCoursesReviewsById}) 
     }
   }
   
-  
+  //cambia el estado del curso a completed cuando finaliza, y no lo deja volver al  estado anterior
   if (state.playing && state.ended){
     videoStatus = 'completed';
   } else if(state.playing && videoStatus !== "completed") {
     videoStatus = 'started';
   }
+
+  // verifica si el usuario ya dejo comentario o no, para habilitar el componente de dejar un comentario
+  const filterCourse = user.coursesAndData?.filter((c)=> (c.course.courseId) === info.id) || []
+  const userReview = filterCourse[0].reviews.filter((r) => r.commentUser === user.email ) || []
+
 
 
 
@@ -55,7 +62,6 @@ const ResponsivePlayer = ({updateInfoVideo, info, user, getCoursesReviewsById}) 
     email: user.email
   };
 
-  // console.log("videoinfo", videoInfo)
 
   const handlePlay = () => {
     setState( {...state, playing: true} )
@@ -102,30 +108,36 @@ const ResponsivePlayer = ({updateInfoVideo, info, user, getCoursesReviewsById}) 
 
       return (
         <>
-        <div className="player-wrapper">
-          <ReactPlayer
-            className="react-player"
-            url={info.url}
-            config={{ 
-              youtube: {
-                playerVars: {
-                  start: startHere // setea el timepo de avance del video.
-                }
-              }
-            }}
-            width="100%"
-            height="100%"
-            onProgress={handleProgress}
-            playing={false} //SI inicia o no acutomaticamente
-            controls={true}
-            onPlay={handlePlay}
-            onEnded={handleEnded}
-            progressInterval={10000}
-            onDuration={handleDurationTime}
-          />
-        </div>
-        <NewReview/>
-        <Comments courseId={info.id}/>
+          <div className="player-wrapper">
+            <ReactPlayer
+              className="react-player"
+              url={info.url}
+              config={{
+                youtube: {
+                  playerVars: {
+                    start: startHere, // setea el timepo de avance del video.
+                  },
+                },
+              }}
+              width="1280px"
+              height="720px"
+              onProgress={handleProgress}
+              playing={false} //SI inicia o no acutomaticamente
+              controls={true}
+              onPlay={handlePlay}
+              onEnded={handleEnded}
+              progressInterval={2000}
+              onDuration={handleDurationTime}
+            />
+          </div>
+
+          <div className="player-wrapper">
+            {userReview.length >= 1 ? null : <NewReview />}
+          </div>
+
+          <div className="player-wrapper">
+            <Comments courseId={info.id} />
+          </div>
         </>
       );
     
@@ -134,8 +146,8 @@ const ResponsivePlayer = ({updateInfoVideo, info, user, getCoursesReviewsById}) 
 function mapStateToProps(state) {
   return {
     info: state.rootReducer.videoPlaying,
-    user: state.rootReducer.userInfo
+    user: state.rootReducer.userInfo,
   }
 }
 
-export default connect(mapStateToProps, {updateInfoVideo, getCoursesReviewsById})(ResponsivePlayer);
+export default connect(mapStateToProps, {updateInfoVideo, getCoursesReviewsById, getUserInfo})(ResponsivePlayer);

@@ -18,6 +18,7 @@ export function Home ({user,getUserInfo, getAllCourses, getGenresCourses, getUse
 
     return (
         <>
+        {/* <Carousel/> */}
             <SearchBar />
         <div className='home-container'>
             <CourseList />

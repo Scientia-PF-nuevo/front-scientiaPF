@@ -45,32 +45,32 @@ export function getAllCourses() {
 //* Trae todos los cursos filtrados por valores de filtro (QUERY)
 export function getFilteredCourses(info) {
     const {
-      level1,
-      level2,
-      level3,
-      price1,
-      price2,
-      languaje1,
-      languaje2,
-      languaje3,
-      ranking1,
-      ranking2,
-      ranking3,
-      ranking4,
-      ranking5,
+        level1,
+        level2,
+        level3,
+        price1,
+        price2,
+        languaje1,
+        languaje2,
+        languaje3,
+        ranking1,
+        ranking2,
+        ranking3,
+        ranking4,
+        ranking5,
+        category,
     } = info;
     return async function (dispatch) {
-        console.log(info)
         return await axios
-          .get(
-            `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&languaje1=${languaje1}&languaje2=${languaje2}&languaje3=${languaje3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}`
-          )
-          .then((res) => {
-            dispatch({ type: GET_FILTERED_COURSES, payload: res.data });
-          })
-          .catch((err) => {
-            return err;
-          });
+            .get(
+                `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&languaje1=${languaje1}&languaje2=${languaje2}&languaje3=${languaje3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}&category=${category}`
+            )
+            .then((res) => {
+                dispatch({ type: GET_FILTERED_COURSES, payload: res.data });
+            })
+            .catch((err) => {
+                return err;
+            });
     }
 }
 
@@ -199,13 +199,39 @@ export function setCourseToAprove(payload) {
     }
 }
 
-export function logear(data) {
+export function logear(correo, contra, normal, user) {
+
+    if (normal) {
+        return function (dispatch) {
+            axios.get(`http://localhost:3001/users/login`, {
+                params: { email: correo, password: contra }
+            })
+                .then(r => dispatch({ type: LOGIN, payload: (r.data) }))
+                .catch(err => console.log(err))
+        }
+    } else {
+        return function (dispatch) {
+            axios.get(`http://localhost:3001/users/login`, {
+                params: { email: user.email, password: user.uid }
+            })
+                .then(r => {
+                    if (r.data === "Check your email and password") {
+                        dispatch(registrarYLogear(user))
+                    } else {
+                        dispatch({ type: LOGIN, payload: (r.data) })
+                    }
+                })
+                .catch(err => console.log(err))
+        }
+    }
+}
+function registrarYLogear(data) {
+    register(data)
     return {
         type: LOGIN,
         payload: data
     }
 }
-
 export function addCart(data) {
     return {
         type: ADD_CART,
@@ -271,7 +297,7 @@ export function setInfoVideoPlaying(info) {
     }
 }
 
-export function autenticarConGoogle(prop) {
+export function autenticarConGoogle() {
     return function (dispatch) {
         const auth = getAuth();
         const provider = new GoogleAuthProvider();
@@ -280,10 +306,7 @@ export function autenticarConGoogle(prop) {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
                 const user = result.user;
-                dispatch(logear(user))
-                if (prop === 'register') {
-                    dispatch(register(user))
-                }
+                dispatch(logear('', '', false, user))
             })
             .catch((error) => {
                 const errorCode = error.code;
