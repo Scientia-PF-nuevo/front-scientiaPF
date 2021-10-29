@@ -11,10 +11,13 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { connect } from 'react-redux'
 import TextRating from '../CourseCard/Qualify';
-import {addCart, getCoursesReviewsById} from '../../actions/actions'
+import {addCart, getCoursesReviewsById,addCartLogged} from '../../actions/actions'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Comments from '../Comments/Comments';
 import './Details.css'
+import bestSeller from '../../assets/bestSeller.jpg'
+import topSeller from '../../assets/topSeller.jpg'
+import Player from "../reactPlayer/reactPlayer";
 
 
 const ExpandMore = styled((props) => {
@@ -42,17 +45,31 @@ function Details({details,addCart, cart, getCoursesReviewsById}) {
     description,
     price,
     url,
+    userInfo,
     categories,
     id,
     score,
     date,
+    login,
     level,
+    addCartLogged,
     language,
-    percentageDiscount
+    percentageDiscount,
+    solds
   } = detailsRender;
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const [state, setState] = React.useState({
+    open: false
+  })
+
+  const onOpenModal = () => {
+    setState(prevState => ({
+      open: prevState.open
+    }));
+  };
 
   React.useEffect(() => {
     getCoursesReviewsById(id)
@@ -71,10 +88,14 @@ function Details({details,addCart, cart, getCoursesReviewsById}) {
 
   const validarCart = (id) => {
     const alreadyAdded = cart.some(courseID => courseID.id === id);
-     if(alreadyAdded) {
-         return;
+    if (alreadyAdded) {
+      return;
     } else {
-      addCart({ name: name, id: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
+      if (!login){
+        addCart({ name: name, id: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
+      } else {
+        addCartLogged({ email: userInfo.email, name: name, id: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
+      }
     }
   }
 
@@ -113,13 +134,21 @@ function Details({details,addCart, cart, getCoursesReviewsById}) {
             {date ? date : "NO DATE"}
           </Typography>
           <br></br>
+          <TextRating score={score ? score : 0} />
           <br></br>
           <Typography>
-            <strong>DESCRIPTION:</strong>{" "}
+            <strong>DESCRIPTION:</strong>
             {description ? description : "NO INFO"}
+            <br></br>
+            <br></br>
+            {solds >=0 ? ( // only for testing (solds > 100)
+          <img src={topSeller} alt="disc" className="discount"></img>
+        ) : null}
+        {solds >= 0 && solds < 100 ? ( // only for testing (solds > 20 && solds < 100)
+          <img src={bestSeller} alt="disc" className="discount"></img>
+        ) : null}
           </Typography>
           <br></br>
-          <TextRating score={score ? score : 0} />
         </CardContent>
         <br></br>
         <div className="confirm-button-div">
@@ -127,14 +156,23 @@ function Details({details,addCart, cart, getCoursesReviewsById}) {
           ADD TO CART
         </button>
         </div>
+        <br></br>
+        <div className="confirm-button-div">
+        <button className="preview-button" onClick={onOpenModal}>
+          PREVIEW
+        </button>
+        </div>
+        <div>
+        <Player open={state.open} toggleModal={onOpenModal} />
+      </div>
         <CardActions>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
             aria-expanded={expanded}
           >
+          <h2>REVIEWS</h2>
             <ExpandMoreIcon />
-          <p>Reviews</p>
           </ExpandMore>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -150,7 +188,8 @@ function mapStateToProps(state) {
         details: state.rootReducer.courseDetails,
         cart : state.rootReducer.cart,
         login: state.rootReducer.login,
+        userInfo: state.rootReducer.userInfo
     }
 }
 
-export default connect(mapStateToProps, {addCart,getCoursesReviewsById})(Details)
+export default connect(mapStateToProps, {addCart,getCoursesReviewsById,addCartLogged})(Details)

@@ -15,6 +15,9 @@ import {
     CONFIRM_ORDER,
     PENDING_ORDER,
     ADD_CART,
+    ADD_CART_LOGGED,
+    GET_CART,
+    DELETE_CART_LOGGED,
     REMOVE_CART,
     CLEAR_CART,
     CLEAR_CART_TO_PAY,
@@ -45,33 +48,34 @@ export function getAllCourses() {
 //* Trae todos los cursos filtrados por valores de filtro (QUERY)
 export function getFilteredCourses(info) {
     const {
-      level1,
-      level2,
-      level3,
-      price1,
-      price2,
-      languaje1,
-      languaje2,
-      languaje3,
-      ranking1,
-      ranking2,
-      ranking3,
-      ranking4,
-      ranking5,
-      category,
+        level1,
+        level2,
+        level3,
+        price1,
+        price2,
+        price3,
+        languaje1,
+        languaje2,
+        languaje3,
+        ranking1,
+        ranking2,
+        ranking3,
+        ranking4,
+        ranking5,
+        category,
     } = info;
     return async function (dispatch) {
         console.log(info)
         return await axios
-          .get(
-            `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&languaje1=${languaje1}&languaje2=${languaje2}&languaje3=${languaje3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}&category=${category}`
-          )
-          .then((res) => {
-            dispatch({ type: GET_FILTERED_COURSES, payload: res.data });
-          })
-          .catch((err) => {
-            return err;
-          });
+            .get(
+                `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&price3=${price3}&languaje1=${languaje1}&languaje2=${languaje2}&languaje3=${languaje3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}&category=${category}`
+            )
+            .then((res) => {
+                dispatch({ type: GET_FILTERED_COURSES, payload: res.data });
+            })
+            .catch((err) => {
+                return err;
+            });
     }
 }
 
@@ -139,6 +143,19 @@ export function getUsers() {
     }
 }
 
+//* Trae todos las orders del carro de la DB
+export function getCart(email) {
+    console.log(email)
+    return function (dispatch) {
+        axios.get(`http://localhost:3001/order/${email}`)
+            .then(res => {
+
+                dispatch({ type: GET_CART, payload: res.data });
+            })
+            .catch(err => { return err })
+    }
+}
+
 //* Trae todos los datos de un usuario en particular (DB)
 export function getUserInfo(email) {
     return function (dispatch) {
@@ -200,11 +217,65 @@ export function setCourseToAprove(payload) {
     }
 }
 
-export function logear(data) {
+export function logear(correo, contra, normal, user) {
+
+    if (normal) {
+        return function (dispatch) {
+            const datos = { email: correo, password: contra }
+            console.log(datos)
+            axios.post('http://localhost:3001/users/login', datos)
+                .then(r => dispatch({ type: LOGIN, payload: (r.data) }))
+                .catch(err => console.log(err))
+        }
+    } else {
+        return function (dispatch) {
+            const datos = { email: user.email, password: user.uid }
+            axios.post('http://localhost:3001/users/login', datos)
+                .then(r => {
+                    if (r.data === "Check your email and password") {
+                        dispatch(registrarYLogear(user))
+                    } else {
+                        dispatch({ type: LOGIN, payload: (r.data) })
+                    }
+                })
+                .catch(err => console.log(err))
+        }
+    }
+}
+
+function registrarYLogear(data) {
+    register(data)
     return {
         type: LOGIN,
         payload: data
     }
+}
+
+export function addCartLogged(data) {
+    const course = { state: "carrito", courseId: data.id, price: data.offerPrice }
+
+    return function (dispatch) {
+        axios.post(`http://localhost:3001/order/${data.email}`, course)
+            .then(res => {
+
+                dispatch({ type: ADD_CART_LOGGED, payload: res.data });
+            })
+            .catch(err => { return err })
+    }
+
+}
+
+export function deleteCartLogged(data) {
+    return async function (dispatch) {
+        return await axios.post(`http://localhost:3001/order/delete/${data.email}/${data.id}`)
+            .then(res => {
+
+                dispatch({ type: DELETE_CART_LOGGED, payload: res.data });
+
+            })
+            .catch(err => { return err })
+    }
+
 }
 
 export function addCart(data) {
@@ -295,8 +366,8 @@ export function autenticarConGoogle(prop) {
 
 //*Crea nuevo usuario desde google
 export function register(user) {
-    if (user.displayName) {
-        let nombre = user.displayName.split(" ")
+    if (user.firstName) {
+        let nombre = user.firstName.split(" ")
         let values = {
             firstName: nombre[0],
             lastName: nombre[nombre.length - 1],

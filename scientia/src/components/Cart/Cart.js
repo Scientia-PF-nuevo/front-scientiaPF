@@ -10,7 +10,8 @@ import {
   confirmOrder,
   pendingOrder,
   clearCart,
-  getUserInfo
+  getUserInfo,
+  deleteCartLogged
 } from "../../actions/actions";
 import { Link } from 'react-router-dom'
 import './Cart.css'
@@ -37,6 +38,7 @@ export function Cart(props) {
     addDetails,
     confirmOrder,
     pendingOrder,
+    deleteCartLogged,
     clearCart,
   } = props;
 
@@ -100,6 +102,15 @@ export function Cart(props) {
 
     else if (!login) {
       history.push("/login")
+    }
+  }
+
+  const haddleRemoveItem = (id) => {
+    if(login){
+      const data = {id: id, email: user.email}
+      deleteCartLogged(data)
+    }else {
+      removeCart(id)
     }
   }
 
@@ -211,7 +222,7 @@ export function Cart(props) {
                   <td style={{ textAlign: "center" }}>
                     {
                       <DeleteRoundedIcon
-                        onClick={() => removeCart(course.id)}
+                        onClick={() => haddleRemoveItem(course.coursesId)}
                         style={{ cursor: "pointer" }}
                       />
                     }
@@ -274,5 +285,6 @@ export default connect(mapStateToProps, {
   confirmOrder,
   pendingOrder,
   clearCart,
+  deleteCartLogged,
   getUserInfo
 })(Cart);
