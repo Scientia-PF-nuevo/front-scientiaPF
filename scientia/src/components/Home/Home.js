@@ -2,17 +2,18 @@ import React, { useEffect } from "react";
 import './Home.css';
 import SearchBar from "../Search/SearchBar";
 import CourseList from "../../CourseList/CourseList";
-import { getAllCourses, getGenresCourses, getUsers,getUserInfo } from '../../actions/actions'
+import { getAllCourses, getGenresCourses, getUsers,getUserInfo, getCart} from '../../actions/actions'
 import { connect } from "react-redux";
 
 
-export function Home ({user,getUserInfo, getAllCourses, getGenresCourses, getUsers}) {
+export function Home ({user,getUserInfo, getAllCourses, getGenresCourses, getUsers, getCart}) {
 
     useEffect(()=> {
         getAllCourses()
         getGenresCourses()
         getUsers()
         getUserInfo(user.email)
+        getCart(user.email)
     }, [])
 
 
@@ -33,4 +34,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getAllCourses, getGenresCourses, getUsers, getUserInfo })(Home)
+export default connect(mapStateToProps, { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart })(Home)

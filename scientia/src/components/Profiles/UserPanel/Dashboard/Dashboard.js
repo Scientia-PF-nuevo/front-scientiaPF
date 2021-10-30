@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import './Dashboard.css'
 
 const Dashboard = (props) => {
+
       // let initialFirstName = props.user.firstName.charAt(0)
       // let initialLastName = props.user.lastName.charAt(0)
       // let initials = initialFirstName + initialLastName
@@ -35,3 +36,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Dashboard)
+

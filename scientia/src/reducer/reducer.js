@@ -13,6 +13,9 @@ import {
     FILTER_BY,
     ORDER_BY,
     ADD_CART,
+    ADD_CART_LOGGED,
+    GET_CART,
+    DELETE_CART_LOGGED,
     CLEAR_CART,
     REMOVE_CART,
     CONFIRM_ORDER,
@@ -67,6 +70,13 @@ export default function rootReducer(state = initialState, action) {
                 users: action.payload
             };
 
+        case GET_CART:
+            return {
+                ...state,
+                cart: action.payload,
+                cartToPay: action.payload
+            };
+
         case GET_USER_INFO:
             return {
                  ...state,
@@ -100,7 +110,9 @@ export default function rootReducer(state = initialState, action) {
         case GET_REVIEWS_BY_COURSEID:
             return {
                 ...state,
-                coursesReviews: action.payload
+                coursesReviews: action.payload,
+                coursesDetails: action.payload
+
             }; 
         
             //*!! chequear
@@ -187,8 +199,26 @@ export default function rootReducer(state = initialState, action) {
                 cart: agregar_carrito,
                 cartToPay: agregar_carrito
             }
+
+        case ADD_CART_LOGGED:
+
+            return {
+                ...state,
+                cart: action.payload,
+                cartToPay: action.payload
+            }
+
+        case DELETE_CART_LOGGED:
+            console.log(action.payload)
+            return {
+                ...state,
+                cart: action.payload,
+                cartToPay: action.payload
+            }
+
+
         case REMOVE_CART:
-            let remover_carrito = state.cart.filter((course) => course.id !== action.payload)
+            let remover_carrito = state.cart.filter((course) => course.coursesId !== action.payload)
             return {
                 ...state,
                 cart: remover_carrito,

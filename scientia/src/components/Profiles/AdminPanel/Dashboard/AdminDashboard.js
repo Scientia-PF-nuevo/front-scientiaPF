@@ -7,6 +7,7 @@ import * as actionCreators from '../../../../actions/actions'
 import './AdminDashboard.css'
 
 const AdminDashboard = (props) => {
+
     if (props.user.firstName) {
       let inicialNombre = props.user.firstName.split(' ')[0][0]
       let inicialApellido = props.user.firstName.split(' ')[1][0]
@@ -25,15 +26,15 @@ const AdminDashboard = (props) => {
 
 
 function mapStateToProps(state) {
-    return {
-        login: state.rootReducer.login,
-        user: state.rootReducer.user,
-    }
-    
+  return {
+    login: state.rootReducer.login,
+    user: state.rootReducer.user,
+  }
+
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actionCreators, dispatch)
+  return bindActionCreators(actionCreators, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminDashboard)
