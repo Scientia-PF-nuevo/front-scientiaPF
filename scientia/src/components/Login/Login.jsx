@@ -40,13 +40,15 @@ function Login(props) {
     async function handleSubmit(e) {
         e.preventDefault()
         let normal = true
-        props.logear(state.email, state.password, normal)
+        props.logear(state.email, state.password, props.cart, normal)
         handleShow()
     }
 
     async function submitGoogle(e) {
         e.preventDefault()
-        props.autenticarConGoogle()
+
+        props.autenticarConGoogle(props.cart)
+
         handleShow()
     }
 
@@ -108,7 +110,8 @@ function mapStateToProps(state) {
     return {
         login: state.rootReducer.login,
         user: state.rootReducer.user,
-        users: state.rootReducer.users
+        users: state.rootReducer.users,
+        cart: state.rootReducer.cart
     }
 }
 

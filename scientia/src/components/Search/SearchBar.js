@@ -51,7 +51,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
   useEffect(() => {
     getFilteredCourses(checked)
   }, [checked])
-  
+
   const [expanded, setExpanded] = useState(false);
 
   
