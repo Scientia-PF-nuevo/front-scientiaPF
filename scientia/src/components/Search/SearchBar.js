@@ -26,6 +26,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
     level3: false,
     price1: false,
     price2: false,
+    price3: false,
     languaje1: false,
     languaje2: false,
     languaje3: false,
@@ -94,6 +95,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
       level3: false,
       price1: false,
       price2: false,
+      price3: false,
       languaje1: false,
       languaje2: false,
       languaje3: false,
@@ -225,6 +227,13 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
                     }
                     label="FREE"
                     value="free"
+                  />
+                    <FormControlLabel
+                    control={
+                      <Checkbox checked={checked.price3} name="price3" onChange={handleChangeCheck} />
+                    }
+                    label="OFFERS"
+                    value="offers"
                   />
                   <FormControlLabel
                     control={

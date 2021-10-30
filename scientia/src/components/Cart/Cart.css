@@ -1,24 +1,32 @@
+
 .cart-div {
 
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1000px;
+    width: auto;
+
+}
+
+.div-center {
+margin-top: 50px;
 
 }
 
 .cart-img {
-    width: 150px;
-    height: 90px;
+    width: 180px;
+    height: 140px;
 }
 
 td {
     font-size: larger;
     width: 200px;
+    height: 150px;
 }
 
 th {
     text-align: center;
+    margin-top: 10px;
 }
 
 .photo-div {

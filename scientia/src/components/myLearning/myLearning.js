@@ -26,7 +26,7 @@ function MyLearning({courses,user, getUserInfo}) {
           courses.coursesAndData.map((c) => {
             let suma = 0;
 					  let average;
-					  const SCs = c.reviews.map((r, index) => {
+					  c.reviews.map((r, index) => {
 						suma = suma + r.score;						
 						average = suma / index;
 					});

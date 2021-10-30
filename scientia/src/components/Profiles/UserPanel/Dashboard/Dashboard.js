@@ -6,7 +6,6 @@ import './Dashboard.css'
 
 const Dashboard = (props) => {
 
-  console.log(props.user.profilePicture)
       let initialFirstName = props.user.firstName.charAt(0)
       let initialLastName = props.user.lastName.charAt(0)
       let initials = initialFirstName + initialLastName
@@ -36,3 +35,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Dashboard)
+

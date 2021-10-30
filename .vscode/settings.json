@@ -1,25 +1,25 @@
-{
-    "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#0045bc",
-        "activityBar.activeBorder": "#400017",
-        "activityBar.background": "#0045bc",
-        "activityBar.foreground": "#e7e7e7",
-        "activityBar.inactiveForeground": "#e7e7e799",
-        "activityBarBadge.background": "#400017",
-        "activityBarBadge.foreground": "#e7e7e7",
-        "editorGroup.border": "#0045bc",
-        "panel.border": "#0045bc",
-        "sash.hoverBorder": "#0045bc",
-        "sideBar.border": "#0045bc",
-        "statusBar.background": "#003289",
-        "statusBar.foreground": "#e7e7e7",
-        "statusBarItem.hoverBackground": "#0045bc",
-        "statusBarItem.remoteBackground": "#003289",
-        "statusBarItem.remoteForeground": "#e7e7e7",
-        "titleBar.activeBackground": "#003289",
-        "titleBar.activeForeground": "#e7e7e7",
-        "titleBar.inactiveBackground": "#00328999",
-        "titleBar.inactiveForeground": "#e7e7e799"
-    },
-    "peacock.color": "#003289"
-}
+// {
+//     "workbench.colorCustomizations": {
+//         "activityBar.activeBackground": "#0045bc",
+//         "activityBar.activeBorder": "#400017",
+//         "activityBar.background": "#0045bc",
+//         "activityBar.foreground": "#e7e7e7",
+//         "activityBar.inactiveForeground": "#e7e7e799",
+//         "activityBarBadge.background": "#400017",
+//         "activityBarBadge.foreground": "#e7e7e7",
+//         "editorGroup.border": "#0045bc",
+//         "panel.border": "#0045bc",
+//         "sash.hoverBorder": "#0045bc",
+//         "sideBar.border": "#0045bc",
+//         "statusBar.background": "#003289",
+//         "statusBar.foreground": "#e7e7e7",
+//         "statusBarItem.hoverBackground": "#0045bc",
+//         "statusBarItem.remoteBackground": "#003289",
+//         "statusBarItem.remoteForeground": "#e7e7e7",
+//         "titleBar.activeBackground": "#003289",
+//         "titleBar.activeForeground": "#e7e7e7",
+//         "titleBar.inactiveBackground": "#00328999",
+//         "titleBar.inactiveForeground": "#e7e7e799"
+//     },
+//     "peacock.color": "#003289"
+// }

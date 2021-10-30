@@ -46,7 +46,9 @@ function Login(props) {
 
     async function submitGoogle(e) {
         e.preventDefault()
+
         props.autenticarConGoogle(props.cart)
+
         handleShow()
     }
 
