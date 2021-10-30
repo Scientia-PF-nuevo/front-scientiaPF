@@ -251,64 +251,6 @@ export function setCourseToAprove(payload) {
     }
 }
 
-export function logear(correo, contra, cart, normal, name, apellido) {
-
-    var data = {
-        email: correo,
-        password: contra,
-        cart,
-    }
-    if (normal) {
-        data = {
-            ...data,
-            isGoogle: false
-        }
-    } else {
-        data = {
-            ...data,
-            isGoogle: true,
-            firstName: name,
-            lastName: apellido
-        }
-
-    }
-    if (normal) {
-        return function (dispatch) {
-            axios.post(`http://localhost:3001/users/login`, data)
-                .then(r => {
-                    dispatch({
-                        type: LOGIN,
-                        payload: (r.data)
-                    })
-                })
-
-                .catch(err => console.log(err))
-        }
-    } else {
-        return function (dispatch) {
-
-            const datos = { email: user.email, password: user.uid }
-            axios.post('http://localhost:3001/users/login', datos)
-                .then(r => {
-                    if (r.data === "Check your email and password") {
-                        dispatch(registrarYLogear(user))
-                    } else {
-                        dispatch({ type: LOGIN, payload: (r.data) })
-                    }
-                })
-                .catch(err => console.log(err))
-        }
-    }
-}
-
-function registrarYLogear(data) {
-    register(data)
-    return {
-        type: LOGIN,
-        payload: data
-    }
-}
-
 //* Trae todos las orders del carro de la DB
 export function getCart(email) {
     return async function (dispatch) {
@@ -348,7 +290,41 @@ export function deleteCartLogged(data) {
 
 }
 
-            axios.post(`http://localhost:3001/users/login`, data)
+export function logear(correo, contra, cart, normal, name, apellido) {
+
+    var data = {
+        email: correo,
+        password: contra,
+        cart,
+    }
+    if (normal) {
+        data = {
+            ...data,
+            isGoogle: false
+        }
+    } else {
+        data = {
+            ...data,
+            isGoogle: true,
+            firstName: name,
+            lastName: apellido
+        }
+
+    }
+    if (normal) {
+        return function (dispatch) {
+            axios.post('http://localhost:3001/users/login', data)
+                .then(r => {
+                    dispatch({
+                        type: LOGIN,
+                        payload: (r.data)
+                    })
+                })
+                .catch(err => console.log(err))
+        }
+    } else {
+        return function (dispatch) {
+            axios.post('http://localhost:3001/users/login', data)
                 .then(r => {
                     dispatch({
                         type: LOGIN,

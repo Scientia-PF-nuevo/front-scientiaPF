@@ -66,10 +66,9 @@ function Details({
     solds,
   } = details[0];
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
   React.useEffect(() => {
     getCoursesReviewsById(id);
+   
   }, []);
 
   const hadlePlayerDemo = () => {
@@ -79,8 +78,7 @@ function Details({
     }, 30000); // setear el tiempo de DEMO
   };
 
-  //extraer el videoID para la DEMO:
-  var videoID = urlVideo.urlVideo.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/)[1];
+ 
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -120,6 +118,9 @@ function Details({
       }
     }
   };
+
+   //extraer el videoID para la DEMO:
+   var videoID = urlVideo.length === 0 ? "" : urlVideo.urlVideo.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/)[1]
 
   return (
     <div className="details-div">
