@@ -84,6 +84,7 @@ function Details({details,addCart, cart,login, userInfo, getCoursesReviewsById,a
   }
 
   const validarCart = (id) => {
+    console.log(id)
     const alreadyAdded = cart.some(courseID => courseID.coursesId === id);
     if (alreadyAdded) {
       return;
@@ -94,7 +95,7 @@ function Details({details,addCart, cart,login, userInfo, getCoursesReviewsById,a
       
       } else {
         
-        addCart({ name: name, id: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
+        addCart({ name: name, coursesId: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
 
       }
     }

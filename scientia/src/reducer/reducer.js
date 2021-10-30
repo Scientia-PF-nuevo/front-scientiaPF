@@ -216,7 +216,7 @@ export default function rootReducer(state = initialState, action) {
 
 
         case REMOVE_CART:
-            let remover_carrito = state.cart.filter((course) => course.id !== action.payload)
+            let remover_carrito = state.cart.filter((course) => course.coursesId !== action.payload)
             return {
                 ...state,
                 cart: remover_carrito,

@@ -41,7 +41,7 @@ function CourseCard(props) {
       return;
     } else {
       if (!login){
-        addCart({ email: userInfo.email, name: name, id: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
+        addCart({ email: userInfo.email, name: name, coursesId: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
       } else {
         addCartLogged({ email: userInfo.email, name: name, id: id, price: price, url: url,percentageDiscount: percentageDiscount, offerPrice: offer === 0 ? price : offer })
       }

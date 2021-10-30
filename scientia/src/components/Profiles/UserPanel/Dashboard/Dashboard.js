@@ -8,8 +8,8 @@ import './Dashboard.css'
 
 const Dashboard = (props) => {
   if (props.user.firstName) {
-    let inicialNombre = props.user.firstName.split(' ')[0][0]
-    let inicialApellido = props.user.firstName.split(' ')[1][0]
+    let inicialNombre = props.user.firstName[0]
+    let inicialApellido = props.user.lastName[0]
     var iniciales = inicialNombre + inicialApellido
   }
   return (
