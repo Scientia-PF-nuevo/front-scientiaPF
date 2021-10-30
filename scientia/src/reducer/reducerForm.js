@@ -18,6 +18,7 @@ export default function reducerForm(state = initialState, action) {
                 courses: [...state.courses, action.payload]
             }
         case GET_COURSES_TO_APPROVE:
+            console.log('reducer: ', action.payload)
             return {
                 ...state,
                 coursesToApprove: action.payload

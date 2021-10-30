@@ -62,7 +62,6 @@ export function getFilteredCourses(info) {
         ranking5,
     } = info;
     return async function (dispatch) {
-        console.log(info)
         return await axios
             .get(
                 `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&languaje1=${languaje1}&languaje2=${languaje2}&languaje3=${languaje3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}`
@@ -357,7 +356,8 @@ export function createReview(review) {
     }
 }
 
-export function getCrousesToApprove() {
+export function getCoursesToApprove() {
+    console.log('action')
     return async function (dispatch) {
         axios.get('http://localhost:3001/admin/listdata')
             .then(res => dispatch({

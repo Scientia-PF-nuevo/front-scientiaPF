@@ -15,9 +15,10 @@ import axios from 'axios';
 
 function PassCourses(props) {
     useEffect(() => {
-        props.getCrousesToApprove()
+        console.log('useEffect')
+        props.getCoursesToApprove()
     }, [])
-
+    console.log('cursos: ',props.coursesToApprove)
     const [show, setShow] = useState(false);
     const [msg, setMsg] = useState('');
     const [isOpen, setOpen] = useState(false)
@@ -47,10 +48,10 @@ function PassCourses(props) {
         setMsg('¿Está seguro de rechazar este curso?')
         handleShow()
     }
-
+    
     return (
         <>
-            {(props.coursesToApprove.length === 0) ?
+            {(props.coursesToApprove && props.coursesToApprove.length === 0) ?
                 <h1>No hay cursos para analizar</h1>
                 :
                 <div className={s.contenedor}>
@@ -87,7 +88,7 @@ function PassCourses(props) {
                         <Modal.Body>
                             <div className={s.contenedorModal}>
                                 {msg} <br />
-                                <textarea name="motivoRechazo" rows="3" cols="50" />
+                                {msg !== '¿Está seguro de aprobar este curso?' && <textarea name="motivoRechazo" rows="3" cols="50" />}
                             </div>
                         </Modal.Body>
                         <Modal.Footer>

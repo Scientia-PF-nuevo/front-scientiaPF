@@ -23,7 +23,7 @@ import {
     NEW_USER,
     SET_VIDEO,
     VIDEO_PLAYING,
-    CLEAR_CART_TO_PAY
+    CLEAR_CART_TO_PAY,
 } from '../actions/constants';
 
 

@@ -51,8 +51,6 @@ function SearchBar({searchByName, getAllCourses, getFilteredCourses}) {
     ranking5: checked.ranking5 === true ? 5 : "",
   }
   
-  console.log(objFinal)
-  
   const handleChangeCheck = (event) => {
     setChecked({...checked, [event.target.name]: event.target.checked});
   };
