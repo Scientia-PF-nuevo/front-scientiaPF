@@ -115,9 +115,38 @@ label {
 .avatar {
     display: grid;
     justify-content: center;
-    height: 300px;
+    height: 350px;
 }
 
-.avatar-root {
-    background-color: red;
-}
+.file-select {
+    position: relative;
+    display: inline-block;
+    margin: 10px 0 10px 0;
+  }
+  
+  .file-select::before {
+    background-color: #5e6270;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    content: 'Seleccionar'; /* testo por defecto */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .file-select input[type="file"] {
+    opacity: 0;
+    width: 200px;
+    height: 32px;
+    display: inline-block;
+  }
+  
+  #src-file1::before {
+    content: 'Choose File';
+  }
+  

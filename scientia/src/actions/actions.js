@@ -200,10 +200,9 @@ export function setCourseToAprove(payload) {
 }
 
 export function logear(correo, contra, normal, user) {
-
     if (normal) {
         return function (dispatch) {
-            axios.get(`http://localhost:3001/users/login`, {
+            axios.post('http://localhost:3001/users/login', {
                 params: { email: correo, password: contra }
             })
                 .then(r => dispatch({ type: LOGIN, payload: (r.data) }))
@@ -211,7 +210,7 @@ export function logear(correo, contra, normal, user) {
         }
     } else {
         return function (dispatch) {
-            axios.get(`http://localhost:3001/users/login`, {
+            axios.post(`http://localhost:3001/users/login`, {
                 params: { email: user.email, password: user.uid }
             })
                 .then(r => {

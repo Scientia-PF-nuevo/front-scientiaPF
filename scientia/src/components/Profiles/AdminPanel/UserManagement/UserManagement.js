@@ -22,6 +22,7 @@ const UserManagement = ({myCourses}) => {
     ) : (
     <div className="div-usermanagement">
       <CircularProgress disableShrink />
+      <UsersTable />
     </div>
   );
 }
