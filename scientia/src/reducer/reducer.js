@@ -110,7 +110,9 @@ export default function rootReducer(state = initialState, action) {
         case GET_REVIEWS_BY_COURSEID:
             return {
                 ...state,
-                coursesReviews: action.payload
+                coursesReviews: action.payload,
+                coursesDetails: action.payload
+
             }; 
         
             //*!! chequear

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
 import { useHistory } from "react-router-dom";
 import { Table } from 'react-bootstrap';
 import {
@@ -11,7 +11,8 @@ import {
   pendingOrder,
   clearCart,
   getUserInfo,
-  deleteCartLogged
+  deleteCartLogged,
+  getCart
 } from "../../actions/actions";
 import { Link } from 'react-router-dom'
 import './Cart.css'
@@ -22,6 +23,14 @@ import { Modal, Button } from 'react-bootstrap'
 export function Cart(props) {
   const [show, setShow] = useState(false);
   const [redirect, setRedirect] = useState(false)
+
+  const [checked, setChecked] = React.useState({ });
+
+  const handleChange = (event) => {
+    setChecked({...checked, [event.target.name]:event.target.checked});
+  };
+
+  console.log(checked)
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -58,7 +67,7 @@ export function Cart(props) {
     result = cart.reduce((a, b) => ({ offerPrice: a.offerPrice + b.offerPrice })).offerPrice
     taxs = parseFloat((result * 0.21).toFixed(2));
     total = parseFloat(result + taxs).toFixed(2);
-    return `$ ${result}`;
+    return `$ ${parseFloat(result.toFixed(2))}`;
   }
 
 
@@ -114,6 +123,7 @@ export function Cart(props) {
     }
   }
 
+
   const handledPendingOrder = () => {
 
     if (usuario.length >= 1) {
@@ -155,7 +165,7 @@ export function Cart(props) {
   }
 
   return (
-    <>
+    <div className="wrapper-cart">
       <div className="cart-div">
         <Table striped bordered hover>
           <thead>
@@ -163,16 +173,15 @@ export function Cart(props) {
               <th style={{ textAlign: "center" }}>Course</th>
               <th style={{ textAlign: "center" }}>Course Name</th>
               <th style={{ textAlign: "center" }}>Price</th>
-              <th style={{ textAlign: "center" }}>CUPON</th>
+              <th style={{ textAlign: "center" }}>Gift a Course</th>
               <th style={{ textAlign: "center" }}>Sub-Total</th>
               <th style={{ textAlign: "center" }}>Remove</th>
             </tr>
           </thead>
           {cart.length >= 1 ? (
             cart.map((course) => (
-
               <tbody className="tbody-div">
-                <tr style={{}}>
+                <tr>
                   <td className="photo-div">
                     <img className="cart-img" src={course.url} />
                   </td>
@@ -187,7 +196,7 @@ export function Cart(props) {
                   </td>
                   <td style={{ textAlign: "center" }}>
                     {course.percentageDiscount > 0 ? (
-                      <>
+                      <div>
                         <h3
                           style={{
                             color: "red",
@@ -197,34 +206,48 @@ export function Cart(props) {
                           ${course.price}
                         </h3>
                         <p>{course.percentageDiscount}% OFF</p>
-                        <h3 style={{ color: "green" }}>${course.price - ((course.percentageDiscount / 100) * course.price)}</h3>
-                      </>
-                    ) : (
-                      <>
                         <h3 style={{ color: "green" }}>
                           $
-                          {course.price}
+                          {parseFloat(
+                            course.price -
+                              (
+                                (course.percentageDiscount / 100) *
+                                course.price
+                              ).toFixed(2)
+                          )}
                         </h3>
-                      </>
+                      </div>
+                    ) : (
+                      <div className="div-center">
+                        <h3 style={{ color: "green" }}>${course.price}</h3>
+                      </div>
                     )}
                   </td>
                   <td style={{ textAlign: "center" }}>
-                    <TextField
-                      id="standard-basic"
-                      label="ID Number"
-                      variant="standard"
+                    <div className="div-center">
+
+                    <Checkbox
+                  
+                      name={course.coursesId}
+                      checked={checked.hasOwnProperty(course.coursesId) ? checked[course.coursesId] : false}
+                      onChange={handleChange}
+                      inputProps={{ "aria-label": "controlled" }}
                     />
-                    <Button color="secondary">Validar</Button>
+                    </div>
                   </td>
                   <td style={{ textAlign: "center" }}>
-                    <h3 style={{ color: "red" }}>{Total()}</h3>
+                    <div className="div-center">
+                      <h3 style={{ color: "red" }}>{Total()}</h3>
+                    </div>
                   </td>
                   <td style={{ textAlign: "center" }}>
                     {
-                      <DeleteRoundedIcon
-                        onClick={() => haddleRemoveItem(course.coursesId)}
-                        style={{ cursor: "pointer" }}
-                      />
+                      <div className="div-center">
+                        <DeleteRoundedIcon
+                          onClick={() => haddleRemoveItem(course.coursesId)}
+                          style={{ cursor: "pointer" }}
+                        />
+                      </div>
                     }
                   </td>
                 </tr>
@@ -236,7 +259,7 @@ export function Cart(props) {
         </Table>
       </div>
       <p>
-        <strong>SUB - TOTAL:</strong> $ {result}
+        <strong>SUB - TOTAL:</strong> $ {parseFloat(result.toFixed(2))}
       </p>
       <p>
         <strong>TAXs (21%):</strong> $ {taxs}
@@ -266,7 +289,7 @@ export function Cart(props) {
       </Modal>
 
       {redirect ? <Redirect to="/payment" /> : <></>}
-    </>
+    </div>
   );
 }
 

@@ -65,7 +65,7 @@ export function getFilteredCourses(info) {
         category,
     } = info;
     return async function (dispatch) {
-        console.log(info)
+
         return await axios
             .get(
                 `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&price3=${price3}&languaje1=${languaje1}&languaje2=${languaje2}&languaje3=${languaje3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}&category=${category}`
@@ -92,19 +92,17 @@ export function searchByName(name) {
     }
 }
 
-//! NO HAY ENDPOIND CREADO EN EL BACK AUN - 
-//!Trae los detalles del curso pedido por PARAMS por (params :ID)
-export function getCourseDetail(id) {
-    return function (dispatch) {
-        axios.get(`http://localhost:3001/courses/${id}`)
-            .then(res => {
+// export function getCourseDetail(id) {
+//     return function (dispatch) {
+//         axios.get(`http://localhost:3001/courses/${id}`)
+//             .then(res => {
 
-                dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
-            })
-            .catch(err => { return err })
+//                 dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
+//             })
+//             .catch(err => { return err })
 
-    }
-}
+//     }
+// }
 
 //* Trae las reviews de los cursos pedidos por ID 
 export function getCoursesReviewsById(id) {
@@ -143,18 +141,7 @@ export function getUsers() {
     }
 }
 
-//* Trae todos las orders del carro de la DB
-export function getCart(email) {
-    console.log(email)
-    return function (dispatch) {
-        axios.get(`http://localhost:3001/order/${email}`)
-            .then(res => {
 
-                dispatch({ type: GET_CART, payload: res.data });
-            })
-            .catch(err => { return err })
-    }
-}
 
 //* Trae todos los datos de un usuario en particular (DB)
 export function getUserInfo(email) {
@@ -222,7 +209,6 @@ export function logear(correo, contra, normal, user) {
     if (normal) {
         return function (dispatch) {
             const datos = { email: correo, password: contra }
-            console.log(datos)
             axios.post('http://localhost:3001/users/login', datos)
                 .then(r => dispatch({ type: LOGIN, payload: (r.data) }))
                 .catch(err => console.log(err))
@@ -251,11 +237,23 @@ function registrarYLogear(data) {
     }
 }
 
+//* Trae todos las orders del carro de la DB
+export function getCart(email) {
+    return async function (dispatch) {
+        return await axios.get(`http://localhost:3001/order/${email}`)
+            .then(res => {
+
+                dispatch({ type: GET_CART, payload: res.data });
+            })
+            .catch(err => { return err })
+    }
+}
+
 export function addCartLogged(data) {
     const course = { state: "carrito", courseId: data.id, price: data.offerPrice }
 
-    return function (dispatch) {
-        axios.post(`http://localhost:3001/order/${data.email}`, course)
+    return async function (dispatch) {
+        return await axios.post(`http://localhost:3001/order/${data.email}`, course)
             .then(res => {
 
                 dispatch({ type: ADD_CART_LOGGED, payload: res.data });
