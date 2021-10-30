@@ -31,7 +31,10 @@ import {
     SET_COURSE_TOAPROVE,
     NEW_USER,
     SET_VIDEO,
-    VIDEO_PLAYING
+    VIDEO_PLAYING,
+    GET_COURSES_TO_APPROVE,
+    REJECT_COURSE,
+    APPROVE_COURSE
 } from './constants.js';
 
 
@@ -475,6 +478,39 @@ export function createReview(review) {
                 dispatch({
                     type: CREATE_REVIEW,
                     payload: response.data
+                })
+            })
+    }
+}
+
+export function getCoursesToApprove() {
+    return async function (dispatch) {
+        axios.get('http://localhost:3001/admin/listdata')
+            .then(res => dispatch({
+                type: GET_COURSES_TO_APPROVE,
+                payload: res.data
+            }))
+    }
+}
+
+export function approveCourse(id) {
+    return async function (dispatch) {
+        axios.put(`http://localhost:3001/admin/editcoursestate/active/${id}`)
+            .then(res => {
+                dispatch({
+                    type: APPROVE_COURSE,
+                    payload: id
+                })
+            })
+    }
+}
+export function rejectCourse(id, motivo) {
+    return async function (dispatch) {
+        axios.put(`http://localhost:3001/admin/editcoursestate/rejected/${id}`, {motivo: motivo})
+            .then(res => {
+                dispatch({
+                    type: REJECT_COURSE,
+                    payload: id
                 })
             })
     }
