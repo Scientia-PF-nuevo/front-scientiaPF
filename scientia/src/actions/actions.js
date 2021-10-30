@@ -455,9 +455,15 @@ export function updateInfoVideo(info) {
 }
 
 export function logout() {
-    return {
-        type: LOGOUT,
-        payload: false
+    return async function (dispatch) {
+        axios.post(`http://localhost:3001/users/logout`)
+            .then(r => {
+                console.log(r)
+                dispatch({
+                    type: LOGOUT,
+                    payload: false
+                })
+            })
     }
 }
 
