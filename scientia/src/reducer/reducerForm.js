@@ -17,13 +17,22 @@ export default function reducerForm(state = initialState, action) {
                 ...state,
                 courses: [...state.courses, action.payload]
             }
-        case GET_COURSES_TO_APPROVE:
-            console.log('reducer: ', action.payload)
-            return {
-                ...state,
-                coursesToApprove: action.payload
-            }
-        default:
-            return state;
+            case GET_COURSES_TO_APPROVE:
+                return {
+                    ...state,
+                    coursesToApprove: action.payload
+                }
+                case APPROVE_COURSE:
+                    return {
+                        ...state,
+                        coursesToApprove: state.coursesToApprove.filter(el => el.id !== action.payload)
+                    }
+                case REJECT_COURSE:
+                    return {
+                        ...state,
+                        coursesToApprove: state.coursesToApprove.filter(el => el.id !== action.payload)
+                    }
+                    default:
+                        return state;
     }
 };
