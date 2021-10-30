@@ -20,10 +20,9 @@ const MyProfile = ({userInfo, photo}) => {
     },
   }));
 
-  // let initialFirstName = userInfo.firstName.charAt(0)
-  // let initialLastName = userInfo.lastName.charAt(0)
-  // let initials = initialFirstName + initialLastName
-  let initials = "a"
+  let initialFirstName = userInfo.firstName.charAt(0)
+  let initialLastName = userInfo.lastName.charAt(0)
+  let initials = initialFirstName + initialLastName
 
   const dispatch = useDispatch();
 
@@ -37,9 +36,12 @@ const MyProfile = ({userInfo, photo}) => {
     province: userInfo.province,
     city: userInfo.city,
     address: userInfo.address,
-    postalcode: userInfo.postalcode,
-    profilePicture: userInfo.profilePicture
+    postalcode: userInfo.postalcode
   })
+
+  const [valuesImage, setValuesImageUrl] = useState({
+    imageUrl: ""
+  });
 
   const [changePassword, setChangePassword] = React.useState({
     oldPassword: "",
@@ -195,6 +197,7 @@ const MyProfile = ({userInfo, photo}) => {
     const { name, value } = e.target
     setValues({ ...values, [name]: value })
   }
+  console.log(values, 'en setValues')
 
   const handleChangePassword = (e) => {
     const { name, value } = e.target
@@ -203,7 +206,7 @@ const MyProfile = ({userInfo, photo}) => {
   
   const handleSubmit = async (e) => {
     e.preventDefault()
-  
+    
     const isValid = validateAll()
 
     if (!isValid) {
@@ -223,10 +226,12 @@ const MyProfile = ({userInfo, photo}) => {
     if (!isValid) {
       return false
     }
-
-    await axios.put(`http://localhost:3001/users/updatePW/${email}`, changePassword);
-
+    console.log('antes de put')
+    console.log(changePassword, 'changePassword')
+    await axios.put(`http://localhost:3001/users/updatePw/${email}`, changePassword);
+    console.log(changePassword, 'changePassword')
     dispatch(getUserInfo(email));
+    console.log('despues de dispatch')
   }
 
   const { firstName, lastName, email, password, phone, country, city, province, address, postalcode } = values
@@ -245,30 +250,28 @@ const MyProfile = ({userInfo, photo}) => {
     newPassword2: newPassword2Val
   } = validationsPassword
 
-  const [imageUrl, setImageUrl] = useState("");
+  const handleChangeImg = async () => {
+      const cloud_name = "divya1qba";
+      const upload_preset = "yfyfeypn";
 
-  const cloud_name = "divya1qba";
-  const upload_preset = "yfyfeypn"; 
-
-  const handleClickU = (e) => {
-      e.preventDefault()
-
-      const { files } = document.querySelector(".app_uploadInput");
+    const { files } = document.querySelector(".app_uploadInput");
       const formData = new FormData();      
       formData.append("file", files[0]);
       formData.append("upload_preset", upload_preset);
 
-      axios.post(`https://api.Cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
-          .then(function (response) {setImageUrl(response.data.secure_url)})
+
+      await axios.post(`https://api.Cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
+          .then(function (response) {setValuesImageUrl({ ...valuesImage, imageUrl: response.data.secure_url })})
           .catch(function(err) {console.log(err, 'este es el error')});
+  }
 
-        axios.put(`http://localhost:3001/users/updateInfo/${email}`, values);
+  const handleClickU = async (e) => {
+      e.preventDefault()
+      
+      await axios.put(`http://localhost:3001/users/updateProfilePicture/${email}`, valuesImage);
 
-        dispatch(getUserInfo(email));
-
+      dispatch(getUserInfo(email));
   };
-
-  
 
   return userInfo ? (
       <div className="div-userinfo">
@@ -470,19 +473,11 @@ const MyProfile = ({userInfo, photo}) => {
             </div>
 
               {
-               (userInfo.photoURL >= 1 || imageUrl >= 1) ?
                 <div className="avatar">
-                  <Avatar className="avatar-root" src={imageUrl || userInfo.photoURL} sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{}</Avatar>
-                  <div className="appp">
-                    <input id="image_uploads" type="file" className="app_uploadInput" accept="image/png, image/jpeg"/>
-                    <button className="app_uploadButton btn btn-primary mx-auto w-50" onClick={handleClickU}>Upload</button>
-                  </div>
-                </div> :
-                <div className="avatar">
-                  <Avatar src={imageUrl} className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{initials}</Avatar>
+                  <Avatar src={userInfo.profilePicture} className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{}</Avatar>
                   <div className="appp">
                     <div class="file-select" id="src-file1" >
-                      <input className="app_uploadInput" type="file" name="src-file1" aria-label="Archivo"/>
+                      <input className="app_uploadInput" type="file" name="src-file1" aria-label="Archivo" onChange={handleChangeImg}/>
                     </div>
                     <button className="app_uploadButton btn btn-primary mx-auto w-50" onClick={handleClickU}>Upload</button>
                   </div> 
@@ -501,6 +496,7 @@ const MyProfile = ({userInfo, photo}) => {
 }
 
     const mapStateToProps = (state) => {
+      console.log(state.rootReducer, 'state')
     return {
       userInfo: state.rootReducer.userInfo,
       photo: state.rootReducer.user.photoURL
