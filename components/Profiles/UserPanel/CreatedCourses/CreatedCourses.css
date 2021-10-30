@@ -1,0 +1,10 @@
+.div-coursesmanagement {
+    width: 100%;
+    background-color: rgb(209, 209, 209);
+    text-align: center;
+    padding: 40px 20px 20px 20px;
+}
+
+p {
+    font-size: 20px;
+}

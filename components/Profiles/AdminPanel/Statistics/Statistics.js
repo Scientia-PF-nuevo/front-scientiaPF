@@ -1,8 +1,7 @@
 import React from 'react';
-import './UserManagement.css';
+import './Statistics.css';
 import { connect } from 'react-redux'
 import CircularProgress from '@mui/material/CircularProgress';
-import UsersTable from './Table/Table';
 
 const UserManagement = ({myCourses}) => {
   if (myCourses.length === 1) {
@@ -16,13 +15,12 @@ const UserManagement = ({myCourses}) => {
     </div>
     ) : 
     typeof myCourses !== "undefined" && myCourses.length >= 1 ? (
-      <div className="div-usermanagement">
-        <UsersTable />
+      <div className="div-adminstatistics">
+        <img src="https://images.vexels.com/media/users/3/206056/isolated/preview/9af07a2936f83c0318f29730f5907423-creciente-trazo-de-barras-de-grafico.png"/>
       </div>
     ) : (
-    <div className="div-usermanagement">
+    <div className="div-adminstatistics">
       <CircularProgress disableShrink />
-      <UsersTable />
     </div>
   );
 }

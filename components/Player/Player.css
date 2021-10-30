@@ -1,0 +1,14 @@
+.player-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    /* position: relative; */
+    /* padding-top: 56.25% Player ratio: 100 / (1280 / 720) */
+  }
+
+  .player-wrapper2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }

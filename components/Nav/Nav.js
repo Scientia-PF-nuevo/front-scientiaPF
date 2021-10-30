@@ -11,10 +11,7 @@ import * as actionCreators from './../../actions/actions'
 // import logo from '../../images/icon.png';
 
 function Nav(props) {
-
-    console.log(props, 'props')
     const imagenPerfil = props.user.photoURL
-
 
     if (props.user.firstName) {
         let inicialNombre = props.user.firstName[0]
@@ -62,13 +59,13 @@ function Nav(props) {
                             <></>
                     }
                     {
-
-                        <Link className='linkNav' to='/cart'>
-                            <li className='liNav'>
-                                <CustomizedBadges />
-                            </li>
-                        </Link>
-
+                    
+                            <Link className='linkNav' to='/cart'>
+                                <li className='liNav'>
+                                    <CustomizedBadges />
+                                </li>
+                            </Link>
+                            
                     }
                     {
                         props.user.firstName ?
@@ -84,19 +81,14 @@ function Nav(props) {
                                 </li>
                             </Link>
                     }
-                    {   
-                            props.img && props.login === true ?
-                            <Link className='linkNav' to='/userprofile'>
-                                <li className='liNav'>
-                                    <Avatar alt="" src={props.img} />
-                                </li>
-                            </Link>
-                            : props.user.photoURL ?
+                    {
+                        props.user.photoURL ?
                             <Link className='linkNav' to='/userprofile'>
                                 <li className='liNav'>
                                     <Avatar alt="" src={imagenPerfil} />
                                 </li>
-                            </Link> :
+                            </Link>
+                            :
                             props.user.firstName ?
                                 <Link className='linkNav' to='/userprofile'>
                                     <li className='liNav'>
@@ -116,8 +108,7 @@ function Nav(props) {
 function mapStateToProps(state) {
     return {
         login: state.rootReducer.login,
-        user: state.rootReducer.user,
-        img: state.rootReducer.userInfo.profilePicture
+        user: state.rootReducer.user
     }
 }
 
