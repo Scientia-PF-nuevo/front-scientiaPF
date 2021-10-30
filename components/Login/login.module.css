@@ -1,0 +1,22 @@
+.contenedorFormLogin{
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 30px;
+    border: 2px solid rgb(13, 110, 253);
+    border-radius: 10px;
+}
+
+.botones {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+@media (max-width: 600px) {
+    .contenedorFormLogin {
+      margin-left: 2%;
+      margin-right: 2%;
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }

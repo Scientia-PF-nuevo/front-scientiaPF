@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider
+} from "firebase/auth";
 
 import {
     GET_ALL_COURSES,
@@ -36,9 +40,14 @@ export function getAllCourses() {
     return async function (dispatch) {
         return await axios.get('http://localhost:3001/courses/')
             .then(res => {
-                dispatch({ type: GET_ALL_COURSES, payload: res.data })
+                dispatch({
+                    type: GET_ALL_COURSES,
+                    payload: res.data
+                })
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
     }
 }
 
@@ -66,7 +75,10 @@ export function getFilteredCourses(info) {
                 `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&languaje1=${languaje1}&languaje2=${languaje2}&languaje3=${languaje3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}&category=${category}`
             )
             .then((res) => {
-                dispatch({ type: GET_FILTERED_COURSES, payload: res.data });
+                dispatch({
+                    type: GET_FILTERED_COURSES,
+                    payload: res.data
+                });
             })
             .catch((err) => {
                 return err;
@@ -81,9 +93,14 @@ export function searchByName(name) {
 
             .then(res => {
 
-                dispatch({ type: SEARCH_BY_NAME, payload: res.data });
+                dispatch({
+                    type: SEARCH_BY_NAME,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
     }
 }
 
@@ -94,9 +111,14 @@ export function getCourseDetail(id) {
         axios.get(`http://localhost:3001/courses/${id}`)
             .then(res => {
 
-                dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
+                dispatch({
+                    type: GET_COURSE_DETAILS,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
 
     }
 }
@@ -107,9 +129,14 @@ export function getCoursesReviewsById(id) {
         axios.get(`http://localhost:3001/courses/id/${id}`)
             .then(res => {
 
-                dispatch({ type: GET_REVIEWS_BY_COURSEID, payload: res.data });
+                dispatch({
+                    type: GET_REVIEWS_BY_COURSEID,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
 
     }
 }
@@ -120,9 +147,14 @@ export function getGenresCourses() {
         axios.get(`http://localhost:3001/courses/allcategories`)
             .then(res => {
 
-                dispatch({ type: GET_GENRES_COURSES, payload: res.data });
+                dispatch({
+                    type: GET_GENRES_COURSES,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
     }
 }
 
@@ -132,9 +164,14 @@ export function getUsers() {
         axios.get(`http://localhost:3001/users`)
             .then(res => {
 
-                dispatch({ type: GET_USERS, payload: res.data });
+                dispatch({
+                    type: GET_USERS,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
     }
 }
 
@@ -143,9 +180,14 @@ export function getUserInfo(email) {
     return function (dispatch) {
         axios.get(`http://localhost:3001/users/email/${email}`)
             .then(res => {
-                dispatch({ type: GET_USER_INFO, payload: res.data });
+                dispatch({
+                    type: GET_USER_INFO,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
     }
 }
 
@@ -155,9 +197,14 @@ export function getAdmins() {
         axios.get(`http://localhost:3001/admins`)
             .then(res => {
 
-                dispatch({ type: GET_ADMINS, payload: res.data });
+                dispatch({
+                    type: GET_ADMINS,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
     }
 }
 
@@ -167,23 +214,34 @@ export function getFavoritesCourses() {
         axios.get(`http://localhost:3001/favorites`)
             .then(res => {
 
-                dispatch({ type: GET_FAVORITE_COURSES, payload: res.data });
+                dispatch({
+                    type: GET_FAVORITE_COURSES,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
     }
 }
 
 //* Ordenamiento
 export function orderBy(order) {
     return function (dispatch) {
-        dispatch({ type: ORDER_BY, payload: order })
+        dispatch({
+            type: ORDER_BY,
+            payload: order
+        })
     }
 }
 
 //* Filtrado
 export function filterBy(order) {
     return function (dispatch) {
-        dispatch({ type: FILTER_BY, payload: order })
+        dispatch({
+            type: FILTER_BY,
+            payload: order
+        })
     }
 }
 
@@ -192,13 +250,19 @@ export function setCourseToAprove(payload) {
         axios.post(`http://localhost:3001/courses/newcourse`, payload)
             .then(res => {
 
-                dispatch({ type: GET_COURSE_DETAILS, payload: res.data });
+                dispatch({
+                    type: GET_COURSE_DETAILS,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
 
     }
 }
 
+<<<<<<< HEAD
 export function logear(correo, contra, normal, user) {
     if (normal) {
         return function (dispatch) {
@@ -206,31 +270,61 @@ export function logear(correo, contra, normal, user) {
                 params: { email: correo, password: contra }
             })
                 .then(r => dispatch({ type: LOGIN, payload: (r.data) }))
+=======
+export function logear(correo, contra, cart, normal, name, apellido) {
+
+    var data = {
+        email: correo,
+        password: contra,
+        cart,
+    }
+    if (normal) {
+        data = {
+            ...data,
+            isGoogle: false
+        }
+    } else {
+        data = {
+            ...data,
+            isGoogle: true,
+            firstName: name,
+            lastName: apellido
+        }
+
+    }
+    if (normal) {
+        return function (dispatch) {
+            axios.post(`http://localhost:3001/users/login`, data)
+                .then(r => {
+                    dispatch({
+                        type: LOGIN,
+                        payload: (r.data)
+                    })
+                })
+>>>>>>> 144f5abc02d0cfb006cddc6c0a1311a8bb72e9d0
                 .catch(err => console.log(err))
         }
     } else {
         return function (dispatch) {
+<<<<<<< HEAD
             axios.post(`http://localhost:3001/users/login`, {
                 params: { email: user.email, password: user.uid }
             })
+=======
+            axios.post(`http://localhost:3001/users/login`, data)
+>>>>>>> 144f5abc02d0cfb006cddc6c0a1311a8bb72e9d0
                 .then(r => {
-                    if (r.data === "Check your email and password") {
-                        dispatch(registrarYLogear(user))
-                    } else {
-                        dispatch({ type: LOGIN, payload: (r.data) })
-                    }
+                    dispatch({
+                        type: LOGIN,
+                        payload: (r.data)
+                    })
                 })
                 .catch(err => console.log(err))
         }
     }
 }
-function registrarYLogear(data) {
-    register(data)
-    return {
-        type: LOGIN,
-        payload: data
-    }
-}
+
+
 export function addCart(data) {
     return {
         type: ADD_CART,
@@ -261,24 +355,40 @@ export function clearCartToPay() {
 //* Confirma un CURSO a la DB (COMPLETA)
 export function confirmOrder(userCart) {
     return function (dispatch) {
-        axios.post(`http://localhost:3001/order/${userCart.email}`, { state: "completa", courseId: userCart.courseId })
+        axios.post(`http://localhost:3001/order/${userCart.email}`, {
+                state: "completa",
+                courseId: userCart.courseId
+            })
             .then(res => {
 
-                dispatch({ type: CONFIRM_ORDER, payload: res.data });
+                dispatch({
+                    type: CONFIRM_ORDER,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
     }
 }
 
 //* Confirma un CURSO a la DB (PENDIENTE)
 export function pendingOrder(userCart) {
     return function (dispatch) {
-        axios.post(`http://localhost:3001/order/${userCart.email}`, { state: "creada", courseId: userCart.courseId })
+        axios.post(`http://localhost:3001/order/${userCart.email}`, {
+                state: "creada",
+                courseId: userCart.courseId
+            })
             .then(res => {
 
-                dispatch({ type: PENDING_ORDER, payload: res.data });
+                dispatch({
+                    type: PENDING_ORDER,
+                    payload: res.data
+                });
             })
-            .catch(err => { return err })
+            .catch(err => {
+                return err
+            })
     }
 }
 
@@ -296,7 +406,7 @@ export function setInfoVideoPlaying(info) {
     }
 }
 
-export function autenticarConGoogle() {
+export function autenticarConGoogle(cart) {
     return function (dispatch) {
         const auth = getAuth();
         const provider = new GoogleAuthProvider();
@@ -305,7 +415,7 @@ export function autenticarConGoogle() {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
                 const user = result.user;
-                dispatch(logear('', '', false, user))
+                dispatch(logear(user.email, user.uid, cart, false, user.displayName.split(' ')[0], user.displayName.split(' ')[user.displayName.split(' ').length - 1]))
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -345,7 +455,10 @@ export function createUser(user) {
 
 //*Actualizad el estado del video
 export function updateInfoVideo(info) {
-    const { email, ...others } = info
+    const {
+        email,
+        ...others
+    } = info
     return async function (dispatch) {
         return await axios.put(`http://localhost:3001/courses/${email}`, others)
             .then((response) => {

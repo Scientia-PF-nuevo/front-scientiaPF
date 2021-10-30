@@ -1,0 +1,62 @@
+.liNav {
+    color: black;
+    list-style: none;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 22px;
+    margin: 20px;
+    padding-bottom: 5px;
+    transition: all .6s;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.liNav:hover {
+    border-bottom: 1px solid tomato;
+    border-radius: 20px;
+    color: tomato;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    background-color: white;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.containLi {
+    margin: auto;
+    display: flex;
+    justify-content: end;
+    display: inline-block;
+}
+
+.containerNav {
+    white-space: nowrap;
+    text-align: end;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.containLogo {
+    display: inline-block;
+}
+
+.logoNav {
+    max-width: 100px;
+}
+
+@media (max-width:500px) {
+    .logoNav {
+        max-width: 80px;
+    }
+    .liNav {
+        margin: 5px;
+        padding-bottom: 5px;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+}

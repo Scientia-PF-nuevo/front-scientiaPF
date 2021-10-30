@@ -1,0 +1,152 @@
+.div-userinfo {
+    width: 100%;
+    background-color: rgb(0, 139, 194);
+    /* background-color: rgb(255, 255, 255); */
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.p {
+    margin: 0;
+    text-align: left;
+}
+
+.favorite {
+    
+    margin-top: 60px;
+    font-size: 40px;
+}
+
+.box {
+    background-color: white;
+    border: white;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.div-favorite label {
+    text-align:left;
+}
+
+.input {
+    color: white;
+}
+
+.subdiv {
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    height: 95%;
+    background-color: white;
+}
+
+.div-in {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    display: grid;
+    justify-items: center;
+    
+}
+
+#bootstrap-input {
+    width: 100%;
+}
+
+.avatar {
+    display: grid;
+    justify-items: center;
+}
+
+.box {
+    padding: 0;
+    width: 90%;
+}
+
+.form-user {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    justify-items: center;
+}
+
+label {
+    text-align: start;
+}
+
+.save {
+    width: 75%;
+}
+
+.form-row {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.inputdiv {
+    width: 30%;
+}
+
+.appp {
+    height: 10vh;
+    display: grid;
+    flex-direction: column;
+    align-content: center;
+   }
+
+.app_uploadButton {
+    height: 2rem;
+    width: 5rem;
+    background-color: black;
+    color: white;
+}
+
+.app_uploadedImg {
+ height: 10rem;
+ width: 10rem;
+ position: absolute;
+ top: 0;
+}
+
+.avatar {
+    display: grid;
+    justify-content: center;
+    height: 350px;
+}
+
+.file-select {
+    position: relative;
+    display: inline-block;
+    margin: 10px 0 10px 0;
+  }
+  
+  .file-select::before {
+    background-color: #5e6270;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    content: 'Seleccionar'; /* testo por defecto */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .file-select input[type="file"] {
+    opacity: 0;
+    width: 200px;
+    height: 32px;
+    display: inline-block;
+  }
+  
+  #src-file1::before {
+    content: 'Choose File';
+  }
+  
