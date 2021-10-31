@@ -287,7 +287,7 @@ const handleClickVariantWrongRemovedGift = () => {
                       </div>
                     )}
                   </td>
-                  <td style={{ textAlign: "center" }}
+                  <td style={{ textAlign: "center" }}>
                     <div className="div-center3">
                     <Checkbox
                       sx={{ '& .MuiSvgIcon-root': { fontSize: 40 } }}
