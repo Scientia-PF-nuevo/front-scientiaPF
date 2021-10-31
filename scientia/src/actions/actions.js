@@ -40,7 +40,7 @@ import {
     REJECT_COURSE,
     APPROVE_COURSE,
     REMOVE_ALL_GIFT,
-    BIENVENIDO,
+    SALUDO,
 
 } from './constants.js';
 
@@ -545,9 +545,15 @@ export function rejectCourse(id, motivo) {
     }
 }
 
-export function bienvenido() {
+export function saludo() {
     return {
-        type: BIENVENIDO,
+        type: SALUDO,
+        payload: false
+    }
+}
+export function iniciarSaludo() {
+    return {
+        type: SALUDO,
         payload: true
     }
 }

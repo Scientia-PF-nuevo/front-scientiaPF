@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { Avatar } from '@mui/material';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from './../../actions/actions'
+import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 
 // Logo
 // import logo from '../../images/icon.png';
@@ -23,6 +25,20 @@ function Nav(props) {
     function desconectarse() {
         props.clearCart()
         props.logout()
+        deslogeo()
+    }
+
+    const { enqueueSnackbar } = useSnackbar();
+
+    const deslogeo = () => {
+        enqueueSnackbar(`Hasta la próxima ${props.user.firstName}!`, {
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'left',
+            },
+            TransitionComponent: Slide,
+            variant: 'info',
+        })
     }
 
     return (

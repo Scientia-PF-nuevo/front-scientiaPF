@@ -29,7 +29,7 @@ import {
     VIDEO_PLAYING,
     CLEAR_CART_TO_PAY,
     REMOVE_ALL_GIFT,
-    BIENVENIDO
+    SALUDO
 } from '../actions/constants';
 
 
@@ -54,7 +54,7 @@ const initialState = {
     videoUpdated: "",
     videoPlaying: {},
     reviewCreated: {},
-    gift: []
+    gift: [],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -220,16 +220,9 @@ export default function rootReducer(state = initialState, action) {
             };
 
         case LOGIN:
-            let iState = {
-                bienvenido: false
-            }
-            let res = {
-                ...iState,
-                ...action.payload
-            }
             return {
                 ...state,
-                user: res,
+                user: action.payload,
                 login: true
             }
         case ADD_CART:
@@ -331,11 +324,6 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 user: {},
                 login: action.payload
-            }
-        case BIENVENIDO:
-            return {
-                ...state,
-                user: { ...state.user, bienvenido: action.payload },
             }
         default:
             return state;
