@@ -6,31 +6,40 @@ import { getAllCourses, getGenresCourses, getUsers,getUserInfo, getCart} from '.
 import { connect } from "react-redux";
 
 
-export function Home ({user,getUserInfo, getAllCourses, getGenresCourses, getUsers, getCart}) {
+export function Home({
+  user,
+  getUserInfo,
+  getAllCourses,
+  getGenresCourses,
+  getUsers,
+  getCart,
+  login,
+}) {
+  useEffect(() => {
+    getAllCourses();
+    getGenresCourses();
+    getUsers();
+    getUserInfo(user.email);
+    if (login) {
+        getCart(user.email);
+    }
+  }, []);
 
-    useEffect(()=> {
-        getAllCourses()
-        getGenresCourses()
-        getUsers()
-        getUserInfo(user.email)
-        getCart(user.email)
-    }, [])
-
-
-    return (
-        <>
-        {/* <Carousel/> */}
-            <SearchBar />
-        <div className='home-container'>
-            <CourseList />
-        </div>
-        </>
-    );
+  return (
+    <>
+      {/* <Carousel/> */}
+      <SearchBar />
+      <div className="home-container">
+        <CourseList />
+      </div>
+    </>
+  );
 };
 
 const mapStateToProps = (state) => {
     return {
-        user: state.rootReducer.user
+        user: state.rootReducer.user,
+        login: state.rootReducer.login
     }
 }
 

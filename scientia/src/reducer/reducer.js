@@ -15,11 +15,12 @@ import {
     ADD_CART,
     ADD_CART_LOGGED,
     GET_CART,
+    ADD_GIFT,
+    REMOVE_GIFT,
     DELETE_CART_LOGGED,
     CLEAR_CART,
     REMOVE_CART,
     CONFIRM_ORDER,
-    PENDING_ORDER,
     LOGIN,
     ADD_DETAILS,
     LOGOUT,
@@ -50,7 +51,8 @@ const initialState = {
     pendingOrders: [],
     videoUpdated: "",
     videoPlaying: {},
-    reviewCreated: {}
+    reviewCreated: {},
+    gift: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -209,7 +211,6 @@ export default function rootReducer(state = initialState, action) {
             }
 
         case DELETE_CART_LOGGED:
-            console.log(action.payload)
             return {
                 ...state,
                 cart: action.payload,
@@ -248,10 +249,16 @@ export default function rootReducer(state = initialState, action) {
                 reviewCreated: action.payload
             }   
 
-        case PENDING_ORDER:
+        case ADD_GIFT:
             return {
                 ...state,
-                pendingOrders: action.payload
+                gift: state.gift.concat(action.payload)
+            }
+
+        case REMOVE_GIFT:
+            return {
+                ...state,
+                gift: state.gift.filter((g) => g.courseId !== action.payload )
             }
 
         case ADD_DETAILS:

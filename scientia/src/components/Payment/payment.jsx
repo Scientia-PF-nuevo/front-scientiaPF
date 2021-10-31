@@ -6,7 +6,7 @@ import s from './tarjeta.module.css'
 import { Modal, Button, Spinner } from 'react-bootstrap'
 import { Redirect } from "react-router-dom"
 import { clearCartToPay, confirmOrder } from "../../actions/actions";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 
 const INITIAL_STATE = {
@@ -26,8 +26,6 @@ function MercadoPagoForm(props) {
     const [msg, setMsg] = useState('')
     const [showMsg, setShowMsg] = useState(false)
 
-    // const cart = useSelector(state => state.rootReducer.cartToPay)
-
     const handleClose = () => {
         setShow(false)
         setRedir(true)
@@ -40,7 +38,7 @@ function MercadoPagoForm(props) {
         }, 5000);
     };
 
-    const resultPayment = useMercadoPago(props.cartToPay, props.user.email);
+    const resultPayment = useMercadoPago(props.cartToPay, props.user.email, props.gift);
     
     const handleInputChange = (e) => {
         setState({
@@ -203,6 +201,7 @@ function mapStateToProps(state) {
     return {
         cartToPay: state.rootReducer.cartToPay,
         user: state.rootReducer.user,
+        gift: state.rootReducer.gift
     }
 }
 

@@ -7,11 +7,15 @@ import{ Provider} from 'react-redux';
 import store from './store'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './firebase'
+import { SnackbarProvider } from 'notistack';
+
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+    <SnackbarProvider maxSnack={3}>
       <App />
+      </SnackbarProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
