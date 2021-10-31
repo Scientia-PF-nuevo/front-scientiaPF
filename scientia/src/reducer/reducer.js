@@ -27,7 +27,8 @@ import {
     NEW_USER,
     SET_VIDEO,
     VIDEO_PLAYING,
-    CLEAR_CART_TO_PAY
+    CLEAR_CART_TO_PAY,
+    REMOVE_ALL_GIFT
 } from '../actions/constants';
 
 
@@ -235,6 +236,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 cartToPay: []
+            }
+        case REMOVE_ALL_GIFT:
+            return {
+                ...state,
+                gift: action.payload
             }
 
         case CONFIRM_ORDER:

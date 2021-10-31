@@ -5,7 +5,7 @@ import Card from "react-credit-cards";
 import s from './tarjeta.module.css'
 import { Modal, Button, Spinner } from 'react-bootstrap'
 import { Redirect } from "react-router-dom"
-import { clearCartToPay, confirmOrder } from "../../actions/actions";
+import { clearCartToPay, confirmOrder, removeAllGift } from "../../actions/actions";
 import { connect } from "react-redux";
 
 
@@ -31,10 +31,11 @@ function MercadoPagoForm(props) {
         setRedir(true)
     };
     const handleShow = () => {
+        props.removeAllGift()
         setShow(true)
         setTimeout(() => {
             setShowMsg(true)
-            setShow(false)
+            handleClose()
         }, 5000);
     };
 
@@ -50,7 +51,7 @@ function MercadoPagoForm(props) {
     function mensajeModel() {
         if (msg === '') {
             if (resultPayment) {
-                clearCartToPay()
+                // clearCartToPay()
                 setMsg(`Pagado con éxito!`)
             }
             return <Spinner animation="border" variant="primary" />
@@ -205,4 +206,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { confirmOrder, clearCartToPay })(MercadoPagoForm)
+export default connect(mapStateToProps, { confirmOrder, clearCartToPay, removeAllGift })(MercadoPagoForm)

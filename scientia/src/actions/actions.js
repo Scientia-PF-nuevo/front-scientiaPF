@@ -38,7 +38,8 @@ import {
     VIDEO_PLAYING,
     GET_COURSES_TO_APPROVE,
     REJECT_COURSE,
-    APPROVE_COURSE
+    APPROVE_COURSE,
+    REMOVE_ALL_GIFT
 } from './constants.js';
 
 
@@ -374,6 +375,13 @@ export function clearCart() {
 export function clearCartToPay() {
     return {
         type: CLEAR_CART_TO_PAY
+    }
+}
+export function removeAllGift() {
+    console.log('asd')
+    return {
+        type: REMOVE_ALL_GIFT,
+        payload: []
     }
 }
 
