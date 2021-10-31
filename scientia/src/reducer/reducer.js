@@ -29,7 +29,8 @@ import {
     VIDEO_PLAYING,
     CLEAR_CART_TO_PAY,
     REMOVE_ALL_GIFT,
-    SALUDO
+    SALUDO,
+    GET_ALL_CATEGORIES
 } from '../actions/constants';
 
 
@@ -37,6 +38,7 @@ const initialState = {
     users: [],
     admins: [],
     allCourses: [],
+    allCategories: [],
     courseByName: [],
     coursesByGenre: [],
     coursesBackup: [],
@@ -60,6 +62,12 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
 
     switch (action.type) {
+        case GET_ALL_CATEGORIES:
+        return {
+            ...state,
+            allCategories: action.payload
+        };
+
 
         case GET_ALL_COURSES:
             return {
