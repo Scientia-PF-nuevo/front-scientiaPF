@@ -1,4 +1,5 @@
 export const GET_ALL_COURSES = 'GET_ALL_COURSES';
+export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
 export const GET_USERS = 'GET_USERS';
 export const GET_USER_INFO = 'GET_USER_INFO'
 export const GET_ADMINS = 'GET_ADMINS';

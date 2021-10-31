@@ -27,9 +27,24 @@ import {
     SET_COURSE_TOAPROVE,
     NEW_USER,
     SET_VIDEO,
-    VIDEO_PLAYING
+    VIDEO_PLAYING,
+    GET_ALL_CATEGORIES
 } from './constants.js';
 
+//trae todas las categorias 
+export function getAllCategories() {
+    return async function (dispatch) {
+        return await axios.get('http://localhost:3001/courses/allcategories/')
+            .then(response => {
+                console.log("aqui esta la data",response.data)
+                dispatch({
+                    type: GET_ALL_CATEGORIES,
+                    payload: response.data
+                })
+            })
+            .catch(err => { return err })
+    }
+}
 
 //* Trae todos los cursos (DB + API)
 export function getAllCourses() {

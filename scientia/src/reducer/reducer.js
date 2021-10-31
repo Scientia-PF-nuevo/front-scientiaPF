@@ -23,7 +23,8 @@ import {
     NEW_USER,
     SET_VIDEO,
     VIDEO_PLAYING,
-    CLEAR_CART_TO_PAY
+    CLEAR_CART_TO_PAY,
+    GET_ALL_CATEGORIES
 } from '../actions/constants';
 
 
@@ -31,6 +32,7 @@ const initialState = {
     users: [],
     admins: [],
     allCourses: [],
+    allCategories: [],
     courseByName: [],
     coursesByGenre: [],
     coursesBackup: [],
@@ -58,7 +60,13 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 allCourses: action.payload,
-                coursesBackup: action.payload,
+                    coursesBackup: action.payload,
+            };
+
+        case GET_ALL_CATEGORIES:
+            return {
+                ...state,
+                allCategories: action.payload,
             };
 
         case GET_USERS:
@@ -69,8 +77,8 @@ export default function rootReducer(state = initialState, action) {
 
         case GET_USER_INFO:
             return {
-                 ...state,
-                 userInfo: action.payload
+                ...state,
+                userInfo: action.payload
             };
 
         case GET_ADMINS:
@@ -101,14 +109,14 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 coursesReviews: action.payload
-            }; 
-        
+            };
+
             //*!! chequear
         case GET_FILTERED_COURSES:
             return {
                 ...state,
                 allCourses: action.payload
-            }; 
+            };
 
         case GET_GENRES_COURSES:
             return {
@@ -118,141 +126,170 @@ export default function rootReducer(state = initialState, action) {
 
         case FILTER_BY:
             if (action.payload === 'default') {
-                return { ...state, allCourses: state.allCourses }
+                return {
+                    ...state,
+                    allCourses: state.allCourses
+                }
             } else {
-                return { ...state, allCourses: state.allCourses.filter((course) => (action.payload) === course.categories) }
-            }
-
-
-        //! Ordena alfabeticamente
-        case ORDER_BY:
-            if (action.payload === 'A-Z') {
                 return {
-                    ...state, allCourses: [...state.allCourses].sort((prev, next) => {
-                        if (prev.name > next.name) return 1
-                        if (prev.name < next.name) return -1
-                        return 0
-                    })
-                }
-            }
-            if (action.payload === 'Z-A') {
-                return {
-                    ...state, allCourses: [...state.allCourses].sort((prev, next) => {
-                        if (prev.name > next.name) return -1
-                        if (prev.name < next.name) return 1
-                        return 0
-                    })
+                    ...state,
+                    allCourses: state.allCourses.filter((course) => (action.payload) === course.categories)
                 }
             }
 
-            //! Ordena por valor del curso (asc o desc)
-            if (action.payload === 'desc') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => prev.price - next.price) }
-            }
-            if (action.payload === 'asc') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => next.price - prev.price) }
-            }
 
-            //! Ordena por fecha (new o old)
-            if (action.payload === 'new') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => prev.date - next.date) }
-            }
-            if (action.payload === 'old') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => next.date - prev.date) }
-            }
+            //! Ordena alfabeticamente
+            case ORDER_BY:
+                if (action.payload === 'A-Z') {
+                    return {
+                        ...state,
+                        allCourses: [...state.allCourses].sort((prev, next) => {
+                            if (prev.name > next.name) return 1
+                            if (prev.name < next.name) return -1
+                            return 0
+                        })
+                    }
+                }
+                if (action.payload === 'Z-A') {
+                    return {
+                        ...state,
+                        allCourses: [...state.allCourses].sort((prev, next) => {
+                            if (prev.name > next.name) return -1
+                            if (prev.name < next.name) return 1
+                            return 0
+                        })
+                    }
+                }
 
-            //! Ordena por Rating (best o worst)
-            if (action.payload === 'worst') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => prev.score - next.score) }
-            }
-            if (action.payload === 'best') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => next.score - prev.score) }
-            }
+                //! Ordena por valor del curso (asc o desc)
+                if (action.payload === 'desc') {
+                    return {
+                        ...state,
+                        allCourses: [...state.allCourses].sort((prev, next) => prev.price - next.price)
+                    }
+                }
+                if (action.payload === 'asc') {
+                    return {
+                        ...state,
+                        allCourses: [...state.allCourses].sort((prev, next) => next.price - prev.price)
+                    }
+                }
 
-            //! Orden por default como llega de la DB
-            else {
-                return { ...state, filteredCourses: state.coursesBackup }
-            };
+                //! Ordena por fecha (new o old)
+                if (action.payload === 'new') {
+                    return {
+                        ...state,
+                        allCourses: [...state.allCourses].sort((prev, next) => prev.date - next.date)
+                    }
+                }
+                if (action.payload === 'old') {
+                    return {
+                        ...state,
+                        allCourses: [...state.allCourses].sort((prev, next) => next.date - prev.date)
+                    }
+                }
 
-        case LOGIN:
-            return {
-                ...state,
-                user: action.payload,
-                login: true
-            }
-        case ADD_CART:
-            let agregar_carrito = state.cart.concat(action.payload)
-            return {
-                ...state,
-                cart: agregar_carrito,
-                cartToPay: agregar_carrito
-            }
-        case REMOVE_CART:
-            let remover_carrito = state.cart.filter((course) => course.id !== action.payload)
-            return {
-                ...state,
-                cart: remover_carrito,
-                cartToPay: remover_carrito
-            }
+                //! Ordena por Rating (best o worst)
+                if (action.payload === 'worst') {
+                    return {
+                        ...state,
+                        allCourses: [...state.allCourses].sort((prev, next) => prev.score - next.score)
+                    }
+                }
+                if (action.payload === 'best') {
+                    return {
+                        ...state,
+                        allCourses: [...state.allCourses].sort((prev, next) => next.score - prev.score)
+                    }
+                }
 
-        case CLEAR_CART:
-            return {
-                ...state,
-                cart: []
-            }
-        case CLEAR_CART_TO_PAY:
-            return {
-                ...state,
-                cartToPay: []
-            }
+                //! Orden por default como llega de la DB
+                else {
+                    return {
+                        ...state,
+                        filteredCourses: state.coursesBackup
+                    }
+                };
 
-        case CONFIRM_ORDER:
-            return {
-                ...state,
-                orderConfirm: action.payload
-            }
+            case LOGIN:
+                return {
+                    ...state,
+                    user: action.payload,
+                        login: true
+                }
+                case ADD_CART:
+                    let agregar_carrito = state.cart.concat(action.payload)
+                    return {
+                        ...state,
+                        cart: agregar_carrito,
+                            cartToPay: agregar_carrito
+                    }
+                    case REMOVE_CART:
+                        let remover_carrito = state.cart.filter((course) => course.id !== action.payload)
+                        return {
+                            ...state,
+                            cart: remover_carrito,
+                                cartToPay: remover_carrito
+                        }
 
-        case CREATE_REVIEW:
-            return {
-                ...state,
-                reviewCreated: action.payload
-            }   
+                        case CLEAR_CART:
+                            return {
+                                ...state,
+                                cart: []
+                            }
+                            case CLEAR_CART_TO_PAY:
+                                return {
+                                    ...state,
+                                    cartToPay: []
+                                }
 
-        case PENDING_ORDER:
-            return {
-                ...state,
-                pendingOrders: action.payload
-            }
+                                case CONFIRM_ORDER:
+                                    return {
+                                        ...state,
+                                        orderConfirm: action.payload
+                                    }
 
-        case ADD_DETAILS:
-            return {
-                ...state,
-                courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
-            }
-        case NEW_USER:
-            return {
-                ...state,
-                user: action.payload
-            }
+                                    case CREATE_REVIEW:
+                                        return {
+                                            ...state,
+                                            reviewCreated: action.payload
+                                        }
 
-        case SET_VIDEO:
-            return {
-                ...state,
-                videoUpdated: action.payload
-            }
+                                        case PENDING_ORDER:
+                                            return {
+                                                ...state,
+                                                pendingOrders: action.payload
+                                            }
 
-        case VIDEO_PLAYING:
-            return {
-                ...state,
-                videoPlaying: action.payload
-            }
-        case LOGOUT:
-            return {
-                ...state,
-                user: {},
-                login: action.payload
-            }
-        default:
-            return state;
+                                            case ADD_DETAILS:
+                                                return {
+                                                    ...state,
+                                                    courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
+                                                }
+                                                case NEW_USER:
+                                                    return {
+                                                        ...state,
+                                                        user: action.payload
+                                                    }
+
+                                                    case SET_VIDEO:
+                                                        return {
+                                                            ...state,
+                                                            videoUpdated: action.payload
+                                                        }
+
+                                                        case VIDEO_PLAYING:
+                                                            return {
+                                                                ...state,
+                                                                videoPlaying: action.payload
+                                                            }
+                                                            case LOGOUT:
+                                                                return {
+                                                                    ...state,
+                                                                    user: {},
+                                                                        login: action.payload
+                                                                }
+                                                                default:
+                                                                    return state;
     }
 };
