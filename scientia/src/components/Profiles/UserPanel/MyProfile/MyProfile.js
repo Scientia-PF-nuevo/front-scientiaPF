@@ -197,7 +197,6 @@ const MyProfile = ({userInfo, photo}) => {
     const { name, value } = e.target
     setValues({ ...values, [name]: value })
   }
-  console.log(values, 'en setValues')
 
   const handleChangePassword = (e) => {
     const { name, value } = e.target
@@ -226,12 +225,8 @@ const MyProfile = ({userInfo, photo}) => {
     if (!isValid) {
       return false
     }
-    console.log('antes de put')
-    console.log(changePassword, 'changePassword')
     await axios.put(`http://localhost:3001/users/updatePw/${email}`, changePassword);
-    console.log(changePassword, 'changePassword')
     dispatch(getUserInfo(email));
-    console.log('despues de dispatch')
   }
 
   const { firstName, lastName, email, password, phone, country, city, province, address, postalcode } = values
@@ -496,7 +491,6 @@ const MyProfile = ({userInfo, photo}) => {
 }
 
     const mapStateToProps = (state) => {
-      console.log(state.rootReducer, 'state')
     return {
       userInfo: state.rootReducer.userInfo,
       photo: state.rootReducer.user.photoURL

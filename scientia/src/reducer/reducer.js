@@ -26,7 +26,8 @@ import {
     NEW_USER,
     SET_VIDEO,
     VIDEO_PLAYING,
-    CLEAR_CART_TO_PAY
+    CLEAR_CART_TO_PAY,
+    BIENVENIDO
 } from '../actions/constants';
 
 
@@ -79,8 +80,8 @@ export default function rootReducer(state = initialState, action) {
 
         case GET_USER_INFO:
             return {
-                 ...state,
-                 userInfo: action.payload
+                ...state,
+                userInfo: action.payload
             };
 
         case GET_ADMINS:
@@ -113,14 +114,14 @@ export default function rootReducer(state = initialState, action) {
                 coursesReviews: action.payload,
                 coursesDetails: action.payload
 
-            }; 
-        
-            //*!! chequear
+            };
+
+        //*!! chequear
         case GET_FILTERED_COURSES:
             return {
                 ...state,
                 allCourses: action.payload
-            }; 
+            };
 
         case GET_GENRES_COURSES:
             return {
@@ -130,9 +131,15 @@ export default function rootReducer(state = initialState, action) {
 
         case FILTER_BY:
             if (action.payload === 'default') {
-                return { ...state, allCourses: state.allCourses }
+                return {
+                    ...state,
+                    allCourses: state.allCourses
+                }
             } else {
-                return { ...state, allCourses: state.allCourses.filter((course) => (action.payload) === course.categories) }
+                return {
+                    ...state,
+                    allCourses: state.allCourses.filter((course) => (action.payload) === course.categories)
+                }
             }
 
 
@@ -140,7 +147,8 @@ export default function rootReducer(state = initialState, action) {
         case ORDER_BY:
             if (action.payload === 'A-Z') {
                 return {
-                    ...state, allCourses: [...state.allCourses].sort((prev, next) => {
+                    ...state,
+                    allCourses: [...state.allCourses].sort((prev, next) => {
                         if (prev.name > next.name) return 1
                         if (prev.name < next.name) return -1
                         return 0
@@ -149,7 +157,8 @@ export default function rootReducer(state = initialState, action) {
             }
             if (action.payload === 'Z-A') {
                 return {
-                    ...state, allCourses: [...state.allCourses].sort((prev, next) => {
+                    ...state,
+                    allCourses: [...state.allCourses].sort((prev, next) => {
                         if (prev.name > next.name) return -1
                         if (prev.name < next.name) return 1
                         return 0
@@ -159,37 +168,65 @@ export default function rootReducer(state = initialState, action) {
 
             //! Ordena por valor del curso (asc o desc)
             if (action.payload === 'desc') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => prev.price - next.price) }
+                return {
+                    ...state,
+                    allCourses: [...state.allCourses].sort((prev, next) => prev.price - next.price)
+                }
             }
             if (action.payload === 'asc') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => next.price - prev.price) }
+                return {
+                    ...state,
+                    allCourses: [...state.allCourses].sort((prev, next) => next.price - prev.price)
+                }
             }
 
             //! Ordena por fecha (new o old)
             if (action.payload === 'new') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => prev.date - next.date) }
+                return {
+                    ...state,
+                    allCourses: [...state.allCourses].sort((prev, next) => prev.date - next.date)
+                }
             }
             if (action.payload === 'old') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => next.date - prev.date) }
+                return {
+                    ...state,
+                    allCourses: [...state.allCourses].sort((prev, next) => next.date - prev.date)
+                }
             }
 
             //! Ordena por Rating (best o worst)
             if (action.payload === 'worst') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => prev.score - next.score) }
+                return {
+                    ...state,
+                    allCourses: [...state.allCourses].sort((prev, next) => prev.score - next.score)
+                }
             }
             if (action.payload === 'best') {
-                return { ...state, allCourses: [...state.allCourses].sort((prev, next) => next.score - prev.score) }
+                return {
+                    ...state,
+                    allCourses: [...state.allCourses].sort((prev, next) => next.score - prev.score)
+                }
             }
 
             //! Orden por default como llega de la DB
             else {
-                return { ...state, filteredCourses: state.coursesBackup }
+                return {
+                    ...state,
+                    filteredCourses: state.coursesBackup
+                }
             };
 
         case LOGIN:
+            let iState = {
+                bienvenido: false
+            }
+            let res = {
+                ...iState,
+                ...action.payload
+            }
             return {
                 ...state,
-                user: action.payload,
+                user: res,
                 login: true
             }
         case ADD_CART:
@@ -209,7 +246,6 @@ export default function rootReducer(state = initialState, action) {
             }
 
         case DELETE_CART_LOGGED:
-            console.log(action.payload)
             return {
                 ...state,
                 cart: action.payload,
@@ -246,7 +282,7 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 reviewCreated: action.payload
-            }   
+            }
 
         case PENDING_ORDER:
             return {
@@ -281,6 +317,11 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 user: {},
                 login: action.payload
+            }
+        case BIENVENIDO:
+            return {
+                ...state,
+                user: { ...state.user, bienvenido: action.payload },
             }
         default:
             return state;

@@ -1,29 +1,49 @@
-import React, { useEffect } from "react";
-import './Home.css';
+import React, { useState, useEffect } from "react";
+import s from './Home.module.css';
 import SearchBar from "../Search/SearchBar";
 import CourseList from "../../CourseList/CourseList";
-import { getAllCourses, getGenresCourses, getUsers,getUserInfo, getCart} from '../../actions/actions'
+import { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart, bienvenido } from '../../actions/actions'
 import { connect } from "react-redux";
+import { Row, Col, Toast, ToastContainer } from 'react-bootstrap'
 
+export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUsers, getCart, bienvenido }) {
 
-export function Home ({user,getUserInfo, getAllCourses, getGenresCourses, getUsers, getCart}) {
+    const [show, setShow] = useState(false);
 
-    useEffect(()=> {
+    useEffect(() => {
         getAllCourses()
         getGenresCourses()
-        getUsers()
-        getUserInfo(user.email)
+        user.email && getUserInfo(user.email)
         getCart(user.email)
+        !user.bienvenido && saludar()
     }, [])
 
+    const saludar = () => {
+        setShow(true)
+        bienvenido()
+    }
 
     return (
         <>
-        {/* <Carousel/> */}
+
+            <ToastContainer className={`p-3 ${s.mensaje}`} position={'top-start'}>
+                <Toast className={s.mensaje} onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                    <Toast.Header>
+                        <img
+                            src="holder.js/20x20?text=%20"
+                            className="rounded me-2"
+                            alt=""
+                        />
+                        <strong className="me-auto">Inico de Sesión</strong>
+                    </Toast.Header>
+                    <Toast.Body>{`Bienvenido ${user.firstName}!`}</Toast.Body>
+                </Toast>
+            </ToastContainer>
+
             <SearchBar />
-        <div className='home-container'>
-            <CourseList />
-        </div>
+            <div className={s.homeContainer}>
+                <CourseList />
+            </div>
         </>
     );
 };
@@ -34,4 +54,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart })(Home)
+export default connect(mapStateToProps, { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart, bienvenido })(Home)
