@@ -27,7 +27,6 @@ const Dashboard = (props) => {
 
 
 function mapStateToProps(state) {
-  console.log(state.rootReducer, 'user info en das')
     return {
         user: state.rootReducer.userInfo,
     }

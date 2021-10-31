@@ -24,13 +24,12 @@ export function Cart(props) {
   const [show, setShow] = useState(false);
   const [redirect, setRedirect] = useState(false)
 
-  const [checked, setChecked] = React.useState({ });
+  const [checked, setChecked] = React.useState({});
 
   const handleChange = (event) => {
-    setChecked({...checked, [event.target.name]:event.target.checked});
+    setChecked({ ...checked, [event.target.name]: event.target.checked });
   };
 
-  console.log(checked)
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -53,7 +52,7 @@ export function Cart(props) {
 
 
   useEffect(() => {
-    getUserInfo(user.email)
+    user.email && getUserInfo(user.email)
   }, [])
 
   function mensajeModel(id) {
@@ -115,10 +114,10 @@ export function Cart(props) {
   }
 
   const haddleRemoveItem = (id) => {
-    if(login){
-      const data = {id: id, email: user.email}
+    if (login) {
+      const data = { id: id, email: user.email }
       deleteCartLogged(data)
-    }else {
+    } else {
       removeCart(id)
     }
   }
@@ -210,10 +209,10 @@ export function Cart(props) {
                           $
                           {parseFloat(
                             course.price -
-                              (
-                                (course.percentageDiscount / 100) *
-                                course.price
-                              ).toFixed(2)
+                            (
+                              (course.percentageDiscount / 100) *
+                              course.price
+                            ).toFixed(2)
                           )}
                         </h3>
                       </div>
@@ -226,13 +225,13 @@ export function Cart(props) {
                   <td style={{ textAlign: "center" }}>
                     <div className="div-center">
 
-                    <Checkbox
-                  
-                      name={course.coursesId}
-                      checked={checked.hasOwnProperty(course.coursesId) ? checked[course.coursesId] : false}
-                      onChange={handleChange}
-                      inputProps={{ "aria-label": "controlled" }}
-                    />
+                      <Checkbox
+
+                        name={course.coursesId}
+                        checked={checked.hasOwnProperty(course.coursesId) ? checked[course.coursesId] : false}
+                        onChange={handleChange}
+                        inputProps={{ "aria-label": "controlled" }}
+                      />
                     </div>
                   </td>
                   <td style={{ textAlign: "center" }}>

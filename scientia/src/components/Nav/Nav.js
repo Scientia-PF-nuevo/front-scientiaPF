@@ -11,8 +11,6 @@ import * as actionCreators from './../../actions/actions'
 // import logo from '../../images/icon.png';
 
 function Nav(props) {
-
-    console.log(props, 'props')
     const imagenPerfil = props.user.photoURL
 
 
