@@ -1,25 +1,26 @@
 import React from 'react';
-import './App.css';
-
 // Router
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import About from '../components/About/About';
+import Cart from '../components/Cart/Cart';
+import Details from '../components/Details/Details';
+import Footer from '../components/Footer/Footer';
+import Form from '../components/Form/Form';
 // Components
 import Home from '../components/Home/Home';
-import About from '../components/About/About';
-import Nav from '../components/Nav/Nav';
-import Footer from '../components/Footer/Footer';
-import Cart from '../components/Cart/Cart';
-import Form from '../components/Form/Form';
-import Details from '../components/Details/Details';
-import Login from '../components/Login/Login.jsx'
-import SignUp from '../components/SignUp/SignUp';
+import Landing from '../components/Landing/Landing';
+import Login from '../components/Login/Login.jsx';
 import MyLearning from '../components/myLearning/myLearning';
-import Success from '../components/SignUp/Success';
-import ResponsivePlayer from '../components/Player/Player';
-import UserPanel from '../components/Profiles/UserPanel/UserPanel';
-import AdminPanel from '../components/Profiles/AdminPanel/AdminPanel';
+import Nav from '../components/Nav/Nav';
 import Payment from '../components/Payment/payment';
+import ResponsivePlayer from '../components/Player/Player';
+import AdminPanel from '../components/Profiles/AdminPanel/AdminPanel';
+import UserPanel from '../components/Profiles/UserPanel/UserPanel';
+import SignUp from '../components/SignUp/SignUp';
+import Success from '../components/SignUp/Success';
+import './App.css';
+
+
 
 function App() {
   return (
@@ -29,6 +30,10 @@ function App() {
       
       <Nav />
 
+      <Route exact path='/'>
+        <Landing/>
+      </Route>
+      
       <Route exact path='/login'>
         <Login />
       </Route>
