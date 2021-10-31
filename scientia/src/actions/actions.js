@@ -17,8 +17,9 @@ import {
     GET_FILTERED_COURSES,
     CREATE_REVIEW,
     CONFIRM_ORDER,
-    PENDING_ORDER,
     ADD_CART,
+    ADD_GIFT,
+    REMOVE_GIFT,
     ADD_CART_LOGGED,
     GET_CART,
     DELETE_CART_LOGGED,
@@ -37,9 +38,27 @@ import {
     VIDEO_PLAYING,
     GET_COURSES_TO_APPROVE,
     REJECT_COURSE,
-    APPROVE_COURSE
+    APPROVE_COURSE,
+    REMOVE_ALL_GIFT,
+    BIENVENIDO,
+    GET_ALL_CATEGORIES
+
 } from './constants.js';
 
+//trae todas las categorias 
+export function getAllCategories() {
+    return async function (dispatch) {
+        return await axios.get('http://localhost:3001/courses/allcategories/')
+            .then(response => {
+                console.log("aqui esta la data",response.data)
+                dispatch({
+                    type: GET_ALL_CATEGORIES,
+                    payload: response.data
+                })
+            })
+            .catch(err => { return err })
+    }
+}
 
 //* Trae todos los cursos (DB + API)
 export function getAllCourses() {
@@ -343,6 +362,20 @@ export function addCart(data) {
     }
 }
 
+export function addGift(data) {
+    return {
+        type: ADD_GIFT,
+        payload: data
+    }
+}
+
+export function removeGift(id) {
+    return {
+        type: REMOVE_GIFT,
+        payload: id
+    }
+}
+
 export function removeCart(id) {
     return {
         type: REMOVE_CART,
@@ -361,15 +394,22 @@ export function clearCartToPay() {
         type: CLEAR_CART_TO_PAY
     }
 }
+export function removeAllGift() {
+    console.log('asd')
+    return {
+        type: REMOVE_ALL_GIFT,
+        payload: []
+    }
+}
 
 
 //* Confirma un CURSO a la DB (COMPLETA)
 export function confirmOrder(userCart) {
     return function (dispatch) {
         axios.post(`http://localhost:3001/order/${userCart.email}`, {
-                state: "completa",
-                courseId: userCart.courseId
-            })
+            state: "completa",
+            courseId: userCart.courseId
+        })
             .then(res => {
 
                 dispatch({
@@ -383,25 +423,6 @@ export function confirmOrder(userCart) {
     }
 }
 
-//* Confirma un CURSO a la DB (PENDIENTE)
-export function pendingOrder(userCart) {
-    return function (dispatch) {
-        axios.post(`http://localhost:3001/order/${userCart.email}`, {
-                state: "creada",
-                courseId: userCart.courseId
-            })
-            .then(res => {
-
-                dispatch({
-                    type: PENDING_ORDER,
-                    payload: res.data
-                });
-            })
-            .catch(err => {
-                return err
-            })
-    }
-}
 
 export function addDetails(id) {
     return {
@@ -484,13 +505,12 @@ export function updateInfoVideo(info) {
 export function logout() {
     return async function (dispatch) {
         axios.post(`http://localhost:3001/users/logout`)
-            .then(r => {
-                console.log(r)
+            .then(r =>
                 dispatch({
                     type: LOGOUT,
                     payload: false
                 })
-            })
+            )
     }
 }
 
@@ -530,12 +550,19 @@ export function approveCourse(id) {
 }
 export function rejectCourse(id, motivo) {
     return async function (dispatch) {
-        axios.put(`http://localhost:3001/admin/editcoursestate/rejected/${id}`, {motivo: motivo})
+        axios.put(`http://localhost:3001/admin/editcoursestate/rejected/${id}`, { motivo: motivo })
             .then(res => {
                 dispatch({
                     type: REJECT_COURSE,
                     payload: id
                 })
             })
+    }
+}
+
+export function bienvenido() {
+    return {
+        type: BIENVENIDO,
+        payload: true
     }
 }

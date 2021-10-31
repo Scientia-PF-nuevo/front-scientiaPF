@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import useScript from "./useScript";
 import { formConfig } from "./formConfig.js";
-import { useSelector } from 'react-redux'
 
-export default function useMercadoPago(carrito, correo) {
+export default function useMercadoPago(carrito, correo, orders) {
+
     const [resultPayment, setResultPayment] = useState();
 
     let total = 0
@@ -54,6 +54,7 @@ export default function useMercadoPago(carrito, correo) {
                                 body: JSON.stringify({
                                     token,
                                     issuer_id,
+                                    orders,
                                     payment_method_id,
                                     transaction_amount: 1000,
                                     installments: Number(installments),

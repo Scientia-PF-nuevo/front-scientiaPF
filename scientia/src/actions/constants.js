@@ -1,4 +1,5 @@
 export const GET_ALL_COURSES = 'GET_ALL_COURSES';
+export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
 export const GET_USERS = 'GET_USERS';
 export const GET_USER_INFO = 'GET_USER_INFO'
 export const GET_ADMINS = 'GET_ADMINS';
@@ -15,7 +16,6 @@ export const REMOVE_CART = 'REMOVE_CART'
 export const ADD_DETAILS = 'ADD_DETAILS'
 export const SET_COURSE_TOAPROVE = 'SET_COURSE_TOAPROVE'
 export const CONFIRM_ORDER = 'CONFIRM_ORDER'
-export const PENDING_ORDER = 'PENDING_ORDER'
 export const CLEAR_CART = 'CLEAR_CART'
 export const NEW_USER = 'NEW_USER'
 export const SET_VIDEO = 'SET_VIDEO'
@@ -30,3 +30,8 @@ export const GET_CART = 'GET_CART'
 export const GET_COURSES_TO_APPROVE = 'GET_COURSES_TO_APPROVE'
 export const APPROVE_COURSE = 'APPROVE_COURSE'
 export const REJECT_COURSE = 'REJECT_COURSE'
+export const ADD_GIFT = 'ADD_GIFT'
+export const REMOVE_GIFT = 'REMOVE_GIFT'
+export const REMOVE_ALL_GIFT = 'REMOVE_ALL_GIFT'
+export const BIENVENIDO = 'BIENVENIDO'
+

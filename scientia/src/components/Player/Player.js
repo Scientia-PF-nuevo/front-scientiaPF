@@ -31,7 +31,7 @@ const ResponsivePlayer = ({updateInfoVideo, getUserInfo, info, user, getCoursesR
 
 
   useEffect(() => {
-    getUserInfo(user.email)
+    user.email && getUserInfo(user.email)
     getCoursesReviewsById(info.id)
   }, [])
 
