@@ -1,33 +1,65 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
 import { useHistory } from "react-router-dom";
 import { Table } from 'react-bootstrap';
 import {
   removeCart,
   addDetails,
   confirmOrder,
-  pendingOrder,
   clearCart,
-  getUserInfo
+  getUserInfo,
+  deleteCartLogged,
+  addGift,
+  removeGift
 } from "../../actions/actions";
 import { Link } from 'react-router-dom'
 import './Cart.css'
 import { Redirect } from 'react-router'
 import { Modal, Button } from 'react-bootstrap'
-
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Form from 'react-bootstrap/Form'
+import styles from './modal.css.js'
+import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 
 export function Cart(props) {
-  const [show, setShow] = useState(false);
-  const [redirect, setRedirect] = useState(false)
 
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+const { enqueueSnackbar } = useSnackbar();
 
-  let history = useHistory();
+const handleClickVariantOk = () => {
+        enqueueSnackbar('YOUR GIFT ADDED CORRECTLY', {
+          anchorOrigin: {
+              vertical: 'top',
+              horizontal: 'left',              
+          },
+          TransitionComponent: Slide,
+          variant: 'success',
+      })
+}
 
-  const usuario = useSelector(state => state.rootReducer.userInfo.coursesAndData)
+const handleClickVariantWrongEmail = () => {
+  enqueueSnackbar('INCORRECT EMAIL OR MISSED', {
+    anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'left',              
+    },
+    TransitionComponent: Slide,
+    variant: 'error',
+})
+}
+
+const handleClickVariantWrongRemovedGift = () => {
+  enqueueSnackbar('GIFT REMOVED', {
+    anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'left',              
+    },
+    TransitionComponent: Slide,
+    variant: 'warning',
+})
+}
 
   const {
     cart,
@@ -36,13 +68,94 @@ export function Cart(props) {
     removeCart,
     addDetails,
     confirmOrder,
-    pendingOrder,
+    deleteCartLogged,
     clearCart,
+    addGift,
+    removeGift,
+    gift
   } = props;
+
+  const [show, setShow] = useState(false);
+  const [redirect, setRedirect] = useState(false)
+
+  const [checked, setChecked] = React.useState({
+
+    gift: false,
+    courseId: 0,
+    price: 0,
+    orderId: 0,
+    emailGift: "" });
+    
+  const [show2, setShow2] = useState(false);
+
+  const handleClose3 = () => {
+    setShow2(false)
+  };
+  
+  const handleChange = (event) => {
+
+    if (login){
+
+      if (cart.length > 0) {
+        var [selectedCourse] = cart.filter((course)=> course.coursesId === parseInt(event.target.name))
+      }
+      
+     
+
+        setChecked({...checked,
+          gift: event.target.checked,
+          courseId: parseInt(event.target.name),
+          price: selectedCourse.price || 0,
+          orderId: selectedCourse.id || 0,
+          emailGift: "",
+          [event.target.name]:event.target.checked
+        });
+      
+  
+      if (!checked[event.target.name])
+      setShow2(true)
+      removeGift(parseInt(event.target.name))
+    } else {
+      history.push("/login")
+    }
+
+    
+  };
+
+  const [state, setState] = React.useState({emailGift: ""})
+
+
+
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+  const handleClose2 = (email) => {
+    if(validateEmail(email)) {
+      addGift(checked)
+      handleClickVariantOk('success')
+      setShow2(false)
+    } else {
+      handleClickVariantWrongEmail('error')
+    }
+   
+  };
+  const handleChangeGift = (e) => setChecked({...checked,[e.target.name]: e.target.value})
+
+  
+
+
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
+  let history = useHistory();
+
+  const usuario = useSelector(state => state.rootReducer.userInfo.coursesAndData)
 
 
   useEffect(() => {
-    getUserInfo(user.email)
+    user.email && getUserInfo(user.email)
   }, [])
 
   function mensajeModel(id) {
@@ -56,7 +169,7 @@ export function Cart(props) {
     result = cart.reduce((a, b) => ({ offerPrice: a.offerPrice + b.offerPrice })).offerPrice
     taxs = parseFloat((result * 0.21).toFixed(2));
     total = parseFloat(result + taxs).toFixed(2);
-    return `$ ${result}`;
+    return `$ ${parseFloat(result.toFixed(2))}`;
   }
 
 
@@ -88,11 +201,6 @@ export function Cart(props) {
         }
       }
 
-
-
-    
-
-
       if (sameId) {
         handleShow()
       } else {
@@ -108,48 +216,18 @@ export function Cart(props) {
     }
   }
 
-  const handledPendingOrder = () => {
-
-    if (usuario.length >= 1) {
-      var arrIDCourses = usuario.map((course) => course.courseId)
-    }
-
-    const userCart = {
-      email: "",
-      courseId: []
-    }
-
-    if (cart.length >= 1 && login) {
-      userCart.courseId = cart.map((course) => course.id)
-      userCart.email = user.email
-
-      var matchedIDs = []
-      var sameId = false;
-      for (let i = 0; i < userCart.courseId.length; i++) {
-        for (let j = 0; j < arrIDCourses.length; j++) {
-          if (userCart.courseId[i] === arrIDCourses[j]) {
-            var sameId = true;
-            matchedIDs.push(userCart.courseId[i])
-          }
-        }
-      }
-
-      if (sameId) {
-        handleShow()
-      } else {
-        pendingOrder(userCart)
-        clearCart()
-      }
-
-    }
-
-    else if (!login) {
-      history.push("/login")
+  const haddleRemoveItem = (id) => {
+    if(login){
+      const data = {id: id, email: user.email}
+      removeGift(id)
+      deleteCartLogged(data)
+    } else {
+      removeCart(id)
     }
   }
 
   return (
-    <>
+    <div className="wrapper-cart">
       <div className="cart-div">
         <Table striped bordered hover>
           <thead>
@@ -157,31 +235,32 @@ export function Cart(props) {
               <th style={{ textAlign: "center" }}>Course</th>
               <th style={{ textAlign: "center" }}>Course Name</th>
               <th style={{ textAlign: "center" }}>Price</th>
-              <th style={{ textAlign: "center" }}>CUPON</th>
+              <th style={{ textAlign: "center" }}>Gift a Course</th>
               <th style={{ textAlign: "center" }}>Sub-Total</th>
               <th style={{ textAlign: "center" }}>Remove</th>
             </tr>
           </thead>
           {cart.length >= 1 ? (
             cart.map((course) => (
-
               <tbody className="tbody-div">
-                <tr style={{}}>
+                <tr>
                   <td className="photo-div">
                     <img className="cart-img" src={course.url} />
                   </td>
                   <td style={{ textAlign: "center" }}>
+                  <div className="div-center2">
                     <Link
                       to="/details"
-                      onClick={() => addDetails(course.id)}
+                      onClick={() => addDetails(course.coursesId)}
                       className="link-div-cart"
                     >
                       {course.name && course.name.toUpperCase()}
                     </Link>
+                    </div>
                   </td>
                   <td style={{ textAlign: "center" }}>
                     {course.percentageDiscount > 0 ? (
-                      <>
+                      <div>
                         <h3
                           style={{
                             color: "red",
@@ -191,46 +270,79 @@ export function Cart(props) {
                           ${course.price}
                         </h3>
                         <p>{course.percentageDiscount}% OFF</p>
-                        <h3 style={{ color: "green" }}>${course.price - ((course.percentageDiscount / 100) * course.price)}</h3>
-                      </>
-                    ) : (
-                      <>
                         <h3 style={{ color: "green" }}>
                           $
-                          {course.price}
+                          {parseFloat(
+                            course.price -
+                            (
+                              (course.percentageDiscount / 100) *
+                              course.price
+                            ).toFixed(2)
+                          )}
                         </h3>
-                      </>
+                      </div>
+                    ) : (
+                      <div className="div-center">
+                        <h3 style={{ color: "green" }}>${course.price}</h3>
+                      </div>
                     )}
                   </td>
                   <td style={{ textAlign: "center" }}>
-                    <TextField
-                      id="standard-basic"
-                      label="ID Number"
-                      variant="standard"
+                    <div className="div-center3">
+                    <Checkbox
+                      sx={{ '& .MuiSvgIcon-root': { fontSize: 40 } }}
+                      name={course.coursesId}
+                      checked={checked.hasOwnProperty(course.coursesId) ? checked[course.coursesId] : false}
+                      onChange={handleChange}
+                      inputProps={{ "aria-label": "controlled" }}
                     />
-                    <Button color="secondary">Validar</Button>
+                    <p>GIFT</p>
+                    </div>
                   </td>
                   <td style={{ textAlign: "center" }}>
-                    <h3 style={{ color: "red" }}>{Total()}</h3>
+                    <div className="div-center">
+                      <h3 style={{ color: "red" }}>{Total()}</h3>
+                    </div>
                   </td>
                   <td style={{ textAlign: "center" }}>
                     {
-                      <DeleteRoundedIcon
-                        onClick={() => removeCart(course.id)}
-                        style={{ cursor: "pointer" }}
-                      />
+                      <div className="div-center">
+                        <DeleteRoundedIcon
+                          onClick={() => haddleRemoveItem(course.coursesId)}
+                          style={{ cursor: "pointer", fontSize: 40 }}
+                        />
+                      </div>
                     }
                   </td>
                 </tr>
+        
               </tbody>
             ))
           ) : (
             <div></div>
           )}
         </Table>
-      </div>
+        <div>
+          {
+            (gift && gift.length >= 1) 
+
+            ? 
+
+            (
+              gift.map((g) => 
+                <p>{g.emailGift}</p>
+              )
+            ) 
+            
+            : 
+            
+            (
+              <p>NO TIENES CURSOS PARA REGALAR</p>
+            )
+          }
+        </div>
       <p>
-        <strong>SUB - TOTAL:</strong> $ {result}
+        <strong>SUB - TOTAL:</strong> $ {parseFloat(result.toFixed(2))}
       </p>
       <p>
         <strong>TAXs (21%):</strong> $ {taxs}
@@ -238,12 +350,14 @@ export function Cart(props) {
       <p>
         <strong>TOTAL:</strong> $ {total}
       </p>
+      <div className="confirm-order-div">
       <button className="confirm-button" onClick={handledSubmitOrder}>
-        {" "}
-        CONFIRM ORDER{" "}
+        CONFIRM ORDER
       </button>
+      </div>
       <br></br>
       <br></br>
+      </div>
 
       {/* <button className="confirm-button-later" onClick={handledPendingOrder}> CONFIRM LATER </button> */}
 
@@ -258,9 +372,31 @@ export function Cart(props) {
           </Button>
         </Modal.Footer>
       </Modal>
-
+  
       {redirect ? <Redirect to="/payment" /> : <></>}
-    </>
+      <Modal show={show2} onHide={handleClose3} style={styles.modal} >
+        <Modal.Header closeButton>
+          <Modal.Title>INSERT THE E-MAIL TO GIFT</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form.Group >
+              <Form.Label style={{marginLeft: "10"}}>E-MAIL: </Form.Label>
+              <Form.Control type="email" name="emailGift" onChange={handleChangeGift} value={state.name} placeholder="email@email.com" />           
+          </Form.Group>
+          </Modal.Body>
+        <Modal.Footer>
+        {/* <Button variant="primary" type="submit" onClick={handleChangeGift}>
+              Submit
+          </Button> */}
+          <Button variant="primary" onClick={handleClose3}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={() => handleClose2(checked.emailGift)}>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>     
+    </div>
   );
 }
 
@@ -269,7 +405,8 @@ function mapStateToProps(state) {
     cart: state.rootReducer.cart,
     user: state.rootReducer.user,
     userStatus: state.rootReducer.login,
-    login: state.rootReducer.login
+    login: state.rootReducer.login,
+    gift: state.rootReducer.gift
   }
 }
 
@@ -277,7 +414,9 @@ export default connect(mapStateToProps, {
   removeCart,
   addDetails,
   confirmOrder,
-  pendingOrder,
   clearCart,
-  getUserInfo
+  deleteCartLogged,
+  getUserInfo,
+  addGift,
+  removeGift
 })(Cart);

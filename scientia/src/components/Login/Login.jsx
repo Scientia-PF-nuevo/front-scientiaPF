@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import * as actionCreators from './../../actions/actions'
-import { register } from './../../actions/actions'
 import s from './login.module.css'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom'
@@ -40,20 +39,22 @@ function Login(props) {
     async function handleSubmit(e) {
         e.preventDefault()
         let normal = true
-        props.logear(state.email, state.password, normal)
+        props.logear(state.email, state.password, props.cart, normal)
         handleShow()
     }
 
     async function submitGoogle(e) {
         e.preventDefault()
-        props.autenticarConGoogle()
+
+        props.autenticarConGoogle(props.cart)
+
         handleShow()
     }
 
     function mensajeModel() {
         //revisar display Name o first name
         if (user.firstName) {
-            return `Bienvenido ${user.firstName}!`
+            return <Redirect to="/home" />
         }
         return <Spinner animation="border" variant="primary" />
     }
@@ -86,14 +87,9 @@ function Login(props) {
                 :
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Inicio de Sesión</Modal.Title>
+                        <Modal.Title>Iniciando Sesión</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>{mensajeModel()}</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" onClick={handleClose}>
-                            Ok!
-                        </Button>
-                    </Modal.Footer>
                 </Modal>
             }
         </>
@@ -108,7 +104,7 @@ function mapStateToProps(state) {
     return {
         login: state.rootReducer.login,
         user: state.rootReducer.user,
-        users: state.rootReducer.users
+        cart: state.rootReducer.cart
     }
 }
 

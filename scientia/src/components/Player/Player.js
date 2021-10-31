@@ -1,27 +1,51 @@
 import React, {useEffect, useState} from 'react'
 import ReactPlayer from 'react-player'
 import './Player.css'
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
 import Comments from '../Comments/Comments'
 import { connect } from 'react-redux'
 import {getCoursesReviewsById} from '../../actions/actions'
 import {updateInfoVideo, getUserInfo} from '../../actions/actions'
 import NewReview from '../Reviews/NewReview'
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { CardContent } from '@material-ui/core';
 
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+
+
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 const ResponsivePlayer = ({updateInfoVideo, getUserInfo, info, user, getCoursesReviewsById}) => {
 
 
   useEffect(() => {
-    getUserInfo(user.email)
+    user.email && getUserInfo(user.email)
     getCoursesReviewsById(info.id)
   }, [])
 
+  const [expanded, setExpanded] = React.useState(false);
 
   const [state, setState] = React.useState ({
     playing: false, 
     ended: false,
     videoTime: 0,
   })
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   const [duration, setDuration] = React.useState ({})
 
@@ -134,9 +158,22 @@ const ResponsivePlayer = ({updateInfoVideo, getUserInfo, info, user, getCoursesR
           <div className="player-wrapper">
             {userReview.length >= 1 ? null : <NewReview />}
           </div>
-
-          <div className="player-wrapper">
-            <Comments courseId={info.id} />
+          <div className="player-wrapper2">
+          <h2>REVIEWS</h2>
+          <CardContent>
+          <CardActions>
+          <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+          >
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Comments />
+        </Collapse>
+        </CardContent>
           </div>
         </>
       );

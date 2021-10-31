@@ -1,7 +1,6 @@
 
 import {React, useState, useEffect} from 'react'
 import { connect } from 'react-redux'
-import FilterBar from '../FilterBar/FilterBar'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MyFormControlLabel from '@mui/material/FormControlLabel';
@@ -27,6 +26,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
     level3: false,
     price1: false,
     price2: false,
+    price3: false,
     languaje1: false,
     languaje2: false,
     languaje3: false,
@@ -52,7 +52,6 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
     getFilteredCourses(checked)
   }, [checked])
 
-  
   const [expanded, setExpanded] = useState(false);
 
   
@@ -96,6 +95,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
       level3: false,
       price1: false,
       price2: false,
+      price3: false,
       languaje1: false,
       languaje2: false,
       languaje3: false,
@@ -228,6 +228,13 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
                     label="FREE"
                     value="free"
                   />
+                    <FormControlLabel
+                    control={
+                      <Checkbox checked={checked.price3} name="price3" onChange={handleChangeCheck} />
+                    }
+                    label="OFFERS"
+                    value="offers"
+                  />
                   <FormControlLabel
                     control={
                       <Checkbox checked={checked.price2} name="price2" onChange={handleChangeCheck} />
@@ -356,8 +363,9 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
             </AccordionDetails>
           </Accordion>
           <br></br>
-          <p>COURSES FOUNDED: {allCourses && allCourses.length > 0 ? allCourses.length : 0}</p>
+          <p>COURSES FOUNDED: ({allCourses && allCourses.length > 0 ? allCourses.length : 0})</p>
 
+          <br></br>
           <div className="clearFilter-button-div">
         <button className="clearFilter-button" onClick={handleCleanFilters}>
           CLEAR FILTERS
@@ -365,7 +373,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
         </div>
 
           <br></br>
-        <h3>ORDER BY</h3>
+        <h3>SORT BY</h3>
         <br></br>
           <Accordion
             expanded={expanded === "panel5"}
@@ -415,12 +423,72 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
                 <RadioGroup name="use-radio-group" defaultValue="first">
                   <MyFormControlLabel
                     value="best"
-                    label="BEST"
+                    label="BEST RATING"
                     control={<Radio onChange={handleSelect2} />}
                   />
                   <MyFormControlLabel
                     value="worst"
-                    label="WORST"
+                    label="LESS RATING"
+                    control={<Radio onChange={handleSelect2} />}
+                  />
+                </RadioGroup>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel8"}
+            onChange={handleChange("panel8")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                <strong>ALPHABETIC</strong>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <RadioGroup name="use-radio-group" defaultValue="first">
+                  <MyFormControlLabel
+                    value="A-Z"
+                    label="A - Z"
+                    control={<Radio onChange={handleSelect2} />}
+                  />
+                  <MyFormControlLabel
+                    value="Z-A"
+                    label="Z - A"
+                    control={<Radio onChange={handleSelect2} />}
+                  />
+                </RadioGroup>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel9"}
+            onChange={handleChange("panel9")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                <strong>PRICE</strong>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <RadioGroup name="use-radio-group" defaultValue="first">
+                  <MyFormControlLabel
+                    value="desc"
+                    label="MOST CHEAPER"
+                    control={<Radio onChange={handleSelect2} />}
+                  />
+                  <MyFormControlLabel
+                    value="asc"
+                    label="MOST EXPENSIVE"
                     control={<Radio onChange={handleSelect2} />}
                   />
                 </RadioGroup>
@@ -428,8 +496,6 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
             </AccordionDetails>
           </Accordion>
         </div>
-        <br></br>
-        <FilterBar />
       </div>
       
     );

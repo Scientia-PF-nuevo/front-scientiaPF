@@ -1,24 +1,49 @@
-.cart-div {
+.wrapper-cart {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1000px;
+.cart-div {
+   
+    flex-direction: column;
+}
+
+.div-center {
+margin-top: 50px;
 
 }
 
+.div-center2 {
+  margin-top: 28px;
+  
+  }
+
+  .div-center3 {
+    margin-top: 30px;
+    
+    }
+
 .cart-img {
-    width: 150px;
-    height: 90px;
+    width: 155px;
+    height: 110px;
+}
+
+.confirm-order-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 td {
     font-size: larger;
     width: 200px;
+    height: 150px;
 }
 
 th {
     text-align: center;
+    margin-top: 10px;
 }
 
 .photo-div {
@@ -29,10 +54,11 @@ th {
 
 .link-div-cart {
     text-decoration: none;
+    font-size: 25px;
 }
 
-.cart-div input {
-    margin: 10px;
+.link-div-cart:hover {
+  text-decoration: none;
 }
 
 .confirm-button {
@@ -86,55 +112,3 @@ th {
   background-color: #298e46;
   box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
 }
-
-.confirm-button-later {
- 
-    appearance: none;
-    background-color: #e41d0f;
-    border: 1px solid rgba(27, 31, 35, .15);
-    border-radius: 6px;
-    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-    padding: 6px 16px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-  
-  .confirm-button-later:focus:not(:focus-visible):not(.focus-visible) {
-    box-shadow: none;
-    outline: none;
-  }
-  
-  .confirm-button-later:hover {
-    background-color: #97382c;
-  }
-  
-  .confirm-button-later:focus {
-    box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
-    outline: none;
-  }
-  
-  .confirm-button-later:disabled {
-    background-color: #94d3a2;
-    border-color: rgba(27, 31, 35, .1);
-    color: rgba(255, 255, 255, .8);
-    cursor: default;
-  }
-  
-  .cconfirm-button-later:active {
-    background-color: #b82107;
-    box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
-  }

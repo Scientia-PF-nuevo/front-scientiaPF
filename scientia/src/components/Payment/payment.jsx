@@ -5,8 +5,8 @@ import Card from "react-credit-cards";
 import s from './tarjeta.module.css'
 import { Modal, Button, Spinner } from 'react-bootstrap'
 import { Redirect } from "react-router-dom"
-import { clearCartToPay, confirmOrder } from "../../actions/actions";
-import { connect, useSelector } from "react-redux";
+import { clearCartToPay, confirmOrder, removeAllGift } from "../../actions/actions";
+import { connect } from "react-redux";
 
 
 const INITIAL_STATE = {
@@ -26,21 +26,20 @@ function MercadoPagoForm(props) {
     const [msg, setMsg] = useState('')
     const [showMsg, setShowMsg] = useState(false)
 
-    // const cart = useSelector(state => state.rootReducer.cartToPay)
-
     const handleClose = () => {
         setShow(false)
         setRedir(true)
     };
     const handleShow = () => {
+        props.removeAllGift()
         setShow(true)
         setTimeout(() => {
             setShowMsg(true)
-            setShow(false)
+            handleClose()
         }, 5000);
     };
 
-    const resultPayment = useMercadoPago(props.cartToPay, props.user.email);
+    const resultPayment = useMercadoPago(props.cartToPay, props.user.email, props.gift);
     
     const handleInputChange = (e) => {
         setState({
@@ -52,7 +51,7 @@ function MercadoPagoForm(props) {
     function mensajeModel() {
         if (msg === '') {
             if (resultPayment) {
-                clearCartToPay()
+                // clearCartToPay()
                 setMsg(`Pagado con éxito!`)
             }
             return <Spinner animation="border" variant="primary" />
@@ -203,7 +202,8 @@ function mapStateToProps(state) {
     return {
         cartToPay: state.rootReducer.cartToPay,
         user: state.rootReducer.user,
+        gift: state.rootReducer.gift
     }
 }
 
-export default connect(mapStateToProps, { confirmOrder, clearCartToPay })(MercadoPagoForm)
+export default connect(mapStateToProps, { confirmOrder, clearCartToPay, removeAllGift })(MercadoPagoForm)
