@@ -85,7 +85,13 @@ const handleClickVariantWrongRemovedGift = () => {
     price: 0,
     orderId: 0,
     emailGift: "" });
+    
+  const [show2, setShow2] = useState(false);
 
+  const handleClose3 = () => {
+    setShow2(false)
+  };
+  
   const handleChange = (event) => {
 
     if (login){
@@ -93,15 +99,18 @@ const handleClickVariantWrongRemovedGift = () => {
       if (cart.length > 0) {
         var [selectedCourse] = cart.filter((course)=> course.coursesId === parseInt(event.target.name))
       }
-  
-      setChecked({...checked,
-        gift: event.target.checked,
-        courseId: parseInt(event.target.name),
-        price: selectedCourse.price || 0,
-        orderId: selectedCourse.id || 0,
-        emailGift: "",
-        [event.target.name]:event.target.checked
-      });
+      
+     
+
+        setChecked({...checked,
+          gift: event.target.checked,
+          courseId: parseInt(event.target.name),
+          price: selectedCourse.price || 0,
+          orderId: selectedCourse.id || 0,
+          emailGift: "",
+          [event.target.name]:event.target.checked
+        });
+      
   
       if (!checked[event.target.name])
       setShow2(true)
@@ -115,7 +124,6 @@ const handleClickVariantWrongRemovedGift = () => {
 
   const [state, setState] = React.useState({emailGift: ""})
 
-  const [show2, setShow2] = useState(false);
 
 
   function validateEmail(email) {
@@ -133,13 +141,10 @@ const handleClickVariantWrongRemovedGift = () => {
     }
    
   };
-
-  const handleClose3 = () => {
-    setShow2(false)
-  };
-
   const handleChangeGift = (e) => setChecked({...checked,[e.target.name]: e.target.value})
-  // console.log(state)
+
+  
+
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -147,7 +152,6 @@ const handleClickVariantWrongRemovedGift = () => {
   let history = useHistory();
 
   const usuario = useSelector(state => state.rootReducer.userInfo.coursesAndData)
-
 
 
   useEffect(() => {
@@ -222,7 +226,6 @@ const handleClickVariantWrongRemovedGift = () => {
     }
   }
 
-
   return (
     <div className="wrapper-cart">
       <div className="cart-div">
@@ -248,7 +251,7 @@ const handleClickVariantWrongRemovedGift = () => {
                   <div className="div-center2">
                     <Link
                       to="/details"
-                      onClick={() => addDetails(course.id)}
+                      onClick={() => addDetails(course.coursesId)}
                       className="link-div-cart"
                     >
                       {course.name && course.name.toUpperCase()}
@@ -319,6 +322,25 @@ const handleClickVariantWrongRemovedGift = () => {
             <div></div>
           )}
         </Table>
+        <div>
+          {
+            (gift && gift.length >= 1) 
+
+            ? 
+
+            (
+              gift.map((g) => 
+                <p>{g.emailGift}</p>
+              )
+            ) 
+            
+            : 
+            
+            (
+              <p>NO TIENES CURSOS PARA REGALAR</p>
+            )
+          }
+        </div>
       <p>
         <strong>SUB - TOTAL:</strong> $ {parseFloat(result.toFixed(2))}
       </p>
