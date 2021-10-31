@@ -17,8 +17,9 @@ import {
     GET_FILTERED_COURSES,
     CREATE_REVIEW,
     CONFIRM_ORDER,
-    PENDING_ORDER,
     ADD_CART,
+    ADD_GIFT,
+    REMOVE_GIFT,
     ADD_CART_LOGGED,
     GET_CART,
     DELETE_CART_LOGGED,
@@ -38,7 +39,9 @@ import {
     GET_COURSES_TO_APPROVE,
     REJECT_COURSE,
     APPROVE_COURSE,
-    BIENVENIDO
+    REMOVE_ALL_GIFT,
+    BIENVENIDO,
+
 } from './constants.js';
 
 
@@ -344,6 +347,20 @@ export function addCart(data) {
     }
 }
 
+export function addGift(data) {
+    return {
+        type: ADD_GIFT,
+        payload: data
+    }
+}
+
+export function removeGift(id) {
+    return {
+        type: REMOVE_GIFT,
+        payload: id
+    }
+}
+
 export function removeCart(id) {
     return {
         type: REMOVE_CART,
@@ -360,6 +377,13 @@ export function clearCart() {
 export function clearCartToPay() {
     return {
         type: CLEAR_CART_TO_PAY
+    }
+}
+export function removeAllGift() {
+    console.log('asd')
+    return {
+        type: REMOVE_ALL_GIFT,
+        payload: []
     }
 }
 
@@ -384,25 +408,6 @@ export function confirmOrder(userCart) {
     }
 }
 
-//* Confirma un CURSO a la DB (PENDIENTE)
-export function pendingOrder(userCart) {
-    return function (dispatch) {
-        axios.post(`http://localhost:3001/order/${userCart.email}`, {
-            state: "creada",
-            courseId: userCart.courseId
-        })
-            .then(res => {
-
-                dispatch({
-                    type: PENDING_ORDER,
-                    payload: res.data
-                });
-            })
-            .catch(err => {
-                return err
-            })
-    }
-}
 
 export function addDetails(id) {
     return {

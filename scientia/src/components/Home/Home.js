@@ -6,7 +6,7 @@ import { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart, bienve
 import { connect } from "react-redux";
 import { Row, Col, Toast, ToastContainer } from 'react-bootstrap'
 
-export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUsers, getCart, bienvenido }) {
+export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUsers, getCart, bienvenido, login }) {
 
     const [show, setShow] = useState(false);
 
@@ -14,7 +14,7 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUs
         getAllCourses()
         getGenresCourses()
         user.email && getUserInfo(user.email)
-        getCart(user.email)
+        if (login) {getCart(user.email)}
         !user.bienvenido && saludar()
     }, [])
 
@@ -25,7 +25,6 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUs
 
     return (
         <>
-
             <ToastContainer className={`p-3 ${s.mensaje}`} position={'top-start'}>
                 <Toast className={s.mensaje} onClose={() => setShow(false)} show={show} delay={3000} autohide>
                     <Toast.Header>
@@ -46,11 +45,13 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUs
             </div>
         </>
     );
+
 };
 
 const mapStateToProps = (state) => {
     return {
-        user: state.rootReducer.user
+        user: state.rootReducer.user,
+        login: state.rootReducer.login
     }
 }
 

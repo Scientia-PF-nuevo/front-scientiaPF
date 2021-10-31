@@ -73,9 +73,6 @@ function Details({
 
   const hadlePlayerDemo = () => {
     setOpen(true);
-    setTimeout(() => {
-      setOpen(false);
-    }, 30000); // setear el tiempo de DEMO
   };
 
  
@@ -145,6 +142,11 @@ function Details({
             <ModalVideo
               channel="youtube"
               autoplay
+              youtube={{
+                end: 10,
+                showinfo: 0,
+                controls: 0
+              }}
               isOpen={isOpen}
               videoId={videoID}
               onClose={() => setOpen(false)}

@@ -365,6 +365,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
           <br></br>
           <p>COURSES FOUNDED: ({allCourses && allCourses.length > 0 ? allCourses.length : 0})</p>
 
+          <br></br>
           <div className="clearFilter-button-div">
         <button className="clearFilter-button" onClick={handleCleanFilters}>
           CLEAR FILTERS
@@ -372,7 +373,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
         </div>
 
           <br></br>
-        <h3>ORDER BY</h3>
+        <h3>SORT BY</h3>
         <br></br>
           <Accordion
             expanded={expanded === "panel5"}
