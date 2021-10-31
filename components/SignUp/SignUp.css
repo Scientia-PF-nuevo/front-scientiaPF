@@ -1,0 +1,44 @@
+.div-signup {
+    background-color: rgba(207, 207, 207, 0.651);
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    margin: 0 10% 4% 10%;
+    padding: 2% 5% 2% 5%;
+}
+
+.legend {
+    color: hsl(0, 99%, 36%);
+}
+
+.div-signup form {
+    width: 100%;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.form-row div {
+    margin: 10px 10px 10px 10px;
+}
+
+.div-signup label {
+    width: 100%;
+}
+
+.div-signup input {
+    width: 100%;
+}
+
+.div-signup button {
+    width: 300px;
+}

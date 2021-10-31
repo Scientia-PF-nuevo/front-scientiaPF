@@ -39,7 +39,9 @@ import {
     GET_COURSES_TO_APPROVE,
     REJECT_COURSE,
     APPROVE_COURSE,
-    REMOVE_ALL_GIFT
+    REMOVE_ALL_GIFT,
+    BIENVENIDO,
+
 } from './constants.js';
 
 
@@ -390,9 +392,9 @@ export function removeAllGift() {
 export function confirmOrder(userCart) {
     return function (dispatch) {
         axios.post(`http://localhost:3001/order/${userCart.email}`, {
-                state: "completa",
-                courseId: userCart.courseId
-            })
+            state: "completa",
+            courseId: userCart.courseId
+        })
             .then(res => {
 
                 dispatch({
@@ -406,27 +408,6 @@ export function confirmOrder(userCart) {
     }
 }
 
-
-
-// //* Confirma un CURSO a la DB (PENDIENTE)
-// export function pendingOrder(userCart) {
-//     return function (dispatch) {
-//         axios.post(`http://localhost:3001/order/${userCart.email}`, {
-//                 state: "creada",
-//                 courseId: userCart.courseId
-//             })
-//             .then(res => {
-
-//                 dispatch({
-//                     type: PENDING_ORDER,
-//                     payload: res.data
-//                 });
-//             })
-//             .catch(err => {
-//                 return err
-//             })
-//     }
-// }
 
 export function addDetails(id) {
     return {
@@ -509,13 +490,12 @@ export function updateInfoVideo(info) {
 export function logout() {
     return async function (dispatch) {
         axios.post(`http://localhost:3001/users/logout`)
-            .then(r => {
-                console.log(r)
+            .then(r =>
                 dispatch({
                     type: LOGOUT,
                     payload: false
                 })
-            })
+            )
     }
 }
 
@@ -555,12 +535,19 @@ export function approveCourse(id) {
 }
 export function rejectCourse(id, motivo) {
     return async function (dispatch) {
-        axios.put(`http://localhost:3001/admin/editcoursestate/rejected/${id}`, {motivo: motivo})
+        axios.put(`http://localhost:3001/admin/editcoursestate/rejected/${id}`, { motivo: motivo })
             .then(res => {
                 dispatch({
                     type: REJECT_COURSE,
                     payload: id
                 })
             })
+    }
+}
+
+export function bienvenido() {
+    return {
+        type: BIENVENIDO,
+        payload: true
     }
 }

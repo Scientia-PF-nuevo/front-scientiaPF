@@ -26,7 +26,7 @@ import Slide from '@material-ui/core/Slide';
 
 export function Cart(props) {
 
-  const { enqueueSnackbar } = useSnackbar();
+const { enqueueSnackbar } = useSnackbar();
 
 const handleClickVariantOk = () => {
         enqueueSnackbar('YOUR GIFT ADDED CORRECTLY', {
@@ -155,7 +155,7 @@ const handleClickVariantWrongRemovedGift = () => {
 
 
   useEffect(() => {
-    getUserInfo(user.email)
+    user.email && getUserInfo(user.email)
   }, [])
 
   function mensajeModel(id) {
@@ -221,7 +221,7 @@ const handleClickVariantWrongRemovedGift = () => {
       const data = {id: id, email: user.email}
       removeGift(id)
       deleteCartLogged(data)
-    }else {
+    } else {
       removeCart(id)
     }
   }
@@ -274,10 +274,10 @@ const handleClickVariantWrongRemovedGift = () => {
                           $
                           {parseFloat(
                             course.price -
-                              (
-                                (course.percentageDiscount / 100) *
-                                course.price
-                              ).toFixed(2)
+                            (
+                              (course.percentageDiscount / 100) *
+                              course.price
+                            ).toFixed(2)
                           )}
                         </h3>
                       </div>
@@ -287,7 +287,7 @@ const handleClickVariantWrongRemovedGift = () => {
                       </div>
                     )}
                   </td>
-                  <td style={{ textAlign: "center" }}>
+                  <td style={{ textAlign: "center" }}
                     <div className="div-center3">
                     <Checkbox
                       sx={{ '& .MuiSvgIcon-root': { fontSize: 40 } }}
