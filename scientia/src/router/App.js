@@ -18,74 +18,78 @@ import AdminPanel from '../components/Profiles/AdminPanel/AdminPanel';
 import UserPanel from '../components/Profiles/UserPanel/UserPanel';
 import SignUp from '../components/SignUp/SignUp';
 import Success from '../components/SignUp/Success';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 import './App.css';
 
 
 
 function App() {
+  const user = useSelector((state) => state.rootReducer.user)
+  console.log(user)
   return (
     <div className='container-app'>
 
-    <Router>
-      
-      <Nav />
+      <Router>
 
-      <Route exact path='/'>
-        <Landing/>
-      </Route>
-      
-      <Route exact path='/login'>
-        <Login />
-      </Route>
+        <Nav />
 
-      <Route exact path='/signup'>
-        <SignUp />
-      </Route>
+        <Route exact path='/'>
+          <Landing />
+        </Route>
 
-      <Route exact path='/player'>
-        <ResponsivePlayer />
-      </Route>
+        <Route exact path='/login'>
+          <Login />
+        </Route>
 
-      <Route exact path='/mylearning'>
-        <MyLearning />
-      </Route>
-    
-      <Route exact path='/success'>
-        <Success />
-      </Route>
+        <Route exact path='/signup'>
+          <SignUp />
+        </Route>
 
-      <Route exact path='/home'>
-        <Home />
-      </Route>
+        <Route exact path='/player'>
+          <ResponsivePlayer />
+        </Route>
 
-      <Route exact path='/about'>
-        <About />
-      </Route>
+        <Route exact path='/mylearning'>
+          <MyLearning />
+        </Route>
 
-      <Route exact path='/cart'>
-        <Cart />
-      </Route>
+        <Route exact path='/success'>
+          <Success />
+        </Route>
 
-      <Route exact path='/details'>
-        <Details />
-      </Route>
+        <Route exact path='/home'>
+          <Home />
+        </Route>
 
-      <Route exact path='/payment'>
-        <Payment />
-      </Route>
+        <Route exact path='/about'>
+          <About />
+        </Route>
 
-      <Route exact path='/form' component={Form}/>
+        <Route exact path='/cart'>
+          <Cart />
+        </Route>
 
-      <Route path='/userprofile'>
-        <UserPanel />
-      </Route>
+        <Route exact path='/details'>
+          <Details />
+        </Route>
 
-      <Route path='/adminprofile'>
-        <AdminPanel />
-      </Route>
-      
-      <Footer />
-    </Router>
+        <Route exact path='/payment'>
+          <Payment />
+        </Route>
+
+        <Route exact path='/form' component={Form} />
+
+        <Route path='/userprofile'>
+          {user.isAdmin ? <Redirect to="/adminprofile" /> : <UserPanel />}
+        </Route>
+
+        <Route path='/adminprofile'>
+          {user.isAdmin ? <AdminPanel /> : <Redirect to="/" />}
+        </Route>
+
+        <Footer />
+      </Router>
     </div>
   );
 }
