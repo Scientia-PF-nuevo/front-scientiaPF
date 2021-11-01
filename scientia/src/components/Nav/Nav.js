@@ -37,7 +37,7 @@ function Nav(props) {
   const deslogeo = () => {
     enqueueSnackbar(`Hasta la próxima ${props.user.firstName}!`, {
       anchorOrigin: {
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'left',
       },
       TransitionComponent: Slide,
