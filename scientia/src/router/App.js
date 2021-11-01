@@ -26,7 +26,6 @@ import './App.css';
 
 function App() {
   const user = useSelector((state) => state.rootReducer.user)
-  console.log(user)
   return (
     <div className='container-app'>
 

@@ -19,7 +19,7 @@ function Login(props) {
     const errorLogeo = () => {
         enqueueSnackbar('Credenciales erroneas', {
             anchorOrigin: {
-                vertical: 'top',
+                vertical: 'bottom',
                 horizontal: 'left',
             },
             TransitionComponent: Slide,

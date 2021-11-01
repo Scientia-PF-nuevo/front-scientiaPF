@@ -15,7 +15,7 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getCa
     const logeoCorrecto = () => {
         enqueueSnackbar(`Bienvenido ${user.firstName}!`, {
             anchorOrigin: {
-                vertical: 'top',
+                vertical: 'bottom',
                 horizontal: 'left',
             },
             TransitionComponent: Slide,
@@ -29,7 +29,6 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getCa
         user.email && getUserInfo(user.email)
         if (login) { getCart(user.email) }
         bienvenido && saludar()
-        console.log(bienvenido)
     }, [])
 
     const saludar = () => {
