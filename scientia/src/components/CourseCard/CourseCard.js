@@ -4,8 +4,6 @@ import './CourseCard.css'
 import { connect } from 'react-redux'
 import { addCart, addCartLogged, addDetails } from '../../actions/actions'
 import TextRating from './Qualify'
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import IconButton from '@mui/material/IconButton';
 import dicount from '../../assets/discount.png'
 import bestSeller from '../../assets/bestSeller.jpg'
 import topSeller from '../../assets/topSeller.jpg'
@@ -70,6 +68,18 @@ function CourseCard(props) {
 
     offer = price - ((percentageDiscount / 100) * price)
   }
+
+
+   
+    var alreadyBothCoursesId = []
+    var bothIds = []
+    if(login){
+    alreadyBothCoursesId = userInfo.coursesAndData.filter((c) => c.course.courseId)
+    bothIds = alreadyBothCoursesId.map((c) => c.course.courseId )
+    }
+
+  // console.log(bothIds)
+  // console.log(id)
 
   return (
     <div className="container-course">
@@ -150,11 +160,26 @@ function CourseCard(props) {
             </Link>
           )}
           {
-            <>
+            (bothIds.filter((bId) => (bId === id))[0] === id)
+            
+            ? 
+            
+            (
+              <button className="cart-button-play">
+               <Link to='/mylearning' style= {{textDecoration:"none", color: "black"}}>
+                PLAY
+               </Link>
+               </button>
+            ) 
+            
+            : 
+            
+            (
               <button className="cart-button2" onClick={() => validarCart(id)}>
                 ADD CART
               </button>
-            </>
+            )
+
           }
         </div>
       </div>
