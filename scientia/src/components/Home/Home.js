@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import s from './Home.module.css';
 import SearchBar from "../Search/SearchBar";
 import CourseList from "../../CourseList/CourseList";
 import { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart, bienvenido } from '../../actions/actions'
 import { connect } from "react-redux";
-import { Row, Col, Toast, ToastContainer } from 'react-bootstrap'
+import './Home.css';
 
 export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUsers, getCart, bienvenido, login }) {
 
@@ -24,22 +23,14 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUs
     }
 
     return (
+        <div>
+        <div className="title-home-div">
+            <h1>Home</h1>
+        </div>
         <div className="home-div-container">
             <SearchBar />
-                <CourseList />
-            <ToastContainer className={`p-3 ${s.mensaje}`} position={'top-start'}>
-                <Toast className={s.mensaje} onClose={() => setShow(false)} show={show} delay={3000} autohide>
-                    <Toast.Header>
-                        <img
-                            src="holder.js/20x20?text=%20"
-                            className="rounded me-2"
-                            alt=""
-                        />
-                        <strong className="me-auto">Inico de Sesión</strong>
-                    </Toast.Header>
-                    <Toast.Body>{`Bienvenido ${user.firstName}!`}</Toast.Body>
-                </Toast>
-            </ToastContainer>
+            <CourseList />
+        </div>
         </div>
     );
 

@@ -9,13 +9,8 @@ import * as actionCreators from './../../actions/actions'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-
-// Logo
-// import logo from '../../images/icon.png';
+import ControlCameraIcon from '@mui/icons-material/ControlCamera';
 
 function Nav(props) {
     const imagenPerfil = props.user.photoURL
@@ -33,7 +28,8 @@ function Nav(props) {
     }
 
     return (
-      <Box sx={{ flexGrow: 2 }}>
+      <div >
+      <Box >
         <AppBar position="static" style={{ background: '#8d749e' }}>
           <Toolbar>
             <IconButton
@@ -43,7 +39,10 @@ function Nav(props) {
               aria-label="menu"
               sx={{ mr: 2 }}
             >
-              {/* <MenuIcon /> */}
+              <Link className="linkNav" to="/">
+                <ControlCameraIcon/>
+                <li className="liNav">SCientia</li>
+              </Link>
               <Link className="linkNav" to="/home">
                 <li className="liNav">Home</li>
               </Link>
@@ -104,6 +103,7 @@ function Nav(props) {
           </Toolbar>
         </AppBar>
       </Box>
+      </div>
     );
 };
 

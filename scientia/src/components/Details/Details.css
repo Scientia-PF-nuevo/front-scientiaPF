@@ -2,15 +2,32 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
 }
 
-.confirm-button-div {
+.title-details-div {
+  display: flex;
+  margin-bottom: 40px;
+  align-items: center;
+  background-color: black;
+  color: aliceblue;
+  height: 120px;
+  margin-top: 5px;
+}
+
+.title-details-div h1 {
+  padding-left: 40px;
+  font-size: 50px;
+  color: #fff;
+}
+
+.details-div .confirm-button-div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.confirm-button {
+.details-div .confirm-button {
  
     appearance: none;
     background-color: #2ea44f;
@@ -37,39 +54,17 @@
     margin-left: 40px;
   }
   
-  .confirm-button:focus:not(:focus-visible):not(.focus-visible) {
-    box-shadow: none;
-    outline: none;
-  }
-  
-  .confirm-button:hover {
+  .details-div .confirm-button:hover {
     background-color: #a0c4aa;
   }
-  
-  .confirm-button:focus {
-    box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
-    outline: none;
-  }
-  
-  .confirm-button:disabled {
-    background-color: #94d3a2;
-    border-color: rgba(27, 31, 35, .1);
-    color: rgba(255, 255, 255, .8);
-    cursor: default;
-  }
-  
-  .confirm-button:active {
-    background-color: #298e46;
-    box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
-  }
 
-  .preview-button-div {
+  .details-div .preview-button-div {
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  .preview-button {
+  .details-div .preview-button {
    
       appearance: none;
       background-color: #d1d422;
@@ -96,28 +91,6 @@
       margin-left: 40px;
     }
     
-    .preview-button:focus:not(:focus-visible):not(.focus-visible) {
-      box-shadow: none;
-      outline: none;
-    }
-    
     .preview-button:hover {
       background-color: #dae9de;
-    }
-    
-    .preview-button:focus {
-      box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
-      outline: none;
-    }
-    
-    .preview-button:disabled {
-      background-color: #94d3a2;
-      border-color: rgba(27, 31, 35, .1);
-      color: rgba(255, 255, 255, .8);
-      cursor: default;
-    }
-    
-    .preview-button:active {
-      background-color: #298e46;
-      box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
     }

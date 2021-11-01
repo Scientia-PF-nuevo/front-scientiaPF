@@ -10,7 +10,6 @@ function Comments({coursesReviews}) {
 
   return (
     <div style={{ padding: 14, width: 800 }} className="comments-div">
-      <h1>Comments</h1>
       {
         (coursesReviews.reviews && coursesReviews.reviews.length >= 1)
 
