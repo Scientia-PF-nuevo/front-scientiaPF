@@ -50,7 +50,6 @@ export function getAllCategories() {
     return async function (dispatch) {
         return await axios.get('http://localhost:3001/courses/allcategories/')
             .then(response => {
-                console.log("aqui esta la data",response.data)
                 dispatch({
                     type: GET_ALL_CATEGORIES,
                     payload: response.data
@@ -395,7 +394,6 @@ export function clearCartToPay() {
     }
 }
 export function removeAllGift() {
-    console.log('asd')
     return {
         type: REMOVE_ALL_GIFT,
         payload: []
