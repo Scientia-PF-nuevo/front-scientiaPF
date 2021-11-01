@@ -2,13 +2,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-    /* position: relative; */
-    /* padding-top: 56.25% Player ratio: 100 / (1280 / 720) */
-  }
+}
 
-  .player-wrapper2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.player-wrapper2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  }
+.title-player-div{
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  background-color: black;
+  color: aliceblue;
+  height: 120px;
+  margin-top: 5px;
+}
+
+.title-player-div h1 {
+  padding-left: 40px;
+  font-size: 50px;
+  color: #fff;
+}

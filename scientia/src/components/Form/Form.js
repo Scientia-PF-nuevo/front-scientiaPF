@@ -94,6 +94,10 @@ export default function Form(props) {
     };
 
     return (
+        <div>
+        <div className="title-form-div">
+            <h1>Add Course</h1>
+        </div>
         <div className="form-div-container">
             <form>
                 <h1>ADD NEW COURSE</h1>
@@ -235,6 +239,7 @@ export default function Form(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
+        </div>
         </div>
     );
 };

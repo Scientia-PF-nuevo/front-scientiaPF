@@ -29,6 +29,7 @@
 .sub-title-landing-div {
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: #8d749e;
     height: 70px;
     margin-bottom: 15px;

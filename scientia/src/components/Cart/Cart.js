@@ -15,9 +15,9 @@ import { Redirect } from 'react-router'
 import { Modal, Button, Table } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import Checkbox from '@mui/material/Checkbox';
-import Slide from '@material-ui/core/Slide';
 import styles from './modal.css.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Cart.css'

@@ -74,9 +74,9 @@ function CourseCard(props) {
   return (
     <div className="container-course">
       <div className="left-container">
-        <IconButton color="primary" aria-label="add to shopping cart">
+        {/* <IconButton color="primary" aria-label="add to shopping cart">
           <AddShoppingCartIcon onClick={() => validarCart(id)} />
-        </IconButton>
+        </IconButton> */}
         <div className="title-course">
           <h5>{name && name.toUpperCase()}</h5>
         </div>
@@ -130,6 +130,11 @@ function CourseCard(props) {
             ) : (
               <strong>Price : ${price}</strong>
             )}
+          </p>
+        </div>
+        <div className="info-price-div2">
+          <p>
+            solds:({solds})
           </p>
         </div>
         <TextRating score={score} />
