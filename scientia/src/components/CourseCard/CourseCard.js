@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './CourseCard.css'
 import { connect } from 'react-redux'
-import { addCart, addCartLogged, addDetails, addFreeCourse } from '../../actions/actions'
+import { addCart, addCartLogged, addDetails, addFreeCourse} from '../../actions/actions'
 import TextRating from './Qualify'
 import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';
@@ -11,6 +11,7 @@ import bestSeller from '../../assets/bestSeller.jpg'
 import topSeller from '../../assets/topSeller.jpg'
 
 function CourseCard(props) {
+
   const {
     name,
     url,
@@ -33,6 +34,7 @@ function CourseCard(props) {
     numbersOfDiscounts,
     percentageDiscount,
   } = props;
+
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -100,7 +102,7 @@ const handleClickVariantWrong = () => {
    
     var alreadyBothCoursesId = []
     var bothIds = []
-    if(login){
+    if(login && userInfo.coursesAndData){
     alreadyBothCoursesId = userInfo.coursesAndData.filter((c) => c.course.courseId)
     bothIds = alreadyBothCoursesId.map((c) => c.course.courseId )
     }

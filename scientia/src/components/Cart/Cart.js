@@ -29,7 +29,7 @@ const { enqueueSnackbar } = useSnackbar();
 const handleClickVariantOk = () => {
         enqueueSnackbar('YOUR GIFT ADDED CORRECTLY', {
           anchorOrigin: {
-              vertical: 'top',
+              vertical: 'bottom',
               horizontal: 'left',              
           },
           TransitionComponent: Slide,
@@ -40,7 +40,7 @@ const handleClickVariantOk = () => {
 const handleClickVariantWrongEmail = () => {
   enqueueSnackbar('INCORRECT EMAIL OR MISSED', {
     anchorOrigin: {
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'left',              
     },
     TransitionComponent: Slide,
@@ -51,7 +51,7 @@ const handleClickVariantWrongEmail = () => {
 const handleClickVariantWrongRemovedGift = () => {
   enqueueSnackbar('ITEM REMOVED', {
     anchorOrigin: {
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'left',              
     },
     TransitionComponent: Slide,
