@@ -11,6 +11,9 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import ControlCameraIcon from '@mui/icons-material/ControlCamera';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 
 function Nav(props) {
     const imagenPerfil = props.user.photoURL
@@ -25,6 +28,20 @@ function Nav(props) {
     function desconectarse() {
         props.clearCart()
         props.logout()
+        deslogeo()
+    }
+
+    const { enqueueSnackbar } = useSnackbar();
+
+    const deslogeo = () => {
+        enqueueSnackbar(`Hasta la próxima ${props.user.firstName}!`, {
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'left',
+            },
+            TransitionComponent: Slide,
+            variant: 'info',
+        })
     }
 
     return (
