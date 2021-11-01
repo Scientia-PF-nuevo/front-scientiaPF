@@ -16,37 +16,37 @@ import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';
 
 function Nav(props) {
-    const imagenPerfil = props.user.photoURL
+  const imagenPerfil = props.user.photoURL
 
 
-    if (props.user.firstName) {
-        let inicialNombre = props.user.firstName[0]
-        let inicialApellido = props.user.lastName[0]
-        var iniciales = inicialNombre + inicialApellido
-    }
+  if (props.user.firstName) {
+    let inicialNombre = props.user.firstName[0]
+    let inicialApellido = props.user.lastName[0]
+    var iniciales = inicialNombre + inicialApellido
+  }
 
-    function desconectarse() {
-        props.clearCart()
-        props.removeAllGift()
-        props.logout()
-        deslogeo()
-    }
+  function desconectarse() {
+    props.clearCart()
+    props.removeAllGift()
+    props.logout()
+    deslogeo()
+  }
 
-    const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
-    const deslogeo = () => {
-        enqueueSnackbar(`Hasta la próxima ${props.user.firstName}!`, {
-            anchorOrigin: {
-                vertical: 'top',
-                horizontal: 'left',
-            },
-            TransitionComponent: Slide,
-            variant: 'info',
-        })
-    }
+  const deslogeo = () => {
+    enqueueSnackbar(`Hasta la próxima ${props.user.firstName}!`, {
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'left',
+      },
+      TransitionComponent: Slide,
+      variant: 'info',
+    })
+  }
 
-    return (
-      <div >
+  return (
+    <div >
       <Box >
         <AppBar position="static" style={{ background: '#8d749e' }}>
           <Toolbar>
@@ -58,7 +58,7 @@ function Nav(props) {
               sx={{ mr: 2 }}
             >
               <Link className="linkNav" to="/">
-                <ControlCameraIcon/>
+                <ControlCameraIcon />
                 <li className="liNav">SCientia</li>
               </Link>
               <Link className="linkNav" to="/home">
@@ -121,20 +121,20 @@ function Nav(props) {
           </Toolbar>
         </AppBar>
       </Box>
-      </div>
-    );
+    </div>
+  );
 };
 
 function mapStateToProps(state) {
-    return {
-        login: state.rootReducer.login,
-        user: state.rootReducer.user,
-        img: state.rootReducer.userInfo.profilePicture
-    }
+  return {
+    login: state.rootReducer.login,
+    user: state.rootReducer.user,
+    img: state.rootReducer.userInfo.profilePicture
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actionCreators, dispatch)
+  return bindActionCreators(actionCreators, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav)

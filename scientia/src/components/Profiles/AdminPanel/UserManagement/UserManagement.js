@@ -67,7 +67,6 @@ const UserManagement = ({users}) => {
   return users.length >= 1 ? (
       <div className="div-usermanagement" style={{ maxWidth: "100%" }}>
         <MaterialTable
-        className="table"
         columns={columns}
         data={users}
         title="Users"
