@@ -1,26 +1,29 @@
 .container-course {
 
     display: inline-flex;
-    border: 1px solid rgb(224, 222, 222);
+    border: 1px solid rgb(161, 154, 154);
     margin: 10px;
     padding: 10px;
-    width: 1600px;
+    width: 1500px;
+    height: 350px;
 
 }
 
 .discount {
-  width: 150px;
+  margin: 5px;
+  margin-top: 10px;
+  width: 110px;
 }
 
 .detaiils-card-container {
-    width: 600px;
+    width: 500px;
     margin-right: 20px;
     margin-left: 20px;
-    padding-top: 60px;
+    padding-top: 40px;
 }
 
 .description-container {
-    padding-top: 60px;
+    padding-top: 40px;
     width: fit-content;
 }
 
@@ -61,10 +64,10 @@
     justify-content: center;
 }
 
-.confirm-button2 {
+.detaiils-card-container .confirm-button2 {
  
     appearance: none;
-    background-color: #f3ef06;
+    background-color: #a185e2;
     border: 1px solid rgba(27, 31, 35, .15);
     border-radius: 6px;
     box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
@@ -88,81 +91,42 @@
     margin-right: 30px;
   }
   
-  .confirm-button2:focus:not(:focus-visible):not(.focus-visible) {
-    box-shadow: none;
-    outline: none;
+  .detaiils-card-container .confirm-button2:hover {
+    background-color: #6e57a3;
+    color: aliceblue;
   }
   
-  .confirm-button2:hover {
-    background-color: #dcece1;
-  }
-  
-  .confirm-button2:focus {
-    box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
-    outline: none;
-  }
-  
-  .confirm-button2:disabled {
-    background-color: #94d3a2;
-    border-color: rgba(27, 31, 35, .1);
-    color: rgba(255, 255, 255, .8);
-    cursor: default;
-  }
-  
-  .confirm-button2:active {
-    background-color: #298e46;
-    box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+
+  .detaiils-card-container .cart-button2 {
+ 
+    appearance: none;
+    background-color: #0ed11e;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;
+    color: rgb(14, 13, 13);
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin-right: 30px;
   }
 
-  .cart-button2 {
- 
-    appearance: none;
-    background-color: #09b918;
-    border: 1px solid rgba(27, 31, 35, .15);
-    border-radius: 6px;
-    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-    box-sizing: border-box;
-    color: rgb(14, 13, 13);
-    cursor: pointer;
-    display: inline-block;
-    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-    padding: 6px 16px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: middle;
-    white-space: nowrap;
-    margin-right: 30px;
-  }
   
-  .cart-button2:focus:not(:focus-visible):not(.focus-visible) {
-    box-shadow: none;
-    outline: none;
+  .detaiils-card-container .cart-button2:hover {
+    background-color: #16811f;
+    color: aliceblue;
   }
-  
-  .cart-button2:hover {
-    background-color: #dcece1;
-  }
-  
-  .cart-button2:focus {
-    box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
-    outline: none;
-  }
-  
-  .cart-button2:disabled {
-    background-color: #94d3a2;
-    border-color: rgba(27, 31, 35, .1);
-    color: rgba(255, 255, 255, .8);
-    cursor: default;
-  }
-  
-  .cart-button2:active {
-    background-color: #298e46;
-    box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
-  }
+

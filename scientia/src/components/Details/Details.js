@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
+import { connect } from 'react-redux'
 import Card from '@mui/material/Card';
+import {addCart, getCoursesReviewsById,addCartLogged} from '../../actions/actions'
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -9,17 +11,15 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { connect } from 'react-redux'
 import TextRating from '../CourseCard/Qualify';
-import {addCart, getCoursesReviewsById,addCartLogged} from '../../actions/actions'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Comments from '../Comments/Comments';
 import ModalVideo from 'react-modal-video'
-import 'react-modal-video/scss/modal-video.scss'
-import './Details.css'
 import bestSeller from '../../assets/bestSeller.jpg'
 import topSeller from '../../assets/topSeller.jpg'
 import dicount from '../../assets/discount.png'
+import 'react-modal-video/scss/modal-video.scss'
+import './Details.css'
 
 
 
@@ -120,6 +120,10 @@ function Details({
    var videoID = urlVideo.length === 0 ? "" : urlVideo.urlVideo.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/)[1]
 
   return (
+    <div>
+   <div className="title-details-div">
+      <h1>Details</h1>
+    </div>
     <div className="details-div">
       <Card sx={{ maxWidth: 900 }}>
         <CardHeader
@@ -211,6 +215,7 @@ function Details({
           <Comments />
         </Collapse>
       </Card>
+    </div>
     </div>
   );
 }

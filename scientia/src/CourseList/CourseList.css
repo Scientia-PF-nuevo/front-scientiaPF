@@ -1,7 +1,7 @@
-.course-div-cards {
-    flex-wrap: wrap;
+.div-wrapper-course-list{
+    margin-left: 20px;
 }
 
 .not-found-course img {
-    width: 1200px;
+    width: 1000px;
 }

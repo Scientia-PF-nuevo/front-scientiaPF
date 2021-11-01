@@ -5,10 +5,6 @@
     flex-wrap: wrap;
 }
 
-
-
-
-
 /* css para cupon */
 .cupon {
     width: 100%;
@@ -34,4 +30,21 @@
 .save {
     
     display: block;
+
+}
+
+.title-learning-div {
+    display: flex;
+    margin-bottom: 40px;
+    align-items: center;
+    background-color: black;
+    color: aliceblue;
+    height: 120px;
+    margin-top: 5px;
+}
+
+.title-learning-div h1 {
+    padding-left: 40px;
+    font-size: 50px;
+    color: #fff;
 }

@@ -13,6 +13,10 @@ import CreatedCourses from './CreatedCourses/CreatedCourses';
 
 function UserPanel () {
   return (
+    <div>
+    <div className="title-userProfile-div">
+      <h1>My Profile</h1>
+    </div>
     <div className='container-app'>
     <Router>
       <div className="div-app">
@@ -37,6 +41,7 @@ function UserPanel () {
         </Route> */}
       </div>
     </Router>
+    </div>
     </div>
   );
 }

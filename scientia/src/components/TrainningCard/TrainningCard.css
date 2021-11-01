@@ -1,9 +1,10 @@
 .container-course2 {
     margin: 20px;
-    border: 1px solid rgb(228, 224, 224);
+    border: 1px solid rgb(161, 154, 154);
     padding: 20px;
-    width: 800px;
-    height: 600px;
+    width: 400px;
+    height: 580px;
+    background-color: #f7f7e6;
 }
 
 .rating-div {
@@ -28,8 +29,8 @@
 }
 
 .course-div-card2 img {
-    width: 600px;
-    height: 350px;
+    width: 400px;
+    height: 300px;
     padding-bottom: 30px;
 }
 
@@ -37,16 +38,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 
-.button-container2 {
+.container-course2 .button-container2 {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
 
-.confirm-button3 {
+.container-course2 .confirm-button3 {
  
     appearance: none;
     background-color: #2ea44f;
@@ -70,31 +72,12 @@
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap;
+    margin-bottom: 20px;
+    margin-top: 0px;
 
   }
-  
-  .confirm-button3:focus:not(:focus-visible):not(.focus-visible) {
-    box-shadow: none;
-    outline: none;
-  }
-  
-  .confirm-button3:hover {
-    background-color: #2c974b;
-  }
-  
+   
   .confirm-button3:focus {
     box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
     outline: none;
-  }
-  
-  .confirm-button3:disabled {
-    background-color: #94d3a2;
-    border-color: rgba(27, 31, 35, .1);
-    color: rgba(255, 255, 255, .8);
-    cursor: default;
-  }
-  
-  .confirm-button3:active {
-    background-color: #298e46;
-    box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
   }

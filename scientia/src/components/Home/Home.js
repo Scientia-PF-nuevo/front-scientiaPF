@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
-import s from './Home.module.css';
+
+import React, { useState, useEffect } from "react";
 import SearchBar from "../Search/SearchBar";
 import CourseList from "../../CourseList/CourseList";
 import { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart, saludo } from '../../actions/actions'
 import { connect } from "react-redux";
+import './Home.css';
 import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';
 
@@ -39,12 +40,18 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getCa
     }
 
     return (
-        <>
+
+        <div>
+        <div className="title-home-div">
+            <h1>Home</h1>
+        </div>
+
+        <div className="home-div-container">
             <SearchBar />
-            <div className={s.homeContainer}>
-                <CourseList />
-            </div>
-        </>
+            <CourseList />
+        </div>
+        </div>
+
     );
 
 };

@@ -131,7 +131,10 @@ const ResponsivePlayer = ({updateInfoVideo, getUserInfo, info, user, getCoursesR
   }
 
       return (
-        <>
+        <div>
+          <div className="title-player-div">
+            <h1>Player</h1>
+          </div>
           <div className="player-wrapper">
             <ReactPlayer
               className="react-player"
@@ -159,23 +162,23 @@ const ResponsivePlayer = ({updateInfoVideo, getUserInfo, info, user, getCoursesR
             {userReview.length >= 1 ? null : <NewReview />}
           </div>
           <div className="player-wrapper2">
-          <h2>REVIEWS</h2>
-          <CardContent>
-          <CardActions>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <Comments />
-        </Collapse>
-        </CardContent>
+            <h2>REVIEWS</h2>
+            <CardContent>
+              <CardActions>
+                <ExpandMore
+                  expand={expanded}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                >
+                  <ExpandMoreIcon />
+                </ExpandMore>
+              </CardActions>
+              <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <Comments />
+              </Collapse>
+            </CardContent>
           </div>
-        </>
+        </div>
       );
     
 }
