@@ -27,6 +27,7 @@ function Nav(props) {
 
     function desconectarse() {
         props.clearCart()
+        props.removeAllGift()
         props.logout()
         deslogeo()
     }

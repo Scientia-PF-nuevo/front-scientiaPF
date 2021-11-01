@@ -123,9 +123,9 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
         <button className="search-icon" onClick={() => getAllCourses()}>
           ALL
         </button>
-       
         <br></br>
-        <h3>FILTER BY</h3>
+        <br></br>
+        <h3>FILTER BY:</h3>
         <br></br>
 
         <div>
@@ -373,7 +373,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
         </div>
 
           <br></br>
-        <h3>SORT BY</h3>
+        <h3>SORT BY:</h3>
         <br></br>
           <Accordion
             expanded={expanded === "panel5"}
@@ -489,6 +489,36 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
                   <MyFormControlLabel
                     value="asc"
                     label="MOST EXPENSIVE"
+                    control={<Radio onChange={handleSelect2} />}
+                  />
+                </RadioGroup>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel10"}
+            onChange={handleChange("panel10")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                <strong>SOLDS</strong>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <RadioGroup name="use-radio-group" defaultValue="first">
+                  <MyFormControlLabel
+                    value="most"
+                    label="MOST SOLDS"
+                    control={<Radio onChange={handleSelect2} />}
+                  />
+                  <MyFormControlLabel
+                    value="less"
+                    label="LESS SOLDS"
                     control={<Radio onChange={handleSelect2} />}
                   />
                 </RadioGroup>

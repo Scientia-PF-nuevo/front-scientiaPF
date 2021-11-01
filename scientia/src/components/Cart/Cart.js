@@ -218,6 +218,7 @@ const handleClickVariantWrongRemovedGift = () => {
       handleClickVariantWrongRemovedGift('removed')
     } else {
       removeCart(id)
+      handleClickVariantWrongRemovedGift()
     }
   }
 
