@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 
 // Logo
 // import logo from '../../images/icon.png';
@@ -30,6 +32,20 @@ function Nav(props) {
     function desconectarse() {
         props.clearCart()
         props.logout()
+        deslogeo()
+    }
+
+    const { enqueueSnackbar } = useSnackbar();
+
+    const deslogeo = () => {
+        enqueueSnackbar(`Hasta la próxima ${props.user.firstName}!`, {
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'left',
+            },
+            TransitionComponent: Slide,
+            variant: 'info',
+        })
     }
 
     return (
