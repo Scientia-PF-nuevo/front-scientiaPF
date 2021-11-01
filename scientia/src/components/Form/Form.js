@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import './Form.css'
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,25 +19,32 @@ export default function Form(props) {
         getGenresCourses()
     }, [])
     const dispatch = useDispatch();
-    const categories = useSelector(state => state.rootReducer.coursesByGenre);
+    let categories = useSelector(state => state.rootReducer.coursesByGenre);
     const user = useSelector(state => state.rootReducer.user);
-
-
+    // categories.map(el => el.name = el.name.charAt(0).toUpperCase() + el.name.slice(1))
+    
     const [course, setCourse] = useState({
+        email: user.email,
         name: '',
         description: '',
         price: 0,
         url: '',
         urlVideo: '',
         category: '',
-        email: user.email,
-        leng: '',
-        dif: '',
-        amount: 0,
-        percentage: 0
+        languaje: '',
+        level: '',
+        numberOfDiscounts: 0,
+        percentageDiscount: 0
     });
 
     function handleChange(e) {
+        e.preventDefault();
+        setCourse({
+            ...course,
+            [e.target.name]: e.target.value
+        });
+    };
+    function handleChangeOption(e) {
         e.preventDefault();
         setCourse({
             ...course,
@@ -66,27 +74,26 @@ export default function Form(props) {
             setMsg('People should know the category of the course')
             return handleShow();
         }
-        if(course.leng === '' || course.leng === undefined) {
-            return alert ('People should know the lenguage of the course');
+        if (course.languaje === '' || course.languaje === undefined) {
+            return alert('People should know the lenguage of the course');
         }
-        if(course.dif === '' || course.dif === undefined) {
-            return alert ('People should know the experience required for the course');
+        if (course.level === '' || course.level === undefined) {
+            return alert('People should know the experience required for the course');
         }
         dispatch(setCourseToAprove(course));
 
         setCourse({
+            email: user.email,
             name: '',
             description: '',
             price: 0,
             url: '',
-
-            urlVideo:'',    
+            urlVideo: '',
             category: '',
-            leng: '',
-            dif: '',
-            amount: 0,
-            percentage: 0
-
+            languaje: '',
+            level: '',
+            numberOfDiscounts: 0,
+            percentageDiscount: 0
         });
 
         // Redirect
@@ -95,151 +102,152 @@ export default function Form(props) {
 
     return (
         <div>
-        <div className="title-form-div">
-            <h1>Add Course</h1>
-        </div>
-        <div className="form-div-container">
-            <form>
-                <h1>ADD NEW COURSE</h1>
-                <br></br>
-                <TextField required
-                    // className='placeHolder'
-                    // type="text" 
-                    style={{ marginBottom: "10px" }}
-                    id="outlined-required"
-                    label="COURSE NAME"
-                    value={course.name}
-                    // placeholder='Nombre...'
+            <div className="title-form-div">
+                <h1>Add Course</h1>
+            </div>
+            <div className="form-div-container">
+                <form>
+                    <h1>ADD NEW COURSE</h1>
+                    <br></br>
+                    <TextField required
+                        // className='placeHolder'
+                        // type="text" 
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="COURSE NAME"
+                        value={course.name}
+                        // placeholder='Nombre...'
 
-                // defaultValue="Hello World"
-                name="name" 
-                autocomplete="off"
-                onChange={e => handleChange(e)} />
-                
-                <TextField required 
-                style={{marginBottom:"10px"}}
-                id="outlined-required"
-                label="PRICE (Dollars)"
-                // defaultValue="Hello World"
-                // className='placeHolder' 
-                type="number" 
-                // value={course.price}
-                name="price" 
-                // min = "1"
-                autocomplete="off"
-                onChange={e => handleChange(e)} />
+                        // defaultValue="Hello World"
+                        name="name"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
 
-                <TextField required 
-                // className='placeHolder' 
-                // type="text"
-                style={{marginBottom:"10px"}}
-                id="outlined-required"
-                label="DESCRIPTION"
-                // defaultValue="Hello World"
-                value={course.description}
-                // placeholder='Course description...'
-                name="description" 
-                autocomplete="off"
-                onChange={e => handleChange(e)} />
+                    <TextField required
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="PRICE (Dollars)"
+                        // defaultValue="Hello World"
+                        // className='placeHolder' 
+                        type="number"
+                        // value={course.price}
+                        name="price"
+                        // min = "1"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
 
-                {/* <label>Course price USD:</label> */}
+                    <TextField required
+                        // className='placeHolder' 
+                        // type="text"
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="DESCRIPTION"
+                        // defaultValue="Hello World"
+                        value={course.description}
+                        // placeholder='Course description...'
+                        name="description"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
 
-                <TextField required 
-                style={{marginBottom:"10px"}}
-                id="outlined-required"
-                label="URL IMAGE"
-                // defaultValue="Hello World"
-                // className='placeHolder' 
-                type="text" 
-                value={course.url}
-                placeholder='Course url...'
-                name="url" 
-                autocomplete="off"
-                onChange={e => handleChange(e)} />
+                    {/* <label>Course price USD:</label> */}
 
-               <TextField required 
-                style={{marginBottom:"10px"}}
-                id="outlined-required"
-                label="URL VIDEO"
-                // defaultValue="Hello World"
-                // className='placeHolder' 
-                type="category" 
-                value={course.urlVideo}
-                placeholder='Course url...'
-                name="urlVideo" 
-                autocomplete="off"
-                onChange={e => handleChange(e)} /> 
- 
-              {  <select className='selector'  name="category" value={course.category} onChange={handleChange} >
-                 <option defaultValue="selected"></option>
-                {categories ? 
-                    categories.map((a)=>{
-                    return (
-                    <option> { a.name } </option>)}
-                            
-                           
-                    
-                ) : 
-                    null    
-                    }
-                </select>}
+                    <TextField required
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="URL IMAGE"
+                        // defaultValue="Hello World"
+                        // className='placeHolder' 
+                        type="text"
+                        value={course.url}
+                        placeholder='Course url...'
+                        name="url"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
 
-                <select className='selector' name="leng" value={course.leng} onChange={handleChange} >
-                 <option defaultValue="selected"></option>
-                 <option> Español </option>
-                 <option> English </option>
-                 <option> Others </option>
-                </select>
+                    <TextField required
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="URL VIDEO"
+                        // defaultValue="Hello World"
+                        // className='placeHolder' 
+                        type="category"
+                        value={course.urlVideo}
+                        placeholder='Course url...'
+                        name="urlVideo"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
 
-                <select className='selector' placeholder='Experience required...' name="dif" value={course.dif} onChange={handleChange} >
-                <option defaultValue="selected"></option>
-                 <option> Beginner </option>
-                 <option> Intermediate </option>
-                 <option> Advance </option>
-                </select>
+                    {<select className='selector' name="category" value={course.category} onChange={handleChange} >
+                        <option defaultValue="selected"></option>
+                        {categories ?
+                            categories.map((a) => {
+                                return (
+                                    <option> {a.name} </option>)
+                            }
 
-                <TextField required 
-                style={{marginBottom:"10px"}}
-                id="outlined-required"
-                label="Percentage"
-                // className='placeHolder' 
-                type="number" 
-                // value={course.price}
-                name="percentage" 
-                // min = "1"
-                autocomplete="off"
-                onChange={e => handleChange(e)} />
 
-                <TextField required 
-                style={{marginBottom:"10px"}}
-                id="outlined-required"
-                label="amount"
-                // className='placeHolder' 
-                type="number" 
-                // value={course.price}
-                name="amount" 
-                // min = "1"
-                autocomplete="off"
-                onChange={e => handleChange(e)} />
 
-            <div className='containerbtSub'>
-                <input className="form-button" type='submit' onClick={e=>handleSubmit(e)}/>
-            </div>      
+                            ) :
+                            null
+                        }
+                    </select>}
 
-            </form>
+                    <select className='selector' name="languaje" value={course.languaje} onChange={handleChangeOption} >
+                        <option defaultValue="selected"></option>
+                        <option name="languaje"> spanish </option>
+                        <option name="languaje"> english </option>
+                        <option name="languaje"> others </option>
+                    </select>
 
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Notificación</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{msg}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
-                        Ok!
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
+                    <select className='selector' placeholder='Experience required...' name="level" value={course.level} onChange={handleChangeOption} >
+                        <option defaultValue="selected"></option>
+                        <option name="level"> begginer </option>
+                        <option name="level"> middle </option>
+                        <option name="level"> expert </option>
+                    </select>
+
+                    <TextField
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="Percentage of Discount"
+                        // className='placeHolder' 
+                        type="number"
+                        // value={course.price}
+                        name="percentageDiscount"
+                        // min = "1"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
+
+                    <TextField
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="Amount of Discount"
+                        // className='placeHolder' 
+                        type="number"
+                        // value={course.price}
+                        name="numberOfDiscounts"
+                        // min = "1"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
+
+                    <div className='containerbtSub'>
+                        <input className="form-button" type='submit' onClick={e => handleSubmit(e)} />
+                    </div>
+
+                </form>
+
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Notificación</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{msg}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>
+                            Ok!
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         </div>
     );
 };

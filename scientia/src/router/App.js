@@ -6,6 +6,13 @@ import Cart from '../components/Cart/Cart';
 import Details from '../components/Details/Details';
 import Footer from '../components/Footer/Footer';
 import Form from '../components/Form/Form';
+import NewForm from '../components/NewForm/NewForm';
+import NewForm2 from '../components/NewForm/NewForm2';
+import NewForm3 from '../components/NewForm/NewForm3';
+import NewForm4 from '../components/NewForm/NewForm4';
+import NewForm5 from '../components/NewForm/NewForm5';
+import NewFormLast from '../components/NewForm/NewFormLast';
+
 // Components
 import Home from '../components/Home/Home';
 import Landing from '../components/Landing/Landing';
@@ -75,6 +82,18 @@ function App() {
       </Route>
 
       <Route exact path='/form' component={Form}/>
+
+      <Route exact path='/newForm' component={NewForm} />
+
+      <Route exact path='/newForm2' component={NewForm2} />
+
+      <Route exact path='/newForm3' component={NewForm3} />
+
+      <Route exact path='/newForm4' component={NewForm4} />
+
+      <Route exact path='/newForm5' component={NewForm5} />
+
+      <Route exact path='/newFormLast' component={NewFormLast} />
 
       <Route path='/userprofile'>
         <UserPanel />

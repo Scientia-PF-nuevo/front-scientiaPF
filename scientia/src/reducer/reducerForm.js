@@ -1,38 +1,52 @@
-import {
-    SET_COURSE_TOAPROVE,
-    GET_COURSES_TO_APPROVE,
-    APPROVE_COURSE,
-    REJECT_COURSE
-} from '../actions/constants';
+
 
 const initialState = {
-    courses: [],
-    coursesToApprove: []
+    name: '',
+    description: '',
+    price: 0,
+    url: '',
+    urlVideo: '',
+    category: '',
+    email: '',
+    leng: '',
+    dif: '',
+    amount: 0,
+    percentage: 0
 }
 
 export default function reducerForm(state = initialState, action) {
     switch (action.type) {
-        case SET_COURSE_TOAPROVE:
+        case 'SET_NAME':
             return {
                 ...state,
-                courses: [...state.courses, action.payload]
+                name: action.payload.name
             }
-            case GET_COURSES_TO_APPROVE:
-                return {
-                    ...state,
-                    coursesToApprove: action.payload
-                }
-                case APPROVE_COURSE:
-                    return {
-                        ...state,
-                        coursesToApprove: state.coursesToApprove.filter(el => el.id !== action.payload)
-                    }
-                case REJECT_COURSE:
-                    return {
-                        ...state,
-                        coursesToApprove: state.coursesToApprove.filter(el => el.id !== action.payload)
-                    }
-                    default:
-                        return state;
+        case 'SET_DESCRIPTION':
+            return {
+                ...state,
+                description: action.payload.description
+            }
+        case 'SET_CATEGORY':
+            return {
+                ...state,
+                category: action.payload.category,
+                leng: action.payload.leng,
+                dif: action.payload.dif,
+                price: action.payload.price
+            }
+        case 'SET_URL':
+            return {
+                ...state,
+                url: action.payload.url,
+                urlVideo: action.payload.urlVideo,
+            }
+        case 'SET_AMOUNT':
+            return {
+                ...state,
+                amount: action.payload.amount,
+                percentage: action.payload.percentage,
+            }
+    default:
+        return state;
     }
 };

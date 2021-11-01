@@ -258,7 +258,6 @@ export function setCourseToAprove(payload) {
     return function (dispatch) {
         axios.post(`http://localhost:3001/courses/newcourse`, payload)
             .then(res => {
-
                 dispatch({
                     type: GET_COURSE_DETAILS,
                     payload: res.data
@@ -271,6 +270,38 @@ export function setCourseToAprove(payload) {
     }
 }
 
+export function setNewCourse (payload) {
+    if (payload.name) {
+        return {
+            type: 'SET_NAME',
+            payload
+        }
+    }
+    if (payload.description) {
+        return {
+            type: 'SET_DESCRIPTION',
+            payload
+        }
+    }
+    if (payload.category) {
+        return {
+            type: 'SET_CATEGORY',
+            payload
+        }
+    }
+    if (payload.url) {
+        return {
+            type: 'SET_URL',
+            payload
+        }
+    }
+    if (payload.amount) {
+        return {
+            type: 'SET_AMOUNT',
+            payload
+        }
+    }
+}
 //* Trae todos las orders del carro de la DB
 export function getCart(email) {
     return async function (dispatch) {
