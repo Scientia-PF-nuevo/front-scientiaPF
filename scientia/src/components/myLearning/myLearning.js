@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import axios from 'axios';
 import TrainningCard from '../TrainningCard/TrainningCard'
 import { getUserInfo } from '../../actions/actions'
@@ -11,8 +11,6 @@ function MyLearning({ courses, user, getUserInfo }) {
   useEffect(() => {
     user.email && getUserInfo(user.email)
   }, [])
-
-  const dispatch = useDispatch();
 
   const email = user.email
 
