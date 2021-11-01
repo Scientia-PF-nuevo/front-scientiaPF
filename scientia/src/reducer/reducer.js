@@ -220,6 +220,20 @@ export default function rootReducer(state = initialState, action) {
                 }
             }
 
+            //! Ordena por Solds (less o most)
+            if (action.payload === 'less') {
+                return {
+                    ...state,
+                    allCourses: [...state.allCourses].sort((prev, next) => prev.solds - next.solds)
+                }
+            }
+            if (action.payload === 'most') {
+                return {
+                    ...state,
+                    allCourses: [...state.allCourses].sort((prev, next) => next.solds - prev.solds)
+                }
+            }
+
             //! Orden por default como llega de la DB
             else {
                 return {
