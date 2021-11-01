@@ -47,7 +47,7 @@ function MyLearning({ courses, user, getUserInfo }) {
                       className="form-control-cupon"
                       type="text"
                       name="firstName"
-                      placeholder="Enter your gif code"
+                      placeholder=" Enter your gift code..."
                       onChange={handleChange}
                     />
 

@@ -1,12 +1,8 @@
 .div-usermanagement {
     width: 100%;
-    height: 700px;
+    height: 900px;
+    background-color: rgb(209, 209, 209);
 }
-
-.table {
-    height: 600px;
-}
-
 
 td {
     height: 60px;

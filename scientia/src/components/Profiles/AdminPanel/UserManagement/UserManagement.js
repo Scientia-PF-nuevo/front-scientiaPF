@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './UserManagement.css';
 import { connect } from 'react-redux'
 import CircularProgress from '@mui/material/CircularProgress';
@@ -17,7 +17,14 @@ import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 
 
-const UserManagement = ({users}) => {
+const UserManagement = ({users}, props) => {
+  console.log(users, 'users', props, 'props')
+
+
+  // useEffect(() => {
+  //   props.getUserInfo()
+  // }, [])
+
   const columns = [
     {
       title: "First Name",
@@ -173,6 +180,7 @@ const UserManagement = ({users}) => {
 }
 
     const mapStateToProps = (state) => {
+      
     return {
         users: state.rootReducer.users
     }
