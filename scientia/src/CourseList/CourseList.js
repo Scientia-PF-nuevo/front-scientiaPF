@@ -4,7 +4,6 @@ import CourseCard from '../components/CourseCard/CourseCard'
 import './CourseList.css'
 import Pagination from '../components/Pagination/Pagination'
 import noEncontrado from '../../src/assets/ahahah.gif'
-import { width } from '@mui/system'
 
 function CourseList({ courses }) {
 
@@ -35,13 +34,9 @@ function CourseList({ courses }) {
   }
 
   return (
-    <>
-     <Pagination
-          cardPerPage={cardPerPage}
-          totalCards={courses.length}
-          paginate={paginate}
-          currentPage={currentPage}
-        />
+    <div className="div-wrapper-course-list">
+    <div className="div-container-course-list">
+
    { typeof currentCards === "string" || currentCards.length === 0? (
     <div className="not-found-course">
       <img src={noEncontrado}></img>
@@ -67,18 +62,21 @@ function CourseList({ courses }) {
         percentageDiscount={course.percentageDiscount}
       />
     ))
-  ) : (
+  ) 
+  
+  : (
     <div>
       <h1>Cargando...</h1>
     </div>
   )}
+    </div>    
   <Pagination
           cardPerPage={cardPerPage}
           totalCards={courses.length}
           paginate={paginate}
           currentPage={currentPage}
         />
-  </>
+  </div>
   )
 }
 

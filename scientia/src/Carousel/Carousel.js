@@ -37,7 +37,7 @@ export default function CarouselCourses(props) {
       removeArrowOnDeviceType={["tablet", "mobile"]}
       dotListClass="custom-dot-list-style"
     > 
-      {courses.map((course, index) => (
+      {courses && courses.map((course) => (
         <div className="carousel-item-container">
           <img
             src={course.url}
@@ -45,27 +45,31 @@ export default function CarouselCourses(props) {
             className="carousel-item-image"
           />
           <div className="carousel-item-info">
-            <h3 className="carousel-item-title">{course.name}</h3>
-            <p className="carousel-item-description">{course.description}</p>
+          <br></br>
+            <h3 className="carousel-item-title">{course.name.toUpperCase()}</h3>
+            <p className="carousel-item-description"><strong>DESCRIPTION :</strong> {course.description}</p>
             <div className="carousel-item-features">
-              <span className="carousel-item-lenguaje-text">
-                Lenguaje: {course.language}
-              </span>
-              <span className="carousel-item-level-text">
+              {/* <span className="carousel-item-lenguaje-text">
+                Lenguage: {course.language}
+              </span> */}
+              {/* <span className="carousel-item-level-text">
                 Nivel: {course.level}
-              </span>
+              </span> */}
             </div>
             <div className="carousel-item-price">
-              <span className="carousel-item-price-text">
+              {/* <span className="carousel-item-price-text">
                 Precio: {course.price}
-              </span>
+              </span> */}
               <span className="carousel-item-solds">
-                Categoria: {course.categories}
+                <strong>CATEGORY:</strong>{course.categories.toUpperCase()}
               </span>
             </div>
+            <br></br>
             <div className="carousel-item-rating">
               <TextRating score={course.score} />
             </div>
+            <br></br>
+            <br></br>
           </div>
         </div>
       ))}

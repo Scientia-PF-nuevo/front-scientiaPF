@@ -1,5 +1,5 @@
 .liNav {
-    color: black;
+    color: rgb(12, 11, 11);
     list-style: none;
     text-decoration: none;
     display: inline-block;
@@ -11,43 +11,6 @@
     padding-left: 10px;
 }
 
-.liNav:hover {
-    border-bottom: 1px solid tomato;
-    border-radius: 20px;
-    color: tomato;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px;
-    background-color: white;
-    max-width: 100%;
-    overflow: hidden;
-}
-
-.containLi {
-    margin: auto;
-    display: flex;
-    justify-content: end;
-    display: inline-block;
-}
-
-.containerNav {
-    white-space: nowrap;
-    text-align: end;
-    display: inline-block;
-    max-width: 100%;
-}
-
-.containLogo {
-    display: inline-block;
-}
-
-.logoNav {
-    max-width: 100px;
-}
 
 @media (max-width:500px) {
     .logoNav {

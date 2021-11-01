@@ -14,6 +14,10 @@ function MyLearning({ courses, user, getUserInfo }) {
   }, [])
 
   return (
+    <div>
+    <div className="title-learning-div">
+      <h1>My learning</h1>
+    </div>
     <div className="my-learning-div">
 
       {
@@ -71,7 +75,7 @@ function MyLearning({ courses, user, getUserInfo }) {
             </div>
           )
       }
-
+      </div>
     </div>
 
   )

@@ -39,12 +39,25 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getCa
     }
 
     return (
-        <>
+
+        <div className="home-div-container">
             <SearchBar />
-            <div className={s.homeContainer}>
                 <CourseList />
-            </div>
-        </>
+            <ToastContainer className={`p-3 ${s.mensaje}`} position={'top-start'}>
+                <Toast className={s.mensaje} onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                    <Toast.Header>
+                        <img
+                            src="holder.js/20x20?text=%20"
+                            className="rounded me-2"
+                            alt=""
+                        />
+                        <strong className="me-auto">Inico de Sesión</strong>
+                    </Toast.Header>
+                    <Toast.Body>{`Bienvenido ${user.firstName}!`}</Toast.Body>
+                </Toast>
+            </ToastContainer>
+        </div>
+
     );
 
 };

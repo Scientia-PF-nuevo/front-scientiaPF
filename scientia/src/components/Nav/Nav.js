@@ -6,6 +6,13 @@ import { connect } from 'react-redux'
 import { Avatar } from '@mui/material';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from './../../actions/actions'
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';
 
@@ -42,88 +49,77 @@ function Nav(props) {
     }
 
     return (
-        <div className='container'>
-            <div className='containLogo'>
-                {/* <Link to='/home'>
-                    <img className='logoNav' src={logo} alt='logo Scientia' />
-                </Link> */}
-            </div>
-            <nav className='containerNav'>
-                <div className='containLi'>
-                    <Link className='linkNav' to='/home'>
-                        <li className='liNav'>
-                            Home
-                        </li>
-                    </Link>
-                    {
-                        props.user.firstName ?
-                            <Link className='linkNav' to='/form'>
-                                <li className='liNav'>
-                                    Add Course
-                                </li>
-                            </Link>
-                            :
-                            <></>
-                    }
-                    {
-                        props.user.firstName ?
-                            <Link className='linkNav' to='/mylearning'>
-                                <li className='liNav'>
-                                    My learning
-                                </li>
-                            </Link>
-                            :
-                            <></>
-                    }
-                    {
-
-                        <Link className='linkNav' to='/cart'>
-                            <li className='liNav'>
-                                <CustomizedBadges />
-                            </li>
-                        </Link>
-
-                    }
-                    {
-                        props.user.firstName ?
-                            <Link className='linkNav' to='/home'>
-                                <li className='liNav' onClick={desconectarse} >
-                                    Log Out
-                                </li>
-                            </Link>
-                            :
-                            <Link className='linkNav' to='/login'>
-                                <li className='liNav'>
-                                    Sign in
-                                </li>
-                            </Link>
-                    }
-                    {   
-                            props.img && props.login === true ?
-                            <Link className='linkNav' to='/userprofile'>
-                                <li className='liNav'>
-                                    <Avatar alt="" src={props.img} />
-                                </li>
-                            </Link>
-                            : props.user.photoURL ?
-                            <Link className='linkNav' to='/userprofile'>
-                                <li className='liNav'>
-                                    <Avatar alt="" src={imagenPerfil} />
-                                </li>
-                            </Link> :
-                            props.user.firstName ?
-                                <Link className='linkNav' to='/userprofile'>
-                                    <li className='liNav'>
-                                        <Avatar sx={{ bgcolor: 'orange' }}>{iniciales}</Avatar>
-                                    </li>
-                                </Link>
-                                :
-                                <></>
-                    }
-
-                </div>
-            </nav>
-        </div>
+      <Box sx={{ flexGrow: 2 }}>
+        <AppBar position="static" style={{ background: '#8d749e' }}>
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              {/* <MenuIcon /> */}
+              <Link className="linkNav" to="/home">
+                <li className="liNav">Home</li>
+              </Link>
+              {props.user.firstName ? (
+                <Link className="linkNav" to="/form">
+                  <li className="liNav">Add Course</li>
+                </Link>
+              ) : (
+                <></>
+              )}
+              {props.user.firstName ? (
+                <Link className="linkNav" to="/mylearning">
+                  <li className="liNav">My learning</li>
+                </Link>
+              ) : (
+                <></>
+              )}
+              {
+                <Link className="linkNav" to="/cart">
+                  <li className="liNav">
+                    <CustomizedBadges />
+                  </li>
+                </Link>
+              }
+              {props.user.firstName ? (
+                <Link className="linkNav" to="/home">
+                  <li className="liNav" onClick={desconectarse}>
+                    Log Out
+                  </li>
+                </Link>
+              ) : (
+                <Link className="linkNav" to="/login">
+                  <li className="liNav">Sign in</li>
+                </Link>
+              )}
+              {props.img && props.login === true ? (
+                <Link className="linkNav" to="/userprofile">
+                  <li className="liNav">
+                    <Avatar alt="" src={props.img} />
+                  </li>
+                </Link>
+              ) : props.user.photoURL ? (
+                <Link className="linkNav" to="/userprofile">
+                  <li className="liNav">
+                    <Avatar alt="" src={imagenPerfil} />
+                  </li>
+                </Link>
+              ) : props.user.firstName ? (
+                <Link className="linkNav" to="/userprofile">
+                  <li className="liNav">
+                    <Avatar sx={{ bgcolor: "orange" }}>{iniciales}</Avatar>
+                  </li>
+                </Link>
+              ) : (
+                <></>
+              )}
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </Box>
     );
 };
 
