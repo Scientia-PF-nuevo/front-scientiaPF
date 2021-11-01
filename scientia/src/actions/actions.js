@@ -41,7 +41,8 @@ import {
     APPROVE_COURSE,
     REMOVE_ALL_GIFT,
     BIENVENIDO,
-    GET_ALL_CATEGORIES
+    GET_ALL_CATEGORIES,
+    ADD_FREE_COURSE
 
 } from './constants.js';
 
@@ -277,6 +278,18 @@ export function getCart(email) {
             .then(res => {
 
                 dispatch({ type: GET_CART, payload: res.data });
+            })
+            .catch(err => { return err })
+    }
+}
+
+//* agrega curso gratuito directamente
+export function addFreeCourse(email, id) {
+    return async function (dispatch) {
+        return await axios.post(`http://localhost:3001/purchase/freecourses/${email}/${id}`)
+            .then(res => {
+
+                dispatch({ type: ADD_FREE_COURSE, payload: res.data });
             })
             .catch(err => { return err })
     }

@@ -2,8 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './CourseCard.css'
 import { connect } from 'react-redux'
-import { addCart, addCartLogged, addDetails } from '../../actions/actions'
+import { addCart, addCartLogged, addDetails, addFreeCourse } from '../../actions/actions'
 import TextRating from './Qualify'
+import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 import dicount from '../../assets/discount.png'
 import bestSeller from '../../assets/bestSeller.jpg'
 import topSeller from '../../assets/topSeller.jpg'
@@ -25,11 +27,36 @@ function CourseCard(props) {
     cart,
     addDetails,
     addCartLogged,
+    addFreeCourse,
     solds,
     userInfo,
     numbersOfDiscounts,
     percentageDiscount,
   } = props;
+
+  const { enqueueSnackbar } = useSnackbar();
+
+const handleClickVariantOk = () => {
+        enqueueSnackbar('COURSE ADDED CORRECTLY', {
+          anchorOrigin: {
+              vertical: 'top',
+              horizontal: 'left',              
+          },
+          TransitionComponent: Slide,
+          variant: 'success',
+      })
+}
+
+const handleClickVariantWrong = () => {
+  enqueueSnackbar('PLEASE LOGIN FIRST', {
+    anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'left',              
+    },
+    TransitionComponent: Slide,
+    variant: 'error',
+})
+}
 
 
   const validarCart = (id) => {
@@ -78,8 +105,10 @@ function CourseCard(props) {
     bothIds = alreadyBothCoursesId.map((c) => c.course.courseId )
     }
 
-  // console.log(bothIds)
-  // console.log(id)
+    const handdleAddFreeCourse = (email, id) => {
+      addFreeCourse(email, id)
+      handleClickVariantOk()
+    }
 
   return (
     <div className="container-course">
@@ -160,7 +189,38 @@ function CourseCard(props) {
             </Link>
           )}
           {
-            (bothIds.filter((bId) => (bId === id))[0] === id)
+
+            (price == 0) 
+            
+            ?
+            
+             (
+              ((bothIds.filter((bId) => (bId === id))[0] === id)
+            
+            ? 
+            
+            (
+              <button className="cart-button-play">
+               <Link to='/mylearning' style= {{textDecoration:"none", color: "black"}}>
+                PLAY
+               </Link>
+               </button>
+            ) 
+            
+            : 
+            
+            (
+              <button className="cart-button-add" onClick={(login) ? () => handdleAddFreeCourse(userInfo.email, id) : () => handleClickVariantWrong()}>
+                ADD COURSE
+              </button>
+            ))
+               
+             ) 
+             
+             : 
+             
+             (
+              ((bothIds.filter((bId) => (bId === id))[0] === id)
             
             ? 
             
@@ -178,7 +238,9 @@ function CourseCard(props) {
               <button className="cart-button2" onClick={() => validarCart(id)}>
                 ADD CART
               </button>
-            )
+            ))
+
+             )
 
           }
         </div>
@@ -208,4 +270,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { addCart, addDetails,addCartLogged })(CourseCard);
+export default connect(mapStateToProps, { addCart, addDetails,addCartLogged, addFreeCourse })(CourseCard);

@@ -278,7 +278,7 @@ const handleClickVariantWrongRemovedGift = () => {
                             textDecoration: "line-through",
                           }}
                         >
-                          ${course.price}
+                          ${parseFloat(course.price.toFixed(2))}
                         </h3>
                         <p>{course.percentageDiscount}% OFF</p>
                         <h3 style={{ color: "green" }}>
@@ -294,7 +294,7 @@ const handleClickVariantWrongRemovedGift = () => {
                       </div>
                     ) : (
                       <div className="div-center">
-                        <h3 style={{ color: "green" }}>${course.price}</h3>
+                        <h3 style={{ color: "green" }}> ${parseFloat(course.price.toFixed(2))}</h3>
                       </div>
                     )}
                   </td>

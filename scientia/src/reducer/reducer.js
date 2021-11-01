@@ -30,7 +30,7 @@ import {
     CLEAR_CART_TO_PAY,
     REMOVE_ALL_GIFT,
     BIENVENIDO,
-
+    ADD_FREE_COURSE,
     GET_ALL_CATEGORIES
 } from '../actions/constants';
 
@@ -57,7 +57,8 @@ const initialState = {
     videoUpdated: "",
     videoPlaying: {},
     reviewCreated: {},
-    gift: []
+    gift: [],
+    freeCourse: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -269,6 +270,13 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 cart: action.payload,
                 cartToPay: action.payload
+            }
+
+        case ADD_FREE_COURSE:
+
+            return {
+                ...state,
+                freeCourse: action.payload,
             }
 
         case DELETE_CART_LOGGED:

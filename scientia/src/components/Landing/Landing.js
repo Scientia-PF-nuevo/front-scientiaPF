@@ -45,7 +45,7 @@ function mapDispatchToProps(Landing) {
 
 function mapStateToProps(state) {
     return {
-        allCourses: state.rootReducer.allCourses,
+        allCourses: state.rootReducer.coursesBackup,
         categories: state.rootReducer.allCategories
     }
 }
