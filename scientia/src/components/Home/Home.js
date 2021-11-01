@@ -24,7 +24,9 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUs
     }
 
     return (
-        <>
+        <div className="home-div-container">
+            <SearchBar />
+                <CourseList />
             <ToastContainer className={`p-3 ${s.mensaje}`} position={'top-start'}>
                 <Toast className={s.mensaje} onClose={() => setShow(false)} show={show} delay={3000} autohide>
                     <Toast.Header>
@@ -38,12 +40,7 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUs
                     <Toast.Body>{`Bienvenido ${user.firstName}!`}</Toast.Body>
                 </Toast>
             </ToastContainer>
-
-            <SearchBar />
-            <div className={s.homeContainer}>
-                <CourseList />
-            </div>
-        </>
+        </div>
     );
 
 };
