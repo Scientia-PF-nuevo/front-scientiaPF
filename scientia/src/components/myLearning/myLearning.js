@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
+import axios from 'axios';
 import TrainningCard from '../TrainningCard/TrainningCard'
 import { getUserInfo } from '../../actions/actions'
 import './myLearning.css'
@@ -8,14 +9,51 @@ import './myLearning.css'
 function MyLearning({ courses, user, getUserInfo }) {
 
   useEffect(() => {
-
     user.email && getUserInfo(user.email)
-
   }, [])
+
+  const dispatch = useDispatch();
+
+  const email = user.email
+
+  const [values, setValues] = React.useState({
+    coupon: ""
+  })
+
+  const handleChange = (e) => {
+    const { value } = e.target
+    setValues({ ...values, coupon: value })
+  }
+
+  const handleClick = async (e) => {
+
+    try {
+      axios.post(`http://localhost:3001/users/validateGift/${email}`, values)
+      getUserInfo(email)
+    } catch (err) {
+      console.log(err, 'invalide')
+      alert("invalide")
+    }
+
+  }
 
   return (
     <div className="my-learning-div">
+      <div className="cupon">
+                <div className="inputdiv-cupon">
+                    <input
+                      className="form-control-cupon"
+                      type="text"
+                      name="firstName"
+                      placeholder="Enter your gif code"
+                      onChange={handleChange}
+                    />
 
+                    <div className="save">
+                      <button className="btn btn-primary mx-auto w-50" type="submit" onClick={handleClick}>Redeem</button>
+                    </div>
+                </div>
+      </div>
       {
         (courses.hasOwnProperty("coursesAndData")) ? courses.coursesAndData.length === 0 ? (
           <div>

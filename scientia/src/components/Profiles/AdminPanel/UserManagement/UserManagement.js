@@ -3,8 +3,6 @@ import './UserManagement.css';
 import { connect } from 'react-redux'
 import CircularProgress from '@mui/material/CircularProgress';
 import MaterialTable from 'material-table';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import ViewColumnIcon from '@material-ui/icons/ViewColumn';
@@ -20,7 +18,6 @@ import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 
 
 const UserManagement = ({users}) => {
-
   const columns = [
     {
       title: "First Name",
@@ -121,12 +118,61 @@ const UserManagement = ({users}) => {
     ) : (
     <div className="div-usermanagement">
       <CircularProgress disableShrink />
+      <div className="div-usermanagement" style={{ maxWidth: "100%" }}>
+        <MaterialTable
+        className="table"
+        columns={columns}
+        data={users}
+        title="Users"
+        icons={{
+          ResetSearch: ClearIcon,
+          Filter: FilterListIcon,
+          Search: SearchIcon,
+          ViewColumn: ViewColumnIcon,
+          FirstPage:  FirstPageIcon,
+          LastPage:  LastPageIcon,
+          NextPage:  ChevronRightIcon,
+          PreviousPage: ChevronLeftIcon,
+          SortArrow: ArrowDownward
+        }}
+        actions={[
+          {
+            icon: PersonIcon,
+            tooltip: 'Enable user',
+            onClick: (event, rowData) => onClickEnable(rowData)
+            // (event, rowData) => window.confirm ('Has presionado editar ' + rowData.firstName)
+          },
+          {
+            icon: PersonOffIcon,
+            tooltip: 'Disable user',
+            onClick: (event, rowData) => onClickDesable(rowData)
+          },
+          {
+            icon: MilitaryTechIcon,
+            tooltip: 'Promote administrator',
+            onClick: (event, rowData) => onClickAdmin(rowData)
+          }
+        ]}
+        options={{
+          filtering: true,
+          search: true,
+          headerStyle: {
+            backgroundColor: "#53A6B7",
+            color: '#FFF',
+            colorRendering: "white"
+          },
+          pageSize: 10
+    
+      }
+        
+      }
+        />
+      </div>
     </div>
   );
 }
 
     const mapStateToProps = (state) => {
-      console.log(state.rootReducer.users)
     return {
         users: state.rootReducer.users
     }
