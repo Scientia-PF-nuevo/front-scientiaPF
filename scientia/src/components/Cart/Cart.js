@@ -9,7 +9,8 @@ import {
   getUserInfo,
   deleteCartLogged,
   addGift,
-  removeGift
+  removeGift,
+  removeAllGift
 } from "../../actions/actions";
 import { Redirect } from 'react-router'
 import { Modal, Button, Table } from 'react-bootstrap'
@@ -22,7 +23,15 @@ import styles from './modal.css.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Cart.css'
 
+
 export function Cart(props) {
+  useEffect(() => {
+    window.addEventListener('mousemove', () => {});
+    props.removeAllGift()
+    return () => {
+       window.removeEventListener('mousemove', () => {})
+    }
+ }, [])
 
 const { enqueueSnackbar } = useSnackbar();
 
@@ -426,5 +435,6 @@ export default connect(mapStateToProps, {
   deleteCartLogged,
   getUserInfo,
   addGift,
-  removeGift
+  removeGift,
+  removeAllGift
 })(Cart);
