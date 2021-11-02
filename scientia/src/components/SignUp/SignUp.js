@@ -286,7 +286,7 @@ const SignUp = (props) => {
           </div>
         </div>
         <button className="btn btn-primary" onClick={handleSubmit} type="submit">Submit</button>
-        <p><b>Already have an account? <a href="http://localhost:3000/login">Sign-In</a></b></p>
+        <p><b>Already have an account? <a href="/login">Sign-In</a></b></p>
       </form>
     </div>
   )

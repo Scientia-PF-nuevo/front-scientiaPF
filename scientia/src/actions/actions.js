@@ -48,7 +48,7 @@ import {
 //trae todas las categorias 
 export function getAllCategories() {
     return async function (dispatch) {
-        return await axios.get('http://localhost:3001/courses/allcategories/')
+        return await axios.get('/courses/allcategories/')
             .then(response => {
                 dispatch({
                     type: GET_ALL_CATEGORIES,
@@ -62,7 +62,7 @@ export function getAllCategories() {
 //* Trae todos los cursos (DB + API)
 export function getAllCourses() {
     return async function (dispatch) {
-        return await axios.get('http://localhost:3001/courses/')
+        return await axios.get('/courses/')
             .then(res => {
                 dispatch({
                     type: GET_ALL_COURSES,
@@ -98,7 +98,7 @@ export function getFilteredCourses(info) {
 
         return await axios
             .get(
-                `http://localhost:3001/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&price3=${price3}&languaje1=${languaje1}&languaje2=${languaje2}&languaje3=${languaje3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}&category=${category}`
+                `/courses/filters?level1=${level1}&level2=${level2}&level3=${level3}&price1=${price1}&price2=${price2}&price3=${price3}&languaje1=${languaje1}&languaje2=${languaje2}&languaje3=${languaje3}&ranking1=${ranking1}&ranking2=${ranking2}&ranking3=${ranking3}&ranking4=${ranking4}&ranking5=${ranking5}&category=${category}`
             )
             .then((res) => {
                 dispatch({ type: GET_FILTERED_COURSES, payload: res.data });
@@ -113,7 +113,7 @@ export function getFilteredCourses(info) {
 //* Trae todos los cursos encontrados por nombre (QUERY: "name")
 export function searchByName(name) {
     return function (dispatch) {
-        return axios.get(`http://localhost:3001/courses?name=${name}`)
+        return axios.get(`/courses?name=${name}`)
 
             .then(res => {
 
@@ -131,7 +131,7 @@ export function searchByName(name) {
 //* Trae las reviews de los cursos pedidos por ID 
 export function getCoursesReviewsById(id) {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/courses/id/${id}`)
+        axios.get(`/courses/id/${id}`)
             .then(res => {
 
                 dispatch({
@@ -149,7 +149,7 @@ export function getCoursesReviewsById(id) {
 //* Trae todos los cursos por generos
 export function getGenresCourses() {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/courses/allcategories`)
+        axios.get(`/courses/allcategories`)
             .then(res => {
 
                 dispatch({
@@ -166,7 +166,7 @@ export function getGenresCourses() {
 //* Trae todos los usuarios de la DB
 export function getUsers() {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/users`)
+        axios.get(`/users`)
             .then(res => {
 
                 dispatch({
@@ -185,7 +185,7 @@ export function getUsers() {
 //* Trae todos los datos de un usuario en particular (DB)
 export function getUserInfo(email) {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/users/email/${email}`)
+        axios.get(`/users/email/${email}`)
             .then(res => {
                 dispatch({
                     type: GET_USER_INFO,
@@ -201,7 +201,7 @@ export function getUserInfo(email) {
 //* Trae todos los administradores de la DB
 export function getAdmins() {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/admins`)
+        axios.get(`/admins`)
             .then(res => {
 
                 dispatch({
@@ -218,7 +218,7 @@ export function getAdmins() {
 //* Trae todos los cursos favoritos por USUARIO (OJO!!!) de la DB
 export function getFavoritesCourses() {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/favorites`)
+        axios.get(`/favorites`)
             .then(res => {
 
                 dispatch({
@@ -254,7 +254,7 @@ export function filterBy(order) {
 
 export function setCourseToAprove(payload) {
     return function (dispatch) {
-        axios.post(`http://localhost:3001/courses/newcourse`, payload)
+        axios.post(`/courses/newcourse`, payload)
             .then(res => {
                 dispatch({
                     type: GET_COURSE_DETAILS,
@@ -303,7 +303,7 @@ export function setNewCourse (payload) {
 //* Trae todos las orders del carro de la DB
 export function getCart(email) {
     return async function (dispatch) {
-        return await axios.get(`http://localhost:3001/order/${email}`)
+        return await axios.get(`/order/${email}`)
             .then(res => {
 
                 dispatch({ type: GET_CART, payload: res.data });
@@ -315,7 +315,7 @@ export function getCart(email) {
 //* agrega curso gratuito directamente
 export function addFreeCourse(email, id) {
     return async function (dispatch) {
-        return await axios.post(`http://localhost:3001/purchase/freecourses/${email}/${id}`)
+        return await axios.post(`/purchase/freecourses/${email}/${id}`)
             .then(res => {
 
                 dispatch({ type: ADD_FREE_COURSE, payload: res.data });
@@ -328,7 +328,7 @@ export function addCartLogged(data) {
     const course = { state: "carrito", courseId: data.id, price: data.offerPrice }
 
     return async function (dispatch) {
-        return await axios.post(`http://localhost:3001/order/${data.email}`, course)
+        return await axios.post(`/order/${data.email}`, course)
             .then(res => {
 
                 dispatch({ type: ADD_CART_LOGGED, payload: res.data });
@@ -340,7 +340,7 @@ export function addCartLogged(data) {
 
 export function deleteCartLogged(data) {
     return async function (dispatch) {
-        return await axios.post(`http://localhost:3001/order/delete/${data.email}/${data.id}`)
+        return await axios.post(`/order/delete/${data.email}/${data.id}`)
             .then(res => {
 
                 dispatch({ type: DELETE_CART_LOGGED, payload: res.data });
@@ -374,7 +374,7 @@ export function logear(correo, contra, cart, normal, name, apellido) {
     }
     if (normal) {
         return function (dispatch) {
-            axios.post('http://localhost:3001/users/login', data)
+            axios.post('/users/login', data)
                 .then(r => {
                     dispatch({
                         type: LOGIN,
@@ -385,7 +385,7 @@ export function logear(correo, contra, cart, normal, name, apellido) {
         }
     } else {
         return function (dispatch) {
-            axios.post('http://localhost:3001/users/login', data)
+            axios.post('/users/login', data)
                 .then(r => {
                     dispatch({
                         type: LOGIN,
@@ -447,7 +447,7 @@ export function removeAllGift() {
 //* Confirma un CURSO a la DB (COMPLETA)
 export function confirmOrder(userCart) {
     return function (dispatch) {
-        axios.post(`http://localhost:3001/order/${userCart.email}`, {
+        axios.post(`/order/${userCart.email}`, {
             state: "completa",
             courseId: userCart.courseId
         })
@@ -507,21 +507,20 @@ export function register(user) {
             email: user.email,
             password: user.uid,
         }
-        axios.post('http://localhost:3001/users/register', values);
-        // window.location.href = 'http://localhost:3000/success';
+        axios.post('/users/register', values);
     }
 }
 
 //*Crea nuevo usuario directo
 export function createUser(user) {
     return async function (dispatch) {
-        return await axios.post('http://localhost:3001/users/register', user)
+        return await axios.post('/users/register', user)
             .then((response) => {
                 dispatch({
                     type: NEW_USER,
                     payload: response.data
                 })
-                window.location.href = 'http://localhost:3000/home';
+                window.location.href = '/home';
             })
     }
 }
@@ -533,7 +532,7 @@ export function updateInfoVideo(info) {
         ...others
     } = info
     return async function (dispatch) {
-        return await axios.put(`http://localhost:3001/courses/${email}`, others)
+        return await axios.put(`/courses/${email}`, others)
             .then((response) => {
                 dispatch({
                     type: SET_VIDEO,
@@ -545,7 +544,7 @@ export function updateInfoVideo(info) {
 
 export function logout() {
     return async function (dispatch) {
-        axios.post(`http://localhost:3001/users/logout`)
+        axios.post(`/users/logout`)
             .then(r =>
                 dispatch({
                     type: LOGOUT,
@@ -558,7 +557,7 @@ export function logout() {
 //*Crea nueva review
 export function createReview(review) {
     return async function (dispatch) {
-        return await axios.post('http://localhost:3001/courses/newreview', review)
+        return await axios.post('/courses/newreview', review)
             .then((response) => {
                 dispatch({
                     type: CREATE_REVIEW,
@@ -570,7 +569,7 @@ export function createReview(review) {
 
 export function getCoursesToApprove() {
     return async function (dispatch) {
-        axios.get('http://localhost:3001/admin/listdata')
+        axios.get('/admin/listdata')
             .then(res => dispatch({
                 type: GET_COURSES_TO_APPROVE,
                 payload: res.data
@@ -580,7 +579,7 @@ export function getCoursesToApprove() {
 
 export function approveCourse(id) {
     return async function (dispatch) {
-        axios.put(`http://localhost:3001/admin/editcoursestate/active/${id}`)
+        axios.put(`/admin/editcoursestate/active/${id}`)
             .then(res => {
                 dispatch({
                     type: APPROVE_COURSE,
@@ -591,7 +590,7 @@ export function approveCourse(id) {
 }
 export function rejectCourse(id, motivo) {
     return async function (dispatch) {
-        axios.put(`http://localhost:3001/admin/editcoursestate/rejected/${id}`, { motivo: motivo })
+        axios.put(`/admin/editcoursestate/rejected/${id}`, { motivo: motivo })
             .then(res => {
                 dispatch({
                     type: REJECT_COURSE,

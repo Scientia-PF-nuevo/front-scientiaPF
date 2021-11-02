@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useScript from "./useScript";
 import { formConfig } from "./formConfig.js";
+import axios from "axios";
 
 export default function useMercadoPago(carrito, correo, orders) {
 
@@ -40,36 +41,50 @@ export default function useMercadoPago(carrito, correo, orders) {
                             identificationType,
                         } = cardForm.getCardFormData();
 
-                        fetch(
-                            `http://localhost:3001/purchase/${correo}`,
-                            {
-                                // entry point backend
-                                method: "POST",
-                                headers: {
-                                    "Access-Control-Allow-Origin": "*",
-                                    "Access-Control-Request-Method":
-                                        "GET, POST, DELETE, PUT, OPTIONS",
-                                    "Content-Type": "application/json",
+                        // fetch(
+                        //     `/purchase/${correo}`,
+                        //     {
+                        //         // entry point backend
+                        //         method: "POST",
+                        //         headers: {
+                        //             "Access-Control-Allow-Origin": "*",
+                        //             "Access-Control-Request-Method":
+                        //                 "GET, POST, DELETE, PUT, OPTIONS",
+                        //             "Content-Type": "application/json",
+                        //         },
+                        // body: JSON.stringify({
+                        //     token,
+                        //     issuer_id,
+                        //     orders,
+                        //     payment_method_id,
+                        //     transaction_amount: 1000,
+                        //     installments: Number(installments),
+                        //     description: "Descripción del producto",
+                        //     payer: {
+                        //         email:correo,
+                        //         identification: {
+                        //             type: identificationType,
+                        //             number: identificationNumber,
+                        //         },
+                        //     },
+                        // }),
+                        //     }
+                        // )
+                        //     .then((res) => res.json())
+                        axios.post(`/purchase/${correo}`, {
+                            token,
+                            payment_method_id,
+                            issuer_id,
+                            installments: Number(installments),
+                            payer: {
+                                email: correo,
+                                identification: {
+                                    type: identificationType,
+                                    number: identificationNumber,
                                 },
-                                body: JSON.stringify({
-                                    token,
-                                    issuer_id,
-                                    orders,
-                                    payment_method_id,
-                                    transaction_amount: 1000,
-                                    installments: Number(installments),
-                                    description: "Descripción del producto",
-                                    payer: {
-                                        email:correo,
-                                        identification: {
-                                            type: identificationType,
-                                            number: identificationNumber,
-                                        },
-                                    },
-                                }),
-                            }
-                        )
-                            .then((res) => res.json())
+                            },
+                            orders
+                        })
                             .then((data) => setResultPayment(data))
                             .catch((err) => {
                                 setResultPayment(err);
