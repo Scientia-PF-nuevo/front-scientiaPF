@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Form.css'
 import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
-//import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import { setCourseToAprove, getGenresCourses, setNewCourse } from '../../actions/actions';
+import { getGenresCourses, setNewCourse } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
 
 import barra3 from '../../images/barras/barra3.png';
@@ -21,7 +19,6 @@ export default function NewForm3(props) {
     }, [])
     const dispatch = useDispatch();
     const categories = useSelector(state => state.rootReducer.coursesByGenre);
-    const user = useSelector(state => state.rootReducer.user);
 
     const [course, setCourse] = useState({
         category: '',

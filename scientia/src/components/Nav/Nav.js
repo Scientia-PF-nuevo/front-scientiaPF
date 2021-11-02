@@ -6,13 +6,8 @@ import { connect } from 'react-redux'
 import { Avatar } from '@mui/material';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from './../../actions/actions'
-import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap'
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+import { Navbar, Container, Nav } from 'react-bootstrap'
 import ControlCameraIcon from '@mui/icons-material/ControlCamera';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';
 
@@ -45,12 +40,11 @@ function Navegacion(props) {
       variant: 'info',
     })
   }
-  console.log(props.user)
 
   return (
     <div className="navigation">
-      <Navbar style={{ height: "84px" }} fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container style={{ marginLeft: "10px" }}>
+      <Navbar style={{ height: "84px"}} fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Container style={{ marginLeft: "auto", marginRight: "auto"  }}>
           <Navbar.Brand>
             <Link to="/">
               <ControlCameraIcon />
@@ -61,7 +55,7 @@ function Navegacion(props) {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
             </Nav>
-            <Nav>
+            <Nav >
               <Nav.Link className="elMenu" href="/home">Home</Nav.Link>
               {props.login && <Nav.Link className="elMenu" href="/form">Add Course</Nav.Link>}
               {props.login && <Nav.Link className="elMenu" href="/mylearning">My Learning</Nav.Link>}
@@ -98,6 +92,7 @@ function Navegacion(props) {
     </div>
   );
 };
+
 
 function mapStateToProps(state) {
   return {

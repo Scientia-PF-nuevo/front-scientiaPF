@@ -29,7 +29,6 @@ function MyLearning({ courses, user, getUserInfo }) {
       axios.post(`http://localhost:3001/users/validateGift/${email}`, values)
       getUserInfo(email)
     } catch (err) {
-      console.log(err, 'invalide')
       alert("invalide")
     }
 

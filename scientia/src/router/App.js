@@ -38,9 +38,6 @@ function App() {
 
     <Router>
       
-      <Nav />
-
-
         <Navegacion />
 
       <Route exact path='/'>

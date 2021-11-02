@@ -116,7 +116,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.rootReducer, 'root en course')
   return {
     coursesToApprove: state.reducerForm.coursesToApprove,
   }

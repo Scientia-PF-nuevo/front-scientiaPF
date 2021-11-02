@@ -268,7 +268,6 @@ const MyProfile = ({userInfo }) => {
 
   const handleClickU = async (e) => {
       e.preventDefault()
-      console.log(valuesImage, 'values img')
 
       await axios.put(`http://localhost:3001/users/updateProfilePicture/${email}`, valuesImage);
 
