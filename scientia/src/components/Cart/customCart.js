@@ -19,7 +19,7 @@ function CustomizedBadges({cart}) {
   return (
     <IconButton aria-label="cart">
       <StyledBadge badgeContent={cart.length} color="secondary">
-        <ShoppingCartIcon />
+        <ShoppingCartIcon color="primary" />
       </StyledBadge>
     </IconButton>
   );
