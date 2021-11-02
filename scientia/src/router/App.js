@@ -18,7 +18,7 @@ import Home from '../components/Home/Home';
 import Landing from '../components/Landing/Landing';
 import Login from '../components/Login/Login.jsx';
 import MyLearning from '../components/myLearning/myLearning';
-import Nav from '../components/Nav/Nav';
+import Navegacion from '../components/Nav/Nav';
 import Payment from '../components/Payment/payment';
 import ResponsivePlayer from '../components/Player/Player';
 import AdminPanel from '../components/Profiles/AdminPanel/AdminPanel';
@@ -40,6 +40,9 @@ function App() {
       
       <Nav />
 
+
+        <Navegacion />
+
       <Route exact path='/'>
         <Landing/>
       </Route>
@@ -47,6 +50,7 @@ function App() {
       <Route exact path='/login'>
         <Login />
       </Route>
+
 
       <Route exact path='/signup'>
         <SignUp />
