@@ -19,12 +19,13 @@ export default function NewForm3(props) {
     }, [])
     const dispatch = useDispatch();
     const categories = useSelector(state => state.rootReducer.coursesByGenre);
+    const reduxer = useSelector(state => state.reducerForm)
 
     const [course, setCourse] = useState({
-        category: '',
-        languaje: '',
-        level: '',
-        price: 0,
+        category: reduxer.category !== '' || reduxer.category || undefined ? reduxer.category : '',
+        languaje: reduxer.languaje !== '' || reduxer.languaje || undefined ? reduxer.languaje : '',
+        level: reduxer.level !== '' || reduxer.level || undefined ? reduxer.level : '',
+        price: reduxer.price !== '' || reduxer.price || undefined ? reduxer.price : 0,
     });
 
     function handleChange(e) {
@@ -37,19 +38,21 @@ export default function NewForm3(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (course.category === '' || course.category === undefined && course.category.length < 20) {
-            setMsg('People should know the name of the course or name is more longer than 20 characters')
+        if (course.category === '' || course.category === undefined) {
+            setMsg('People should know the category of the course')
             return handleShow();
         }
         if(course.languaje === '' || course.languaje === undefined) {
-            return alert ('People should know the lenguage of the course');
+            setMsg('People should know the languaje of the course')
+            return handleShow();
         }
         if (course.price <= 0 || course.price === undefined) {
             setMsg('People should know the price of the course')
             return handleShow();
         }
         if(course.level === '' || course.level === undefined) {
-            return alert ('People should know the experience required for the course');
+            setMsg('People should know the level of the course')
+            return handleShow();
         }
 
         dispatch(setNewCourse(course));
@@ -64,6 +67,12 @@ export default function NewForm3(props) {
         // Redirect
         props.history.push('/addCourses_step_4');
     };
+
+    function handleBack(e) {
+        e.preventDefault();
+        props.history.goBack()
+    }
+
 
     return (
         <div>
@@ -121,7 +130,7 @@ export default function NewForm3(props) {
                     // defaultValue="Hello World"
                     // className='placeHolder' 
                     type="number"
-                    // value={course.price}
+                    value={course.price}
                     name="price"
                     // min = "1"
                     autocomplete="off"
@@ -130,7 +139,10 @@ export default function NewForm3(props) {
 
             <div className='containerbtSub'>
                 <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
-            </div>      
+            </div>   
+            <div className='containerbtSub'>
+                <button className="form-button" onClick={e=>handleBack(e)}>Back</button>
+            </div>     
 
             </form>
             <Modal show={show} onHide={handleClose}>

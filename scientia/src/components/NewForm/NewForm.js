@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Form.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import { getGenresCourses, setNewCourse } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
@@ -12,14 +12,15 @@ export default function NewForm(props) {
     const [msg, setMsg] = useState('')
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true);
-
+    
     useEffect(() => {
         getGenresCourses()
     }, [])
     const dispatch = useDispatch();
-
+    
+    const reduxer = useSelector(state => state.reducerForm)
     const [course, setCourse] = useState({
-        name: '',
+        name: reduxer.name !== '' || reduxer.name || undefined ? reduxer.name : '',
     });
 
     function handleChange(e) {
@@ -32,7 +33,7 @@ export default function NewForm(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (course?.name === '' && course.name.length > 20) {
+        if (course.name === '' || course.name.length > 20) {
             setMsg('People should know the name of the course or name is more longer than 20 characters')
             return handleShow();
         }
