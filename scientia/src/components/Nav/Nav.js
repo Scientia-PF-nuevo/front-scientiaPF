@@ -57,7 +57,7 @@ function Navegacion(props) {
             </Nav>
             <Nav >
               <Nav.Link className="elMenu" href="/home">Home</Nav.Link>
-              {props.login && <Nav.Link className="elMenu" href="/form">Add Course</Nav.Link>}
+              {props.login && <Nav.Link className="elMenu" href="/addCourses_step_1">Add Course</Nav.Link>}
               {props.login && <Nav.Link className="elMenu" href="/mylearning">My Learning</Nav.Link>}
               <Nav.Link href="/cart"><CustomizedBadges /></Nav.Link>
               {!props.login && <Nav.Link className="elMenu" href="/signup">Sign Up</Nav.Link>}

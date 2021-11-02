@@ -253,6 +253,7 @@ export function filterBy(order) {
 }
 
 export function setCourseToAprove(payload) {
+    console.log('entro al action')
     return function (dispatch) {
         axios.post(`http://localhost:3001/courses/newcourse`, payload)
             .then(res => {
@@ -293,7 +294,7 @@ export function setNewCourse (payload) {
             payload
         }
     }
-    if (payload.amount) {
+    if (payload.numbersOfDiscounts) {
         return {
             type: 'SET_AMOUNT',
             payload

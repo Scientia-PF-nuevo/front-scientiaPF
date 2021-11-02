@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './NewFormLast.css'
 import { useDispatch, useSelector } from 'react-redux';
-import TextField from '@mui/material/TextField';
-//import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
 import { setCourseToAprove, getGenresCourses } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
-import reducerForm from '../../reducer/reducerForm';
 
 import barra6 from '../../images/barras/barra6.png';
 
@@ -34,8 +30,8 @@ export default function NewFormLast(props) {
         email: user.email,
         languaje: reduxer.languaje,
         level: reduxer.level,
-        amount: reduxer.amount,
-        percentage: reduxer.percentage
+        numbersOfDiscounts: reduxer.numbersOfDiscounts,
+        percentageDiscount: reduxer.percentageDiscount
     });
 
 
@@ -130,12 +126,12 @@ export default function NewFormLast(props) {
                 <br></br>
                 <div className='containerLastForm'>
                     <h3>Amount of discounts</h3>
-                    <h4>{course.amount}</h4>
+                    <h4>{course.numbersOfDiscounts}</h4>
                 </div>
                 <br></br>
                 <div className='containerLastForm'>
                     <h3>Percentage of the discounts</h3>
-                    <h4>{course.percentage}</h4>
+                    <h4>{course.percentageDiscount}</h4>
                 </div>
                 <br></br>
 

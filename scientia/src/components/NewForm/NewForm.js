@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Form.css'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import { getGenresCourses, setNewCourse } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
@@ -44,7 +44,7 @@ export default function NewForm(props) {
         });
 
         // Redirect
-        props.history.push('/newForm2');
+        props.history.push('/addCourses_step_2');
     };
 
     return (

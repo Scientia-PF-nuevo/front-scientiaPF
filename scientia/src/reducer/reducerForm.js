@@ -16,8 +16,8 @@ const initialState = {
     email: '',
     languaje: '',
     level: '',
-    amount: 0,
-    percentage: 0,
+    numbersOfDiscounts: 0,
+    percentageDiscount: 0,
     courses: [],
     coursesToApprove: [],
     hi:[],
@@ -53,8 +53,8 @@ export default function reducerForm(state = initialState, action) {
         case 'SET_AMOUNT':
             return {
                 ...state,
-                amount: action.payload.amount,
-                percentage: action.payload.percentage,
+                numbersOfDiscounts: action.payload.numbersOfDiscounts,
+                percentageDiscount: action.payload.percentageDiscount,
             }
         case GET_COURSES_TO_APPROVE:
             return {

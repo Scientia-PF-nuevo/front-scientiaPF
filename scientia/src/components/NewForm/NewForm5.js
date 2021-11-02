@@ -24,8 +24,8 @@ export default function NewForm5(props) {
     const user = useSelector(state => state.rootReducer.user);
 
     const [course, setCourse] = useState({
-        amount: 0,
-        percentage: 0
+        numbersOfDiscounts: 0,
+        percentageDiscount: 0
     });
 
     function handleChange(e) {
@@ -42,12 +42,12 @@ export default function NewForm5(props) {
         dispatch(setNewCourse(course));
 
         setCourse({
-            amount: 0,
-            percentage: 0
+            numbersOfDiscounts: 0,
+            percentageDiscount: 0
         });
 
         // Redirect
-        props.history.push('/newFormLast');
+        props.history.push('/addCourses_step_final');
     };
 
     return (
@@ -69,7 +69,7 @@ export default function NewForm5(props) {
                 // className='placeHolder' 
                 type="number" 
                 // value={course.price}
-                name="percentage" 
+                name="percentageDiscount" 
                 // min = "1"
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
@@ -83,7 +83,7 @@ export default function NewForm5(props) {
                 // className='placeHolder' 
                 type="number" 
                 // value={course.price}
-                name="amount" 
+                name="numbersOfDiscounts" 
                 // min = "1"
                 autocomplete="off"
                 onChange={e => handleChange(e)} />

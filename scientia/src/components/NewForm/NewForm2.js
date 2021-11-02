@@ -45,7 +45,7 @@ export default function NewForm2(props) {
         });
 
         // Redirect
-        props.history.push('/newForm3');
+        props.history.push('/addCourses_step_3');
     };
 
     return (

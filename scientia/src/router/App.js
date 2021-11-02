@@ -5,7 +5,6 @@ import About from '../components/About/About';
 import Cart from '../components/Cart/Cart';
 import Details from '../components/Details/Details';
 import Footer from '../components/Footer/Footer';
-import Form from '../components/Form/Form';
 import NewForm from '../components/NewForm/NewForm';
 import NewForm2 from '../components/NewForm/NewForm2';
 import NewForm3 from '../components/NewForm/NewForm3';
@@ -85,19 +84,17 @@ function App() {
         <Payment />
       </Route>
 
-      <Route exact path='/form' component={Form}/>
+      <Route exact path='/addCourses_step_1' component={NewForm} />
 
-      <Route exact path='/newForm' component={NewForm} />
+      <Route exact path='/addCourses_step_2' component={NewForm2} />
 
-      <Route exact path='/newForm2' component={NewForm2} />
+      <Route exact path='/addCourses_step_3' component={NewForm3} />
 
-      <Route exact path='/newForm3' component={NewForm3} />
+      <Route exact path='/addCourses_step_4' component={NewForm4} />
 
-      <Route exact path='/newForm4' component={NewForm4} />
+      <Route exact path='/addCourses_step_5' component={NewForm5} />
 
-      <Route exact path='/newForm5' component={NewForm5} />
-
-      <Route exact path='/newFormLast' component={NewFormLast} />
+      <Route exact path='/addCourses_step_final' component={NewFormLast} />
 
       
       <Route path='/userprofile'>
