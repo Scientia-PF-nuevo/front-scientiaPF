@@ -40,9 +40,9 @@ import {
     REJECT_COURSE,
     APPROVE_COURSE,
     REMOVE_ALL_GIFT,
+    GET_ALL_CATEGORIES,
+    ADD_FREE_COURSE,
     SALUDO,
-    GET_ALL_CATEGORIES
-
 } from './constants.js';
 
 //trae todas las categorias 
@@ -256,7 +256,6 @@ export function setCourseToAprove(payload) {
     return function (dispatch) {
         axios.post(`http://localhost:3001/courses/newcourse`, payload)
             .then(res => {
-
                 dispatch({
                     type: GET_COURSE_DETAILS,
                     payload: res.data
@@ -269,6 +268,38 @@ export function setCourseToAprove(payload) {
     }
 }
 
+export function setNewCourse (payload) {
+    if (payload.name) {
+        return {
+            type: 'SET_NAME',
+            payload
+        }
+    }
+    if (payload.description) {
+        return {
+            type: 'SET_DESCRIPTION',
+            payload
+        }
+    }
+    if (payload.category) {
+        return {
+            type: 'SET_CATEGORY',
+            payload
+        }
+    }
+    if (payload.url) {
+        return {
+            type: 'SET_URL',
+            payload
+        }
+    }
+    if (payload.amount) {
+        return {
+            type: 'SET_AMOUNT',
+            payload
+        }
+    }
+}
 //* Trae todos las orders del carro de la DB
 export function getCart(email) {
     return async function (dispatch) {
@@ -276,6 +307,18 @@ export function getCart(email) {
             .then(res => {
 
                 dispatch({ type: GET_CART, payload: res.data });
+            })
+            .catch(err => { return err })
+    }
+}
+
+//* agrega curso gratuito directamente
+export function addFreeCourse(email, id) {
+    return async function (dispatch) {
+        return await axios.post(`http://localhost:3001/purchase/freecourses/${email}/${id}`)
+            .then(res => {
+
+                dispatch({ type: ADD_FREE_COURSE, payload: res.data });
             })
             .catch(err => { return err })
     }

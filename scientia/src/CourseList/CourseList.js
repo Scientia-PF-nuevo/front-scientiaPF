@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import CourseCard from '../components/CourseCard/CourseCard'
 import './CourseList.css'
 import Pagination from '../components/Pagination/Pagination'
 import noEncontrado from '../../src/assets/ahahah.gif'
 
-function CourseList({ courses }) {
+function CourseList({ courses}) {
 
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -82,7 +82,7 @@ function CourseList({ courses }) {
 
 const mapStateToProps = (state) => {
     return {
-        courses: state.rootReducer.allCourses
+        courses: state.rootReducer.allCourses,
     }
 }
 

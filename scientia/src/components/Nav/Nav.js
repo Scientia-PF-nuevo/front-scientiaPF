@@ -65,7 +65,7 @@ function Nav(props) {
                 <li className="liNav">Home</li>
               </Link>
               {props.user.firstName ? (
-                <Link className="linkNav" to="/form">
+                <Link className="linkNav" to="/newForm">
                   <li className="liNav">Add Course</li>
                 </Link>
               ) : (
