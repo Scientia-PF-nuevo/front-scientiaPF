@@ -22,10 +22,11 @@ export default function NewForm5(props) {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.rootReducer.coursesByGenre);
     const user = useSelector(state => state.rootReducer.user);
+    const reduxer = useSelector(state => state.reducerForm)
 
     const [course, setCourse] = useState({
-        amount: 0,
-        percentage: 0
+        numbersOfDiscounts: reduxer.numbersOfDiscounts !== '' || reduxer.numbersOfDiscounts || undefined ? reduxer.numbersOfDiscounts : 0,
+        percentageDiscount: reduxer.percentageDiscount !== '' || reduxer.percentageDiscount || undefined ? reduxer.percentageDiscount : 0,
     });
 
     function handleChange(e) {
@@ -39,16 +40,31 @@ export default function NewForm5(props) {
     function handleSubmit(e) {
         e.preventDefault();
 
+        if (course.numbersOfDiscounts !== 0 && course.percentageDiscount === 0) {
+            setMsg('People would not use your discount if percentage is under 0')
+            return handleShow();
+        }
+        if (course.percentageDiscount !== 0 && course.numbersOfDiscounts === 0) {
+            setMsg('People would not use your discount if the amount of discounts is under 0')
+            return handleShow();
+        }
+
         dispatch(setNewCourse(course));
 
         setCourse({
-            amount: 0,
-            percentage: 0
+            numbersOfDiscounts: 0,
+            percentageDiscount: 0
         });
 
         // Redirect
-        props.history.push('/newFormLast');
+        props.history.push('/addCourses_step_final');
     };
+    
+    function handleBack(e) {
+        e.preventDefault();
+        props.history.goBack()
+    }
+
 
     return (
         <div>
@@ -68,8 +84,8 @@ export default function NewForm5(props) {
                 label="Percentage"
                 // className='placeHolder' 
                 type="number" 
-                // value={course.price}
-                name="percentage" 
+                value={course.percentageDiscount}
+                name="percentageDiscount" 
                 // min = "1"
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
@@ -79,11 +95,11 @@ export default function NewForm5(props) {
                 <TextField required 
                 style={{marginBottom:"10px"}}
                 id="outlined-required"
-                label="amount"
+                label="Amount"
                 // className='placeHolder' 
                 type="number" 
-                // value={course.price}
-                name="amount" 
+                value={course.numbersOfDiscounts}
+                name="numbersOfDiscounts" 
                 // min = "1"
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
@@ -91,6 +107,9 @@ export default function NewForm5(props) {
 
             <div className='containerbtSub'>
                 <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
+            </div>  
+            <div className='containerbtSub'>
+                <button className="form-button" onClick={e=>handleBack(e)}>Back</button>
             </div>      
 
             </form>

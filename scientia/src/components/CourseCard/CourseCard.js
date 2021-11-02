@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link , useHistory } from 'react-router-dom'
 import './CourseCard.css'
 import { connect } from 'react-redux'
 import { addCart, addCartLogged, addDetails, addFreeCourse} from '../../actions/actions'
@@ -107,9 +107,15 @@ const handleClickVariantWrong = () => {
     bothIds = alreadyBothCoursesId.map((c) => c.course.courseId )
     }
 
+    let history = useHistory();
+
     const handdleAddFreeCourse = (email, id) => {
       addFreeCourse(email, id)
       handleClickVariantOk()
+      history.push('/mylearning')
+    }
+    const handdlePlay = () => {
+      history.push(`/mylearning`)
     }
 
   return (
@@ -202,11 +208,9 @@ const handleClickVariantWrong = () => {
             ? 
             
             (
-              <button className="cart-button-play">
-               <Link to='/mylearning' style= {{textDecoration:"none", color: "black"}}>
-                PLAY
-               </Link>
-               </button>
+              <button onClick={handdlePlay} className="cart-button-play">
+              PLAY
+              </button>
             ) 
             
             : 
@@ -227,10 +231,8 @@ const handleClickVariantWrong = () => {
             ? 
             
             (
-              <button className="cart-button-play">
-               <Link to='/mylearning' style= {{textDecoration:"none", color: "black"}}>
-                PLAY
-               </Link>
+              <button onClick={handdlePlay} className="cart-button-play">
+              PLAY
                </button>
             ) 
             
@@ -252,10 +254,10 @@ const handleClickVariantWrong = () => {
         {numbersOfDiscounts > 0 ? (
           <img src={dicount} alt="disc" className="discount"></img>
         ) : null}
-        {solds >= 0 && solds < 100 ? ( // only for testing (solds > 20 && solds < 100)
+        {solds > 20 && solds < 100 ? ( // only for testin (gsolds > 20 && solds < 100)
           <img src={bestSeller} alt="disc" className="discount"></img>
         ) : null}
-        {solds >=0 ? ( // only for testing (solds > 100)
+        {solds > 100 ? ( // only for testing (solds > 100)
           <img src={topSeller} alt="disc" className="discount"></img>
         ) : null}
       </div>

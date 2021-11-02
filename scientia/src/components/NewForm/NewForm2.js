@@ -18,9 +18,10 @@ export default function NewForm2(props) {
         getGenresCourses()
     }, [])
     const dispatch = useDispatch();
+    const reduxer = useSelector(state => state.reducerForm)
 
     const [course, setCourse] = useState({
-        description: '',
+        description: reduxer.description !== '' || reduxer.description || undefined ? reduxer.description : ''
     });
 
     function handleChange(e) {
@@ -33,7 +34,7 @@ export default function NewForm2(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (course.description === '' || course.description === undefined && course.description.length < 20) {
+        if (course.description === '' || course.description === undefined || course.description.length < 20) {
             setMsg('People should know the description of the course or description is more smallest than 20 characters')
             return handleShow();
         }
@@ -45,8 +46,13 @@ export default function NewForm2(props) {
         });
 
         // Redirect
-        props.history.push('/newForm3');
+        props.history.push('/addCourses_step_3');
     };
+
+    function handleBack(e) {
+        e.preventDefault();
+        props.history.goBack()
+    }
 
     return (
         <div>
@@ -71,7 +77,10 @@ export default function NewForm2(props) {
 
             <div className='containerbtSub'>
                 <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
-            </div>      
+            </div>
+            <div className='containerbtSub'>
+                <button className="form-button" onClick={e=>handleBack(e)}>Back</button>
+            </div>  
 
             </form>
             <Modal show={show} onHide={handleClose}>

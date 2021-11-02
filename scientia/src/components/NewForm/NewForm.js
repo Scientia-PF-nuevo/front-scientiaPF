@@ -12,14 +12,15 @@ export default function NewForm(props) {
     const [msg, setMsg] = useState('')
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true);
-
+    
     useEffect(() => {
         getGenresCourses()
     }, [])
     const dispatch = useDispatch();
-
+    
+    const reduxer = useSelector(state => state.reducerForm)
     const [course, setCourse] = useState({
-        name: '',
+        name: reduxer.name !== '' || reduxer.name || undefined ? reduxer.name : '',
     });
 
     function handleChange(e) {
@@ -32,7 +33,7 @@ export default function NewForm(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (course?.name === '' && course.name.length > 20) {
+        if (course.name === '' || course.name.length > 20) {
             setMsg('People should know the name of the course or name is more longer than 20 characters')
             return handleShow();
         }
@@ -44,7 +45,7 @@ export default function NewForm(props) {
         });
 
         // Redirect
-        props.history.push('/newForm2');
+        props.history.push('/addCourses_step_2');
     };
 
     return (

@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './NewFormLast.css'
 import { useDispatch, useSelector } from 'react-redux';
-import TextField from '@mui/material/TextField';
-//import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
 import { setCourseToAprove, getGenresCourses } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
-import reducerForm from '../../reducer/reducerForm';
 
 import barra6 from '../../images/barras/barra6.png';
 
@@ -34,14 +30,14 @@ export default function NewFormLast(props) {
         email: user.email,
         languaje: reduxer.languaje,
         level: reduxer.level,
-        amount: reduxer.amount,
-        percentage: reduxer.percentage
+        numbersOfDiscounts: reduxer.numbersOfDiscounts,
+        percentageDiscount: reduxer.percentageDiscount
     });
 
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (course.name === '' || course.name === undefined && course.name.length > 20) {
+        if (course.name === '' || course.name === undefined || course.name.length > 20) {
             setMsg('People should know the name of the course or name is more longer than 20 characters')
             return handleShow();
         }
@@ -73,6 +69,13 @@ export default function NewFormLast(props) {
         props.history.push('/home');
     };
 
+    function handleChange(e) {
+        e.preventDefault();
+        setCourse({
+            [e.target.name]:e.target.value
+        })
+    };
+
     return (
         <div>
         <div className="title-form-div">
@@ -100,7 +103,7 @@ export default function NewFormLast(props) {
                 <br></br>
                 <div className='containerLastForm'>
                     <h3>Imagen</h3>
-                    <img src={course.url} />
+                    <img src={course.url} alt='course image' />
                 </div>
                 <br></br>
                 <div className='containerLastForm'>
@@ -130,18 +133,15 @@ export default function NewFormLast(props) {
                 <br></br>
                 <div className='containerLastForm'>
                     <h3>Amount of discounts</h3>
-                    <h4>{course.amount}</h4>
+                    <h4>{course.numbersOfDiscounts}</h4>
                 </div>
                 <br></br>
                 <div className='containerLastForm'>
                     <h3>Percentage of the discounts</h3>
-                    <h4>{course.percentage}</h4>
+                    <h4>{course.percentageDiscount}</h4>
                 </div>
                 <br></br>
-
-                <h1>IT'S OK?</h1>
-
-                <br></br>
+                
             <div className='containerbtSub'>
                 <input className="form-button" value='Submit' type='submit' onClick={e=>handleSubmit(e)}/>
             </div>      
