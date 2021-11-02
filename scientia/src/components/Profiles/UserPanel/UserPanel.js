@@ -36,9 +36,9 @@ function UserPanel () {
           <ShoppingHistory />
         </Route>
 
-        {/* <Route exact path='/userprofile/created-courses'>
+        <Route exact path='/userprofile/created-courses'>
           <CreatedCourses />
-        </Route> */}
+        </Route>
       </div>
     </Router>
     </div>

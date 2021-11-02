@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './UserManagement.css';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import MaterialTable from 'material-table';
 import SearchIcon from '@material-ui/icons/Search';
@@ -18,12 +18,6 @@ import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 
 
 const UserManagement = ({users}, props) => {
-  console.log(users, 'users', props, 'props')
-
-
-  // useEffect(() => {
-  //   props.getUserInfo()
-  // }, [])
 
   const columns = [
     {
