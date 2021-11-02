@@ -18,12 +18,6 @@
 
 
 // const UserManagement = ({users}, props) => {
-//   console.log(users, 'users', props, 'props')
-
-
-//   // useEffect(() => {
-//   //   props.getUserInfo()
-//   // }, [])
 
 //   const columns = [
 //     {
