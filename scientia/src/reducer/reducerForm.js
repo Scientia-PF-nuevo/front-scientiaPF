@@ -7,6 +7,17 @@ import {
 } from '../actions/constants';
 
 const initialState = {
+    name: '',
+    description: '',
+    price: 0,
+    url: '',
+    urlVideo: '',
+    category: '',
+    email: '',
+    languaje: '',
+    level: '',
+    amount: 0,
+    percentage: 0,
     courses: [],
     coursesToApprove: [],
     hi:[],
@@ -15,10 +26,35 @@ const initialState = {
 
 export default function reducerForm(state = initialState, action) {
     switch (action.type) {
-        case SET_COURSE_TOAPROVE:
+        case 'SET_NAME':
             return {
                 ...state,
-                courses: [...state.courses, action.payload]
+                name: action.payload.name
+            }
+        case 'SET_DESCRIPTION':
+            return {
+                ...state,
+                description: action.payload.description
+            }
+        case 'SET_CATEGORY':
+            return {
+                ...state,
+                category: action.payload.category,
+                languaje: action.payload.languaje,
+                level: action.payload.level,
+                price: action.payload.price
+            }
+        case 'SET_URL':
+            return {
+                ...state,
+                url: action.payload.url,
+                urlVideo: action.payload.urlVideo,
+            }
+        case 'SET_AMOUNT':
+            return {
+                ...state,
+                amount: action.payload.amount,
+                percentage: action.payload.percentage,
             }
         case GET_COURSES_TO_APPROVE:
             return {

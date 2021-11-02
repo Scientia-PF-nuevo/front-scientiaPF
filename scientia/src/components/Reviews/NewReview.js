@@ -19,7 +19,7 @@ function NewReview({createReview, videoplaying, userInfo}) {
   const handleClickVariantOk = () => {
     enqueueSnackbar("THANKS FOR YOUR RATING, YOU WILL SEE SOON", {
       anchorOrigin: {
-        vertical: "top",
+        vertical: "bottom",
         horizontal: "left",
       },
       TransitionComponent: Slide,
@@ -30,7 +30,7 @@ function NewReview({createReview, videoplaying, userInfo}) {
   const handleClickVariantWrong = () => {
     enqueueSnackbar('COMPLETE ALL FIELDS', {
       anchorOrigin: {
-          vertical: 'top',
+          vertical: 'bottom',
           horizontal: 'left',              
       },
       TransitionComponent: Slide,
