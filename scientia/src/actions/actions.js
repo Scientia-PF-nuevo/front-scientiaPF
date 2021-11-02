@@ -40,10 +40,9 @@ import {
     REJECT_COURSE,
     APPROVE_COURSE,
     REMOVE_ALL_GIFT,
-    BIENVENIDO,
     GET_ALL_CATEGORIES,
-    ADD_FREE_COURSE
-
+    ADD_FREE_COURSE,
+    SALUDO,
 } from './constants.js';
 
 //trae todas las categorias 
@@ -51,7 +50,6 @@ export function getAllCategories() {
     return async function (dispatch) {
         return await axios.get('http://localhost:3001/courses/allcategories/')
             .then(response => {
-                console.log("aqui esta la data",response.data)
                 dispatch({
                     type: GET_ALL_CATEGORIES,
                     payload: response.data
@@ -439,7 +437,6 @@ export function clearCartToPay() {
     }
 }
 export function removeAllGift() {
-    console.log('asd')
     return {
         type: REMOVE_ALL_GIFT,
         payload: []
@@ -604,9 +601,15 @@ export function rejectCourse(id, motivo) {
     }
 }
 
-export function bienvenido() {
+export function saludo() {
     return {
-        type: BIENVENIDO,
+        type: SALUDO,
+        payload: false
+    }
+}
+export function iniciarSaludo() {
+    return {
+        type: SALUDO,
         payload: true
     }
 }

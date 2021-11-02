@@ -1,31 +1,40 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from './../../actions/actions'
 import s from './login.module.css'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom'
-import { Modal, Button, Spinner } from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap'
 import { Redirect } from "react-router-dom"
+import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 
 function Login(props) {
 
     const [state, setState] = useState({ email: '', password: '', remember: false })
-    const [show, setShow] = useState(false);
     const [redir, setRedir] = useState(false)
-    const [user, setUser] = useState(false)
+
+    const { enqueueSnackbar } = useSnackbar();
+
+    const errorLogeo = () => {
+        enqueueSnackbar('Credenciales erroneas', {
+            anchorOrigin: {
+                vertical: 'bottom',
+                horizontal: 'left',
+            },
+            TransitionComponent: Slide,
+            variant: 'error',
+        })
+    }
 
     useEffect(() => {
-        setUser(props.user)
-    }, [props.user])
-
-    const handleClose = () => {
-        if (user.firstName !== '' && user.firstName) {
+        if (props.user[0] === 'C') {
+            errorLogeo()
+        } else if (props.user.firstName !== '' && props.user.firstName) {
             setRedir(true)
+            props.iniciarSaludo()
         }
-        setShow(false)
-    };
-
-    const handleShow = () => setShow(true);
+    }, [props.user])
 
     function handleChange(e) {
         e.preventDefault()
@@ -40,23 +49,12 @@ function Login(props) {
         e.preventDefault()
         let normal = true
         props.logear(state.email, state.password, props.cart, normal)
-        handleShow()
+
     }
 
     async function submitGoogle(e) {
         e.preventDefault()
-
         props.autenticarConGoogle(props.cart)
-
-        handleShow()
-    }
-
-    function mensajeModel() {
-        //revisar display Name o first name
-        if (user.firstName) {
-            return <Redirect to="/home" />
-        }
-        return <Spinner animation="border" variant="primary" />
     }
 
     return (
@@ -82,16 +80,7 @@ function Login(props) {
                     </div>
                 </form>
             </div>
-            {redir ?
-                <Redirect to="/home" />
-                :
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Iniciando Sesión</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>{mensajeModel()}</Modal.Body>
-                </Modal>
-            }
+            {redir && <Redirect to="/home" />}
         </>
     )
 }

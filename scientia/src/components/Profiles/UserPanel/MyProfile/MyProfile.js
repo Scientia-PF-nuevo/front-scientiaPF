@@ -10,7 +10,8 @@ import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 import { styled } from '@mui/material/styles';
 
-const MyProfile = ({userInfo, photo}) => {
+const MyProfile = ({userInfo }) => {
+
 
   const Root = styled('div')(({ theme }) => ({
     width: '100%',
@@ -20,9 +21,9 @@ const MyProfile = ({userInfo, photo}) => {
     },
   }));
 
-  let initialFirstName = userInfo.firstName.charAt(0)
-  let initialLastName = userInfo.lastName.charAt(0)
-  let initials = initialFirstName + initialLastName
+  // let initialFirstName = userInfo.firstName.charAt(0)
+  // let initialLastName = userInfo.lastName.charAt(0)
+  // let initials = initialFirstName + initialLastName
 
   const dispatch = useDispatch();
 
@@ -214,6 +215,8 @@ const MyProfile = ({userInfo, photo}) => {
 
     await axios.put(`http://localhost:3001/users/updateInfo/${email}`, values);
 
+    alert("Changes saved successfully")
+
     dispatch(getUserInfo(email));
   }
 
@@ -226,6 +229,9 @@ const MyProfile = ({userInfo, photo}) => {
       return false
     }
     await axios.put(`http://localhost:3001/users/updatePw/${email}`, changePassword);
+
+    alert("Changes saved successfully")
+
     dispatch(getUserInfo(email));
   }
 
@@ -262,7 +268,8 @@ const MyProfile = ({userInfo, photo}) => {
 
   const handleClickU = async (e) => {
       e.preventDefault()
-      
+      console.log(valuesImage, 'values img')
+
       await axios.put(`http://localhost:3001/users/updateProfilePicture/${email}`, valuesImage);
 
       dispatch(getUserInfo(email));
@@ -271,12 +278,10 @@ const MyProfile = ({userInfo, photo}) => {
   return userInfo ? (
       <div className="div-userinfo">
         <div className="subdiv">
-              
-         <h2>Profile</h2>
-          <div >
+          <div>
             <form className="form-user">
 
-              <div className="form-row">
+              <div className="form-row-myprofile">
 
                 <Root>
                   <Divider>
@@ -284,132 +289,137 @@ const MyProfile = ({userInfo, photo}) => {
                   </Divider>
                 </Root>
 
-                <div className="inputdiv">
-                  <label>*First Name:
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="firstName"
-                      value={firstName}
-                      placeholder="Henry"
-                      onChange={handleChange}
-                      onBlur={validateOne}
-                    />
-                  </label>
-                  <div className="legend">{firstNameVal}</div>
+                <div className="sub-div-myprofile-user">
+
+                    <div className="inputdiv">
+                      <label>*First Name:
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="firstName"
+                          value={firstName}
+                          placeholder="Henry"
+                          onChange={handleChange}
+                          onBlur={validateOne}
+                        />
+                      </label>
+                      <div className="legend">{firstNameVal}</div>
+                    </div>
+
+                    <div className="inputdiv">
+                      <label>*Last Name:
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="lastName"
+                          value={lastName}
+                          placeholder="Boom"
+                          onChange={handleChange}
+                          onBlur={validateOne}
+                        />
+                      </label>
+                      <div className="legend">{lastNameVal}</div>
+                    </div>
+
+                    <div className="inputdiv">
+                      <label>Phone:
+                        <input
+                          className="form-control"
+                          type="number"
+                          name="phone"
+                          value={phone}
+                          placeholder="4382929282"
+                          onChange={handleChange}
+                        />
+                      </label>
+                    </div>
+
+                    <div className="inputdiv">
+                      <label>Country:
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="country"
+                          value={country}
+                          placeholder="Argentina"
+                          onChange={handleChange}
+                        />
+                      </label>
+                    </div>
+
+                    <div className="inputdiv">
+                      <label>Province:
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="province"
+                          value={province}
+                          placeholder="Ciudad de Buenos Aires"
+                          onChange={handleChange}
+                        />
+                      </label>
+                    </div>
+
+                    <div className="inputdiv">
+                      <label>City:
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="city"
+                          value={city}
+                          placeholder="Mar del Plata"
+                          onChange={handleChange}
+                        />
+                      </label>
+                    </div>
+
+                    <div className="inputdiv">
+                      <label>Address:
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="address"
+                          value={address}
+                          placeholder="Av. Santa Fe 4362"
+                          onChange={handleChange}
+                        />
+                      </label>
+                    </div>
+
+                    <div className="inputdiv">
+                      <label>Postal Code:
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="postalcode"
+                          value={postalcode}
+                          placeholder="B7600"
+                          onChange={handleChange}
+                        />
+                      </label>
+                  </div>
+
+                  <div className="inputdiv">
+                      <label>*Password:
+                        <input
+                          className="form-control"
+                          type="password"
+                          name="password"
+                          value={password}
+                          placeholder="***********"
+                          onChange={handleChange}
+                          onBlur={validateOne}
+                        />
+                      </label>
+                      <div className="legend">{passwordVal}</div>
+                    </div>
+
+                    <div className="save-user">
+                      <button className="btn btn-primary mx-auto w-50" onClick={handleSubmit} type="submit">Save</button>
+                    </div>
+
                 </div>
 
-                <div className="inputdiv">
-                  <label>*Last Name:
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="lastName"
-                      value={lastName}
-                      placeholder="Boom"
-                      onChange={handleChange}
-                      onBlur={validateOne}
-                    />
-                  </label>
-                  <div className="legend">{lastNameVal}</div>
-                </div>
-
-                <div className="inputdiv">
-                  <label>Phone:
-                    <input
-                      className="form-control"
-                      type="number"
-                      name="phone"
-                      value={phone}
-                      placeholder="4382929282"
-                      onChange={handleChange}
-                    />
-                  </label>
-                </div>
-
-                <div className="inputdiv">
-                  <label>Country:
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="country"
-                      value={country}
-                      placeholder="Argentina"
-                      onChange={handleChange}
-                    />
-                  </label>
-                </div>
-
-                <div className="inputdiv">
-                  <label>Province:
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="province"
-                      value={province}
-                      placeholder="Ciudad de Buenos Aires"
-                      onChange={handleChange}
-                    />
-                  </label>
-                </div>
-
-                <div className="inputdiv">
-                  <label>City:
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="city"
-                      value={city}
-                      placeholder="Mar del Plata"
-                      onChange={handleChange}
-                    />
-                  </label>
-                </div>
-
-                <div className="inputdiv">
-                  <label>Address:
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="address"
-                      value={address}
-                      placeholder="Av. Santa Fe 4362"
-                      onChange={handleChange}
-                    />
-                  </label>
-                </div>
-
-                <div className="inputdiv">
-                  <label>Postal Code:
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="postalcode"
-                      value={postalcode}
-                      placeholder="B7600"
-                      onChange={handleChange}
-                    />
-                  </label>
-              </div>
-
-              <div className="inputdiv">
-                  <label>*Password:
-                    <input
-                      className="form-control"
-                      type="password"
-                      name="password"
-                      value={password}
-                      placeholder="***********"
-                      onChange={handleChange}
-                      onBlur={validateOne}
-                    />
-                  </label>
-                  <div className="legend">{passwordVal}</div>
-                </div>
-
-              <div className="save">
-                <button className="btn btn-primary mx-auto w-50" onClick={handleSubmit} type="submit">Save</button>
-              </div>
 
               <Root>
                 <Divider>
@@ -417,7 +427,9 @@ const MyProfile = ({userInfo, photo}) => {
                 </Divider>
               </Root>
 
-              <div className="inputdiv">
+              <div className="sub-div-myprofile-user">
+
+                <div className="inputdiv">
                   <label>*Current Password:
                     <input
                       className="form-control"
@@ -462,9 +474,11 @@ const MyProfile = ({userInfo, photo}) => {
                   <div className="legend">{newPassword2Val}</div>
                 </div>
 
-              <div className="save">
-                <button className="btn btn-primary mx-auto w-50" type="submit" onClick={handleSubmitPassword}>Save</button>
+                <div className="save-user">
+                  <button className="btn btn-primary mx-auto w-50" type="submit" onClick={handleSubmitPassword}>Save</button>
+                </div>
               </div>
+
             </div>
 
               {
@@ -493,7 +507,6 @@ const MyProfile = ({userInfo, photo}) => {
     const mapStateToProps = (state) => {
     return {
       userInfo: state.rootReducer.userInfo,
-      photo: state.rootReducer.user.photoURL
     }
   };
 

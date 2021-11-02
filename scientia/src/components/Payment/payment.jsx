@@ -7,7 +7,8 @@ import { Modal, Button, Spinner } from 'react-bootstrap'
 import { Redirect } from "react-router-dom"
 import { clearCartToPay, confirmOrder, removeAllGift } from "../../actions/actions";
 import { connect } from "react-redux";
-
+import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 
 const INITIAL_STATE = {
     cvc: "",
@@ -39,6 +40,29 @@ function MercadoPagoForm(props) {
         }, 5000);
     };
 
+    const { enqueueSnackbar } = useSnackbar();
+
+    const pagoOk = () => {
+        enqueueSnackbar(`Pagado con éxito!`, {
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'left',
+            },
+            TransitionComponent: Slide,
+            variant: 'success',
+        })
+    }
+    const errorPago = () => {
+        enqueueSnackbar('Hubo un error con el pago', {
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'left',
+            },
+            TransitionComponent: Slide,
+            variant: 'error',
+        })
+    }
+
     const resultPayment = useMercadoPago(props.cartToPay, props.user.email, props.gift);
     
     const handleInputChange = (e) => {
@@ -52,6 +76,7 @@ function MercadoPagoForm(props) {
         if (msg === '') {
             if (resultPayment) {
                 // clearCartToPay()
+                pagoOk()
                 setMsg(`Pagado con éxito!`)
             }
             return <Spinner animation="border" variant="primary" />
@@ -171,7 +196,7 @@ function MercadoPagoForm(props) {
                     resultPayment ?
                         <p>{msg}</p>
                         :
-                        <p>Hubo un error con el pago</p>
+                        errorPago()
                     :
                     <></>
                 }

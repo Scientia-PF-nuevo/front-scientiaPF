@@ -9,15 +9,12 @@ import './AdminDashboard.css'
 const AdminDashboard = (props) => {
 
     if (props.user.firstName) {
-      let inicialNombre = props.user.firstName.split(' ')[0][0]
-      let inicialApellido = props.user.firstName.split(' ')[1][0]
-      var iniciales = inicialNombre + inicialApellido
     }
     return (
       <div className="div-admindashboard">
           <h1>You're welcome!</h1>
-          <Avatar sx={{ width: 200, height: 200, bgcolor: '#090062', fontSize: 100 }}>{iniciales}</Avatar>
-
+          <Avatar sx={{ width: 200, height: 200, bgcolor: '#090062', fontSize: 100 }}>{"👁️‍🗨️"}</Avatar>
+            <h1>Admin</h1>
             <h2>{props.user.firstName}</h2>
             <h3>{props.user.email}</h3> 
       </div>

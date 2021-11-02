@@ -25,11 +25,14 @@ import AdminPanel from '../components/Profiles/AdminPanel/AdminPanel';
 import UserPanel from '../components/Profiles/UserPanel/UserPanel';
 import SignUp from '../components/SignUp/SignUp';
 import Success from '../components/SignUp/Success';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 import './App.css';
 
 
 
 function App() {
+  const user = useSelector((state) => state.rootReducer.user)
   return (
     <div className='container-app'>
 
@@ -95,14 +98,14 @@ function App() {
 
       <Route exact path='/newFormLast' component={NewFormLast} />
 
-      <Route path='/userprofile'>
-        <UserPanel />
-      </Route>
-
-      <Route path='/adminprofile'>
-        <AdminPanel />
-      </Route>
       
+      <Route path='/userprofile'>
+          {user.isAdmin ? <Redirect to="/adminprofile" /> : <UserPanel />}
+        </Route>
+
+        <Route path='/adminprofile'>
+          {user.isAdmin ? <AdminPanel /> : <Redirect to="/" />}
+        </Route>
       <Footer />
     </Router>
     </div>

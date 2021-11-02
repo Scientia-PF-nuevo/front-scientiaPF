@@ -1,4 +1,10 @@
-
+import {
+    SET_COURSE_TOAPROVE,
+    GET_COURSES_TO_APPROVE,
+    APPROVE_COURSE,
+    REJECT_COURSE,
+    SALUDO
+} from '../actions/constants';
 
 const initialState = {
     name: '',
@@ -11,7 +17,11 @@ const initialState = {
     leng: '',
     dif: '',
     amount: 0,
-    percentage: 0
+    percentage: 0,
+    courses: [],
+    coursesToApprove: [],
+    hi:[],
+    bienvenido: true
 }
 
 export default function reducerForm(state = initialState, action) {
@@ -46,7 +56,27 @@ export default function reducerForm(state = initialState, action) {
                 amount: action.payload.amount,
                 percentage: action.payload.percentage,
             }
-    default:
-        return state;
+        case GET_COURSES_TO_APPROVE:
+            return {
+                ...state,
+                coursesToApprove: action.payload
+            }
+        case APPROVE_COURSE:
+            return {
+                ...state,
+                coursesToApprove: state.coursesToApprove.filter(el => el.id !== action.payload)
+            }
+        case REJECT_COURSE:
+            return {
+                ...state,
+                coursesToApprove: state.coursesToApprove.filter(el => el.id !== action.payload)
+            }
+        case SALUDO:
+            return {
+                ...state,
+                bienvenido: action.payload
+            }
+        default:
+            return state;
     }
 };
