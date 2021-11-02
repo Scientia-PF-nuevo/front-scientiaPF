@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import './UserManagement.css';
-import { connect } from 'react-redux';
-import CircularProgress from '@mui/material/CircularProgress';
-import MaterialTable from 'material-table';
-import SearchIcon from '@material-ui/icons/Search';
-import ClearIcon from '@mui/icons-material/Clear';
-import ViewColumnIcon from '@material-ui/icons/ViewColumn';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import LastPageIcon from '@material-ui/icons/LastPage';
-import PersonIcon from '@mui/icons-material/Person';
-import PersonOffIcon from '@mui/icons-material/PersonOff';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
-
-
-const UserManagement = ({users}, props) => {
-=======
 // import React, {useEffect} from 'react';
 // import './UserManagement.css';
 // import { connect } from 'react-redux'
@@ -40,13 +18,6 @@ const UserManagement = ({users}, props) => {
 
 
 // const UserManagement = ({users}, props) => {
-//   console.log(users, 'users', props, 'props')
-
-
-//   // useEffect(() => {
-//   //   props.getUserInfo()
-//   // }, [])
->>>>>>> 6d276938267413ecb1baeefb6208a370a56b7cbf
 
 //   const columns = [
 //     {
@@ -208,9 +179,5 @@ const UserManagement = ({users}, props) => {
 //     }
 //   };
 
-<<<<<<< HEAD
-  export default connect(mapStateToProps, null)(UserManagement)
-=======
 
 //   export default connect(mapStateToProps, null)(UserManagement)
->>>>>>> 6d276938267413ecb1baeefb6208a370a56b7cbf
