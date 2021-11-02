@@ -97,7 +97,7 @@ export default function NewForm4(props) {
 
 
             <div className='containerbtSub'>
-                <input className="form-button" type='submit' onClick={e=>handleSubmit(e)}/>
+                <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
             </div>      
 
             </form>

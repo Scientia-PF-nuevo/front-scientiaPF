@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Form.css'
+import './NewFormLast.css'
 import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 //import Button from '@mui/material/Button';
@@ -82,46 +82,68 @@ export default function NewFormLast(props) {
             <img src={barra6} alt='barra de progreso'/>
         </div>
         <div className="form-div-container">
-            <form>
-                <h3>Name</h3>
-                <h4>{course.name}</h4>
+            <form className='formLast'>
+                <div className='containerLastForm'>
+                    <h3>Name</h3>
+                    <h4>{course.name}</h4>
+                </div>
                 <br></br>
-                <h3>Description</h3>
-                <h4>{course.description}</h4>
+                <div className='containerLastForm'>
+                    <h3>Description</h3>
+                    <h4>{course.description}</h4>
+                </div>
                 <br></br>
-                <h3>Price</h3>
-                <h4>{course.price}</h4>
+                <div className='containerLastForm'>
+                    <h3>Price</h3>
+                    <h4>{course.price}</h4>
+                </div>
                 <br></br>
-                <h3>Imagen</h3>
-                <img src={course.url} />
+                <div className='containerLastForm'>
+                    <h3>Imagen</h3>
+                    <img src={course.url} />
+                </div>
                 <br></br>
-                <h3>UrlVideo</h3>
-                <h4>{course.urlVideo}</h4>
+                <div className='containerLastForm'>
+                    <h3>UrlVideo</h3>
+                    <h4>{course.urlVideo}</h4>
+                </div>
                 <br></br>
-                <h3>Category</h3>
-                <h4>{course.category}</h4>
+                <div className='containerLastForm'>
+                    <h3>Category</h3>
+                    <h4>{course.category}</h4>
+                </div>
                 <br></br>
-                <h3>Email</h3>
-                <h4>{course.email}</h4>
+                <div className='containerLastForm'>
+                    <h3>Email</h3>
+                    <h4>{course.email}</h4>
+                </div>
                 <br></br>
-                <h3>Leng</h3>
-                <h4>{course.leng}</h4>
+                <div className='containerLastForm'>
+                    <h3>Languaje</h3>
+                    <h4>{course.languaje}</h4>
+                </div>
                 <br></br>
-                <h3>Experience required</h3>
-                <h4>{course.dif}</h4>
+                <div className='containerLastForm'>
+                    <h3>Experience required</h3>
+                    <h4>{course.level}</h4>
+                </div>
                 <br></br>
-                <h3>Amount of discounts</h3>
-                <h4>{course.amount}</h4>
+                <div className='containerLastForm'>
+                    <h3>Amount of discounts</h3>
+                    <h4>{course.amount}</h4>
+                </div>
                 <br></br>
-                <h3>Percentage of the discounts</h3>
-                <h4>{course.percentage}</h4>
+                <div className='containerLastForm'>
+                    <h3>Percentage of the discounts</h3>
+                    <h4>{course.percentage}</h4>
+                </div>
                 <br></br>
 
                 <h1>IT'S OK?</h1>
 
                 <br></br>
             <div className='containerbtSub'>
-                <input className="form-button" type='submit' onClick={e=>handleSubmit(e)}/>
+                <input className="form-button" value='Submit' type='submit' onClick={e=>handleSubmit(e)}/>
             </div>      
 
             </form>
