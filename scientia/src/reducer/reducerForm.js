@@ -14,8 +14,8 @@ const initialState = {
     urlVideo: '',
     category: '',
     email: '',
-    leng: '',
-    dif: '',
+    languaje: '',
+    level: '',
     amount: 0,
     percentage: 0,
     courses: [],
@@ -40,8 +40,8 @@ export default function reducerForm(state = initialState, action) {
             return {
                 ...state,
                 category: action.payload.category,
-                leng: action.payload.leng,
-                dif: action.payload.dif,
+                languaje: action.payload.languaje,
+                level: action.payload.level,
                 price: action.payload.price
             }
         case 'SET_URL':

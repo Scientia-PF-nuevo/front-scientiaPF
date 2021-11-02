@@ -25,8 +25,8 @@ export default function NewForm3(props) {
 
     const [course, setCourse] = useState({
         category: '',
-        leng: '',
-        dif: '',
+        languaje: '',
+        level: '',
         price: 0,
     });
 
@@ -44,14 +44,14 @@ export default function NewForm3(props) {
             setMsg('People should know the name of the course or name is more longer than 20 characters')
             return handleShow();
         }
-        if(course.leng === '' || course.leng === undefined) {
+        if(course.languaje === '' || course.languaje === undefined) {
             return alert ('People should know the lenguage of the course');
         }
         if (course.price <= 0 || course.price === undefined) {
             setMsg('People should know the price of the course')
             return handleShow();
         }
-        if(course.dif === '' || course.dif === undefined) {
+        if(course.level === '' || course.level === undefined) {
             return alert ('People should know the experience required for the course');
         }
 
@@ -59,8 +59,8 @@ export default function NewForm3(props) {
 
         setCourse({
             description: '',
-            leng: '',
-            dif: '',
+            languaje: '',
+            level: '',
             price: 0,
         });
 
@@ -98,22 +98,21 @@ export default function NewForm3(props) {
                 <br></br>
                 <h4>THE LENGUAGE OF THE COURSE IS...</h4>
                 <br></br>
-                <select className='selector' name="leng" value={course.leng} onChange={handleChange} >
-                 <option defaultValue="selected"></option>
-                 <option> Español </option>
-                 <option> English </option>
-                 <option> Others </option>
-                </select>
+                <select className='selector' name="languaje" value={course.languaje} onChange={handleChange} >
+                        <option defaultValue="selected"></option>
+                        <option name="languaje"> spanish </option>
+                        <option name="languaje"> english </option>
+                        <option name="languaje"> others </option>
+                    </select>
 
                 <br></br>
                 <h4>THE COURSE IS FOR...</h4>
-                <br></br>
-                <select className='selector' placeholder='Experience required...' name="dif" value={course.dif} onChange={handleChange} >
-                <option defaultValue="selected"></option>
-                 <option> Beginner </option>
-                 <option> Intermediate </option>
-                 <option> Advance </option>
-                </select>
+                <select className='selector' placeholder='Experience required...' name="level" value={course.level} onChange={handleChange} >
+                        <option defaultValue="selected"></option>
+                        <option name="level"> begginer </option>
+                        <option name="level"> middle </option>
+                        <option name="level"> expert </option>
+                    </select>
 
                 <br></br>
                 <h4>THE PRICE IS...</h4>

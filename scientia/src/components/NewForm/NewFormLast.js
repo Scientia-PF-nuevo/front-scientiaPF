@@ -32,8 +32,8 @@ export default function NewFormLast(props) {
         urlVideo: reduxer.urlVideo,
         category: reduxer.category,
         email: user.email,
-        leng: reduxer.leng,
-        dif: reduxer.dif,
+        languaje: reduxer.languaje,
+        level: reduxer.level,
         amount: reduxer.amount,
         percentage: reduxer.percentage
     });
@@ -61,10 +61,10 @@ export default function NewFormLast(props) {
             setMsg('People should know the category of the course')
             return handleShow();
         }
-        if(course.leng === '' || course.leng === undefined) {
+        if(course.languaje === '' || course.languaje === undefined) {
             return alert ('People should know the lenguage of the course');
         }
-        if(course.dif === '' || course.dif === undefined) {
+        if(course.level === '' || course.level === undefined) {
             return alert ('People should know the experience required for the course');
         }
         dispatch(setCourseToAprove(course));
