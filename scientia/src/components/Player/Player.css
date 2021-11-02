@@ -14,7 +14,7 @@
   display: flex;
   margin-bottom: 20px;
   align-items: center;
-  background-color: black;
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(52,58,64,1) 100%);
   color: aliceblue;
   height: 120px;
   margin-top: 5px;

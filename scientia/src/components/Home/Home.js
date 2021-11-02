@@ -32,25 +32,23 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getCa
     }, [])
 
     const saludar = () => {
-        if(user.firstName !== undefined && bienvenido) {
+        if (user.firstName !== undefined && bienvenido) {
             logeoCorrecto()
             saludo()
         }
     }
 
     return (
+        <>
+            <div className="title-home-div">
+                <h1>Home</h1>
+            </div>
 
-        <div>
-        <div className="title-home-div">
-            <h1>Home</h1>
-        </div>
-
-        <div className="home-div-container">
-            <SearchBar />
-            <CourseList />
-        </div>
-        </div>
-
+            <div className="home-div-container">
+                <SearchBar />
+                <CourseList />
+            </div>
+        </>
     );
 
 };
