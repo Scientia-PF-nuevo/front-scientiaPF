@@ -26,7 +26,7 @@ function MyLearning({ courses, user, getUserInfo }) {
   const handleClick = async (e) => {
 
     try {
-      axios.post(`http://localhost:3001/users/validateGift/${email}`, values)
+      axios.post(`/users/validateGift/${email}`, values)
       getUserInfo(email)
     } catch (err) {
       alert("invalide")
