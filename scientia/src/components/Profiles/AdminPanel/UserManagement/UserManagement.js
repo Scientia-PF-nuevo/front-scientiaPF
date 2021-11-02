@@ -179,5 +179,4 @@ const UserManagement = ({users}, props) => {
     }
   };
 
-
   export default connect(mapStateToProps, null)(UserManagement)
