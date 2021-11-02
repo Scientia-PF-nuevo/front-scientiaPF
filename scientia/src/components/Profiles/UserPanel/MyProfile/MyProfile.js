@@ -213,7 +213,7 @@ const MyProfile = ({userInfo }) => {
       return false
     }
 
-    await axios.put(`http://localhost:3001/users/updateInfo/${email}`, values);
+    await axios.put(`/users/updateInfo/${email}`, values);
 
     alert("Changes saved successfully")
 
@@ -228,7 +228,7 @@ const MyProfile = ({userInfo }) => {
     if (!isValid) {
       return false
     }
-    await axios.put(`http://localhost:3001/users/updatePw/${email}`, changePassword);
+    await axios.put(`/users/updatePw/${email}`, changePassword);
 
     alert("Changes saved successfully")
 
@@ -268,9 +268,8 @@ const MyProfile = ({userInfo }) => {
 
   const handleClickU = async (e) => {
       e.preventDefault()
-      console.log(valuesImage, 'values img')
 
-      await axios.put(`http://localhost:3001/users/updateProfilePicture/${email}`, valuesImage);
+      await axios.put(`/users/updateProfilePicture/${email}`, valuesImage);
 
       dispatch(getUserInfo(email));
   };

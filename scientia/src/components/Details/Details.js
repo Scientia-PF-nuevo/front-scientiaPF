@@ -182,10 +182,10 @@ function Details({
             {description ? description : "NO INFO"}
             <br></br>
             <br></br>
-            {solds >= 0 ? ( // only for testing (solds > 100)
+            {solds > 100 ? ( // only for testing (solds > 100)
               <img src={topSeller} alt="disc" className="discount"></img>
             ) : null}
-            {solds >= 0 && solds < 100 ? ( // only for testing (solds > 20 && solds < 100)
+            {solds > 20 && solds < 100 ? ( // only for testing (solds > 20 && solds < 100)
               <img src={bestSeller} alt="disc" className="discount"></img>
             ) : null}
             {numbersOfDiscounts > 0 ? (

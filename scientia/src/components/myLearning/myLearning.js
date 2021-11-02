@@ -26,10 +26,11 @@ function MyLearning({ courses, user, getUserInfo }) {
   const handleClick = async (e) => {
 
     try {
-      axios.post(`http://localhost:3001/users/validateGift/${email}`, values)
+      axios.post(`/users/validateGift/${email}`, values)
       getUserInfo(email)
+      setValues({ coupon: "" })
+      window.location.reload()
     } catch (err) {
-      console.log(err, 'invalide')
       alert("invalide")
     }
 
@@ -52,7 +53,7 @@ function MyLearning({ courses, user, getUserInfo }) {
                     />
 
                     <div className="save">
-                      <button className="btn btn-primary mx-auto w-50" type="submit" onClick={handleClick}>Redeem</button>
+                      <button className="btn btn-primary mx-auto w-50" type="submit" onClick={handleClick}>Take your gift!</button>
                     </div>
                 </div>
       </div>

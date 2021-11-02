@@ -1,9 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import './Form.css'
 import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
-//import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
 import { setCourseToAprove, getGenresCourses } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
 
@@ -32,7 +31,7 @@ export default function Form(props) {
         category: '',
         languaje: '',
         level: '',
-        numberOfDiscounts: 0,
+        numbersOfDiscounts: 0,
         percentageDiscount: 0
     });
 
@@ -79,6 +78,7 @@ export default function Form(props) {
         if (course.level === '' || course.level === undefined) {
             return alert('People should know the experience required for the course');
         }
+        
         dispatch(setCourseToAprove(course));
 
         setCourse({
@@ -91,7 +91,7 @@ export default function Form(props) {
             category: '',
             languaje: '',
             level: '',
-            numberOfDiscounts: 0,
+            numbersOfDiscounts: 0,
             percentageDiscount: 0
         });
 
@@ -224,7 +224,7 @@ export default function Form(props) {
                         // className='placeHolder' 
                         type="number"
                         // value={course.price}
-                        name="numberOfDiscounts"
+                        name="numbersOfDiscounts"
                         // min = "1"
                         autocomplete="off"
                         onChange={e => handleChange(e)} />

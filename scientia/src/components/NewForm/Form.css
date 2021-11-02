@@ -14,11 +14,17 @@
     margin: 10px;
 }
 
+.containerBarra {
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
 .title-form-div {
   display: flex;
   margin-bottom: 40px;
   align-items: center;
-  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(52,58,64,1) 100%);
+  background-color: black;
   color: aliceblue;
   height: 120px;
   margin-top: 5px;

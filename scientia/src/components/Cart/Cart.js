@@ -9,7 +9,8 @@ import {
   getUserInfo,
   deleteCartLogged,
   addGift,
-  removeGift
+  removeGift,
+  removeAllGift
 } from "../../actions/actions";
 import { Redirect } from 'react-router'
 import { Modal, Button, Table } from 'react-bootstrap'
@@ -22,14 +23,22 @@ import styles from './modal.css.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Cart.css'
 
+
 export function Cart(props) {
+  useEffect(() => {
+    window.addEventListener('mousemove', () => {});
+    props.removeAllGift()
+    return () => {
+       window.removeEventListener('mousemove', () => {})
+    }
+ }, [])
 
 const { enqueueSnackbar } = useSnackbar();
 
 const handleClickVariantOk = () => {
         enqueueSnackbar('YOUR GIFT ADDED CORRECTLY', {
           anchorOrigin: {
-              vertical: 'top',
+              vertical: 'bottom',
               horizontal: 'left',              
           },
           TransitionComponent: Slide,
@@ -40,7 +49,7 @@ const handleClickVariantOk = () => {
 const handleClickVariantWrongEmail = () => {
   enqueueSnackbar('INCORRECT EMAIL OR MISSED', {
     anchorOrigin: {
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'left',              
     },
     TransitionComponent: Slide,
@@ -51,7 +60,7 @@ const handleClickVariantWrongEmail = () => {
 const handleClickVariantWrongRemovedGift = () => {
   enqueueSnackbar('ITEM REMOVED', {
     anchorOrigin: {
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'left',              
     },
     TransitionComponent: Slide,
@@ -278,7 +287,7 @@ const handleClickVariantWrongRemovedGift = () => {
                             textDecoration: "line-through",
                           }}
                         >
-                          ${course.price}
+                          ${parseFloat(course.price.toFixed(2))}
                         </h3>
                         <p>{course.percentageDiscount}% OFF</p>
                         <h3 style={{ color: "green" }}>
@@ -294,7 +303,7 @@ const handleClickVariantWrongRemovedGift = () => {
                       </div>
                     ) : (
                       <div className="div-center">
-                        <h3 style={{ color: "green" }}>${course.price}</h3>
+                        <h3 style={{ color: "green" }}> ${parseFloat(course.price.toFixed(2))}</h3>
                       </div>
                     )}
                   </td>
@@ -426,5 +435,6 @@ export default connect(mapStateToProps, {
   deleteCartLogged,
   getUserInfo,
   addGift,
-  removeGift
+  removeGift,
+  removeAllGift
 })(Cart);

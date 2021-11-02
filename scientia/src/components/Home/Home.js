@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import SearchBar from "../Search/SearchBar";
 import CourseList from "../../CourseList/CourseList";
 import { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart, saludo } from '../../actions/actions'
@@ -32,25 +32,23 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getCa
     }, [])
 
     const saludar = () => {
-        if(user.firstName !== undefined && bienvenido) {
+        if (user.firstName !== undefined && bienvenido) {
             logeoCorrecto()
             saludo()
         }
     }
 
     return (
+        <>
+            <div className="title-home-div">
+                <h1>Home</h1>
+            </div>
 
-        <div>
-        <div className="title-home-div">
-            <h1>Home</h1>
-        </div>
-
-        <div className="home-div-container">
-            <SearchBar />
-            <CourseList />
-        </div>
-        </div>
-
+            <div className="home-div-container">
+                <SearchBar />
+                <CourseList />
+            </div>
+        </>
     );
 
 };

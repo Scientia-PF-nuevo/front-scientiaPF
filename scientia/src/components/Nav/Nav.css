@@ -1,18 +1,26 @@
-
-
 .liNav {
     color: rgb(12, 11, 11);
     list-style: none;
     text-decoration: none;
     display: inline-block;
     font-size: 22px;
-    margin: 20px;
-    padding-bottom: 5px;
-    transition: all .6s;
-    padding-right: 10px;
+    margin: 0px;
+    margin-top: 8px;
+    transition: all 1.6s;
     padding-left: 10px;
+    color:white;
 }
 
+.elMenu {
+    padding-top: 18px !important;
+    color: white !important;
+    font-size: 18px;
+}
+
+.navigation {
+    margin-bottom: 84px;
+    width: 100%;
+}
 
 @media (max-width:500px) {
     .logoNav {

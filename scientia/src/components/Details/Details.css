@@ -9,7 +9,7 @@
   display: flex;
   margin-bottom: 40px;
   align-items: center;
-  background-color: black;
+  ackground: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(52,58,64,1) 100%);
   color: aliceblue;
   height: 120px;
   margin-top: 5px;

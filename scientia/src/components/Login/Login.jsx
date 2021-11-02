@@ -4,7 +4,6 @@ import * as actionCreators from './../../actions/actions'
 import s from './login.module.css'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom'
-import { Spinner } from 'react-bootstrap'
 import { Redirect } from "react-router-dom"
 import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';

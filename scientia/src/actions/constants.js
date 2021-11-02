@@ -33,5 +33,7 @@ export const REJECT_COURSE = 'REJECT_COURSE'
 export const ADD_GIFT = 'ADD_GIFT'
 export const REMOVE_GIFT = 'REMOVE_GIFT'
 export const REMOVE_ALL_GIFT = 'REMOVE_ALL_GIFT'
+export const BIENVENIDO = 'BIENVENIDO'
+export const ADD_FREE_COURSE = 'ADD_FREE_COURSE'
 export const SALUDO = 'SALUDO'
 
