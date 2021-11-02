@@ -22,10 +22,11 @@ export default function NewForm4(props) {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.rootReducer.coursesByGenre);
     const user = useSelector(state => state.rootReducer.user);
+    const reduxer = useSelector(state => state.reducerForm)
 
     const [course, setCourse] = useState({
-        url: '',
-        urlVideo:'',  
+        url: reduxer.url !== '' || reduxer.url || undefined ? reduxer.url : '',
+        urlVideo: reduxer.urlVideo !== '' || reduxer.urlVideo || undefined ? reduxer.urlVideo : '',
     });
 
     function handleChange(e) {
@@ -42,6 +43,10 @@ export default function NewForm4(props) {
             setMsg('People should know the url image of the course')
             return handleShow();
         }
+        if (course.urlVideo === '' || course.urlVideo === undefined) {
+            setMsg('People should know the url video of the course')
+            return handleShow();
+        }
         dispatch(setNewCourse(course));
 
         setCourse({
@@ -52,6 +57,13 @@ export default function NewForm4(props) {
         // Redirect
         props.history.push('/addCourses_step_5');
     };
+
+    
+    function handleBack(e) {
+        e.preventDefault();
+        props.history.goBack()
+    }
+
 
     return (
         <div>
@@ -98,7 +110,10 @@ export default function NewForm4(props) {
 
             <div className='containerbtSub'>
                 <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
-            </div>      
+            </div>
+            <div className='containerbtSub'>
+                <button className="form-button" onClick={e=>handleBack(e)}>Back</button>
+            </div>        
 
             </form>
             <Modal show={show} onHide={handleClose}>
