@@ -1,39 +1,54 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../Search/SearchBar";
 import CourseList from "../../CourseList/CourseList";
-import { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart, bienvenido } from '../../actions/actions'
 import { connect } from "react-redux";
 import './Home.css';
+import {
+  getAllCourses,
+  getGenresCourses,
+  getUsers,
+  getUserInfo,
+  getCart,
+  bienvenido,
+} from "../../actions/actions";
 
-export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getUsers, getCart, bienvenido, login }) {
+export function Home({
+  user,
+  getUserInfo,
+  getAllCourses,
+  getGenresCourses,
+  getCart,
+  bienvenido,
+  login,
+}) {
+  const [show, setShow] = useState(false);
 
-    const [show, setShow] = useState(false);
-
-    useEffect(() => {
-        getAllCourses()
-        getGenresCourses()
-        user.email && getUserInfo(user.email)
-        if (login) {getCart(user.email)}
-        !user.bienvenido && saludar()
-    }, [])
-
-    const saludar = () => {
-        setShow(true)
-        bienvenido()
+  useEffect(() => {
+    getAllCourses();
+    getGenresCourses();
+    user.email && getUserInfo(user.email);
+    if (login) {
+      getCart(user.email);
     }
+    !user.bienvenido && saludar();
+  }, []);
 
-    return (
-        <div>
-        <div className="title-home-div">
-            <h1>Home</h1>
-        </div>
-        <div className="home-div-container">
-            <SearchBar />
-            <CourseList />
-        </div>
-        </div>
-    );
+  const saludar = () => {
+    setShow(true);
+    bienvenido();
+  };
 
+  return (
+    <div>
+      <div className="title-home-div">
+        <h1>Home</h1>
+      </div>
+      <div className="home-div-container">
+        <SearchBar />
+        <CourseList />
+      </div>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => {
@@ -43,4 +58,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart, bienvenido })(Home)
+export default connect(mapStateToProps, {
+  getAllCourses,
+  getGenresCourses,
+  getUsers,
+  getUserInfo,
+  getCart,
+  bienvenido,
+})(Home);

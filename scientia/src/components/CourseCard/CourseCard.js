@@ -1,8 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import './CourseCard.css'
 import { connect } from 'react-redux'
-import { addCart, addCartLogged, addDetails, addFreeCourse} from '../../actions/actions'
+import {
+  addCart,
+  addCartLogged,
+  addDetails,
+  addFreeCourse,
+  getUserInfo,
+} from "../../actions/actions";
 import TextRating from './Qualify'
 import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';
@@ -33,6 +39,7 @@ function CourseCard(props) {
     userInfo,
     numbersOfDiscounts,
     percentageDiscount,
+    getUserInfo
   } = props;
 
 
@@ -107,9 +114,16 @@ const handleClickVariantWrong = () => {
     bothIds = alreadyBothCoursesId.map((c) => c.course.courseId )
     }
 
+    let history = useHistory();
+
     const handdleAddFreeCourse = (email, id) => {
       addFreeCourse(email, id)
       handleClickVariantOk()
+      history.push("/mylearning")
+    }
+
+    const handdlePlay = () => {
+      history.push("/mylearning")
     }
 
   return (
@@ -119,7 +133,7 @@ const handleClickVariantWrong = () => {
           <AddShoppingCartIcon onClick={() => validarCart(id)} />
         </IconButton> */}
         <div className="title-course">
-          <h5>{name && name.toUpperCase()}</h5>
+          <h5>COURSE OF {name && name.toUpperCase()}</h5>
         </div>
 
         <div className="course-div-card">
@@ -166,7 +180,9 @@ const handleClickVariantWrong = () => {
                 <strong style={{ textDecoration: "line-through" }}>
                   Price : ${price}
                 </strong>{" "}
-                <strong>({percentageDiscount}% OFF) : ${offer.toFixed(2)}</strong>
+                <strong>
+                  ({percentageDiscount}% OFF) : ${offer.toFixed(2)}
+                </strong>
               </>
             ) : (
               <strong>Price : ${price}</strong>
@@ -174,9 +190,7 @@ const handleClickVariantWrong = () => {
           </p>
         </div>
         <div className="info-price-div2">
-          <p>
-            solds:({solds})
-          </p>
+          <p>solds:({solds})</p>
         </div>
         <TextRating score={score} />
         <div className="button-container">
@@ -190,61 +204,32 @@ const handleClickVariantWrong = () => {
               </button>
             </Link>
           )}
-          {
-
-            (price == 0) 
-            
-            ?
-            
-             (
-              ((bothIds.filter((bId) => (bId === id))[0] === id)
-            
-            ? 
-            
-            (
-              <button className="cart-button-play">
-               <Link to='/mylearning' style= {{textDecoration:"none", color: "black"}}>
+          {price == 0 ? (
+            bothIds.filter((bId) => bId === id)[0] === id ? (
+              <button className="cart-button-play" onClick={handdlePlay}>
                 PLAY
-               </Link>
-               </button>
-            ) 
-            
-            : 
-            
-            (
-              <button className="cart-button-add" onClick={(login) ? () => handdleAddFreeCourse(userInfo.email, id) : () => handleClickVariantWrong()}>
+              </button>
+            ) : (
+              <button
+                className="cart-button-add"
+                onClick={
+                  login
+                    ? () => handdleAddFreeCourse(userInfo.email, id)
+                    : () => handleClickVariantWrong()
+                }
+              >
                 ADD COURSE
               </button>
-            ))
-               
-             ) 
-             
-             : 
-             
-             (
-              ((bothIds.filter((bId) => (bId === id))[0] === id)
-            
-            ? 
-            
-            (
-              <button className="cart-button-play">
-               <Link to='/mylearning' style= {{textDecoration:"none", color: "black"}}>
-                PLAY
-               </Link>
-               </button>
-            ) 
-            
-            : 
-            
-            (
-              <button className="cart-button2" onClick={() => validarCart(id)}>
-                ADD CART
-              </button>
-            ))
-
-             )
-
-          }
+            )
+          ) : bothIds.filter((bId) => bId === id)[0] === id ? (
+            <button className="cart-button-play" onClick={handdlePlay}>
+              PLAY
+            </button>
+          ) : (
+            <button className="cart-button2" onClick={() => validarCart(id)}>
+              ADD CART
+            </button>
+          )}
         </div>
       </div>
       <div className="description-container">
@@ -255,11 +240,10 @@ const handleClickVariantWrong = () => {
         {solds >= 0 && solds < 100 ? ( // only for testing (solds > 20 && solds < 100)
           <img src={bestSeller} alt="disc" className="discount"></img>
         ) : null}
-        {solds >=0 ? ( // only for testing (solds > 100)
+        {solds >= 0 ? ( // only for testing (solds > 100)
           <img src={topSeller} alt="disc" className="discount"></img>
         ) : null}
       </div>
-      
     </div>
   );
 }
@@ -272,4 +256,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { addCart, addDetails,addCartLogged, addFreeCourse })(CourseCard);
+export default connect(mapStateToProps, {
+  addCart,
+  addDetails,
+  addCartLogged,
+  addFreeCourse,
+  getUserInfo,
+})(CourseCard);
