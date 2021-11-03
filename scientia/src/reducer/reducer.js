@@ -363,7 +363,7 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 user: {},
-                login: action.payload
+                login: action.payload,
             }
         default:
             return state;

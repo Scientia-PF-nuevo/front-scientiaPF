@@ -10,7 +10,6 @@ import { Navbar, Container, Nav } from 'react-bootstrap'
 import ControlCameraIcon from '@mui/icons-material/ControlCamera';
 import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';
-import { Redirect } from 'react-router'
 
 function Navegacion(props) {
   const imagenPerfil = props.user.photoURL
@@ -24,7 +23,6 @@ function Navegacion(props) {
 
   function desconectarse() {
     props.clearCart()
-    props.removeAllGift()
     props.logout()
     deslogeo()
   }
@@ -63,7 +61,7 @@ function Navegacion(props) {
               <Nav.Link href="/cart"><CustomizedBadges /></Nav.Link>
               {!props.login && <Nav.Link className="elMenu" href="/signup">Sign Up</Nav.Link>}
               {props.login ?
-                <Nav.Link className="elMenu" href="/home">
+                <Nav.Link className="elMenu" href="/">
                   <li onClick={desconectarse}>
                     Log Out
                   </li></Nav.Link>
