@@ -21,7 +21,8 @@ function Navegacion(props) {
     var iniciales = inicialNombre + inicialApellido
   }
 
-  function desconectarse() {
+  function desconectarse(e) {
+    e.preventDefault()
     props.clearCart()
     props.logout()
     deslogeo()
@@ -62,7 +63,7 @@ function Navegacion(props) {
               {!props.login && <Nav.Link className="elMenu" href="/signup">Sign Up</Nav.Link>}
               {props.login ?
                 <Nav.Link className="elMenu" href="/">
-                  <li onClick={desconectarse}>
+                  <li onClick={(e) => desconectarse(e)}>
                     Log Out
                   </li></Nav.Link>
                 :
