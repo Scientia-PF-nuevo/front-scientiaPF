@@ -145,9 +145,7 @@ const handleClickVariantWrong = () => {
         good = true;
       }
     }
-
-    console.log(top)
-
+    
   return (
     <div className="container-course">
       <div className="left-container">

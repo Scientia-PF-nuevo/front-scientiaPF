@@ -16,6 +16,7 @@ import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices
 
 
 const CreatedCourses = ({shoppingHistory}) => {
+  
   console.log(shoppingHistory, 'shopping....')
 
   const columns = [
