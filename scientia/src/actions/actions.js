@@ -253,7 +253,6 @@ export function filterBy(order) {
 }
 
 export function setCourseToAprove(payload) {
-    console.log('entro al action')
     return function (dispatch) {
         axios.post(`/courses/newcourse`, payload)
             .then(res => {
@@ -553,11 +552,14 @@ export function updateInfoVideo(info) {
 export function logout() {
     return async function (dispatch) {
         axios.post(`/users/logout`)
-            .then(r =>
-                dispatch({
-                    type: LOGOUT,
-                    payload: false
-                })
+            .then(r => {
+                if (r.data === "Need loggin") {
+                    dispatch({
+                        type: LOGOUT,
+                        payload: false
+                    })
+                }
+            }
             )
     }
 }
