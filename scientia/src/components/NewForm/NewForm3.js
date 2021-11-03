@@ -46,7 +46,7 @@ export default function NewForm3(props) {
             setMsg('People should know the languaje of the course')
             return handleShow();
         }
-        if (course.price <= 0 || course.price === undefined) {
+        if (course.price === undefined) {
             setMsg('People should know the price of the course')
             return handleShow();
         }

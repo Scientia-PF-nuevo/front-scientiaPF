@@ -45,7 +45,7 @@ export default function NewFormLast(props) {
             setMsg('People should know the description of the course')
             return handleShow();
         }
-        if (course.price <= 0 || course.price === undefined) {
+        if (course.price === undefined) {
             setMsg('People should know the price of the course')
             return handleShow();
         }
