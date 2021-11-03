@@ -551,7 +551,7 @@ export function updateInfoVideo(info) {
 }
 
 export function logout() {
-    // axios.post(`/users/logout`)
+    axios.post(`/users/logout`)
     return({
         type: LOGOUT,
         payload: false
