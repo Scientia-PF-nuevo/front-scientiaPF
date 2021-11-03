@@ -2,6 +2,43 @@
     width: 100%;
     background-color: rgb(209, 209, 209);
     display: grid;
-    justify-content: center;
-    align-content: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+
+.box-statistics-admin {
+    background-color: white;
+    width: 440px;
+    height: 300px;
+    /* border-radius: 20px; */
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    box-shadow: 2px 2px 10px #666;
+
+}
+
+.box-value-statistics-admin{
+    background-color: rgb(57, 156, 180);
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}
+
+.value-statistics-admin {
+    text-align: center;
+    height: 200px;
+    font-size: 100px;
+    display: grid;
+    align-items: center;
+    border-radius: 10px;
+    color: white;
+}
+
+.text-statistics-admin {
+    text-align: center;
+    font-size: 40px;
 }
