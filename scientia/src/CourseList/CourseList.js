@@ -17,11 +17,11 @@ function CourseList({ courses}) {
 
   var currentCards; //"cards" que se deben mostrar en la pantalla
 
-  // en caso de que al buscar un juego en particular no encuentra ninguno
+  // en caso de que al buscar un curso en particular no encuentra ninguno
   if(typeof courses === 'string'){
       currentCards = courses
   }else {
-      currentCards = courses.slice(indexOfFirstCard, indexOfLastCard) //uso los indices para "fraccionar que juegos muestro"
+      currentCards = courses.slice(indexOfFirstCard, indexOfLastCard) //uso los indices para "fraccionar que cursos muestro"
   }
 
   const paginate = (pageNumber) => {
@@ -32,6 +32,19 @@ function CourseList({ courses}) {
     var arrCourse = []
     arrCourse.push(courses)
   }
+
+//  React.useEffect(() => {
+      
+// }, [])
+if(typeof courses !== "undefined" && courses.length >= 1) {
+  var coursesTopSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(0, 10)
+  var coursesBestSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(11, 30)
+  var coursesGoodSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(31, 60)
+  // var mostSolds = courses.sort((a,b) => a - b)
+  // console.log(mostSolds)
+
+  // courses.filter((c) =>  )
+}
 
   return (
     <div className="div-wrapper-course-list">
@@ -60,6 +73,9 @@ function CourseList({ courses}) {
         solds={course.solds}
         numbersOfDiscounts={course.numbersOfDiscounts}
         percentageDiscount={course.percentageDiscount}
+        coursesTopSeller={coursesTopSeller}
+        coursesBestSeller={coursesBestSeller}
+        coursesGoodSeller={coursesGoodSeller}
       />
     ))
   ) 
