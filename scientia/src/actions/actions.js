@@ -1,3 +1,4 @@
+import { WindowSharp } from '@mui/icons-material';
 import axios from 'axios';
 import {
     getAuth,
@@ -550,18 +551,11 @@ export function updateInfoVideo(info) {
 }
 
 export function logout() {
-    return async function (dispatch) {
-        axios.post(`/users/logout`)
-            .then(r => {
-                if (r.data === "Need loggin") {
-                    dispatch({
-                        type: LOGOUT,
-                        payload: false
-                    })
-                }
-            }
-            )
-    }
+    // axios.post(`/users/logout`)
+    return({
+        type: LOGOUT,
+        payload: false
+    })
 }
 
 //*Crea nueva review
