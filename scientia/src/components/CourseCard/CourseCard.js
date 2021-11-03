@@ -9,6 +9,7 @@ import Slide from '@material-ui/core/Slide';
 import dicount from '../../assets/discount.png'
 import bestSeller from '../../assets/bestSeller.jpg'
 import topSeller from '../../assets/topSeller.jpg'
+import goodSeller from '../../assets/goodSeller.jpg'
 
 function CourseCard(props) {
 
@@ -33,8 +34,10 @@ function CourseCard(props) {
     userInfo,
     numbersOfDiscounts,
     percentageDiscount,
+    coursesTopSeller,
+    coursesBestSeller,
+    coursesGoodSeller
   } = props;
-
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -118,6 +121,33 @@ const handleClickVariantWrong = () => {
       history.push(`/mylearning`)
     }
 
+    // console.log(coursesTopSeller)
+    // console.log(coursesBestSeller)
+    // console.log(coursesGoodSeller)
+
+    var top = false
+    for(let i=0; i <coursesTopSeller.length; i++) {
+      if(coursesTopSeller[i] === solds) {
+        top = true;
+      }
+    }
+
+    var best = false
+    for(let i=0; i <coursesBestSeller.length; i++) {
+      if(coursesBestSeller[i] === solds) {
+        best = true;
+      }
+    }
+
+    var good = false
+    for(let i=0; i <coursesGoodSeller.length; i++) {
+      if(coursesGoodSeller[i] === solds) {
+        good = true;
+      }
+    }
+
+    console.log(top)
+
   return (
     <div className="container-course">
       <div className="left-container">
@@ -167,7 +197,21 @@ const handleClickVariantWrong = () => {
         </div>
         <div className="info-price-div2">
           <p>
-            {percentageDiscount > 0 ? (
+            {price === 0 ? (
+              <strong>Price : FREE </strong>
+            ) : percentageDiscount > 0 ? (
+              <>
+                <strong style={{ textDecoration: "line-through" }}>
+                  Price : ${price}
+                </strong>{" "}
+                <strong>
+                  ({percentageDiscount}% OFF) : ${offer.toFixed(2)}
+                </strong>
+              </>
+            ) : (
+              <strong>Price : ${price}</strong>
+            )}
+            {/* {percentageDiscount > 0 ? (
               <>
                 <strong style={{ textDecoration: "line-through" }}>
                   Price : ${price}
@@ -176,13 +220,11 @@ const handleClickVariantWrong = () => {
               </>
             ) : (
               <strong>Price : ${price}</strong>
-            )}
+            )} */}
           </p>
         </div>
         <div className="info-price-div2">
-          <p>
-            solds:({solds})
-          </p>
+          <p>solds:({solds})</p>
         </div>
         <TextRating score={score} />
         <div className="button-container">
@@ -196,57 +238,32 @@ const handleClickVariantWrong = () => {
               </button>
             </Link>
           )}
-          {
-
-            (price == 0) 
-            
-            ?
-            
-             (
-              ((bothIds.filter((bId) => (bId === id))[0] === id)
-            
-            ? 
-            
-            (
+          {price == 0 ? (
+            bothIds.filter((bId) => bId === id)[0] === id ? (
               <button onClick={handdlePlay} className="cart-button-play">
-              PLAY
+                PLAY
               </button>
-            ) 
-            
-            : 
-            
-            (
-              <button className="cart-button-add" onClick={(login) ? () => handdleAddFreeCourse(userInfo.email, id) : () => handleClickVariantWrong()}>
+            ) : (
+              <button
+                className="cart-button-add"
+                onClick={
+                  login
+                    ? () => handdleAddFreeCourse(userInfo.email, id)
+                    : () => handleClickVariantWrong()
+                }
+              >
                 ADD COURSE
               </button>
-            ))
-               
-             ) 
-             
-             : 
-             
-             (
-              ((bothIds.filter((bId) => (bId === id))[0] === id)
-            
-            ? 
-            
-            (
-              <button onClick={handdlePlay} className="cart-button-play">
+            )
+          ) : bothIds.filter((bId) => bId === id)[0] === id ? (
+            <button onClick={handdlePlay} className="cart-button-play">
               PLAY
-               </button>
-            ) 
-            
-            : 
-            
-            (
-              <button className="cart-button2" onClick={() => validarCart(id)}>
-                ADD CART
-              </button>
-            ))
-
-             )
-
-          }
+            </button>
+          ) : (
+            <button className="cart-button2" onClick={() => validarCart(id)}>
+              ADD CART
+            </button>
+          )}
         </div>
       </div>
       <div className="description-container">
@@ -254,14 +271,16 @@ const handleClickVariantWrong = () => {
         {numbersOfDiscounts > 0 ? (
           <img src={dicount} alt="disc" className="discount"></img>
         ) : null}
-        {solds > 20 && solds < 100 ? ( // only for testin (gsolds > 20 && solds < 100)
-          <img src={bestSeller} alt="disc" className="discount"></img>
-        ) : null}
-        {solds > 100 ? ( // only for testing (solds > 100)
+        {(top && price !== 0) ? (
           <img src={topSeller} alt="disc" className="discount"></img>
         ) : null}
+        {(best && price !== 0)? (
+          <img src={bestSeller} alt="disc" className="discount"></img>
+        ) : null}
+        {(good && price !== 0)? (
+          <img src={goodSeller} alt="disc" className="discount"></img>
+        ) : null}
       </div>
-      
     </div>
   );
 }
@@ -270,8 +289,14 @@ function mapStateToProps(state) {
   return {
     cart: state.rootReducer.cart,
     login: state.rootReducer.login,
-    userInfo: state.rootReducer.userInfo
+    userInfo: state.rootReducer.userInfo,
+    courses: state.rootReducer.allCourses
   }
 }
 
-export default connect(mapStateToProps, { addCart, addDetails,addCartLogged, addFreeCourse })(CourseCard);
+export default connect(mapStateToProps, {
+  addCart,
+  addDetails,
+  addCartLogged,
+  addFreeCourse,
+})(CourseCard);

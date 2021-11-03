@@ -176,6 +176,10 @@ const handleClickVariantWrongRemovedGift = () => {
     return `$ ${parseFloat(result.toFixed(2))}`;
   }
 
+  if(cart.length >= 1) {
+    Total()
+  }
+
   const handledSubmitOrder = () => {
 
     if (usuario && usuario.length >= 1) {
@@ -187,7 +191,9 @@ const handleClickVariantWrongRemovedGift = () => {
       courseId: []
     }
 
+
     if (cart.length >= 1 && login) {
+
       userCart.courseId = cart.map((course) => course.id)
       userCart.email = user.email
 
@@ -246,12 +252,12 @@ const handleClickVariantWrongRemovedGift = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th style={{ textAlign: "center" }}>ID</th>
               <th style={{ textAlign: "center" }}>Course</th>
               <th style={{ textAlign: "center" }}>Course Name</th>
               <th style={{ textAlign: "center" }}>Price</th>
               <th style={{ textAlign: "center" }}>Gift a Course</th>
-              <th style={{ textAlign: "center" }}>Sub-Total</th>
+              <th style={{ textAlign: "center" }}>ID</th>
+              {/* <th style={{ textAlign: "center" }}>Sub-Total</th> */}
               <th style={{ textAlign: "center" }}>Remove</th>
             </tr>
           </thead>
@@ -259,11 +265,6 @@ const handleClickVariantWrongRemovedGift = () => {
             cart.map((course) => (
               <tbody className="tbody-div">
                 <tr>
-                  <td style={{ textAlign: "center" }}>
-                    <div className="div-center">
-                      <p>#{course.coursesId}</p>
-                    </div>
-                  </td>
                   <td className="photo-div">
                     <img className="cart-img" src={course.url} />
                   </td>
@@ -323,9 +324,14 @@ const handleClickVariantWrongRemovedGift = () => {
                       <p>GIFT</p>
                     </div>
                   </td>
-                  <td style={{ textAlign: "center" }}>
+                  {/* <td style={{ textAlign: "center" }}>
                     <div className="div-center">
                       <h3 style={{ color: "red" }}>{Total()}</h3>
+                    </div>
+                  </td> */}
+                  <td style={{ textAlign: "center" }}>
+                    <div className="div-center">
+                      <p>#{course.coursesId}</p>
                     </div>
                   </td>
                   <td style={{ textAlign: "center" }}>
