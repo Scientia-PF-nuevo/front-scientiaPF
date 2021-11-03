@@ -33,6 +33,7 @@ import {
     SALUDO,
     GET_ALL_CATEGORIES,
     BIENVENIDO,
+    DELETE_COURSE
 } from '../actions/constants';
 
 
@@ -59,7 +60,8 @@ const initialState = {
     videoPlaying: {},
     reviewCreated: {},
     gift: [],
-    freeCourse: []
+    freeCourse: [],
+    courseDelete: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -120,6 +122,12 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 courseDetails: action.payload
+            };
+
+        case DELETE_COURSE:
+            return {
+                ...state,
+                courseDelete: action.payload
             };
 
         case GET_REVIEWS_BY_COURSEID:
@@ -198,13 +206,21 @@ export default function rootReducer(state = initialState, action) {
             if (action.payload === 'new') {
                 return {
                     ...state,
-                    allCourses: [...state.allCourses].sort((prev, next) => prev.date - next.date)
+                    allCourses: [...state.allCourses].sort((prev, next) => {
+                        if (prev.date > next.date) return 1
+                        if (prev.date < next.date) return -1
+                        return 0
+                    })
                 }
             }
             if (action.payload === 'old') {
                 return {
                     ...state,
-                    allCourses: [...state.allCourses].sort((prev, next) => next.date - prev.date)
+                    allCourses: [...state.allCourses].sort((prev, next) => {
+                        if (prev.date > next.date) return -1
+                        if (prev.date < next.date) return 1
+                        return 0
+                    })
                 }
             }
 
@@ -340,7 +356,8 @@ export default function rootReducer(state = initialState, action) {
         case ADD_DETAILS:
             return {
                 ...state,
-                courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
+                // courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
+                courseDetails: state.coursesBackup
             }
         case NEW_USER:
             return {

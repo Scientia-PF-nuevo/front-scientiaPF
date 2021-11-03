@@ -44,6 +44,7 @@ import {
     GET_ALL_CATEGORIES,
     ADD_FREE_COURSE,
     SALUDO,
+    DELETE_COURSE
 } from './constants.js';
 
 //trae todas las categorias 
@@ -269,7 +270,15 @@ export function setCourseToAprove(payload) {
     }
 }
 
+
+export function clearReduxer() {
+    return {
+        type: 'CLEAR_REDUX',
+    }
+}
+
 export function setNewCourse(payload) {
+
     if (payload.name) {
         return {
             type: 'SET_NAME',
@@ -294,7 +303,7 @@ export function setNewCourse(payload) {
             payload
         }
     }
-    if (payload.numbersOfDiscounts) {
+    if (payload.numbersOfDiscounts === 0 || payload.numbersOfDiscounts > 0) {
         return {
             type: 'SET_AMOUNT',
             payload
@@ -320,6 +329,18 @@ export function addFreeCourse(email, id) {
             .then(res => {
 
                 dispatch({ type: ADD_FREE_COURSE, payload: res.data });
+            })
+            .catch(err => { return err })
+    }
+}
+
+//* borra curso directamente
+export function deleteCourse(email, id) {
+    return async function (dispatch) {
+        return await axios.post(`/courses/delete/${email}/${id}`)
+            .then(res => {
+
+                dispatch({ type: DELETE_COURSE, payload: res.data });
             })
             .catch(err => { return err })
     }
@@ -551,7 +572,7 @@ export function updateInfoVideo(info) {
 }
 
 export function logout() {
-    // axios.post(`/users/logout`)
+    axios.post(`/users/logout`)
     return({
         type: LOGOUT,
         payload: false
