@@ -459,7 +459,7 @@ const MyProfile = ({userInfo }) => {
                 </div>
 
                 <div className="inputdiv">
-                  <label>*Confirm Password:
+                  <label>*Confirm New Password:
                     <input
                       className="form-control"
                       type="password"
