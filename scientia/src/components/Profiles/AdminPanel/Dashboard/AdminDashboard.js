@@ -1,12 +1,17 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
-
-import { connect } from 'react-redux'
+import { getUsers } from '../../../../actions/actions';
+import { connect, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../../../../actions/actions'
 import './AdminDashboard.css'
 
 const AdminDashboard = (props) => {
+
+    
+    const dispatch = useDispatch();
+
+    dispatch(getUsers());
 
     if (props.user.firstName) {
     }
