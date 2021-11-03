@@ -3,8 +3,21 @@
     border: 1px solid rgb(161, 154, 154);
     padding: 20px;
     width: 400px;
-    height: 580px;
+    height: 610px;
     background-color: #f7f7e6;
+}
+
+.container-course2 .button-delete-div {
+  
+    display: flex;
+    justify-content: flex-end;
+}
+
+.container-course2 .button-delete-course {
+    color: red;
+    width: 30px;
+    background-color: #f7f7e6;
+
 }
 
 .rating-div {
