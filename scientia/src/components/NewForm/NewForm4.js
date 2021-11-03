@@ -51,14 +51,14 @@ export default function NewForm4(props) {
 
         setCourse({
             url: '',
-            urlVideo:'',  
+            urlVideo: '',
         });
 
         // Redirect
         props.history.push('/addCourses_step_5');
     };
 
-    
+
     function handleBack(e) {
         e.preventDefault();
         props.history.goBack()
@@ -67,67 +67,67 @@ export default function NewForm4(props) {
 
     return (
         <div>
-        <div className="title-form-div">
-            <h1>Add url</h1>
-        </div>
-        <div className='containerBarra'>
-            <img src={barra4} alt='barra de progreso'/>
-        </div>
-        <div className="form-div-container">
-            <form>
-                <h1>URL IMAGE</h1>
-                <br></br>
-
-                <TextField required 
-                style={{marginBottom:"10px"}}
-                id="outlined-required"
-                label="URL IMAGE"
-                // defaultValue="Hello World"
-                // className='placeHolder' 
-                type="text" 
-                value={course.url}
-                placeholder='Course url...'
-                name="url" 
-                autocomplete="off"
-                onChange={e => handleChange(e)} />
-
-                <h1>URL VIDEO</h1>
-                <br></br>
-
-               <TextField required 
-                style={{marginBottom:"10px"}}
-                id="outlined-required"
-                label="URL VIDEO"
-                // defaultValue="Hello World"
-                // className='placeHolder' 
-                type="category" 
-                value={course.urlVideo}
-                placeholder='Course url...'
-                name="urlVideo" 
-                autocomplete="off"
-                onChange={e => handleChange(e)} /> 
-
-
-            <div className='containerbtSub'>
-                <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
+            <div className="title-form-div">
+                <h1>Add Course</h1>
             </div>
-            <div className='containerbtSub'>
-                <button className="form-button" onClick={e=>handleBack(e)}>Back</button>
-            </div>        
+            <div className='containerBarra'>
+                <img src={barra4} alt='barra de progreso' />
+            </div>
+            <div className="form-div-container">
+                <form>
+                    <h1>URL IMAGE</h1>
+                    <br></br>
 
-            </form>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Notificación</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{msg}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
-                        Ok!
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
+                    <TextField required
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="URL IMAGE"
+                        // defaultValue="Hello World"
+                        // className='placeHolder' 
+                        type="text"
+                        value={course.url}
+                        placeholder='Course url...'
+                        name="url"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
+
+                    <h1>URL VIDEO</h1>
+                    <br></br>
+
+                    <TextField required
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="URL VIDEO"
+                        // defaultValue="Hello World"
+                        // className='placeHolder' 
+                        type="category"
+                        value={course.urlVideo}
+                        placeholder='Course url...'
+                        name="urlVideo"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
+
+
+                    <div className='containerbtSub'>
+                        <input className="form-button" value='Next' type='submit' onClick={e => handleSubmit(e)} />
+                    </div>
+                    <div className='containerbtSub'>
+                        <button className="form-button" onClick={e => handleBack(e)}>Back</button>
+                    </div>
+
+                </form>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Notificación</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{msg}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>
+                            Ok!
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         </div>
     );
 };

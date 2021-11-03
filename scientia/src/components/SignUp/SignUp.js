@@ -137,158 +137,163 @@ const SignUp = (props) => {
   } = validations
 
   return (
-    <div className="div-signup" >
-      <h1 id="h1">Sign Up</h1>
-      <form>
-        <div className="form-row">
-          <div>
-            <label>*First Name:
-              <input
-                className="form-control"
-                type="text"
-                name="firstName"
-                value={firstName}
-                placeholder="Henry"
-                onChange={handleChange}
-                onBlur={validateOne}
-              />
-            </label>
-            <div className="legend">{firstNameVal}</div>
-          </div>
+    <>
+      <div className="titleLoginDiv">
+        <h1>Sign Up!</h1>
+      </div>
+      <div className="div-signup" >
+        <h1 id="h1">Fill with your information</h1>
+        <form>
+          <div className="form-row">
+            <div>
+              <label>*First Name:
+                <input
+                  className="form-control"
+                  type="text"
+                  name="firstName"
+                  value={firstName}
+                  placeholder="Henry"
+                  onChange={handleChange}
+                  onBlur={validateOne}
+                />
+              </label>
+              <div className="legend">{firstNameVal}</div>
+            </div>
 
-          <div>
-            <label>*Last Name:
-              <input
-                className="form-control"
-                type="text"
-                name="lastName"
-                value={lastName}
-                placeholder="Boom"
-                onChange={handleChange}
-                onBlur={validateOne}
-              />
-            </label>
-            <div className="legend" v>{lastNameVal}</div>
-          </div>
+            <div>
+              <label>*Last Name:
+                <input
+                  className="form-control"
+                  type="text"
+                  name="lastName"
+                  value={lastName}
+                  placeholder="Boom"
+                  onChange={handleChange}
+                  onBlur={validateOne}
+                />
+              </label>
+              <div className="legend" v>{lastNameVal}</div>
+            </div>
 
-          <div>
-            <label>*Email:
-              <input
-                className="form-control"
-                type="email"
-                name="email"
-                value={email}
-                placeholder="henry@mail.com"
-                onChange={handleChange}
-                onBlur={validateOne}
-              />
-            </label>
-            <div className="legend">{emailVal}</div>
-          </div>
+            <div>
+              <label>*Email:
+                <input
+                  className="form-control"
+                  type="email"
+                  name="email"
+                  value={email}
+                  placeholder="henry@mail.com"
+                  onChange={handleChange}
+                  onBlur={validateOne}
+                />
+              </label>
+              <div className="legend">{emailVal}</div>
+            </div>
 
-          <div>
-            <label>*Password:
-              <input
-                className="form-control"
-                type="password"
-                name="password"
-                value={password}
-                placeholder="***********"
-                onChange={handleChange}
-                onBlur={validateOne}
-              />
-            </label>
-            <div className="legend">{passwordVal}</div>
-          </div>
+            <div>
+              <label>*Password:
+                <input
+                  className="form-control"
+                  type="password"
+                  name="password"
+                  value={password}
+                  placeholder="***********"
+                  onChange={handleChange}
+                  onBlur={validateOne}
+                />
+              </label>
+              <div className="legend">{passwordVal}</div>
+            </div>
 
-          <div >
-            <label>Phone:
-              <input
-                className="form-control"
-                type="number"
-                name="phone"
-                value={phone}
-                placeholder="4382929282"
-                onChange={handleChange}
-                onBlur={validateOne}
-              />
-            </label>
-          </div>
+            <div >
+              <label>Phone:
+                <input
+                  className="form-control"
+                  type="number"
+                  name="phone"
+                  value={phone}
+                  placeholder="4382929282"
+                  onChange={handleChange}
+                  onBlur={validateOne}
+                />
+              </label>
+            </div>
 
-          <div>
-            <label>Country:
-              <input
-                className="form-control"
-                type="text"
-                name="country"
-                value={country}
-                placeholder="Argentina"
-                onChange={handleChange}
-                onBlur={validateOne}
-              />
-            </label>
-          </div>
+            <div>
+              <label>Country:
+                <input
+                  className="form-control"
+                  type="text"
+                  name="country"
+                  value={country}
+                  placeholder="Argentina"
+                  onChange={handleChange}
+                  onBlur={validateOne}
+                />
+              </label>
+            </div>
 
-          <div>
-            <label>Province:
-              <input
-                className="form-control"
-                type="text"
-                name="province"
-                value={province}
-                placeholder="Ciudad de Buenos Aires"
-                onChange={handleChange}
-                onBlur={validateOne}
-              />
-            </label>
-          </div>
+            <div>
+              <label>Province:
+                <input
+                  className="form-control"
+                  type="text"
+                  name="province"
+                  value={province}
+                  placeholder="Ciudad de Buenos Aires"
+                  onChange={handleChange}
+                  onBlur={validateOne}
+                />
+              </label>
+            </div>
 
-          <div>
-            <label>City:
-              <input
-                className="form-control"
-                type="text"
-                name="city"
-                value={city}
-                placeholder="Mar del Plata"
-                onChange={handleChange}
-                onBlur={validateOne}
-              />
-            </label>
-          </div>
+            <div>
+              <label>City:
+                <input
+                  className="form-control"
+                  type="text"
+                  name="city"
+                  value={city}
+                  placeholder="Mar del Plata"
+                  onChange={handleChange}
+                  onBlur={validateOne}
+                />
+              </label>
+            </div>
 
-          <div>
-            <label>Address:
-              <input
-                className="form-control"
-                type="text"
-                name="address"
-                value={address}
-                placeholder="Av. Santa Fe 4362"
-                onChange={handleChange}
-                onBlur={validateOne}
-              />
-            </label>
-          </div>
+            <div>
+              <label>Address:
+                <input
+                  className="form-control"
+                  type="text"
+                  name="address"
+                  value={address}
+                  placeholder="Av. Santa Fe 4362"
+                  onChange={handleChange}
+                  onBlur={validateOne}
+                />
+              </label>
+            </div>
 
-          <div>
-            <label>Postal Code:
-              <input
-                className="form-control"
-                type="text"
-                name="postalcode"
-                value={postalcode}
-                placeholder="B7600"
-                onChange={handleChange}
-                onBlur={validateOne}
-              />
-            </label>
+            <div>
+              <label>Postal Code:
+                <input
+                  className="form-control"
+                  type="text"
+                  name="postalcode"
+                  value={postalcode}
+                  placeholder="B7600"
+                  onChange={handleChange}
+                  onBlur={validateOne}
+                />
+              </label>
+            </div>
           </div>
-        </div>
-        <button className="btn btn-primary" onClick={handleSubmit} type="submit">Submit</button>
-        <p><b>Already have an account? <a href="/login">Sign-In</a></b></p>
-      </form>
-    </div>
+          <button className="btn btn-primary" onClick={handleSubmit} type="submit">Submit</button>
+          <p><b>Already have an account? <a href="/login">Sign-In</a></b></p>
+        </form>
+      </div>
+    </>
   )
 }
 
