@@ -139,10 +139,8 @@ export default function NewForm3(props) {
 
             <div className='containerbtSub'>
                 <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
+                <button className="form-button" style={{backgroundColor:"#12351c"}} onClick={e=>handleBack(e)}>Back</button>
             </div>   
-            <div className='containerbtSub'>
-                <button className="form-button" onClick={e=>handleBack(e)}>Back</button>
-            </div>     
 
             </form>
             <Modal show={show} onHide={handleClose}>

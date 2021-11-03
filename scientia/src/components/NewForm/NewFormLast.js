@@ -69,12 +69,11 @@ export default function NewFormLast(props) {
         props.history.push('/home');
     };
 
-    function handleChange(e) {
+    function handleBack(e) {
         e.preventDefault();
-        setCourse({
-            [e.target.name]:e.target.value
-        })
-    };
+        props.history.goBack()
+    }
+
 
     return (
         <div>
@@ -144,6 +143,7 @@ export default function NewFormLast(props) {
                 
             <div className='containerbtSub'>
                 <input className="form-button" value='Submit' type='submit' onClick={e=>handleSubmit(e)}/>
+                <button className="form-button" style={{backgroundColor:"#12351c"}} onClick={e=>handleBack(e)}>Back</button>
             </div>      
 
             </form>
