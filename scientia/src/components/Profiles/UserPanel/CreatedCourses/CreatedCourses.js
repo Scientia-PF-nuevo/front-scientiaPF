@@ -16,7 +16,7 @@ import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices
 
 
 const CreatedCourses = ({shoppingHistory}) => {
-  console.log(shoppingHistory, 'shopping')
+  console.log(shoppingHistory, 'shopping....')
 
   const columns = [
     {
@@ -101,6 +101,7 @@ const CreatedCourses = ({shoppingHistory}) => {
 }
 
     const mapStateToProps = (state) => {
+      console.log(state.rootReducer, 'root')
 
     return {
       shoppingHistory: state.rootReducer.userInfo.uploadedCourses
