@@ -46,7 +46,7 @@ export default function NewForm3(props) {
             setMsg('People should know the languaje of the course')
             return handleShow();
         }
-        if (course.price <= 0 || course.price === undefined) {
+        if (course.price === undefined) {
             setMsg('People should know the price of the course')
             return handleShow();
         }
@@ -120,44 +120,41 @@ export default function NewForm3(props) {
                         <option name="level"> middle </option>
                         <option name="level"> expert </option>
                     </select>
+                <br></br>
+                <h4>THE PRICE IS...</h4>
+                <br></br>
+                <TextField required
+                    style={{ marginBottom: "10px" }}
+                    id="outlined-required"
+                    label="PRICE (Dollars)"
+                    // defaultValue="Hello World"
+                    // className='placeHolder' 
+                    type="number"
+                    value={course.price}
+                    name="price"
+                    // min = "1"
+                    autocomplete="off"
+                    onChange={e => handleChange(e)} />
 
-                    <br></br>
-                    <h4>THE PRICE IS...</h4>
-                    <br></br>
-                    <TextField required
-                        style={{ marginBottom: "10px" }}
-                        id="outlined-required"
-                        label="PRICE (Dollars)"
-                        // defaultValue="Hello World"
-                        // className='placeHolder' 
-                        type="number"
-                        value={course.price}
-                        name="price"
-                        // min = "1"
-                        autocomplete="off"
-                        onChange={e => handleChange(e)} />
 
+            <div className='containerbtSub'>
+                <button className="form-button" style={{backgroundColor:"#12351c"}} onClick={e=>handleBack(e)}>Back</button>
+                <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
+            </div>   
 
-                    <div className='containerbtSub'>
-                        <input className="form-button" value='Next' type='submit' onClick={e => handleSubmit(e)} />
-                    </div>
-                    <div className='containerbtSub'>
-                        <button className="form-button" onClick={e => handleBack(e)}>Back</button>
-                    </div>
-
-                </form>
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Notificación</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>{msg}</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" onClick={handleClose}>
-                            Ok!
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
+            </form>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Notificación</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{msg}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleClose}>
+                        Ok!
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
         </div>
     );
 };

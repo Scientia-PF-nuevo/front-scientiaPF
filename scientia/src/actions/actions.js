@@ -269,7 +269,15 @@ export function setCourseToAprove(payload) {
     }
 }
 
+
+export function clearReduxer() {
+    return {
+        type: 'CLEAR_REDUX',
+    }
+}
+
 export function setNewCourse(payload) {
+
     if (payload.name) {
         return {
             type: 'SET_NAME',
@@ -294,7 +302,7 @@ export function setNewCourse(payload) {
             payload
         }
     }
-    if (payload.numbersOfDiscounts) {
+    if (payload.numbersOfDiscounts === 0 || payload.numbersOfDiscounts > 0) {
         return {
             type: 'SET_AMOUNT',
             payload
