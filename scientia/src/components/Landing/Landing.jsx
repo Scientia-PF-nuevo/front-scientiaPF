@@ -28,10 +28,10 @@ function Landing({ allCourses, getAllCourses, getAllCategories, categories }) {
                     categories.map((category, index) => {
                         let filteredCourses = allCourses.filter(course => course.categories === category.name);
                         return (
-                            <div key={index}>
-                                {filteredCourses.length >= 1 && <div className='sub-title-landing-div'><h3>{category.name.toUpperCase()}</h3></div>}
-                                <CarouselCourses courses={filteredCourses} />
-                            </div>
+                                <div key={index}>
+                                    {filteredCourses.length >= 1 && <div className='sub-title-landing-div'><h3>{category.name.toUpperCase()}</h3></div>}
+                                    <CarouselCourses courses={filteredCourses} />
+                                </div>
                         )
                     })
                 }

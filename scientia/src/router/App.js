@@ -34,73 +34,74 @@ function App() {
   return (
     <div className='container-app'>
 
-    <Router>
-      
+      <Router>
+
         <Navegacion />
 
-      <Route exact path='/'>
-        <Landing/>
-      </Route>
-      
-      <Route exact path='/login'>
-        <Login />
-      </Route>
+        <Route exact path='/'>
+          <Landing />
+        </Route>
+
+        <Route exact path='/login'>
+          <Login />
+        </Route>
 
 
-      <Route exact path='/signup'>
-        <SignUp />
-      </Route>
+        <Route exact path='/signup'>
+          <SignUp />
+        </Route>
 
-      <Route exact path='/player'>
-        <ResponsivePlayer />
-      </Route>
+        <Route exact path='/player'>
+          <ResponsivePlayer />
+        </Route>
 
-      <Route exact path='/mylearning'>
-        <MyLearning />
-      </Route>
+        <Route exact path='/mylearning'>
+          <MyLearning />
+        </Route>
 
-      <Route exact path='/home'>
-        <Home />
-      </Route>
+        <Route exact path='/home'>
+          <Home />
+        </Route>
 
-      <Route exact path='/about'>
-        <About />
-      </Route>
+        <Route exact path='/about'>
+          <About />
+        </Route>
 
-      <Route exact path='/cart'>
-        <Cart />
-      </Route>
+        <Route exact path='/cart'>
+          <Cart />
+        </Route>
 
-      <Route exact path='/details'>
-        <Details />
-      </Route>
+        <Route exact path='/details/:id' render={({ match }) => {
+          const codigo = match.params.id;
+          return <Details codigo={codigo} />
+        }} />
 
-      <Route exact path='/payment'>
-        <Payment />
-      </Route>
+        <Route exact path='/payment'>
+          <Payment />
+        </Route>
 
-      <Route exact path='/addCourses_step_1' component={NewForm} />
+        <Route exact path='/addCourses_step_1' component={NewForm} />
 
-      <Route exact path='/addCourses_step_2' component={NewForm2} />
+        <Route exact path='/addCourses_step_2' component={NewForm2} />
 
-      <Route exact path='/addCourses_step_3' component={NewForm3} />
+        <Route exact path='/addCourses_step_3' component={NewForm3} />
 
-      <Route exact path='/addCourses_step_4' component={NewForm4} />
+        <Route exact path='/addCourses_step_4' component={NewForm4} />
 
-      <Route exact path='/addCourses_step_5' component={NewForm5} />
+        <Route exact path='/addCourses_step_5' component={NewForm5} />
 
-      <Route exact path='/addCourses_step_final' component={NewFormLast} />
+        <Route exact path='/addCourses_step_final' component={NewFormLast} />
 
-      
-      <Route path='/userprofile'>
+
+        <Route path='/userprofile'>
           {user.isAdmin ? <Redirect to="/adminprofile" /> : <UserPanel />}
         </Route>
 
         <Route path='/adminprofile'>
           {user.isAdmin ? <AdminPanel /> : <Redirect to="/" />}
         </Route>
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
     </div>
   );
 }
