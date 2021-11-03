@@ -51,14 +51,14 @@ export default function NewForm4(props) {
 
         setCourse({
             url: '',
-            urlVideo:'',  
+            urlVideo: '',
         });
 
         // Redirect
         props.history.push('/addCourses_step_5');
     };
 
-    
+
     function handleBack(e) {
         e.preventDefault();
         props.history.goBack()

@@ -73,7 +73,7 @@ export default function NewForm5(props) {
         // Redirect
         props.history.push('/addCourses_step_final');
     };
-    
+
     function handleBack(e) {
         e.preventDefault();
         props.history.goBack()

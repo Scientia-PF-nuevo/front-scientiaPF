@@ -1,3 +1,4 @@
+import { WindowSharp } from '@mui/icons-material';
 import axios from 'axios';
 import {
     getAuth,
@@ -253,7 +254,6 @@ export function filterBy(order) {
 }
 
 export function setCourseToAprove(payload) {
-    console.log('entro al action')
     return function (dispatch) {
         axios.post(`/courses/newcourse`, payload)
             .then(res => {
@@ -269,14 +269,15 @@ export function setCourseToAprove(payload) {
     }
 }
 
+
 export function clearReduxer() {
     return {
         type: 'CLEAR_REDUX',
     }
 }
 
-export function setNewCourse (payload) {
-    console.log(payload)
+export function setNewCourse(payload) {
+
     if (payload.name) {
         return {
             type: 'SET_NAME',
@@ -384,10 +385,17 @@ export function logear(correo, contra, cart, normal, name, apellido) {
         return function (dispatch) {
             axios.post('/users/login', data)
                 .then(r => {
-                    dispatch({
-                        type: LOGIN,
-                        payload: (r.data)
-                    })
+                    if (r.data !== 'Check your email and password') {
+                        dispatch({
+                            type: LOGIN,
+                            payload: (r.data)
+                        })
+                    } else {
+                        dispatch({
+                            type: LOGIN,
+                            payload: 'C'
+                        })
+                    }
                 })
                 .catch(err => console.log(err))
         }
@@ -551,15 +559,11 @@ export function updateInfoVideo(info) {
 }
 
 export function logout() {
-    return async function (dispatch) {
-        axios.post(`/users/logout`)
-            .then(r =>
-                dispatch({
-                    type: LOGOUT,
-                    payload: false
-                })
-            )
-    }
+    // axios.post(`/users/logout`)
+    return({
+        type: LOGOUT,
+        payload: false
+    })
 }
 
 //*Crea nueva review

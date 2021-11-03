@@ -23,7 +23,6 @@ function Navegacion(props) {
 
   function desconectarse() {
     props.clearCart()
-    props.removeAllGift()
     props.logout()
     deslogeo()
   }
@@ -43,8 +42,8 @@ function Navegacion(props) {
 
   return (
     <div className="navigation">
-      <Navbar style={{ height: "84px"}} fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container style={{ marginLeft: "auto", marginRight: "auto"  }}>
+      <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Container style={{ marginLeft: "auto", marginRight: "auto" }}>
           <Navbar.Brand>
             <Link to="/">
               <ControlCameraIcon />
@@ -62,7 +61,7 @@ function Navegacion(props) {
               <Nav.Link href="/cart"><CustomizedBadges /></Nav.Link>
               {!props.login && <Nav.Link className="elMenu" href="/signup">Sign Up</Nav.Link>}
               {props.login ?
-                <Nav.Link className="elMenu" href="/home">
+                <Nav.Link className="elMenu" href="/">
                   <li onClick={desconectarse}>
                     Log Out
                   </li></Nav.Link>

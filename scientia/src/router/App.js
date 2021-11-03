@@ -23,7 +23,6 @@ import ResponsivePlayer from '../components/Player/Player';
 import AdminPanel from '../components/Profiles/AdminPanel/AdminPanel';
 import UserPanel from '../components/Profiles/UserPanel/UserPanel';
 import SignUp from '../components/SignUp/SignUp';
-import Success from '../components/SignUp/Success';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import './App.css';
@@ -58,10 +57,6 @@ function App() {
 
       <Route exact path='/mylearning'>
         <MyLearning />
-      </Route>
-    
-      <Route exact path='/success'>
-        <Success />
       </Route>
 
       <Route exact path='/home'>

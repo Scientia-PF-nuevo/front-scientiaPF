@@ -66,10 +66,10 @@ export default function rootReducer(state = initialState, action) {
 
     switch (action.type) {
         case GET_ALL_CATEGORIES:
-        return {
-            ...state,
-            allCategories: action.payload
-        };
+            return {
+                ...state,
+                allCategories: action.payload
+            };
 
 
         case GET_ALL_COURSES:
@@ -245,10 +245,18 @@ export default function rootReducer(state = initialState, action) {
             };
 
         case LOGIN:
-            return {
-                ...state,
-                user: action.payload,
-                login: true
+            if (action.payload === 'C') {
+                return {
+                    ...state,
+                    user: 'C',
+                    login: false
+                }
+            } else {
+                return {
+                    ...state,
+                    user: action.payload,
+                    login: true
+                }
             }
         case ADD_CART:
             let agregar_carrito = state.cart.concat(action.payload)
@@ -326,7 +334,7 @@ export default function rootReducer(state = initialState, action) {
         case REMOVE_GIFT:
             return {
                 ...state,
-                gift: state.gift.filter((g) => g.courseId !== action.payload )
+                gift: state.gift.filter((g) => g.courseId !== action.payload)
             }
 
         case ADD_DETAILS:
@@ -355,7 +363,7 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 user: {},
-                login: action.payload
+                login: action.payload,
             }
         default:
             return state;
