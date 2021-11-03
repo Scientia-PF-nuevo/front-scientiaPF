@@ -76,6 +76,21 @@ export default function reducerForm(state = initialState, action) {
                 ...state,
                 bienvenido: action.payload
             }
+        case 'CLEAR_REDUX' :
+            return {
+                ...state,
+                name: '',
+                description: '',
+                price: 0,
+                url: '',
+                urlVideo: '',
+                category: '',
+                email: '',
+                languaje: '',
+                level: '',
+                numbersOfDiscounts: 0,
+                percentageDiscount: 0,
+            }
         default:
             return state;
     }

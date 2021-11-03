@@ -76,8 +76,8 @@ export default function NewForm2(props) {
                 onChange={e => handleChange(e)} />
 
             <div className='containerbtSub'>
-                <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
                 <button className="form-button" style={{backgroundColor:"#12351c"}} onClick={e=>handleBack(e)}>Back</button>
+                <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
             </div>
 
             </form>

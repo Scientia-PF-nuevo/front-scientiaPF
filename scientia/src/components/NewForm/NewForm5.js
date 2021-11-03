@@ -8,6 +8,7 @@ import { setCourseToAprove, getGenresCourses, setNewCourse } from '../../actions
 import { Modal, Button } from 'react-bootstrap'
 
 import barra5 from '../../images/barras/barra5.png';
+import { Checkbox } from '@mui/material';
 
 export default function NewForm5(props) {
 
@@ -39,11 +40,24 @@ export default function NewForm5(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (typeof course.numbersOfDiscounts !== "number") {
+            return setCourse({
+                ...course,
+                numbersOfDiscounts: 0
+            });
+        }
+        if (typeof course.percentageDiscount !== "number") {
+            return setCourse({
+                ...course,
+                percentageDiscount: 0
+            });
+        }
 
         if (course.numbersOfDiscounts !== 0 && course.percentageDiscount === 0) {
             setMsg('People would not use your discount if percentage is under 0')
             return handleShow();
         }
+
         if (course.percentageDiscount !== 0 && course.numbersOfDiscounts === 0) {
             setMsg('People would not use your discount if the amount of discounts is under 0')
             return handleShow();
@@ -69,14 +83,14 @@ export default function NewForm5(props) {
     return (
         <div>
         <div className="title-form-div">
-            <h1>You wanna add a discount?</h1>
+            <h1>Discount</h1>
         </div>
         <div className='containerBarra'>
             <img src={barra5} alt='barra de progreso'/>
         </div>
         <div className="form-div-container">
-            <form>
-                <h1>IF NOT, SKIP THIS STEP</h1>
+            <form className='formLast'>
+                <h1>You wanna add a discount?</h1>
                 <br></br>
                 <TextField required 
                 style={{marginBottom:"10px"}}
@@ -86,7 +100,6 @@ export default function NewForm5(props) {
                 type="number" 
                 value={course.percentageDiscount}
                 name="percentageDiscount" 
-                // min = "1"
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
 
@@ -100,14 +113,13 @@ export default function NewForm5(props) {
                 type="number" 
                 value={course.numbersOfDiscounts}
                 name="numbersOfDiscounts" 
-                // min = "1"
                 autocomplete="off"
                 onChange={e => handleChange(e)} />
 
 
             <div className='containerbtSub'>
-                <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
                 <button className="form-button" style={{backgroundColor:"#12351c"}} onClick={e=>handleBack(e)}>Back</button>
+                <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
             </div>   
 
             </form>

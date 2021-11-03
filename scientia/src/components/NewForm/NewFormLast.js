@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './NewFormLast.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCourseToAprove, getGenresCourses } from '../../actions/actions';
+import { setCourseToAprove, clearReduxer, getGenresCourses } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
 
 import barra6 from '../../images/barras/barra6.png';
@@ -64,6 +64,22 @@ export default function NewFormLast(props) {
             return alert ('People should know the experience required for the course');
         }
         dispatch(setCourseToAprove(course));
+
+        setCourse({
+            name: '',
+            description: '',
+            price: 0,
+            url: '',
+            urlVideo: '',
+            email: '',
+            category: '',
+            languaje: '',
+            level: '',
+            numbersOfDiscounts: 0,
+            percentageDiscount: 0
+        });
+
+        dispatch(clearReduxer())
 
         // Redirect
         props.history.push('/home');
@@ -142,8 +158,8 @@ export default function NewFormLast(props) {
                 <br></br>
                 
             <div className='containerbtSub'>
-                <input className="form-button" value='Submit' type='submit' onClick={e=>handleSubmit(e)}/>
                 <button className="form-button" style={{backgroundColor:"#12351c"}} onClick={e=>handleBack(e)}>Back</button>
+                <input className="form-button" value='Submit' type='submit' onClick={e=>handleSubmit(e)}/>
             </div>      
 
             </form>
