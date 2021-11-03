@@ -340,7 +340,8 @@ export default function rootReducer(state = initialState, action) {
         case ADD_DETAILS:
             return {
                 ...state,
-                courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
+                // courseDetails: state.coursesBackup.filter((course) => course.id === action.payload)
+                courseDetails: state.coursesBackup
             }
         case NEW_USER:
             return {

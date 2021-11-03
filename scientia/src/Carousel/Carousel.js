@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 import TextRating from "../components/CourseCard/Qualify";
 import "./Carousel.css";
 
@@ -24,7 +25,6 @@ export default function CarouselCourses(props) {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
-
   return (
     <Carousel
       swipeable={true}
@@ -36,16 +36,18 @@ export default function CarouselCourses(props) {
       containerClass="carousel-container"
       removeArrowOnDeviceType={["tablet", "mobile"]}
       dotListClass="custom-dot-list-style"
-    > 
+    >
       {courses && courses.map((course) => (
         <div className="carousel-item-container">
-          <img
-            src={course.url}
-            alt={course.url}
-            className="carousel-item-image"
-          />
+          <Link to={`/details/${course.id}`}>
+            <img
+              src={course.url}
+              alt={course.url}
+              className="carousel-item-image"
+            />
+          </Link>
           <div className="carousel-item-info">
-          <br></br>
+            <br></br>
             <h3 className="carousel-item-title">{course.name.toUpperCase()}</h3>
             <p className="carousel-item-description"><strong>DESCRIPTION :</strong> {course.description}</p>
             <div className="carousel-item-features">
