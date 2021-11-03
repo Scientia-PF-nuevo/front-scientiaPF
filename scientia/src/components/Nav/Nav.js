@@ -10,6 +10,7 @@ import { Navbar, Container, Nav } from 'react-bootstrap'
 import ControlCameraIcon from '@mui/icons-material/ControlCamera';
 import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';
+import { Redirect } from 'react-router'
 
 function Navegacion(props) {
   const imagenPerfil = props.user.photoURL
@@ -44,7 +45,7 @@ function Navegacion(props) {
   return (
     <div className="navigation">
       <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container style={{ marginLeft: "auto", marginRight: "auto"  }}>
+        <Container style={{ marginLeft: "auto", marginRight: "auto" }}>
           <Navbar.Brand>
             <Link to="/">
               <ControlCameraIcon />
