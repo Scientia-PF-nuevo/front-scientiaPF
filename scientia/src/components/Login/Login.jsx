@@ -58,6 +58,9 @@ function Login(props) {
 
     return (
         <>
+            <div className={s.titleLoginDiv}>
+                <h1>Log In!</h1>
+            </div>
             <div className={s.contenedorFormLogin}>
                 <form>
                     <div className="mb-3">

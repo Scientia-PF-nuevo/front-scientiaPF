@@ -10,11 +10,10 @@
   color: aliceblue;
   height: 120px;
   margin-bottom: 40px;
-  margin-top: 84px;
 }
 
 .title-home-div h1 {
-  padding-left: 40px;
+    padding-left: 25%;
   font-size: 50px;
   color: #fff;
 }

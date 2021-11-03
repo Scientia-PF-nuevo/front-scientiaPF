@@ -59,7 +59,7 @@ export default function NewForm5(props) {
         // Redirect
         props.history.push('/addCourses_step_final');
     };
-    
+
     function handleBack(e) {
         e.preventDefault();
         props.history.goBack()
@@ -68,63 +68,63 @@ export default function NewForm5(props) {
 
     return (
         <div>
-        <div className="title-form-div">
-            <h1>You wanna add a discount?</h1>
-        </div>
-        <div className='containerBarra'>
-            <img src={barra5} alt='barra de progreso'/>
-        </div>
-        <div className="form-div-container">
-            <form>
-                <h1>IF NOT, SKIP THIS STEP</h1>
-                <br></br>
-                <TextField required 
-                style={{marginBottom:"10px"}}
-                id="outlined-required"
-                label="Percentage"
-                // className='placeHolder' 
-                type="number" 
-                value={course.percentageDiscount}
-                name="percentageDiscount" 
-                // min = "1"
-                autocomplete="off"
-                onChange={e => handleChange(e)} />
+            <div className="title-form-div">
+                <h1>Add Course</h1>
+            </div>
+            <div className='containerBarra'>
+                <img src={barra5} alt='barra de progreso' />
+            </div>
+            <div className="form-div-container">
+                <form>
+                    <h1>DISCOUNTS?</h1>
+                    <br></br>
+                    <TextField required
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="Percentage"
+                        // className='placeHolder' 
+                        type="number"
+                        value={course.percentageDiscount}
+                        name="percentageDiscount"
+                        // min = "1"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
 
-                <h4>AMOUNT OF DISCOUNTS</h4>
-                <br></br>
-                <TextField required 
-                style={{marginBottom:"10px"}}
-                id="outlined-required"
-                label="Amount"
-                // className='placeHolder' 
-                type="number" 
-                value={course.numbersOfDiscounts}
-                name="numbersOfDiscounts" 
-                // min = "1"
-                autocomplete="off"
-                onChange={e => handleChange(e)} />
+                    <h4>AMOUNT OF DISCOUNTS</h4>
+                    <br></br>
+                    <TextField required
+                        style={{ marginBottom: "10px" }}
+                        id="outlined-required"
+                        label="Amount"
+                        // className='placeHolder' 
+                        type="number"
+                        value={course.numbersOfDiscounts}
+                        name="numbersOfDiscounts"
+                        // min = "1"
+                        autocomplete="off"
+                        onChange={e => handleChange(e)} />
 
 
-            <div className='containerbtSub'>
-                <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
-            </div>  
-            <div className='containerbtSub'>
-                <button className="form-button" onClick={e=>handleBack(e)}>Back</button>
-            </div>      
+                    <div className='containerbtSub'>
+                        <input className="form-button" value='Next' type='submit' onClick={e => handleSubmit(e)} />
+                    </div>
+                    <div className='containerbtSub'>
+                        <button className="form-button" onClick={e => handleBack(e)}>Back</button>
+                    </div>
 
-            </form>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Notificación</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{msg}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
-                        Ok!
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
+                </form>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Notificación</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{msg}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>
+                            Ok!
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         </div>
     );
 };

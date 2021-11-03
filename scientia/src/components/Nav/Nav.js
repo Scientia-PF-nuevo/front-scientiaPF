@@ -43,7 +43,7 @@ function Navegacion(props) {
 
   return (
     <div className="navigation">
-      <Navbar style={{ height: "84px"}} fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container style={{ marginLeft: "auto", marginRight: "auto"  }}>
           <Navbar.Brand>
             <Link to="/">

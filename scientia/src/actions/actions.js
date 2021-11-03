@@ -269,7 +269,7 @@ export function setCourseToAprove(payload) {
     }
 }
 
-export function setNewCourse (payload) {
+export function setNewCourse(payload) {
     if (payload.name) {
         return {
             type: 'SET_NAME',
@@ -377,10 +377,17 @@ export function logear(correo, contra, cart, normal, name, apellido) {
         return function (dispatch) {
             axios.post('/users/login', data)
                 .then(r => {
-                    dispatch({
-                        type: LOGIN,
-                        payload: (r.data)
-                    })
+                    if (r.data !== 'Check your email and password') {
+                        dispatch({
+                            type: LOGIN,
+                            payload: (r.data)
+                        })
+                    } else {
+                        dispatch({
+                            type: LOGIN,
+                            payload: 'C'
+                        })
+                    }
                 })
                 .catch(err => console.log(err))
         }
