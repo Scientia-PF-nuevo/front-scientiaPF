@@ -23,7 +23,6 @@ function Navegacion(props) {
 
   function desconectarse() {
     props.clearCart()
-    props.removeAllGift()
     props.logout()
     deslogeo()
   }

@@ -43,6 +43,7 @@ import {
     GET_ALL_CATEGORIES,
     ADD_FREE_COURSE,
     SALUDO,
+    DELETE_COURSE
 } from './constants.js';
 
 //trae todas las categorias 
@@ -320,6 +321,18 @@ export function addFreeCourse(email, id) {
             .then(res => {
 
                 dispatch({ type: ADD_FREE_COURSE, payload: res.data });
+            })
+            .catch(err => { return err })
+    }
+}
+
+//* borra curso directamente
+export function deleteCourse(email, id) {
+    return async function (dispatch) {
+        return await axios.post(`/courses/delete/${email}/${id}`)
+            .then(res => {
+
+                dispatch({ type: DELETE_COURSE, payload: res.data });
             })
             .catch(err => { return err })
     }
