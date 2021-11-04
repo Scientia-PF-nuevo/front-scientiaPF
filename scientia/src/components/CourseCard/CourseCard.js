@@ -227,7 +227,7 @@ const handleClickVariantWrong = () => {
         <TextRating score={score} />
         <div className="button-container">
           {id && (
-            <Link to={`/details/${id}`}>
+            <Link to="/details">
               <button
                 className="confirm-button2"
                 onClick={() => addDetails(id)}
