@@ -18,8 +18,8 @@ import { confirmAlert } from 'react-confirm-alert';
 
 const CreatedCourses = ({courses}) => {
   
-  console.log(courses, 'shopping....')
   const data = courses.uploadedCourses;
+  
   const rejected = courses.rejectedCourses[0]
 
   const onClickEnable = (e) => {
@@ -98,56 +98,48 @@ const CreatedCourses = ({courses}) => {
   ]
 
 
-  return data.length >= 1 ? (
+  return (
       <div className="div-coursesmanagement" style={{ maxWidth: "100%" }}>
         <MaterialTable
-        columns={columns}
-        data={data}
-        title="Courses"
-        icons={{
-          ResetSearch: ClearIcon,
-          Filter: FilterListIcon,
-          Search: SearchIcon,
-          ViewColumn: ViewColumnIcon,
-          FirstPage:  FirstPageIcon,
-          LastPage:  LastPageIcon,
-          NextPage:  ChevronRightIcon,
-          PreviousPage: ChevronLeftIcon,
-          SortArrow: ArrowDownward
-        }}
-        actions={[
-          {
-            icon: CommentIcon,
-            tooltip: 'Enable user',
-            onClick: (event, rowData) => onClickEnable(rowData)
-          }
-        ]}
-        options={{
-          filtering: false,
-          search: false,
-          headerStyle: {
-            backgroundColor: "#655E5E",
-            color: '#FFF',
-            colorRendering: "white"
-          },
-          actionsColumnIndex: -1
-    
-      }
-        
-      }
+          columns={columns}
+          data={data}
+          title="Courses"
+          icons={{
+            ResetSearch: ClearIcon,
+            Filter: FilterListIcon,
+            Search: SearchIcon,
+            ViewColumn: ViewColumnIcon,
+            FirstPage:  FirstPageIcon,
+            LastPage:  LastPageIcon,
+            NextPage:  ChevronRightIcon,
+            PreviousPage: ChevronLeftIcon,
+            SortArrow: ArrowDownward
+          }}
+          actions={[
+            {
+              icon: CommentIcon,
+              tooltip: 'Comments',
+              onClick: (event, rowData) => onClickEnable(rowData)
+            }
+          ]}
+          options={{
+            filtering: false,
+            search: false,
+            headerStyle: {
+              backgroundColor: "#655E5E",
+              color: '#FFF',
+              colorRendering: "white"
+            },
+            actionsColumnIndex: -1
+          }}
         />
       </div>
-    ) : (
-    <div className="div-usermanagement">
-      <CircularProgress disableShrink />
-    </div>
-  );
+    ) 
 }
 
     const mapStateToProps = (state) => {
     return {
       courses: state.rootReducer.userInfo
-      
     }
   };
 
