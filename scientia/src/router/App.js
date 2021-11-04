@@ -72,10 +72,9 @@ function App() {
           <Cart />
         </Route>
 
-        <Route exact path='/details/:id' render={({ match }) => {
-          const codigo = match.params.id;
-          return <Details codigo={codigo} />
-        }} />
+        <Route exact path='/details'>
+          <Details />
+        </Route>
 
         <Route exact path='/payment'>
           <Payment />

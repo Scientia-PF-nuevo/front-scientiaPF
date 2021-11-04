@@ -73,9 +73,6 @@ const CourseManagement = (props) => {
                         </div>
                       </Card.Text>
                       <div className={s.botones}>
-                        <Link to={{ pathname: "/details", state: { isAdmin: true, details: [props.coursesToApprove[idx]] } }}>
-                          <Button variant="primary">Ver Detalles</Button>
-                        </Link>
                         <Button variant="primary" onClick={() => openVideo(props.coursesToApprove[idx].urlVideo)}>Ver Video</Button>
                         <Button variant="success" onClick={() => { consultarAprobacion(); setId(props.coursesToApprove[idx].id) }}>Aprobar</Button>
                         <Button variant="danger" onClick={() => { consultarRechazo(motivo); setId(props.coursesToApprove[idx].id) }}>Rechazar</Button>
@@ -96,10 +93,10 @@ const CourseManagement = (props) => {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="success" onClick={handleClose}>
+                <Button variant={msg === '¿Está seguro de aprobar este curso?' ? "danger" : 'success'} onClick={handleClose}>
                   No
                 </Button>
-                <Button variant="danger" onClick={msg === '¿Está seguro de aprobar este curso?' ? aprobar : rechazar}>
+                <Button variant={msg === '¿Está seguro de aprobar este curso?' ? "success" : 'danger'}onClick={msg === '¿Está seguro de aprobar este curso?' ? aprobar : rechazar}>
                   Si
                 </Button>
               </Modal.Footer>
