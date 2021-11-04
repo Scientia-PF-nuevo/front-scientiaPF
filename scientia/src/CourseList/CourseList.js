@@ -36,15 +36,15 @@ function CourseList({ courses}) {
 //  React.useEffect(() => {
       
 // }, [])
-if(typeof courses !== "undefined" && courses.length >= 1) {
-  var coursesTopSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(0, 10)
-  var coursesBestSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(11, 30)
-  var coursesGoodSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(31, 60)
-  // var mostSolds = courses.sort((a,b) => a - b)
-  // console.log(mostSolds)
+// if(typeof courses !== "undefined" && typeof courses !== "string" && courses.length >= 1) {
+//   var coursesTopSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(0, 10)
+//   var coursesBestSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(11, 30)
+//   var coursesGoodSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(31, 60)
+//   // var mostSolds = courses.sort((a,b) => a - b)
+//   // console.log(mostSolds)
 
-  // courses.filter((c) =>  )
-}
+//   // courses.filter((c) =>  )
+// }
 
   return (
     <div className="div-wrapper-course-list">
@@ -73,9 +73,9 @@ if(typeof courses !== "undefined" && courses.length >= 1) {
         solds={course.solds}
         numbersOfDiscounts={course.numbersOfDiscounts}
         percentageDiscount={course.percentageDiscount}
-        coursesTopSeller={coursesTopSeller}
-        coursesBestSeller={coursesBestSeller}
-        coursesGoodSeller={coursesGoodSeller}
+        // coursesTopSeller={coursesTopSeller}
+        // coursesBestSeller={coursesBestSeller}
+        // coursesGoodSeller={coursesGoodSeller}
       />
     ))
   ) 
