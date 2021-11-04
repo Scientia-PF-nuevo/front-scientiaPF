@@ -216,7 +216,7 @@ export function Cart(props) {
       //   // handleShow()
       // } else {
       // }
-      confirmOrder(userCart)
+      //confirmOrder(userCart)
       clearCart()
       setRedirect(true)
 
