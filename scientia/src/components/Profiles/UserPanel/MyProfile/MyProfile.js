@@ -14,7 +14,7 @@ import Slide from '@material-ui/core/Slide';
 
 const MyProfile = ({userInfo }) => {
 
-
+  console.log(userInfo.google);
   const Root = styled('div')(({ theme }) => ({
     width: '100%',
     ...theme.typography.body2,
@@ -319,7 +319,7 @@ const MyProfile = ({userInfo }) => {
     };
 
 
-  return userInfo ? (
+  return !userInfo.google ? (
       <div className="div-userinfo">
         <div className="subdiv">
           <div>
@@ -542,8 +542,51 @@ const MyProfile = ({userInfo }) => {
           </div>
       </div>
     ) : (
-    <div className="div-userinfo">
-      <CircularProgress disableShrink />
+      <div className="div-userinfo">
+      <div className="subdiv">
+        <div>
+          <form className="form-user">
+
+            <div className="form-row-myprofile">
+
+              <Root>
+                <Divider>
+                  <Chip label="Personal information" />
+                </Divider>
+              </Root>
+
+              <div className="sub-div-myprofile-user">
+
+                  <div className="inputdiv">
+                    <label>*First Name:
+                      <div>{userInfo.firstName}</div>
+                    </label>
+                    <div className="legend">{firstNameVal}</div>
+                  </div>
+
+                  <div className="inputdiv">
+                    <label>*Last Name:
+                    <div>{userInfo.lastName}</div>
+                    </label>
+                    <div className="legend">{lastNameVal}</div>
+                  </div>
+
+              </div>
+
+         
+          </div>
+
+            {
+              <div className="avatar">
+                <Avatar src={userInfo.profilePicture} className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{}</Avatar>
+                <div className="appp">
+                </div> 
+              </div>
+            }
+            
+          </form>           
+        </div>
+        </div>
     </div>
   );
 }
