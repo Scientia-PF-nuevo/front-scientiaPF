@@ -53,7 +53,7 @@ function MyLearning({ courses, user, getUserInfo }) {
                     />
 
                     <div className="save">
-                      <button className="btn btn-primary mx-auto w-50" type="submit" onClick={handleClick}>Take your gift!</button>
+                      <button className="btn btn-primary mx-auto w-50 botonTake" type="submit" onClick={handleClick}>Take your gift!</button>
                     </div>
                 </div>
       </div>

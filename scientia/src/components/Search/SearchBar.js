@@ -122,7 +122,7 @@ function SearchBar({ coursesByGenre, allCourses, searchByName, getAllCourses, ge
       <Button style={{marginBottom:"15px"}} variant="primary" className="search-icon" onClick={handleOnClick}>
         SEARCH
       </Button>
-      <Button variant="primary" className="search-icon" onClick={() => getAllCourses()}>
+      <Button style={{marginBottom:"15px"}} variant="primary" className="search-icon" onClick={() => getAllCourses()}>
         ALL
       </Button>
       <br></br>

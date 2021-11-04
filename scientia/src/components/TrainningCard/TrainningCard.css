@@ -8,7 +8,7 @@
 }
 
 .container-course2 .button-delete-div {
-  
+
     display: flex;
     justify-content: flex-end;
 }
@@ -62,7 +62,6 @@
 }
 
 .container-course2 .confirm-button3 {
- 
     appearance: none;
     background-color: #2ea44f;
     border: 1px solid rgba(27, 31, 35, .15);
@@ -72,7 +71,7 @@
     color: #fff;
     cursor: pointer;
     display: inline-block;
-    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
@@ -87,10 +86,23 @@
     white-space: nowrap;
     margin-bottom: 20px;
     margin-top: 0px;
+}
 
-  }
-   
-  .confirm-button3:focus {
+.confirm-button3:focus {
     box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
     outline: none;
-  }
+}
+
+@media (max-width: 600px) {
+    .container-course2 {
+        margin: 20px;
+        padding: 20px;
+        width: 320px;
+        height: 500px;
+    }
+
+    .course-div-card2 img {
+        width: 300px;
+        height: 200px;
+    }
+}

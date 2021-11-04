@@ -202,6 +202,14 @@
   .div-container-course-list {
     width: 300px;
   }
+
+  .title-course {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
   .container-course {
     display: flex;
     flex-direction: column;
@@ -215,6 +223,7 @@
   .detaiils-card-container {
     width: auto;
     margin: 0;
+    margin-left: 10px;
     padding: 0;
   }
 
