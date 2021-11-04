@@ -11,6 +11,8 @@ import ControlCameraIcon from '@mui/icons-material/ControlCamera';
 import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';
 
+import sc from '../../images/sc.png';
+
 function Navegacion(props) {
   const imagenPerfil = props.user.photoURL
 
@@ -47,8 +49,9 @@ function Navegacion(props) {
         <Container style={{ marginLeft: "auto", marginRight: "auto" }}>
           <Navbar.Brand>
             <Link to="/">
-              <ControlCameraIcon />
-              <li className="liNav">SCientia</li>
+              {/* <ControlCameraIcon /> */}
+              <img className='imagenNav' src={sc} alt='logo scientia' />
+              {/* <li className="liNav">SCientia</li> */}
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

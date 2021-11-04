@@ -11,14 +11,18 @@
     color:white;
 }
 
+.imagenNav {
+    width: 180px;
+}
+
 .elMenu {
     padding-top: 18px !important;
     color: white !important;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .navigation {
-    margin-bottom: 67px;
+    margin-bottom: 100px;
     width: 100%;
 }
 
