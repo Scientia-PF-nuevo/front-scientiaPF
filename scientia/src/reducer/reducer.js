@@ -46,7 +46,7 @@ const initialState = {
     coursesByGenre: [],
     coursesBackup: [],
     courseDetails: [],
-    coursesReviews: [],
+    coursesReviews: {},
     favoritesCourses: [],
     filteredCourses: [],
     login: false,
