@@ -373,24 +373,28 @@ export function deleteCartLogged(data) {
 
 }
 
-export function logear(correo, contra, cart, normal, name, apellido) {
-
+export function logear(correo, contra, cart, normal, name, apellido, photo) {
+    
     var data = {
         email: correo,
         password: contra,
         cart,
     }
+
+    
     if (normal) {
         data = {
             ...data,
             isGoogle: false
         }
     } else {
+        
         data = {
             ...data,
             isGoogle: true,
             firstName: name,
-            lastName: apellido
+            lastName: apellido,
+            profilePicture: photo
         }
 
     }
@@ -517,7 +521,8 @@ export function autenticarConGoogle(cart) {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
                 const user = result.user;
-                dispatch(logear(user.email, user.uid, cart, false, user.displayName.split(' ')[0], user.displayName.split(' ')[user.displayName.split(' ').length - 1]))
+                console.log(user)
+                dispatch(logear(user.email, user.uid, cart, false, user.displayName.split(' ')[0], user.displayName.split(' ')[user.displayName.split(' ').length - 1], user.photoURL))
             })
             .catch((error) => {
                 const errorCode = error.code;
