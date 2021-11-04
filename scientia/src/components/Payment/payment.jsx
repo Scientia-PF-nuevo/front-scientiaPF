@@ -92,7 +92,7 @@ function MercadoPagoForm(props) {
     return (
         <>
             <div className={s.titlePayDiv}>
-                <h1>Shopping Cart</h1>
+                <h1>Checkout</h1>
             </div>
             <div className={s.container}>
                 <Card

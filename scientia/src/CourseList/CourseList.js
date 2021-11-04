@@ -33,64 +33,50 @@ function CourseList({ courses }) {
     arrCourse.push(courses)
   }
 
-  //  React.useEffect(() => {
+//  React.useEffect(() => {
+      
+// }, [])
+// if(typeof courses !== "undefined" && typeof courses !== "string" && courses.length >= 1) {
+//   var coursesTopSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(0, 10)
+//   var coursesBestSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(11, 30)
+//   var coursesGoodSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(31, 60)
+//   // var mostSolds = courses.sort((a,b) => a - b)
+//   // console.log(mostSolds)
 
-  // }, [])
-  if (typeof courses !== "undefined" && courses.length >= 1) {
-    var coursesTopSeller = courses.map((c) => c.solds).sort((a, b) => b - a).slice(0, 10)
-    var coursesBestSeller = courses.map((c) => c.solds).sort((a, b) => b - a).slice(11, 30)
-    var coursesGoodSeller = courses.map((c) => c.solds).sort((a, b) => b - a).slice(31, 60)
-    // var mostSolds = courses.sort((a,b) => a - b)
-    // console.log(mostSolds)
+//   // courses.filter((c) =>  )
+// }
 
-    // courses.filter((c) =>  )
-  }
 
   return (
     <div className="div-wrapper-course-list">
       <div className="div-container-course-list">
 
-        {typeof currentCards === "string" || currentCards.length === 0 ? (
-          <div className="not-found-course">
-            <img src={noEncontrado}></img>
-          </div>
-        ) :
-
-          typeof currentCards !== "undefined" && currentCards.length >= 1 ? (
-            currentCards.map((course) => (
-              <CourseCard
-                key={course.id}
-                id={course.id}
-                name={course.name}
-                score={course.score}
-                date={course.date}
-                price={course.price}
-                url={course.url}
-                categories={course.categories}
-                description={course.description}
-                language={course.language}
-                level={course.level}
-                solds={course.solds}
-                numbersOfDiscounts={course.numbersOfDiscounts}
-                percentageDiscount={course.percentageDiscount}
-                coursesTopSeller={coursesTopSeller}
-                coursesBestSeller={coursesBestSeller}
-                coursesGoodSeller={coursesGoodSeller}
-              />
-            ))
-          )
-
-            : (
-              <div>
-                <h1>Cargando...</h1>
-              </div>
-            )}
-      </div>
-      <Pagination
-        cardPerPage={cardPerPage}
-        totalCards={courses.length}
-        paginate={paginate}
-        currentPage={currentPage}
+   { typeof currentCards === "string" || currentCards.length === 0? (
+    <div className="not-found-course">
+      <img src={noEncontrado}></img>
+    </div>
+  ) : 
+    
+  typeof currentCards !== "undefined" && currentCards.length >= 1 ? (
+    currentCards.map((course) => (
+      <CourseCard
+        key={course.id}
+        id={course.id}
+        name={course.name}
+        score={course.score}
+        date={course.date}
+        price={course.price}
+        url={course.url}
+        categories={course.categories}
+        description={course.description}
+        language={course.language}
+        level={course.level}
+        solds={course.solds}
+        numbersOfDiscounts={course.numbersOfDiscounts}
+        percentageDiscount={course.percentageDiscount}
+        // coursesTopSeller={coursesTopSeller}
+        // coursesBestSeller={coursesBestSeller}
+        // coursesGoodSeller={coursesGoodSeller}
       />
     </div>
   )

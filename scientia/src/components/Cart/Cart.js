@@ -25,7 +25,6 @@ import './Cart.css'
 
 
 export function Cart(props) {
-
   useEffect(() => {
     window.addEventListener('mousemove', () => { });
     props.removeAllGift()
@@ -280,7 +279,7 @@ export function Cart(props) {
                       </div>
                     </td>
                     <td style={{ textAlign: "center" }}>
-                      {course.percentageDiscount !== null && course.percentageDiscount > 0 ? (
+                      {course.percentageDiscount > 0 ? (
                         <div>
                           <h3
                             style={{
@@ -288,13 +287,22 @@ export function Cart(props) {
                               textDecoration: "line-through",
                             }}
                           >
-                            ${parseFloat(course.price !== null && course.price.toFixed(2))}
+
+                            ${course.price !== null && parseFloat(course.price.toFixed(2))}
+
                           </h3>
                           <p>{course.percentageDiscount}% OFF</p>
                           <h3 style={{ color: "green" }}>
                             $
-                            {course.price !== null && parseFloat((course.price - ((course.percentageDiscount / 100) * course.price)).toFixed(2)
-                            )}
+
+                            {course.price !== null &&
+                              parseFloat(
+                                course.price -
+                                (
+                                  (course.percentageDiscount / 100) *
+                                  course.price
+                                ).toFixed(2)
+                              )}
                           </h3>
                         </div>
                       ) : (
@@ -439,3 +447,4 @@ export default connect(mapStateToProps, {
   removeGift,
   removeAllGift
 })(Cart);
+

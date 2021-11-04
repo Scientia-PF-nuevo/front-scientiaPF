@@ -207,21 +207,61 @@ function Details({
             </button>
           </div>
           <br></br>
-          <CardActions>
-            <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
+          <Typography>
+            <strong>LEVEL:</strong> {level?.toUpperCase() || "No Level Defined"}
+          </Typography>
+          <br></br>
+          <Typography>
+            <strong>LANGUAGE: </strong>{" "}
+            {language?.toUpperCase() || "No Language Defined "}
+          </Typography>
+          <br></br>
+          <Typography>
+            <strong>DATE: </strong>
+            {date ? date : "NO DATE"}
+          </Typography>
+          <br></br>
+          <TextRating score={score ? score : 0} />
+          <br></br>
+          <Typography>
+            <strong>DESCRIPTION:</strong>
+            {description ? description : "NO INFO"}
+            <br></br>
+            <br></br>
+            {solds > 100 ? ( // only for testing (solds > 100)
+              <img src={topSeller} alt="disc" className="discount"></img>
+            ) : null}
+            {solds > 20 && solds < 100 ? ( // only for testing (solds > 20 && solds < 100)
+              <img src={bestSeller} alt="disc" className="discount"></img>
+            ) : null}
+            {numbersOfDiscounts > 0 ? (
+              <img src={dicount} alt="disc" className="discount"></img>
+            ) : null}
+          </Typography>
+          <br></br>
+        </CardContent>
+        <br></br>
+        <div className="confirm-button-div">
+          <button className="confirm-button" onClick={() => validarCart(id)}>
+            ADD TO CART
+          </button>
+        </div>
+        <br></br>
+        <CardActions>
+          <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
             >
-              <h2>REVIEWS</h2>
-              <ExpandMoreIcon />
-            </ExpandMore>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <Comments />
-          </Collapse>
-        </Card>
-      </div>
+            <h2>REVIEWS</h2>
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Comments />
+        </Collapse>
+      </Card>
+    </div>
     </div>
   );
 }
