@@ -12,9 +12,8 @@ import { styled } from '@mui/material/styles';
 import { useSnackbar } from 'notistack';
 import Slide from '@material-ui/core/Slide';
 
-const MyProfile = ({userInfo }) => {
-
-  console.log(userInfo.google);
+const MyProfile = ({userInfo,  userGoogle }) => {
+  console.log(userInfo)
   const Root = styled('div')(({ theme }) => ({
     width: '100%',
     ...theme.typography.body2,
@@ -47,11 +46,13 @@ const MyProfile = ({userInfo }) => {
     })
   }
 
-  // let initialFirstName = userInfo.firstName.charAt(0)
-  // let initialLastName = userInfo.lastName.charAt(0)
-  // let initials = initialFirstName + initialLastName
+  let initialFirstName =  userGoogle.firstName.charAt(0)
+  let initialLastName =  userGoogle.lastName.charAt(0)
+  let initials = initialFirstName + initialLastName
 
   const dispatch = useDispatch();
+  
+  
 
   const [values, setValues] = React.useState({
     firstName: userInfo.firstName,
@@ -65,8 +66,6 @@ const MyProfile = ({userInfo }) => {
     address: userInfo.address,
     postalcode: userInfo.postalcode
   })
-
-  console.log(values, 'VALUES')
 
   const [valuesImage, setValuesImageUrl] = useState({
     imageUrl: ""
@@ -266,16 +265,16 @@ const MyProfile = ({userInfo }) => {
     }
 
     try {
-      const res = await axios.put(`/users/updatePw/${email}`, changePassword);
+      const res = await axios.post(`/users/updatePw/${email}`, changePassword);
       const response = res.data
-      if (response === 'El email y password no corresponden a un usuario') {
+      if (response === 'error') {
         saveError();
       } else {
         save();
         dispatch(getUserInfo(email));
       }
     } catch (error) {
-      console.log(console.error())
+      console.log(error)
     }
   }
 
@@ -527,7 +526,11 @@ const MyProfile = ({userInfo }) => {
 
               {
                 <div className="avatar">
-                  <Avatar src={userInfo.profilePicture} className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{}</Avatar>
+                  {
+                    userInfo.profilePicture && userInfo.profilePicture !== 0 ? 
+                    <Avatar src={userInfo.profilePicture} className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{}</Avatar> :
+                    <Avatar className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{initials}</Avatar>
+                  }
                   <div className="appp">
                     <div class="file-select" id="src-file1" >
                       <input className="app_uploadInput" type="file" name="src-file1" aria-label="Archivo" onChange={handleChangeImg}/>
@@ -543,11 +546,22 @@ const MyProfile = ({userInfo }) => {
       </div>
     ) : (
       <div className="div-userinfo">
-      <div className="subdiv">
-        <div>
-          <form className="form-user">
+      <div className="subdiv-b">
+          <form className="form-user-b">
 
-            <div className="form-row-myprofile">
+            <div className="form-row-myprofile-b">
+
+            {
+              <div className="avatar-b">
+                {
+                  userInfo.profilePicture && userInfo.profilePicture !== 0 ? 
+                  <Avatar src={userInfo.profilePicture} className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{}</Avatar> :
+                  <Avatar className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100}}>{initials}</Avatar>
+                }
+                <div className="appp">
+                </div> 
+              </div>
+            }
 
               <Root>
                 <Divider>
@@ -558,34 +572,25 @@ const MyProfile = ({userInfo }) => {
               <div className="sub-div-myprofile-user">
 
                   <div className="inputdiv">
-                    <label>*First Name:
-                      <div>{userInfo.firstName}</div>
+                    <label>First Name
+                      <div className="legend-b">{userInfo.firstName}</div>
                     </label>
-                    <div className="legend">{firstNameVal}</div>
+                    <div>{firstNameVal}</div>
                   </div>
 
                   <div className="inputdiv">
-                    <label>*Last Name:
-                    <div>{userInfo.lastName}</div>
+                    <label>Last Name
+                    <div className="legend-b">{userInfo.lastName}</div>
                     </label>
-                    <div className="legend">{lastNameVal}</div>
+                    <div>{lastNameVal}</div>
                   </div>
 
               </div>
 
          
           </div>
-
-            {
-              <div className="avatar">
-                <Avatar src={userInfo.profilePicture} className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{}</Avatar>
-                <div className="appp">
-                </div> 
-              </div>
-            }
             
-          </form>           
-        </div>
+          </form>   
         </div>
     </div>
   );
@@ -594,6 +599,7 @@ const MyProfile = ({userInfo }) => {
     const mapStateToProps = (state) => {
     return {
       userInfo: state.rootReducer.userInfo,
+      userGoogle: state.rootReducer.user
     }
   };
 
