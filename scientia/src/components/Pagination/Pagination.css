@@ -11,7 +11,7 @@
 }
 
 .pag-div li {
-    list-style:none;
+    list-style: none;
     margin: 20px;
     width: 10px;
 }
@@ -21,6 +21,16 @@
     font-size: larger;
     width: 30px;
     height: 30px;
-    color:black
-    
+    color: black
+}
+
+@media (max-width: 600px) {
+    .pag-div {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 20px;
+        width: 300px;
+        overflow-x: scroll;
+
+    }
 }

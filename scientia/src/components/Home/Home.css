@@ -31,9 +31,13 @@
 }
 
 @media (max-width: 600px) {
+  .title-home-div h1 {
+    padding-left: 5%;
+  }
+
   .boton-filtrado {
     display: flex;
-justify-content: center;
+    justify-content: center;
   }
 
   .barra-filtrado {

@@ -82,7 +82,7 @@ export function Cart(props) {
     gift
   } = props;
 
-  // const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
   const [redirect, setRedirect] = useState(false)
 
   const [checked, setChecked] = React.useState({
@@ -134,8 +134,6 @@ export function Cart(props) {
 
   const [state, setState] = React.useState({ emailGift: "" })
 
-
-
   function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -152,8 +150,8 @@ export function Cart(props) {
 
   };
   const handleChangeGift = (e) => setChecked({ ...checked, [e.target.name]: e.target.value })
-  // const handleShow = () => setShow(true);
-  // const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   let history = useHistory();
 
@@ -164,9 +162,9 @@ export function Cart(props) {
     user.email && getUserInfo(user.email)
   }, [])
 
-  // function mensajeModel() {
-  //   return `Ya posees el/los curso/s!`
-  // }
+  function mensajeModel(id) {
+    return `Ya posees el/los curso/s!`
+  }
 
   var result = 0;
   var taxs = 0;
@@ -213,7 +211,7 @@ export function Cart(props) {
       }
 
       if (sameId) {
-        // handleShow()
+        handleShow()
       } else {
         confirmOrder(userCart)
         clearCart()
@@ -226,7 +224,6 @@ export function Cart(props) {
       history.push("/login")
     }
   }
-
 
   const haddleRemoveItem = (id) => {
     if (login) {
@@ -290,13 +287,22 @@ export function Cart(props) {
                               textDecoration: "line-through",
                             }}
                           >
+
                             ${course.price !== null && parseFloat(course.price.toFixed(2))}
+
                           </h3>
                           <p>{course.percentageDiscount}% OFF</p>
                           <h3 style={{ color: "green" }}>
                             $
+
                             {course.price !== null &&
-                              parseFloat((course.price -((course.percentageDiscount / 100) * course.price)).toFixed(2))}
+                              parseFloat(
+                                course.price -
+                                (
+                                  (course.percentageDiscount / 100) *
+                                  course.price
+                                ).toFixed(2)
+                              )}
                           </h3>
                         </div>
                       ) : (
@@ -378,9 +384,9 @@ export function Cart(props) {
         </div>
       </div>
 
-      {/* <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>YA POSEE ESTOS CURSOS</Modal.Title>
+          <Modal.Title>Inicio de Sesión</Modal.Title>
         </Modal.Header>
         <Modal.Body>{mensajeModel()}</Modal.Body>
         <Modal.Footer>
@@ -388,7 +394,7 @@ export function Cart(props) {
             Ok!
           </Button>
         </Modal.Footer>
-      </Modal> */}
+      </Modal>
 
       {redirect ? <Redirect to="/payment" /> : <></>}
       <Modal show={show2} onHide={handleClose3} style={styles.modal}>

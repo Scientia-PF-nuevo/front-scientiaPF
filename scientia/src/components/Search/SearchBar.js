@@ -1,5 +1,3 @@
-
-
 import { React, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import FormGroup from '@mui/material/FormGroup';
@@ -121,10 +119,10 @@ function SearchBar({ coursesByGenre, allCourses, searchByName, getAllCourses, ge
         value={input.buscar}
         autoComplete="off"
       ></input>
-      <Button variant="primary" className="search-icon" onClick={handleOnClick}>
+      <Button style={{marginBottom:"15px"}} variant="primary" className="search-icon" onClick={handleOnClick}>
         SEARCH
       </Button>
-      <Button variant="primary" className="search-icon" onClick={() => getAllCourses()}>
+      <Button style={{marginBottom:"15px"}} variant="primary" className="search-icon" onClick={() => getAllCourses()}>
         ALL
       </Button>
       <br></br>

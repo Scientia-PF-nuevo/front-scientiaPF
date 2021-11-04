@@ -1,4 +1,3 @@
-
 .imagen-landing-div {
     display: flex;
     justify-content: center;
@@ -13,7 +12,7 @@
 .title-landing-div {
     display: flex;
     align-items: center;
-    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(52,58,64,1) 100%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(52, 58, 64, 1) 100%);
     color: aliceblue;
     height: 120px;
 }
@@ -38,4 +37,10 @@
     padding-left: 10px;
     font-size: 30px;
     color: rgb(5, 5, 5);
+}
+
+@media (max-width: 600px) {
+    .title-landing-div h1 {
+        padding-left: 5%;
+    }
 }

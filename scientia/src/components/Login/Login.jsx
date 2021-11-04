@@ -12,6 +12,7 @@ function Login(props) {
 
     const [state, setState] = useState({ email: '', password: '', remember: false })
     const [redir, setRedir] = useState(false)
+    const [signUp, setSignUp] = useState(false)
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -78,10 +79,11 @@ function Login(props) {
                     <div className={s.botones}>
                         <button onClick={state.email && state.password && handleSubmit} disabled={!state.email || !state.password} type="submit" className="btn btn-primary btn-lg">Enter</button>
                         <button onClick={submitGoogle} type="submit" className="btn btn-outline-primary btn-lg">Login with Google</button>
-                        <Link to='/signup' className="btn btn-outline-primary btn-lg">Register</Link>
+                        <button className="btn btn-outline-primary btn-lg" onClick={() => setSignUp(true)}>Register</button>
                     </div>
                 </form>
             </div>
+            {signUp && <Redirect to="/signup" />}
             {redir && <Redirect to="/home" />}
         </>
     )
