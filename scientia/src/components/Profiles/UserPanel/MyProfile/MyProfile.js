@@ -14,7 +14,7 @@ import Slide from '@material-ui/core/Slide';
 
 const MyProfile = ({userInfo }) => {
 
-
+  console.log(userInfo.google);
   const Root = styled('div')(({ theme }) => ({
     width: '100%',
     ...theme.typography.body2,
@@ -65,6 +65,8 @@ const MyProfile = ({userInfo }) => {
     address: userInfo.address,
     postalcode: userInfo.postalcode
   })
+
+  console.log(values, 'VALUES')
 
   const [valuesImage, setValuesImageUrl] = useState({
     imageUrl: ""
@@ -240,13 +242,17 @@ const MyProfile = ({userInfo }) => {
     }
 
     try {
-      await axios.put(`/users/updateInfo/${email}`, values);
-      save();
-      dispatch(getUserInfo(email));
+      const res = await axios.post(`/users/updateInfo/${email}`, values);
+      const response = res.data
+      if (response === 'error') {
+        saveError()
+      } else {
+        save()
+        dispatch(getUserInfo(email));
+      }
     } catch (error) {
-      saveError();
+      console.log(error)
     }
-
 
   }
 
@@ -260,11 +266,16 @@ const MyProfile = ({userInfo }) => {
     }
 
     try {
-      await axios.put(`/users/updatePw/${email}`, changePassword);
-      save();
-      dispatch(getUserInfo(email));
+      const res = await axios.put(`/users/updatePw/${email}`, changePassword);
+      const response = res.data
+      if (response === 'El email y password no corresponden a un usuario') {
+        saveError();
+      } else {
+        save();
+        dispatch(getUserInfo(email));
+      }
     } catch (error) {
-      saveError();
+      console.log(console.error())
     }
   }
 
@@ -308,7 +319,7 @@ const MyProfile = ({userInfo }) => {
     };
 
 
-  return userInfo ? (
+  return !userInfo.google ? (
       <div className="div-userinfo">
         <div className="subdiv">
           <div>
@@ -358,7 +369,7 @@ const MyProfile = ({userInfo }) => {
                       <label>Phone:
                         <input
                           className="form-control"
-                          type="number"
+                          type="text"
                           name="phone"
                           value={phone}
                           placeholder="4382929282"
@@ -531,8 +542,51 @@ const MyProfile = ({userInfo }) => {
           </div>
       </div>
     ) : (
-    <div className="div-userinfo">
-      <CircularProgress disableShrink />
+      <div className="div-userinfo">
+      <div className="subdiv">
+        <div>
+          <form className="form-user">
+
+            <div className="form-row-myprofile">
+
+              <Root>
+                <Divider>
+                  <Chip label="Personal information" />
+                </Divider>
+              </Root>
+
+              <div className="sub-div-myprofile-user">
+
+                  <div className="inputdiv">
+                    <label>*First Name:
+                      <div>{userInfo.firstName}</div>
+                    </label>
+                    <div className="legend">{firstNameVal}</div>
+                  </div>
+
+                  <div className="inputdiv">
+                    <label>*Last Name:
+                    <div>{userInfo.lastName}</div>
+                    </label>
+                    <div className="legend">{lastNameVal}</div>
+                  </div>
+
+              </div>
+
+         
+          </div>
+
+            {
+              <div className="avatar">
+                <Avatar src={userInfo.profilePicture} className="avatar-root" sx={{ width: 250, height: 250, bgcolor: 'orange', fontSize: 100  }}>{}</Avatar>
+                <div className="appp">
+                </div> 
+              </div>
+            }
+            
+          </form>           
+        </div>
+        </div>
     </div>
   );
 }
