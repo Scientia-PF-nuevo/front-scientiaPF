@@ -265,16 +265,16 @@ const MyProfile = ({userInfo,  userGoogle }) => {
     }
 
     try {
-      const res = await axios.put(`/users/updatePw/${email}`, changePassword);
+      const res = await axios.post(`/users/updatePw/${email}`, changePassword);
       const response = res.data
-      if (response === 'El email y password no corresponden a un usuario') {
+      if (response === 'error') {
         saveError();
       } else {
         save();
         dispatch(getUserInfo(email));
       }
     } catch (error) {
-      console.log(console.error())
+      console.log(error)
     }
   }
 
