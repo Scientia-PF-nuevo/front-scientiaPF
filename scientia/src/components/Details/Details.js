@@ -20,6 +20,7 @@ import topSeller from '../../assets/topSeller.jpg'
 import dicount from '../../assets/discount.png'
 import 'react-modal-video/scss/modal-video.scss'
 import './Details.css'
+import axios from 'axios';
 
 
 
@@ -49,10 +50,14 @@ function Details({
 }) {
   const [isOpen, setOpen] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
+  const [detail, setDetail] = React.useState({})
 
-  let cursoDetalle = details.filter((course) => course.id === Number(codigo))
+  React.useEffect(() => {
+    axios.get(`/courses/id/${codigo}`)
+      .then(res => setDetail(res.data))
+  }, []);
 
-  if (cursoDetalle[0]) {
+  if (detail) {
     var {
       name,
       description,
@@ -67,14 +72,10 @@ function Details({
       percentageDiscount,
       numbersOfDiscounts,
       solds,
-    } = cursoDetalle[0];
+    } = detail;
   } else {
     var page404 = true
   }
-
-  React.useEffect(() => {
-    getCoursesReviewsById(id);
-  }, [details]);
 
   const hadlePlayerDemo = () => {
     setOpen(true);
