@@ -66,6 +66,8 @@ const MyProfile = ({userInfo }) => {
     postalcode: userInfo.postalcode
   })
 
+  console.log(values, 'VALUES')
+
   const [valuesImage, setValuesImageUrl] = useState({
     imageUrl: ""
   });
@@ -240,13 +242,17 @@ const MyProfile = ({userInfo }) => {
     }
 
     try {
-      await axios.put(`/users/updateInfo/${email}`, values);
-      save();
-      dispatch(getUserInfo(email));
+      const res = await axios.post(`/users/updateInfo/${email}`, values);
+      const response = res.data
+      if (response === 'error') {
+        saveError()
+      } else {
+        save()
+        dispatch(getUserInfo(email));
+      }
     } catch (error) {
-      saveError();
+      console.log(error)
     }
-
 
   }
 
@@ -260,11 +266,16 @@ const MyProfile = ({userInfo }) => {
     }
 
     try {
-      await axios.put(`/users/updatePw/${email}`, changePassword);
-      save();
-      dispatch(getUserInfo(email));
+      const res = await axios.put(`/users/updatePw/${email}`, changePassword);
+      const response = res.data
+      if (response === 'El email y password no corresponden a un usuario') {
+        saveError();
+      } else {
+        save();
+        dispatch(getUserInfo(email));
+      }
     } catch (error) {
-      saveError();
+      console.log(console.error())
     }
   }
 
@@ -358,7 +369,7 @@ const MyProfile = ({userInfo }) => {
                       <label>Phone:
                         <input
                           className="form-control"
-                          type="number"
+                          type="text"
                           name="phone"
                           value={phone}
                           placeholder="4382929282"
