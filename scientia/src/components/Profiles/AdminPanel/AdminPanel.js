@@ -16,23 +16,23 @@ function AdminPanel () {
     <div className='container-app-admin'>
     <Router>
       <div className="div-app-admin">
-      <Route path='/adminprofile'>
+      <Route path='/userprofile'>
           <AdminSidebar />
         </Route>
 
-        <Route exact path='/adminprofile'>
+        <Route exact path='/userprofile'>
           <AdminDashboard />
         </Route>
 
-        <Route exact path='/adminprofile/user-management'>
+        <Route exact path='/userprofile/user-management'>
           <UserManagement />
         </Route>
 
-        <Route exact path='/adminprofile/course-management'>
+        <Route exact path='/userprofile/course-management'>
           <CourseManagement />
         </Route>
 
-        <Route exact path='/adminprofile/statistics'>
+        <Route exact path='/userprofile/statistics'>
           <Statistics />
         </Route>
       </div>
