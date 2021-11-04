@@ -61,6 +61,37 @@ p {
     justify-items: center;
 }
 
+.subdiv-b {
+    display: grid;
+    justify-items: center;
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    height: 95%;
+    background-color: white;
+}
+
+.avatar-b {
+    display: grid;
+    justify-items: center;
+}
+
+.form-user-b {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+    justify-items: center;
+    justify-content: center;
+}
+
+
+.legend-b {
+    font-size: 30px;
+}
+
+
+
 .box {
     padding: 0;
     width: 90%;

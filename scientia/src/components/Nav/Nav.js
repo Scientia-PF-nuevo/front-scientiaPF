@@ -15,7 +15,7 @@ import Slide from '@material-ui/core/Slide';
 import sc from '../../images/sc.png';
 
 function Navegacion(props) {
-  const imagenPerfil = props.user.photoURL
+
   const dispatch = useDispatch()
 
 
@@ -81,9 +81,9 @@ function Navegacion(props) {
                     <li className="liNav">
                       <Avatar alt="imagen de perfil" src={props.img} />
                     </li>
-                    : props.user.photoURL ?
+                    : props.user.profilePicture ?
                       <li className="liNav">
-                        <Avatar alt="" src={imagenPerfil} />
+                        <Avatar alt="" src={props.user.profilePicture} />
                       </li>
                       : props.user.firstName &&
                       <li className="liNav">
