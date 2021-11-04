@@ -39,4 +39,9 @@ justify-content: center;
   .barra-filtrado {
     display: none;
   }
+
+  .title-home-div h1 {
+    padding-left: 5%;
+  }
+  
 }

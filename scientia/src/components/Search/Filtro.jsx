@@ -11,11 +11,12 @@ function Filtro() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Filter
-            </Button>
-
-            <Offcanvas show={show} onHide={handleClose}>
+            <div className="botonFiltro">
+                <Button variant="dark" onClick={handleShow}>
+                    Filter
+                </Button>
+            </div>
+            <Offcanvas style={{maxWidth:"320px"}} show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Filters</Offcanvas.Title>
                 </Offcanvas.Header>

@@ -153,7 +153,7 @@ const handleClickVariantWrong = () => {
           <AddShoppingCartIcon onClick={() => validarCart(id)} />
         </IconButton> */}
         <div className="title-course">
-          <h5>{name && name.toUpperCase()}</h5>
+          <h5>COURSE OF {name && name.toUpperCase()}</h5>
         </div>
 
         <div className="course-div-card">
