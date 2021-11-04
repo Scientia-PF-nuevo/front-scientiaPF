@@ -34,9 +34,9 @@ function CourseCard(props) {
     userInfo,
     numbersOfDiscounts,
     percentageDiscount,
-    coursesTopSeller,
-    coursesBestSeller,
-    coursesGoodSeller
+    // coursesTopSeller,
+    // coursesBestSeller,
+    // coursesGoodSeller
   } = props;
 
   const { enqueueSnackbar } = useSnackbar();
@@ -125,26 +125,26 @@ const handleClickVariantWrong = () => {
     // console.log(coursesBestSeller)
     // console.log(coursesGoodSeller)
 
-    var top = false
-    for(let i=0; i <coursesTopSeller.length; i++) {
-      if(coursesTopSeller[i] === solds) {
-        top = true;
-      }
-    }
+    // var top = false
+    // for(let i=0; i <coursesTopSeller.length; i++) {
+    //   if(coursesTopSeller[i] === solds) {
+    //     top = true;
+    //   }
+    // }
 
-    var best = false
-    for(let i=0; i <coursesBestSeller.length; i++) {
-      if(coursesBestSeller[i] === solds) {
-        best = true;
-      }
-    }
+    // var best = false
+    // for(let i=0; i <coursesBestSeller.length; i++) {
+    //   if(coursesBestSeller[i] === solds) {
+    //     best = true;
+    //   }
+    // }
 
-    var good = false
-    for(let i=0; i <coursesGoodSeller.length; i++) {
-      if(coursesGoodSeller[i] === solds) {
-        good = true;
-      }
-    }
+    // var good = false
+    // for(let i=0; i <coursesGoodSeller.length; i++) {
+    //   if(coursesGoodSeller[i] === solds) {
+    //     good = true;
+    //   }
+    // }
     
   return (
     <div className="container-course">
@@ -269,13 +269,13 @@ const handleClickVariantWrong = () => {
         {numbersOfDiscounts > 0 ? (
           <img src={dicount} alt="disc" className="discount"></img>
         ) : null}
-        {(top && price !== 0) ? (
+        {(solds > 170) ? (
           <img src={topSeller} alt="disc" className="discount"></img>
         ) : null}
-        {(best && price !== 0)? (
+        {(solds > 120 && solds < 170)? (
           <img src={bestSeller} alt="disc" className="discount"></img>
         ) : null}
-        {(good && price !== 0)? (
+        {(solds > 100 && solds < 120)? (
           <img src={goodSeller} alt="disc" className="discount"></img>
         ) : null}
       </div>
