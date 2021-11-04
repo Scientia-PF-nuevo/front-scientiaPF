@@ -206,7 +206,7 @@ function Details({
             expand={expanded}
             onClick={handleExpandClick}
             aria-expanded={expanded}
-          >
+            >
             <h2>REVIEWS</h2>
             <ExpandMoreIcon />
           </ExpandMore>

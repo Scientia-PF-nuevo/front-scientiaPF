@@ -1,57 +1,30 @@
 .wrapper {
   margin-top: 10px;
+  margin-left: 25px;
   width: 290px;
   float: left;
 }
 
-  .wrapper .search {
-    border: 1px solid grey;
-    border-radius: 20px;
-    height: 40px;
-    width: 300px;
-    margin-bottom: 20px;
-    padding: 2px 23px 2px 30px;
-    outline: 0;
-    background-color: #f5f5f5;
-    border: 1.5px solid #585c5b;
-  }
+.wrapper .search {
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+  margin-bottom: 20px;
+  padding: 2px 23px 2px 30px;
+  outline: 0;
+  border: 1.5px solid #585c5b;
+}
 
-  .wrapper .search:hover {
-    border: 1.5px solid #960064;
-    background-color: white;
-  }
+.wrapper .search:hover {
+  border: 1.5px solid black;
+}
 
-  .wrapper .search-icon {
-    border: 1px solid #960064;
-    border-radius: 5px;
-    height: 30px;
-    margin-bottom: 20px;
-    margin-left: 35px;
-    padding: 2px;
-    outline: 0;
-    background-color: #f5f5f5;
-    width: 90px;
-  }
+.wrapper .search-icon {
+  margin-left: 35px;
+}
 
-  .wrapper .search-icon:hover {
-    border: 1.5px solid #960064;
-    background-color: whitesmoke;
-  }
-
-  .wrapper .clearFilter-button-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .wrapper .clearFilter-button {
-    border: 1px solid #960064;
-    border-radius: 5px;
-    height: 40px;
-    margin-bottom: 20px;
-    margin-left: 5px;
-    padding: 2px;
-    outline: 0;
-    background-color: #f5f5f5;
-    width: 140px;
-  }
+.wrapper .clearFilter-button-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
