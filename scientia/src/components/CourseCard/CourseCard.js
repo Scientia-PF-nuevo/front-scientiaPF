@@ -269,13 +269,13 @@ const handleClickVariantWrong = () => {
         {numbersOfDiscounts > 0 ? (
           <img src={dicount} alt="disc" className="discount"></img>
         ) : null}
-        {(solds > 170) ? (
+        {(solds > 170 && price !== 0) ? (
           <img src={topSeller} alt="disc" className="discount"></img>
         ) : null}
-        {(solds > 120 && solds < 170)? (
+        {(solds > 120 && solds < 170 && price !== 0)? (
           <img src={bestSeller} alt="disc" className="discount"></img>
         ) : null}
-        {(solds > 100 && solds < 120)? (
+        {(solds > 100 && solds < 120 && price !== 0)? (
           <img src={goodSeller} alt="disc" className="discount"></img>
         ) : null}
       </div>

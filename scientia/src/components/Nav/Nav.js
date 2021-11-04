@@ -36,7 +36,7 @@ function Navegacion(props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const deslogeo = () => {
-    enqueueSnackbar(`Hasta la próxima ${props.user.firstName}!`, {
+    enqueueSnackbar(`See you soon ${props.user.firstName}!`, {
       anchorOrigin: {
         vertical: 'bottom',
         horizontal: 'left',

@@ -39,19 +39,19 @@ export default function NewForm3(props) {
     function handleSubmit(e) {
         e.preventDefault();
         if (course.category === '' || course.category === undefined) {
-            setMsg('People should know the category of the course')
+            setMsg('Please add the category of the course')
             return handleShow();
         }
         if (course.languaje === '' || course.languaje === undefined) {
-            setMsg('People should know the languaje of the course')
+            setMsg('Please add the languaje of the course')
             return handleShow();
         }
         if (course.price === undefined) {
-            setMsg('People should know the price of the course')
+            setMsg('Please add the price of the course')
             return handleShow();
         }
         if (course.level === '' || course.level === undefined) {
-            setMsg('People should know the level of the course')
+            setMsg('Please add the level of the course')
             return handleShow();
         }
 
@@ -84,7 +84,7 @@ export default function NewForm3(props) {
             </div>
             <div className="form-div-container">
                 <form>
-                    <h1>ADD THE CATEGORY, EXPERIENCE AND LANGUAGE</h1>
+                    <h1>ADD CATEGORY, EXPERIENCE AND LANGUAGE</h1>
                     <br></br>
 
                     {<select className='selector' name="category" value={course.category} onChange={handleChange} >
@@ -113,8 +113,8 @@ export default function NewForm3(props) {
                     </select>
 
                     <br></br>
-                    <h4>THE COURSE IS FOR...</h4>
-                    <select className='selector' placeholder='Experience required...' name="level" value={course.level} onChange={handleChange} >
+                    <h4>THE COURSE LEVEL IS...</h4>
+                    <select className='selector' placeholder='Level is required...' name="level" value={course.level} onChange={handleChange} >
                         <option defaultValue="selected"></option>
                         <option name="level"> begginer </option>
                         <option name="level"> middle </option>
@@ -145,7 +145,7 @@ export default function NewForm3(props) {
             </form>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Notificación</Modal.Title>
+                    <Modal.Title>Notification</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{msg}</Modal.Body>
                 <Modal.Footer>

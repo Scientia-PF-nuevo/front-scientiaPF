@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Form.css'
 import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
-//import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import { setCourseToAprove, getGenresCourses, setNewCourse } from '../../actions/actions';
+import { getGenresCourses, setNewCourse } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
 
 import barra4 from '../../images/barras/barra4.png';
@@ -40,11 +38,11 @@ export default function NewForm4(props) {
     function handleSubmit(e) {
         e.preventDefault();
         if (course.url === '' || course.url === undefined) {
-            setMsg('People should know the url image of the course')
+            setMsg('Please add the url image of the course')
             return handleShow();
         }
         if (course.urlVideo === '' || course.urlVideo === undefined) {
-            setMsg('People should know the url video of the course')
+            setMsg('Please add the url video of the course')
             return handleShow();
         }
         dispatch(setNewCourse(course));
@@ -68,7 +66,7 @@ export default function NewForm4(props) {
     return (
         <div>
         <div className="title-form-div">
-            <h1>Add url</h1>
+            <h1>Add URL</h1>
         </div>
         <div className='containerBarra'>
             <img src={barra4} alt='barra de progreso'/>
@@ -116,7 +114,7 @@ export default function NewForm4(props) {
             </form>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Notificación</Modal.Title>
+                    <Modal.Title>Notification</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{msg}</Modal.Body>
                 <Modal.Footer>

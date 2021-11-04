@@ -82,7 +82,7 @@ export function Cart(props) {
     gift
   } = props;
 
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const [redirect, setRedirect] = useState(false)
 
   const [checked, setChecked] = React.useState({
@@ -152,8 +152,8 @@ export function Cart(props) {
 
   };
   const handleChangeGift = (e) => setChecked({ ...checked, [e.target.name]: e.target.value })
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
 
   let history = useHistory();
 
@@ -164,9 +164,9 @@ export function Cart(props) {
     user.email && getUserInfo(user.email)
   }, [])
 
-  function mensajeModel(id) {
-    return `Ya posees el/los curso/s!`
-  }
+  // function mensajeModel() {
+  //   return `Ya posees el/los curso/s!`
+  // }
 
   var result = 0;
   var taxs = 0;
@@ -199,26 +199,26 @@ export function Cart(props) {
       userCart.courseId = cart.map((course) => course.id)
       userCart.email = user.email
 
-      var matchedIDs = []
-      var sameId = false;
-      if (arrIDCourses) {
-        for (let i = 0; i < userCart.courseId.length; i++) {
-          for (let j = 0; j < arrIDCourses.length; j++) {
-            if (userCart.courseId[i] === arrIDCourses[j]) {
-              sameId = true;
-              matchedIDs.push(userCart.courseId[i])
-            }
-          }
-        }
-      }
+      // var matchedIDs = []
+      // var sameId = false;
+      // if (arrIDCourses) {
+      //   for (let i = 0; i < userCart.courseId.length; i++) {
+      //     for (let j = 0; j < arrIDCourses.length; j++) {
+      //       if (userCart.courseId[i] === arrIDCourses[j]) {
+      //         sameId = true;
+      //         matchedIDs.push(userCart.courseId[i])
+      //       }
+      //     }
+      //   }
+      // }
 
-      if (sameId) {
-        handleShow()
-      } else {
-        confirmOrder(userCart)
-        clearCart()
-        setRedirect(true)
-      }
+      // if (sameId) {
+      //   // handleShow()
+      // } else {
+      // }
+      confirmOrder(userCart)
+      clearCart()
+      setRedirect(true)
 
     }
 
@@ -226,6 +226,7 @@ export function Cart(props) {
       history.push("/login")
     }
   }
+
 
   const haddleRemoveItem = (id) => {
     if (login) {
@@ -295,13 +296,7 @@ export function Cart(props) {
                           <h3 style={{ color: "green" }}>
                             $
                             {course.price !== null &&
-                              parseFloat(
-                                course.price -
-                                (
-                                  (course.percentageDiscount / 100) *
-                                  course.price
-                                ).toFixed(2)
-                              )}
+                              parseFloat((course.price -((course.percentageDiscount / 100) * course.price)).toFixed(2))}
                           </h3>
                         </div>
                       ) : (
@@ -383,9 +378,9 @@ export function Cart(props) {
         </div>
       </div>
 
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Inicio de Sesión</Modal.Title>
+          <Modal.Title>YA POSEE ESTOS CURSOS</Modal.Title>
         </Modal.Header>
         <Modal.Body>{mensajeModel()}</Modal.Body>
         <Modal.Footer>
@@ -393,7 +388,7 @@ export function Cart(props) {
             Ok!
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
 
       {redirect ? <Redirect to="/payment" /> : <></>}
       <Modal show={show2} onHide={handleClose3} style={styles.modal}>
