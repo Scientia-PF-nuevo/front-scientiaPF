@@ -3,7 +3,6 @@ import './NewFormLast.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCourseToAprove, clearReduxer, getGenresCourses } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
-
 import barra6 from '../../images/barras/barra6.png';
 
 export default function NewFormLast(props) {
@@ -38,30 +37,30 @@ export default function NewFormLast(props) {
     function handleSubmit(e) {
         e.preventDefault();
         if (course.name === '' || course.name === undefined || course.name.length > 20) {
-            setMsg('People should know the name of the course or name is more longer than 20 characters')
+            setMsg('The name of the course can´t be longer than 20 characters')
             return handleShow();
         }
         if (course.description === '' || course.description === undefined) {
-            setMsg('People should know the description of the course')
+            setMsg('The description of the course is mandatory')
             return handleShow();
         }
         if (course.price === undefined) {
-            setMsg('People should know the price of the course')
+            setMsg('The price of the course is mandatory')
             return handleShow();
         }
         if (course.url === '' || course.url === undefined) {
-            setMsg('People should know the url of the course')
+            setMsg('The url of the course is mandatory')
             return handleShow();
         }
         if (course.category === '' || course.category === undefined) {
-            setMsg('People should know the category of the course')
+            setMsg('The category of the course is mandatory')
             return handleShow();
         }
         if(course.languaje === '' || course.languaje === undefined) {
-            return alert ('People should know the lenguage of the course');
+            return alert ('The lenguage of the course is mandatory');
         }
         if(course.level === '' || course.level === undefined) {
-            return alert ('People should know the experience required for the course');
+            return alert ('The experience required for the course is mandatory');
         }
         dispatch(setCourseToAprove(course));
 
@@ -117,12 +116,12 @@ export default function NewFormLast(props) {
                 </div>
                 <br></br>
                 <div className='containerLastForm'>
-                    <h3>Imagen</h3>
+                    <h3>Image</h3>
                     <img src={course.url} alt='course image' />
                 </div>
                 <br></br>
                 <div className='containerLastForm'>
-                    <h3>UrlVideo</h3>
+                    <h3>URL Video</h3>
                     <h4>{course.urlVideo}</h4>
                 </div>
                 <br></br>
@@ -137,12 +136,12 @@ export default function NewFormLast(props) {
                 </div>
                 <br></br>
                 <div className='containerLastForm'>
-                    <h3>Languaje</h3>
+                    <h3>Language</h3>
                     <h4>{course.languaje}</h4>
                 </div>
                 <br></br>
                 <div className='containerLastForm'>
-                    <h3>Experience required</h3>
+                    <h3>Level required</h3>
                     <h4>{course.level}</h4>
                 </div>
                 <br></br>
@@ -152,7 +151,7 @@ export default function NewFormLast(props) {
                 </div>
                 <br></br>
                 <div className='containerLastForm'>
-                    <h3>Percentage of the discounts</h3>
+                    <h3>Percentage of the discount</h3>
                     <h4>{course.percentageDiscount}</h4>
                 </div>
                 <br></br>
@@ -165,7 +164,7 @@ export default function NewFormLast(props) {
             </form>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Notificación</Modal.Title>
+                    <Modal.Title>Notification</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{msg}</Modal.Body>
                 <Modal.Footer>

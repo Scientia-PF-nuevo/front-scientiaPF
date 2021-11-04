@@ -199,26 +199,26 @@ export function Cart(props) {
       userCart.courseId = cart.map((course) => course.id)
       userCart.email = user.email
 
-      var matchedIDs = []
-      var sameId = false;
-      if (arrIDCourses) {
-        for (let i = 0; i < userCart.courseId.length; i++) {
-          for (let j = 0; j < arrIDCourses.length; j++) {
-            if (userCart.courseId[i] === arrIDCourses[j]) {
-              sameId = true;
-              matchedIDs.push(userCart.courseId[i])
-            }
-          }
-        }
-      }
+      // var matchedIDs = []
+      // var sameId = false;
+      // if (arrIDCourses) {
+      //   for (let i = 0; i < userCart.courseId.length; i++) {
+      //     for (let j = 0; j < arrIDCourses.length; j++) {
+      //       if (userCart.courseId[i] === arrIDCourses[j]) {
+      //         sameId = true;
+      //         matchedIDs.push(userCart.courseId[i])
+      //       }
+      //     }
+      //   }
+      // }
 
-      if (sameId) {
-        // handleShow()
-      } else {
-        confirmOrder(userCart)
-        clearCart()
-        setRedirect(true)
-      }
+      // if (sameId) {
+      //   // handleShow()
+      // } else {
+      // }
+      confirmOrder(userCart)
+      clearCart()
+      setRedirect(true)
 
     }
 

@@ -16,7 +16,7 @@ function Login(props) {
     const { enqueueSnackbar } = useSnackbar();
 
     const errorLogeo = () => {
-        enqueueSnackbar('Credenciales erroneas', {
+        enqueueSnackbar('Credential Error, Please verify!', {
             anchorOrigin: {
                 vertical: 'bottom',
                 horizontal: 'left',

@@ -35,7 +35,7 @@ export default function NewForm2(props) {
     function handleSubmit(e) {
         e.preventDefault();
         if (course.description === '' || course.description === undefined || course.description.length < 20) {
-            setMsg('People should know the description of the course or description is more smallest than 20 characters')
+            setMsg('The name must be longer than 20 characters')
             return handleShow();
         }
 
@@ -82,7 +82,7 @@ export default function NewForm2(props) {
             </form>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Notificación</Modal.Title>
+                        <Modal.Title>Notification</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>{msg}</Modal.Body>
                     <Modal.Footer>

@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Form.css'
 import { useDispatch, useSelector } from 'react-redux';
-import TextField from '@mui/material/TextField';
-//import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import { setCourseToAprove, getGenresCourses, setNewCourse } from '../../actions/actions';
+import {  getGenresCourses, setNewCourse } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
-
 import barra5 from '../../images/barras/barra5.png';
-import { Checkbox } from '@mui/material';
 
 export default function NewForm5(props) {
 
@@ -41,11 +36,11 @@ export default function NewForm5(props) {
     function handleSubmit(e) {
         e.preventDefault();
         if (course.numbersOfDiscounts !== 0 && course.percentageDiscount === 0) {
-            setMsg('People would not use your discount if percentage is under 0')
+            setMsg('Do not apply a discount if percentage is under 0')
             return handleShow();
         }
         if (course.percentageDiscount !== 0 && course.numbersOfDiscounts === 0) {
-            setMsg('People would not use your discount if the amount of discounts is under 0')
+            setMsg('Do not apply discount if the amount of discounts is under 0')
             return handleShow();
         }
 
@@ -76,7 +71,7 @@ export default function NewForm5(props) {
         </div>
         <div className="form-div-container">
             <form className='formLast'>
-                <h1>You wanna add a discount?</h1>
+                <h1>Do you wanna add a discount?</h1>
                 <br></br>
                 <select className='selector' placeholder='Percentage...' name="percentageDiscount" value={course.percentageDiscount} onChange={handleChange} >
                     <option defaultValue="selected">0%</option>
@@ -111,7 +106,7 @@ export default function NewForm5(props) {
             </form>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Notificación</Modal.Title>
+                    <Modal.Title>Notification</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{msg}</Modal.Body>
                 <Modal.Footer>

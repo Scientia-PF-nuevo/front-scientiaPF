@@ -14,7 +14,7 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getCa
     const { enqueueSnackbar } = useSnackbar();
 
     const logeoCorrecto = () => {
-        enqueueSnackbar(`Bienvenido ${user.firstName}!`, {
+        enqueueSnackbar(`Welcome ${user.firstName}!`, {
             anchorOrigin: {
                 vertical: 'bottom',
                 horizontal: 'left',
