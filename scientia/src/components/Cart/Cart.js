@@ -25,6 +25,7 @@ import './Cart.css'
 
 
 export function Cart(props) {
+
   useEffect(() => {
     window.addEventListener('mousemove', () => {});
     props.removeAllGift()
@@ -131,8 +132,6 @@ const handleClickVariantWrongRemovedGift = () => {
   };
 
   const [state, setState] = React.useState({emailGift: ""})
-
-
 
   function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -293,12 +292,7 @@ const handleClickVariantWrongRemovedGift = () => {
                         <p>{course.percentageDiscount}% OFF</p>
                         <h3 style={{ color: "green" }}>
                           $
-                          {parseFloat(
-                            course.price -
-                              (
-                                (course.percentageDiscount / 100) *
-                                course.price
-                              ).toFixed(2)
+                          {parseFloat((course.price -((course.percentageDiscount / 100) * course.price)).toFixed(2)
                           )}
                         </h3>
                       </div>

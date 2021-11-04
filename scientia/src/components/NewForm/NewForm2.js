@@ -56,33 +56,30 @@ export default function NewForm2(props) {
 
     return (
         <div>
-            <div className="title-form-div">
-                <h1>Add Course</h1>
-            </div>
-            <div className='containerBarra'>
-                <img src={barra2} alt='barra de progreso' />
-            </div>
-            <div className="form-div-container">
-                <form>
-                    <h1>ADD NEW DESCRPTION</h1>
-                    <br></br>
-                    <TextField required
-                        style={{ marginBottom: "10px" }}
-                        id="outlined-required"
-                        label="DESCRIPTION"
-                        value={course.description}
-                        name="description"
-                        autocomplete="off"
-                        onChange={e => handleChange(e)} />
+        <div className="title-form-div">
+            <h1>Add Description</h1>
+        </div>
+        <div className='containerBarra'>
+            <img src={barra2} alt='barra de progreso'/>
+        </div>
+        <div className="form-div-container">
+            <form>
+                <h1>ADD NEW DESCRPTION</h1>
+                <br></br>
+                <TextField required 
+                style={{marginBottom:"10px"}}
+                id="outlined-required"
+                label="DESCRIPTION"
+                value={course.description}
+                name="description" 
+                autocomplete="off"
+                onChange={e => handleChange(e)} />
 
-                    <div className='containerbtSub'>
-                        <input className="form-button" value='Next' type='submit' onClick={e => handleSubmit(e)} />
-                    </div>
-                    <div className='containerbtSub'>
-                        <button className="form-button" onClick={e => handleBack(e)}>Back</button>
-                    </div>
-
-                </form>
+            <div className='containerbtSub'>
+                <button className="form-button" style={{backgroundColor:"#12351c"}} onClick={e=>handleBack(e)}>Back</button>
+                <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
+            </div>
+            </form>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Notificación</Modal.Title>

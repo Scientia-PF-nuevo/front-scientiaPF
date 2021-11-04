@@ -375,7 +375,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
           <br></br>
         <h3>SORT BY:</h3>
         <br></br>
-          <Accordion
+          {/* <Accordion
             expanded={expanded === "panel5"}
             onChange={handleChange("panel5")}
           >
@@ -404,7 +404,7 @@ function SearchBar({coursesByGenre,allCourses, searchByName, getAllCourses, getF
                 </RadioGroup>
               </Typography>
             </AccordionDetails>
-          </Accordion>
+          </Accordion> */}
           <Accordion
             expanded={expanded === "panel6"}
             onChange={handleChange("panel6")}
