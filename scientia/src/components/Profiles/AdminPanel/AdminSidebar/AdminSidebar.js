@@ -32,22 +32,22 @@ const AdminSidebar = () => {
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <div>
-              <Link to="/adminprofile" >
+              <Link to="/userprofile" >
                 <CDBSidebarMenuItem  icon="user">Dashboard</CDBSidebarMenuItem>
               </Link>
             </div>
             <div>
-              <Link to="/adminprofile/user-management" >
+              <Link to="/userprofile/user-management" >
                 <CDBSidebarMenuItem  icon="table">User Management</CDBSidebarMenuItem>
               </Link>
             </div>
             <div>
-              <Link to="/adminprofile/course-management" >
+              <Link to="/userprofile/course-management" >
                 <CDBSidebarMenuItem icon="sticky-note">Course Management</CDBSidebarMenuItem>
               </Link>
             </div>
             <div>
-              <Link to="/adminprofile/statistics" >
+              <Link to="/userprofile/statistics" >
                 <CDBSidebarMenuItem icon="th">Statistics</CDBSidebarMenuItem>
               </Link>
             </div>

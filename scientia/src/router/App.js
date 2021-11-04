@@ -56,9 +56,8 @@ function App() {
           <ResponsivePlayer />
         </Route>
 
-        <Route exact path='/mylearning'>
-          <MyLearning />
-        </Route>
+        <Route exact path='/mylearning' component={isLogin === true ? MyLearning : Home }  />
+     
 
         <Route exact path='/home'>
           <Home />
@@ -76,10 +75,8 @@ function App() {
           <Details />
         </Route>
 
-        <Route exact path='/payment'>
-          <Payment />
-        </Route>
-
+        <Route exact path='/payment' component={isLogin === true ? Payment : Home } />
+        
         <Route exact path='/addCourses_step_1' component={isLogin === true ? NewForm : Home} />
 
         <Route exact path='/addCourses_step_2' component={isLogin === true ? NewForm2 : Home} />
@@ -93,13 +90,15 @@ function App() {
         <Route exact path='/addCourses_step_final' component={isLogin === true ? NewFormLast : Home} />
 
 
-        <Route path='/userprofile'>
+        <Route exact path='/userprofile' component={isLogin === true ? (user.isAdmin ? AdminPanel : UserPanel)  : Home} />
+        
+      {/*   <Route path='/userprofile'>
           {user.isAdmin ? <Redirect to="/adminprofile" /> : <UserPanel />}
-        </Route>
-
+        </Route> */}
+{/* 
         <Route path='/adminprofile'>
           {user.isAdmin ? <AdminPanel /> : <Redirect to="/" />}
-        </Route>
+        </Route> */}
         <Footer />
       </Router>
     </div>
