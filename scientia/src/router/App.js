@@ -31,6 +31,7 @@ import './App.css';
 
 function App() {
   const user = useSelector((state) => state.rootReducer.user)
+  const isLogin = useSelector(state=>state.rootReducer.login)
   return (
     <div className='container-app'>
 
@@ -80,17 +81,17 @@ function App() {
           <Payment />
         </Route>
 
-        <Route exact path='/addCourses_step_1' component={NewForm} />
+        <Route exact path='/addCourses_step_1' component={isLogin === true ? NewForm : Home} />
 
-        <Route exact path='/addCourses_step_2' component={NewForm2} />
+        <Route exact path='/addCourses_step_2' component={isLogin === true ? NewForm2 : Home} />
 
-        <Route exact path='/addCourses_step_3' component={NewForm3} />
+        <Route exact path='/addCourses_step_3' component={isLogin === true ? NewForm3 : Home} />
 
-        <Route exact path='/addCourses_step_4' component={NewForm4} />
+        <Route exact path='/addCourses_step_4' component={isLogin === true ? NewForm4 : Home} />
 
-        <Route exact path='/addCourses_step_5' component={NewForm5} />
+        <Route exact path='/addCourses_step_5' component={isLogin === true ? NewForm5 : Home} />
 
-        <Route exact path='/addCourses_step_final' component={NewFormLast} />
+        <Route exact path='/addCourses_step_final' component={isLogin === true ? NewFormLast : Home} />
 
 
         <Route path='/userprofile'>

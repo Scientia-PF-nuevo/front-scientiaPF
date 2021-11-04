@@ -11487,6 +11487,11 @@
   "resolved" "https://registry.npmjs.org/react-commentbox/-/react-commentbox-3.0.1.tgz"
   "version" "3.0.1"
 
+"react-confirm-alert@^2.7.0":
+  "integrity" "sha512-21NWtGK/e85+ZX3TLRpMc3IsU5Kj6Z9ElCOrkTIlwMzV9EancyXNlkqHGbtKP63a2iS6g5hOxROokmJOqKQiXA=="
+  "resolved" "https://registry.npmjs.org/react-confirm-alert/-/react-confirm-alert-2.7.0.tgz"
+  "version" "2.7.0"
+
 "react-credit-cards@^0.8.3":
   "integrity" "sha512-88XJErkkdDjeFevOxfWYV2dUs4ddNNXJMIgutqTlUH2pYfcaDeFv9MXNGCcJKvBv4+6GEnxbCToymNRNbEt/uw=="
   "resolved" "https://registry.npmjs.org/react-credit-cards/-/react-credit-cards-0.8.3.tgz"

@@ -2,10 +2,11 @@ import React from "react";
 import './Nav.css';
 import { Link } from "react-router-dom";
 import CustomizedBadges from "../Cart/customCart";
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { Avatar } from '@mui/material';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from './../../actions/actions'
+import { clearReduxer } from './../../actions/actions'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import ControlCameraIcon from '@mui/icons-material/ControlCamera';
 import { useSnackbar } from 'notistack';
@@ -13,6 +14,7 @@ import Slide from '@material-ui/core/Slide';
 
 function Navegacion(props) {
   const imagenPerfil = props.user.photoURL
+  const dispatch = useDispatch()
 
 
   if (props.user.firstName) {
@@ -23,6 +25,7 @@ function Navegacion(props) {
 
   function desconectarse(e) {
     e.preventDefault()
+    dispatch(clearReduxer())
     props.clearCart()
     props.logout()
     deslogeo()
