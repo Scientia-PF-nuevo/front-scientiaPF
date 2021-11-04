@@ -541,7 +541,8 @@ export function register(user) {
 }
 
 //*Crea nuevo usuario directo
-export function createUser(user) {
+export function createUser(user, enqueueSnackbar, save, saveError) {
+
     return async function (dispatch) {
         return await axios.post('/users/register', user)
             .then((response) => {
@@ -550,7 +551,14 @@ export function createUser(user) {
                     payload: response.data
                 })
                 window.location.href = '/home';
+                save()
             })
+            .catch((error) => {
+                saveError()
+            });
+            
+            
+            
     }
 }
 
