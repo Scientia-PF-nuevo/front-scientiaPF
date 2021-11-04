@@ -3,20 +3,51 @@ import './Statistics.css';
 import { connect } from 'react-redux'
 import CircularProgress from '@mui/material/CircularProgress';
 
-const UserManagement = ({myCourses}) => {
-  if (myCourses.length === 1) {
-    var arrCourse = []
-    arrCourse.push(myCourses)
-  }
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import AppsIcon from '@mui/icons-material/Apps';
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
+import { element } from 'prop-types';
 
-  return myCourses === "" ? (
-    <div>
-      <h1></h1>
-    </div>
-    ) : 
-    typeof myCourses !== "undefined" && myCourses.length >= 1 ? (
+const UserManagement = ({info}) => {
+
+  const solds  = info.allCourses.map( course => {return course.solds})
+ 
+  let suma = 0;
+    solds.forEach (function(sold){
+        suma += sold;
+    });
+
+  return info.users.length >= 1 ? (
       <div className="div-adminstatistics">
-        <img src="https://images.vexels.com/media/users/3/206056/isolated/preview/9af07a2936f83c0318f29730f5907423-creciente-trazo-de-barras-de-grafico.png"/>
+        <div className="box-statistics-admin">
+          <div className="box-value-statistics-admin">
+            <div className="value-statistics-admin">{info.users.length}</div>
+          </div>
+          <PeopleAltIcon fontSize="large"/>
+          <div className="text-statistics-admin">Users </div>
+        </div>
+        <div className="box-statistics-admin">
+          <div className="box-value-statistics-admin">
+            <div className="value-statistics-admin">{info.allCourses.length}</div>
+          </div>
+          <LibraryBooksIcon fontSize="large" />
+          <div className="text-statistics-admin">Courses</div>
+        </div>
+        <div className="box-statistics-admin">
+          <div className="box-value-statistics-admin">
+            <div className="value-statistics-admin">{info.allCategories.length}</div>
+          </div>
+          <AppsIcon fontSize="large" />
+          <div className="text-statistics-admin">Categories</div>
+        </div>
+        <div className="box-statistics-admin">
+          <div className="box-value-statistics-admin">
+            <div className="value-statistics-admin">{suma}</div>
+          </div>
+          <PointOfSaleIcon fontSize="large" />
+          <div className="text-statistics-admin">Solds Courses</div>
+        </div>
       </div>
     ) : (
     <div className="div-adminstatistics">
@@ -27,7 +58,7 @@ const UserManagement = ({myCourses}) => {
 
     const mapStateToProps = (state) => {
     return {
-        myCourses: state.rootReducer.allCourses
+        info: state.rootReducer
     }
   };
 

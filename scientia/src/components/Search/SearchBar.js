@@ -1,4 +1,5 @@
 
+
 import { React, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import FormGroup from '@mui/material/FormGroup';
@@ -378,7 +379,7 @@ function SearchBar({ coursesByGenre, allCourses, searchByName, getAllCourses, ge
         <br></br>
         <h3>SORT BY:</h3>
         <br></br>
-        <Accordion
+        {/* <Accordion
           expanded={expanded === "panel5"}
           onChange={handleChange("panel5")}
         >
@@ -407,7 +408,7 @@ function SearchBar({ coursesByGenre, allCourses, searchByName, getAllCourses, ge
               </RadioGroup>
             </Typography>
           </AccordionDetails>
-        </Accordion>
+        </Accordion> */}
         <Accordion
           expanded={expanded === "panel6"}
           onChange={handleChange("panel6")}

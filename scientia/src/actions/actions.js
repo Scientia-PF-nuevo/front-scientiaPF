@@ -1,3 +1,4 @@
+import { WindowSharp } from '@mui/icons-material';
 import axios from 'axios';
 import {
     getAuth,
@@ -43,6 +44,7 @@ import {
     GET_ALL_CATEGORIES,
     ADD_FREE_COURSE,
     SALUDO,
+    DELETE_COURSE
 } from './constants.js';
 
 //trae todas las categorias 
@@ -253,7 +255,6 @@ export function filterBy(order) {
 }
 
 export function setCourseToAprove(payload) {
-    console.log('entro al action')
     return function (dispatch) {
         axios.post(`/courses/newcourse`, payload)
             .then(res => {
@@ -269,7 +270,15 @@ export function setCourseToAprove(payload) {
     }
 }
 
+
+export function clearReduxer() {
+    return {
+        type: 'CLEAR_REDUX',
+    }
+}
+
 export function setNewCourse(payload) {
+
     if (payload.name) {
         return {
             type: 'SET_NAME',
@@ -294,7 +303,7 @@ export function setNewCourse(payload) {
             payload
         }
     }
-    if (payload.numbersOfDiscounts) {
+    if (payload.numbersOfDiscounts === 0 || payload.numbersOfDiscounts > 0) {
         return {
             type: 'SET_AMOUNT',
             payload
@@ -320,6 +329,18 @@ export function addFreeCourse(email, id) {
             .then(res => {
 
                 dispatch({ type: ADD_FREE_COURSE, payload: res.data });
+            })
+            .catch(err => { return err })
+    }
+}
+
+//* borra curso directamente
+export function deleteCourse(email, id) {
+    return async function (dispatch) {
+        return await axios.post(`/courses/delete/${email}/${id}`)
+            .then(res => {
+
+                dispatch({ type: DELETE_COURSE, payload: res.data });
             })
             .catch(err => { return err })
     }
@@ -520,7 +541,8 @@ export function register(user) {
 }
 
 //*Crea nuevo usuario directo
-export function createUser(user) {
+export function createUser(user, enqueueSnackbar, save, saveError) {
+
     return async function (dispatch) {
         return await axios.post('/users/register', user)
             .then((response) => {
@@ -529,7 +551,14 @@ export function createUser(user) {
                     payload: response.data
                 })
                 window.location.href = '/home';
+                save()
             })
+            .catch((error) => {
+                saveError()
+            });
+            
+            
+            
     }
 }
 
@@ -551,15 +580,11 @@ export function updateInfoVideo(info) {
 }
 
 export function logout() {
-    return async function (dispatch) {
-        axios.post(`/users/logout`)
-            .then(r =>
-                dispatch({
-                    type: LOGOUT,
-                    payload: false
-                })
-            )
-    }
+    axios.post(`/users/logout`)
+    return({
+        type: LOGOUT,
+        payload: false
+    })
 }
 
 //*Crea nueva review

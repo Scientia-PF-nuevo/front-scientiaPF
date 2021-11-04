@@ -9,6 +9,8 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 import { styled } from '@mui/material/styles';
+import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 
 const MyProfile = ({userInfo }) => {
 
@@ -20,6 +22,30 @@ const MyProfile = ({userInfo }) => {
       marginTop: theme.spacing(2),
     },
   }));
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const save = () => {
+    enqueueSnackbar(`Changes saved successfully!`, {
+      anchorOrigin: {
+        vertical: 'bottom',
+        horizontal: 'center',
+      },
+      TransitionComponent: Slide,
+      variant: 'info',
+    })
+  }
+
+  const saveError = () => {
+    enqueueSnackbar(`Please enter the data correctly.`, {
+      anchorOrigin: {
+        vertical: 'bottom',
+        horizontal: 'center',
+      },
+      TransitionComponent: Slide,
+      variant: 'error',
+    })
+  }
 
   // let initialFirstName = userInfo.firstName.charAt(0)
   // let initialLastName = userInfo.lastName.charAt(0)
@@ -213,11 +239,15 @@ const MyProfile = ({userInfo }) => {
       return false
     }
 
-    await axios.put(`/users/updateInfo/${email}`, values);
+    try {
+      await axios.put(`/users/updateInfo/${email}`, values);
+      save();
+      dispatch(getUserInfo(email));
+    } catch (error) {
+      saveError();
+    }
 
-    alert("Changes saved successfully")
 
-    dispatch(getUserInfo(email));
   }
 
   const handleSubmitPassword = async (e) => {
@@ -228,11 +258,14 @@ const MyProfile = ({userInfo }) => {
     if (!isValid) {
       return false
     }
-    await axios.put(`/users/updatePw/${email}`, changePassword);
 
-    alert("Changes saved successfully")
-
-    dispatch(getUserInfo(email));
+    try {
+      await axios.put(`/users/updatePw/${email}`, changePassword);
+      save();
+      dispatch(getUserInfo(email));
+    } catch (error) {
+      saveError();
+    }
   }
 
   const { firstName, lastName, email, password, phone, country, city, province, address, postalcode } = values
@@ -272,7 +305,8 @@ const MyProfile = ({userInfo }) => {
       await axios.put(`/users/updateProfilePicture/${email}`, valuesImage);
 
       dispatch(getUserInfo(email));
-  };
+    };
+
 
   return userInfo ? (
       <div className="div-userinfo">

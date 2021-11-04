@@ -446,3 +446,4 @@ export default connect(mapStateToProps, {
   removeGift,
   removeAllGift
 })(Cart);
+

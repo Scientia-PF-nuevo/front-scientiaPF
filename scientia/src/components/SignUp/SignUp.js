@@ -5,9 +5,35 @@ import * as actionCreators from './../../actions/actions'
 import { bindActionCreators } from 'redux';
 import { useDispatch } from "react-redux";
 import { createUser } from '../../actions/actions';
+import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 
 const SignUp = (props) => {
   const dispatch = useDispatch();
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const save = () => {
+    enqueueSnackbar(`Successful registration!`, {
+      anchorOrigin: {
+        vertical: 'bottom',
+        horizontal: 'center',
+      },
+      TransitionComponent: Slide,
+      variant: 'info',
+    })
+  }
+
+  const saveError = () => {
+    enqueueSnackbar(`Registration error, please check the information and try again.`, {
+      anchorOrigin: {
+        vertical: 'bottom',
+        horizontal: 'center',
+      },
+      TransitionComponent: Slide,
+      variant: 'error',
+    })
+  }
 
   const [values, setValues] = React.useState({
     firstName: '',
@@ -123,8 +149,9 @@ const SignUp = (props) => {
     if (!isValid) {
       return false
     }
+    
+    dispatch(createUser(values, enqueueSnackbar, save, saveError))
 
-    dispatch(createUser(values));
   }
 
   const { firstName, lastName, email, password, phone, country, city, province, address, postalcode } = values

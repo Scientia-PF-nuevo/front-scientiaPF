@@ -145,9 +145,7 @@ const handleClickVariantWrong = () => {
         good = true;
       }
     }
-
-    console.log(top)
-
+    
   return (
     <div className="container-course">
       <div className="left-container">
@@ -192,7 +190,7 @@ const handleClickVariantWrong = () => {
 
         <div className="info-price-div2">
           <p>
-            <strong>Date</strong>: {`${date}`}
+            <strong>Date</strong>: {`${date.slice(0,10)}`}
           </p>
         </div>
         <div className="info-price-div2">
