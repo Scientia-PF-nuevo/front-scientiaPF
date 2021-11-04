@@ -8,6 +8,7 @@ import { setCourseToAprove, getGenresCourses, setNewCourse } from '../../actions
 import { Modal, Button } from 'react-bootstrap'
 
 import barra5 from '../../images/barras/barra5.png';
+import { Checkbox } from '@mui/material';
 
 export default function NewForm5(props) {
 
@@ -33,13 +34,12 @@ export default function NewForm5(props) {
         e.preventDefault();
         setCourse({
             ...course,
-            [e.target.name]: e.target.value
+            [e.target.name]: parseInt(e.target.value)
         });
     };
 
     function handleSubmit(e) {
         e.preventDefault();
-
         if (course.numbersOfDiscounts !== 0 && course.percentageDiscount === 0) {
             setMsg('People would not use your discount if percentage is under 0')
             return handleShow();
@@ -68,63 +68,59 @@ export default function NewForm5(props) {
 
     return (
         <div>
-            <div className="title-form-div">
-                <h1>Add Course</h1>
-            </div>
-            <div className='containerBarra'>
-                <img src={barra5} alt='barra de progreso' />
-            </div>
-            <div className="form-div-container">
-                <form>
-                    <h1>DISCOUNTS?</h1>
-                    <br></br>
-                    <TextField required
-                        style={{ marginBottom: "10px" }}
-                        id="outlined-required"
-                        label="Percentage"
-                        // className='placeHolder' 
-                        type="number"
-                        value={course.percentageDiscount}
-                        name="percentageDiscount"
-                        // min = "1"
-                        autocomplete="off"
-                        onChange={e => handleChange(e)} />
+        <div className="title-form-div">
+            <h1>Discount</h1>
+        </div>
+        <div className='containerBarra'>
+            <img src={barra5} alt='barra de progreso'/>
+        </div>
+        <div className="form-div-container">
+            <form className='formLast'>
+                <h1>You wanna add a discount?</h1>
+                <br></br>
+                <select className='selector' placeholder='Percentage...' name="percentageDiscount" value={course.percentageDiscount} onChange={handleChange} >
+                    <option defaultValue="selected">0%</option>
+                    <option name="percentageDiscount" value={10}> 10% </option>
+                    <option name="percentageDiscount" value={15}> 15% </option>
+                    <option name="percentageDiscount" value={20}> 20% </option>
+                    <option name="percentageDiscount" value={25}> 25% </option>
+                    <option name="percentageDiscount" value={30}> 30% </option>
+                    <option name="percentageDiscount" value={35}> 35% </option>
+                </select>
 
-                    <h4>AMOUNT OF DISCOUNTS</h4>
-                    <br></br>
-                    <TextField required
-                        style={{ marginBottom: "10px" }}
-                        id="outlined-required"
-                        label="Amount"
-                        // className='placeHolder' 
-                        type="number"
-                        value={course.numbersOfDiscounts}
-                        name="numbersOfDiscounts"
-                        // min = "1"
-                        autocomplete="off"
-                        onChange={e => handleChange(e)} />
+                <h4>Amount of discounts</h4>
+                <br></br>
+                <select className='selector' placeholder='Quantity...' name="numbersOfDiscounts" value={course.numbersOfDiscounts} onChange={handleChange} >
+                    <option defaultValue="selected">0</option>
+                    <option name="numbersOfDiscounts" value={5}> 5 </option>
+                    <option name="numbersOfDiscounts" value={10}> 10 </option>
+                    <option name="numbersOfDiscounts" value={20}> 20 </option>
+                    <option name="numbersOfDiscounts" value={25}> 25 </option>
+                    <option name="numbersOfDiscounts" value={30}> 30 </option>
+                    <option name="numbersOfDiscounts" value={35}> 35 </option>
+                    <option name="numbersOfDiscounts" value={40}> 40 </option>
+                    <option name="numbersOfDiscounts" value={50}> 50 </option>
+                </select>
 
 
-                    <div className='containerbtSub'>
-                        <input className="form-button" value='Next' type='submit' onClick={e => handleSubmit(e)} />
-                    </div>
-                    <div className='containerbtSub'>
-                        <button className="form-button" onClick={e => handleBack(e)}>Back</button>
-                    </div>
+            <div className='containerbtSub'>
+                <button className="form-button" style={{backgroundColor:"#12351c"}} onClick={e=>handleBack(e)}>Back</button>
+                <input className="form-button" value='Next' type='submit' onClick={e=>handleSubmit(e)}/>
+            </div>   
 
-                </form>
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Notificación</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>{msg}</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" onClick={handleClose}>
-                            Ok!
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
+            </form>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Notificación</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{msg}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleClose}>
+                        Ok!
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
         </div>
     );
 };

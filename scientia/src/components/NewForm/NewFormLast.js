@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './NewFormLast.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCourseToAprove, getGenresCourses } from '../../actions/actions';
+import { setCourseToAprove, clearReduxer, getGenresCourses } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
 
 import barra6 from '../../images/barras/barra6.png';
@@ -45,7 +45,7 @@ export default function NewFormLast(props) {
             setMsg('People should know the description of the course')
             return handleShow();
         }
-        if (course.price <= 0 || course.price === undefined) {
+        if (course.price === undefined) {
             setMsg('People should know the price of the course')
             return handleShow();
         }
@@ -65,16 +65,31 @@ export default function NewFormLast(props) {
         }
         dispatch(setCourseToAprove(course));
 
+        setCourse({
+            name: '',
+            description: '',
+            price: 0,
+            url: '',
+            urlVideo: '',
+            email: '',
+            category: '',
+            languaje: '',
+            level: '',
+            numbersOfDiscounts: 0,
+            percentageDiscount: 0
+        });
+
+        dispatch(clearReduxer())
+
         // Redirect
         props.history.push('/home');
     };
 
-    function handleChange(e) {
+    function handleBack(e) {
         e.preventDefault();
-        setCourse({
-            [e.target.name]:e.target.value
-        })
-    };
+        props.history.goBack()
+    }
+
 
     return (
         <div>
@@ -143,6 +158,7 @@ export default function NewFormLast(props) {
                 <br></br>
                 
             <div className='containerbtSub'>
+                <button className="form-button" style={{backgroundColor:"#12351c"}} onClick={e=>handleBack(e)}>Back</button>
                 <input className="form-button" value='Submit' type='submit' onClick={e=>handleSubmit(e)}/>
             </div>      
 

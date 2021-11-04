@@ -9,7 +9,7 @@ function CourseList({ courses}) {
 
   const [currentPage, setCurrentPage] = useState(1)
 
-  const [cardPerPage] = useState(5)
+  const [cardPerPage] = useState(10)
 
   //* indices de la paginación:
   const indexOfLastCard = currentPage * cardPerPage

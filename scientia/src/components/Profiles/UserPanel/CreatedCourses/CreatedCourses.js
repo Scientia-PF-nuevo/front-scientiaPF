@@ -12,11 +12,66 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
+import CommentIcon from '@mui/icons-material/Comment';
+import { confirmAlert } from 'react-confirm-alert';
 
 
-const CreatedCourses = ({shoppingHistory}) => {
-  console.log(shoppingHistory, 'shopping')
+const CreatedCourses = ({courses}) => {
+  
+  const data = courses.uploadedCourses;
+  
+  const rejected = courses.rejectedCourses[0]
+
+  const onClickEnable = (e) => {
+
+    if (e.state === "rejected") {
+      let ac = ""
+      for (let i = 0; i < rejected.length; i++) {
+        if (rejected[i].id === e.id) {
+          ac = rejected[i].adminComments
+        }
+      }
+
+      confirmAlert({
+        title: "Admin Comments",
+        message: ac,
+        buttons: [
+          {
+            label: 'Ok',
+            onClick: async () => 
+            {
+            }
+          }
+        ]
+      });
+    } else if (e.state === "active") {
+      confirmAlert({
+        title: "Approved",
+        message: "No comments from the administrator",
+        buttons: [
+          {
+            label: 'Ok',
+            onClick: async () => 
+            {
+            }
+          }
+        ]
+      });
+    } else {
+      confirmAlert({
+        title: "Pending approval",
+        message: "No administrator comments yet",
+        buttons: [
+          {
+            label: 'Ok',
+            onClick: async () => 
+            {
+            }
+          }
+        ]
+      });
+    }
+  }
 
   const columns = [
     {
@@ -38,73 +93,53 @@ const CreatedCourses = ({shoppingHistory}) => {
     {
       title: "State",
       field: "state",
-      lookup: { active: 'Active', rejected: 'Rejected' }
-    },
-    {
-      title: "Admin Comments",
-      field: "adminComments",
+      lookup: { active: 'Active', pendingToApprove: "Pending to approve", rejected: "Rejected" }
     }
   ]
 
-  const data = shoppingHistory;
 
-  const onClickEnable = (e) => {
-    console.log('entré a onClick', e.email)
-  }
-
-  return shoppingHistory.length >= 1 ? (
+  return (
       <div className="div-coursesmanagement" style={{ maxWidth: "100%" }}>
         <MaterialTable
-        columns={columns}
-        data={shoppingHistory}
-        title="Courses"
-        icons={{
-          ResetSearch: ClearIcon,
-          Filter: FilterListIcon,
-          Search: SearchIcon,
-          ViewColumn: ViewColumnIcon,
-          FirstPage:  FirstPageIcon,
-          LastPage:  LastPageIcon,
-          NextPage:  ChevronRightIcon,
-          PreviousPage: ChevronLeftIcon,
-          SortArrow: ArrowDownward
-        }}
-        actions={[
-          {
-            icon: MiscellaneousServicesIcon,
-            tooltip: 'Enable user',
-            onClick: (event, rowData) => onClickEnable(rowData)
-            // (event, rowData) => window.confirm ('Has presionado editar ' + rowData.firstName)
-          }
-        ]}
-        options={{
-          filtering: false,
-          search: false,
-          headerStyle: {
-            backgroundColor: "#655E5E",
-            color: '#FFF',
-            colorRendering: "white"
-          },
-          pageSize: 10,
-          actionsColumnIndex: -1
-    
-      }
-        
-      }
+          columns={columns}
+          data={data}
+          title="Courses"
+          icons={{
+            ResetSearch: ClearIcon,
+            Filter: FilterListIcon,
+            Search: SearchIcon,
+            ViewColumn: ViewColumnIcon,
+            FirstPage:  FirstPageIcon,
+            LastPage:  LastPageIcon,
+            NextPage:  ChevronRightIcon,
+            PreviousPage: ChevronLeftIcon,
+            SortArrow: ArrowDownward
+          }}
+          actions={[
+            {
+              icon: CommentIcon,
+              tooltip: 'Comments',
+              onClick: (event, rowData) => onClickEnable(rowData)
+            }
+          ]}
+          options={{
+            filtering: false,
+            search: false,
+            headerStyle: {
+              backgroundColor: "#655E5E",
+              color: '#FFF',
+              colorRendering: "white"
+            },
+            actionsColumnIndex: -1
+          }}
         />
       </div>
-    ) : (
-    <div className="div-usermanagement">
-      <CircularProgress disableShrink />
-    </div>
-  );
+    ) 
 }
 
     const mapStateToProps = (state) => {
-
     return {
-      shoppingHistory: state.rootReducer.userInfo.uploadedCourses
-      
+      courses: state.rootReducer.userInfo
     }
   };
 

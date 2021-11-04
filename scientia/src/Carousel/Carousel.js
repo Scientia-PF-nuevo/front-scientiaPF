@@ -61,7 +61,7 @@ export default function CarouselCourses(props) {
                 Precio: {course.price}
               </span> */}
               <span className="carousel-item-solds">
-                <strong>CATEGORY:</strong>{course.categories.toUpperCase()}
+                <strong>CATEGORY:</strong>{course.categories?.toUpperCase()}
               </span>
             </div>
             <br></br>

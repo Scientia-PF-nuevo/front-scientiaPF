@@ -116,8 +116,14 @@ function Details({
     }
   };
 
+
+
    //extraer el videoID para la DEMO:
-   var videoID = urlVideo.length === 0 ? "" : urlVideo.urlVideo.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/)[1]
+   if(urlVideo.urlVideo && urlVideo.urlVideo.toLowerCase().includes('youtube')){
+      var videoID = urlVideo.length === 0 ? "" : urlVideo.urlVideo.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/)[1]
+   } else {
+     var videoID = ''
+   }
 
   return (
     <div>

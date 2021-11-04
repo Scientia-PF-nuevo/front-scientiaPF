@@ -13,8 +13,6 @@ const AdminDashboard = (props) => {
 
     dispatch(getUsers());
 
-    if (props.user.firstName) {
-    }
     return (
       <div className="div-admindashboard">
           <h1>You're welcome!</h1>
