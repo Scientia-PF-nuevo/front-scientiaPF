@@ -64,7 +64,7 @@ function MercadoPagoForm(props) {
     }
 
     const resultPayment = useMercadoPago(props.cartToPay, props.user.email, props.gift);
-    
+
     const handleInputChange = (e) => {
         setState({
             ...state,
@@ -90,136 +90,141 @@ function MercadoPagoForm(props) {
     };
 
     return (
-        <div className={s.container}>
-            <Card
-                cvc={state.cvc}
-                expiry={state.cardExpirationMonth + state.cardExpirationYear}
-                name={state.cardholderName}
-                number={state.cardNumber}
-                focused={state.focus}
-                brand={state.issuer}
-            />
+        <>
+            <div className={s.titlePayDiv}>
+                <h1>Shopping Cart</h1>
+            </div>
+            <div className={s.container}>
+                <Card
+                    cvc={state.cvc}
+                    expiry={state.cardExpirationMonth + state.cardExpirationYear}
+                    name={state.cardholderName}
+                    number={state.cardNumber}
+                    focused={state.focus}
+                    brand={state.issuer}
+                />
 
-            <form className={s.form} id="form-checkout">
-                <div className={s.formControl}>
-                    <input
-                        maxLength="19"
-                        className={s.input}
-                        type="number"
-                        name="cardNumber"
-                        id="form-checkout__cardNumber"
-                        onChange={handleInputChange}
-                        onFocus={handleInputFocus}
-                    />
-                </div>
-                <div className={s.formControl}>
-                    <input
-                        maxLength="2"
-                        className={s.input}
-                        type="tel"
-                        name="cardExpirationMonth"
-                        id="form-checkout__cardExpirationMonth"
-                        onChange={handleInputChange}
-                        onFocus={handleInputFocus}
-                    />
-                    <input
-                        maxLength="2"
-                        className={s.input}
-                        type="number"
-                        name="cardExpirationYear"
-                        id="form-checkout__cardExpirationYear"
-                        onChange={handleInputChange}
-                        onFocus={handleInputFocus}
-                    />
-                    <input
-                        maxLength="4"
-                        className={s.input}
-                        type="number"
-                        name="cvc"
-                        id="form-checkout__securityCode"
-                        onChange={handleInputChange}
-                        onFocus={handleInputFocus}
-                    />
-                </div>
-                <div className={s.formControl}>
-                    <input
-                        className={s.input}
-                        type="text"
-                        name="cardholderName"
-                        id="form-checkout__cardholderName"
-                        onChange={handleInputChange}
-                        onFocus={handleInputFocus}
-                    />
-                    <input
-                        className={s.input}
-                        type="email"
-                        name="cardholderEmail"
-                        id="form-checkout__cardholderEmail"
-                        onFocus={handleInputFocus}
-                    />
-                </div>
-                <div className={s.formControl}>
-                    <select
-                        className={s.select}
-                        name="issuer"
-                        id="form-checkout__issuer"
-                        on
-                    ></select>
-                    <select
-                        className={s.select}
-                        name="identificationType"
-                        id="form-checkout__identificationType"
-                    ></select>
-                </div>
-                <div className={s.formControl}>
-                    <input
-                        maxLength="8"
-                        className={s.input}
-                        type="number"
-                        name="identificationNumber"
-                        id="form-checkout__identificationNumber"
-                    />
-                </div>
-                <div className={s.formControl}>
-                    <select
-                        className={s.select}
-                        name="installments"
-                        id="form-checkout__installments"
-                    ></select>
-                </div>
-                <div className={s.formControl}>
-                    <button className={s.button} type="submit" id="form-checkout__submit" onClick={handleShow}>
-                        Pagar
-                    </button>
-                </div>
-                {showMsg ?
-                    resultPayment ?
-                        <p>{msg}</p>
+                <form className={s.form} id="form-checkout">
+                    <div className={s.formControl}>
+                        <input
+                            maxLength="19"
+                            className={s.input}
+                            type="number"
+                            name="cardNumber"
+                            id="form-checkout__cardNumber"
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                        />
+                    </div>
+                    <div className={s.formControl}>
+                        <input
+                            maxLength="2"
+                            className={s.input}
+                            type="tel"
+                            name="cardExpirationMonth"
+                            id="form-checkout__cardExpirationMonth"
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                        />
+                        <input
+                            maxLength="2"
+                            className={s.input}
+                            type="number"
+                            name="cardExpirationYear"
+                            id="form-checkout__cardExpirationYear"
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                        />
+                        <input
+                            maxLength="4"
+                            className={s.input}
+                            type="number"
+                            name="cvc"
+                            id="form-checkout__securityCode"
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                        />
+                    </div>
+                    <div className={s.formControl}>
+                        <input
+                            className={s.input}
+                            type="text"
+                            name="cardholderName"
+                            id="form-checkout__cardholderName"
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                        />
+                        <input
+                            className={s.input}
+                            type="email"
+                            name="cardholderEmail"
+                            id="form-checkout__cardholderEmail"
+                            onFocus={handleInputFocus}
+                        />
+                    </div>
+                    <div className={s.formControl}>
+                        <select
+                            className={s.select}
+                            name="issuer"
+                            id="form-checkout__issuer"
+                            on
+                        ></select>
+                        <select
+                            className={s.select}
+                            name="identificationType"
+                            id="form-checkout__identificationType"
+                        ></select>
+                    </div>
+                    <div className={s.formControl}>
+                        <input
+                            maxLength="8"
+                            className={s.input}
+                            type="number"
+                            name="identificationNumber"
+                            id="form-checkout__identificationNumber"
+                        />
+                    </div>
+                    <div className={s.formControl}>
+                        <select
+                            className={s.select}
+                            name="installments"
+                            id="form-checkout__installments"
+                        ></select>
+                    </div>
+                    <div className={s.formControl}>
+                        <button className={s.button} type="submit" id="form-checkout__submit" onClick={handleShow}>
+                            Pagar
+                        </button>
+                    </div>
+                    {showMsg ?
+                        resultPayment ?
+                            <p>{msg}</p>
+                            :
+                            errorPago()
                         :
-                        errorPago()
-                    :
-                    <></>
+                        <></>
+                    }
+                </form>
+                {
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Procesando el pago</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>{mensajeModel()}</Modal.Body>
+                        <Modal.Footer>
+                            {
+                                (msg !== '') &&
+                                <Button variant="primary" onClick={handleClose}>
+                                    Ok!
+                                </Button>}
+                        </Modal.Footer>
+                    </Modal>
                 }
-            </form>
-            {
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Procesando el pago</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>{mensajeModel()}</Modal.Body>
-                    <Modal.Footer>
-                        {
-                            (msg !== '') &&
-                            <Button variant="primary" onClick={handleClose}>
-                                Ok!
-                            </Button>}
-                    </Modal.Footer>
-                </Modal>
-            }
-            {
-                redir && <Redirect to="/home" />
-            }
-        </div>
+                {
+                    redir && <Redirect to="/home" />
+                }
+            </div>
+        </>
     );
 }
 

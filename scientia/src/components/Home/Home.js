@@ -1,5 +1,5 @@
-
 import React, { useEffect } from "react";
+import Filtro from "../Search/Filtro";
 import SearchBar from "../Search/SearchBar";
 import CourseList from "../../CourseList/CourseList";
 import { getAllCourses, getGenresCourses, getUsers, getUserInfo, getCart, saludo } from '../../actions/actions'
@@ -44,8 +44,13 @@ export function Home({ user, getUserInfo, getAllCourses, getGenresCourses, getCa
                 <h1>Home</h1>
             </div>
 
+            <div className="boton-filtrado">
+                <Filtro />
+            </div>
             <div className="home-div-container">
-                <SearchBar />
+                <div className="barra-filtrado">
+                    <SearchBar />
+                </div>
                 <CourseList />
             </div>
         </>

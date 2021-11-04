@@ -240,7 +240,6 @@ const handleClickVariantWrongRemovedGift = () => {
   return (
     <div >
     <div className="title-cart-div">
-
       <h1>Shopping Cart</h1>
     </div>
     <div className="wrapper-cart">
