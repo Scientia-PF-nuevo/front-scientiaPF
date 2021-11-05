@@ -7,3 +7,30 @@
 td {
     height: 60px;
 }
+
+.credit{
+    
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    
+    align-content: center;
+}
+
+.credit h4{
+    border-radius: 0.4rem;
+    padding: 0.4rem;
+    background-color: white;
+    display: flex;
+}
+
+.credit button{
+    background-color: rgb(93, 157, 187);
+    
+    font-size: 1.1rem;
+    align-content: center;
+    color: white;
+    border-radius: 0.4rem;
+    padding: 0.2rem;
+    margin-left: 0.4rem;
+}

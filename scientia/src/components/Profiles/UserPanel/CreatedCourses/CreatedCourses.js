@@ -14,13 +14,35 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import CommentIcon from '@mui/icons-material/Comment';
 import { confirmAlert } from 'react-confirm-alert';
+import { Modal, Button, Spinner } from 'react-bootstrap'
+import {useState} from 'react';
 
 
 const CreatedCourses = ({courses}) => {
   
+  const [show,setShow]= useState(false);
+
+  const handleShow = () => {setShow(true);}
+  const handleClose = () => setShow(false);
+
+//   function mensajeModel() {
+//     if (msg === '') {
+//         if (resultPayment) {
+//             // clearCartToPay()
+//             pagoOk()
+//             setMsg(`Pagado con éxito!`)
+//         }
+//         return <Spinner animation="border" variant="primary" />
+//     } else {
+//         return msg
+//     }
+// }
+
+
   const data = courses.uploadedCourses;
   
   const rejected = courses.rejectedCourses[0]
+  const credit = courses.credit;
 
   const onClickEnable = (e) => {
 
@@ -100,6 +122,9 @@ const CreatedCourses = ({courses}) => {
 
   return (
       <div className="div-coursesmanagement" style={{ maxWidth: "100%" }}>
+        
+       
+       
         <MaterialTable
           columns={columns}
           data={data}
@@ -133,6 +158,15 @@ const CreatedCourses = ({courses}) => {
             actionsColumnIndex: -1
           }}
         />
+         <br />
+        <div className="credit">
+        
+          <h4 >          
+          Your Total Credit is: <strong> ${credit}
+          </strong>
+          </h4>
+
+        </div>
       </div>
     ) 
 }
@@ -140,6 +174,7 @@ const CreatedCourses = ({courses}) => {
     const mapStateToProps = (state) => {
     return {
       courses: state.rootReducer.userInfo
+
     }
   };
 

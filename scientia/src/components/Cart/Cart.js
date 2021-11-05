@@ -215,7 +215,7 @@ export function Cart(props) {
       if (sameId) {
         handleShow()
       } else {
-        confirmOrder(userCart)
+        //confirmOrder(userCart)
         clearCart()
         setRedirect(true)
       }

@@ -27,9 +27,12 @@ function MyLearning({ courses, user, getUserInfo }) {
 
     try {
       axios.post(`/users/validateGift/${email}`, values)
-      getUserInfo(email)
-      setValues({ coupon: "" })
-      window.location.reload()
+      .then(res => {
+        getUserInfo(email)
+        setValues({ coupon: "" })
+        window.location.reload()
+        
+      })
     } catch (err) {
       alert("invalide")
     }
