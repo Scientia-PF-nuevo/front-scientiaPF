@@ -22,7 +22,7 @@ import Checkbox from '@mui/material/Checkbox';
 import styles from './modal.css.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Cart.css'
-
+import axios from "axios"
 
 export function Cart(props) {
   useEffect(() => {
@@ -192,7 +192,7 @@ export function Cart(props) {
       email: "",
       courseId: []
     }
-
+   const Giftorders = {Giftorders : gift};
 
     if (cart.length >= 1 && login) {
 
@@ -217,6 +217,8 @@ export function Cart(props) {
       // } else {
       // }
       //confirmOrder(userCart)
+      const res = axios.post(`/purchase/orders_destroy/${user.email}`, Giftorders);
+      
       clearCart()
       setRedirect(true)
 
