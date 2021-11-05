@@ -26,7 +26,7 @@ function MyLearning({ courses, user, getUserInfo }) {
   const handleClick = (e) => {
 
     try {
-      axios.post(`/users/validateGift/${email}`, values)
+      axios.post(`/users/validateGift/${email}/${values.coupon}`)
       getUserInfo(email)
       setValues({ coupon: "" })
       window.location.reload()
