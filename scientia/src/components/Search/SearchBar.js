@@ -379,36 +379,7 @@ function SearchBar({ coursesByGenre, allCourses, searchByName, getAllCourses, ge
         <br></br>
         <h3>SORT BY:</h3>
         <br></br>
-        {/* <Accordion
-          expanded={expanded === "panel5"}
-          onChange={handleChange("panel5")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
-          >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-              <strong>DATE</strong>
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <RadioGroup name="use-radio-group" defaultValue="first">
-                <MyFormControlLabel
-                  value="new"
-                  label="NEWEST"
-                  control={<Radio onChange={handleSelect2} />}
-                />
-                <MyFormControlLabel
-                  value="old"
-                  label="OLDER"
-                  control={<Radio onChange={handleSelect2} />}
-                />
-              </RadioGroup>
-            </Typography>
-          </AccordionDetails>
-        </Accordion> */}
+       
         <Accordion
           expanded={expanded === "panel6"}
           onChange={handleChange("panel6")}

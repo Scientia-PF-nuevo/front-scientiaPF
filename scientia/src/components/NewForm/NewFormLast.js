@@ -4,8 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCourseToAprove, clearReduxer, getGenresCourses } from '../../actions/actions';
 import { Modal, Button } from 'react-bootstrap'
 import barra6 from '../../images/barras/barra6.png';
+import { useSnackbar } from 'notistack';
+import Slide from '@material-ui/core/Slide';
 
 export default function NewFormLast(props) {
+
+    const { enqueueSnackbar } = useSnackbar();
+
+    const handleClickVariantOk = () => {
+      enqueueSnackbar('COURSE CREATED CORRECTLY, PENDING APPROVAL', {
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'left',
+        },
+        TransitionComponent: Slide,
+        variant: 'success',
+      })
+    }
 
     const [show, setShow] = useState(false)
     const [msg, setMsg] = useState('')
@@ -79,7 +94,7 @@ export default function NewFormLast(props) {
         });
 
         dispatch(clearReduxer())
-
+        handleClickVariantOk('ok')
         // Redirect
         props.history.push('/home');
     };

@@ -20,6 +20,7 @@ import topSeller from '../../assets/topSeller.jpg'
 import dicount from '../../assets/discount.png'
 import 'react-modal-video/scss/modal-video.scss'
 import './Details.css'
+import goodSeller from '../../assets/goodSeller.jpg'
 
 
 
@@ -135,9 +136,19 @@ function Details({
         <CardHeader
           action={
             <>
-              <IconButton aria-label="add to shopping cart">
+            {
+              (price !== 0) 
+              
+              ? 
+              
+              (<IconButton aria-label="add to shopping cart">
                 <AddShoppingCartIcon onClick={() => validarCart(id)} />
-              </IconButton>
+              </IconButton>) 
+              
+              : 
+              
+              (<></>)
+            }
             </>
           }
           title={`COURSE OF ${name && name.toUpperCase()}`}
@@ -178,7 +189,7 @@ function Details({
           <br></br>
           <Typography>
             <strong>DATE: </strong>
-            {date ? date : "NO DATE"}
+            {date ? date.slice(0,10) : "NO DATE"}
           </Typography>
           <br></br>
           <TextRating score={score ? score : 0} />
@@ -188,24 +199,37 @@ function Details({
             {description ? description : "NO INFO"}
             <br></br>
             <br></br>
-            {solds > 100 ? ( // only for testing (solds > 100)
-              <img src={topSeller} alt="disc" className="discount"></img>
-            ) : null}
-            {solds > 20 && solds < 100 ? ( // only for testing (solds > 20 && solds < 100)
-              <img src={bestSeller} alt="disc" className="discount"></img>
-            ) : null}
-            {numbersOfDiscounts > 0 ? (
-              <img src={dicount} alt="disc" className="discount"></img>
-            ) : null}
+        {numbersOfDiscounts > 0 ? (
+          <img src={dicount} alt="disc" className="discount"></img>
+        ) : null}
+        {(solds > 170 && price !== 0) ? (
+          <img src={topSeller} alt="disc" className="discount"></img>
+        ) : null}
+        {(solds > 120 && solds < 170 && price !== 0)? (
+          <img src={bestSeller} alt="disc" className="discount"></img>
+        ) : null}
+        {(solds > 100 && solds < 120 && price !== 0)? (
+          <img src={goodSeller} alt="disc" className="discount"></img>
+        ) : null}
           </Typography>
           <br></br>
         </CardContent>
         <br></br>
-        <div className="confirm-button-div">
+        {
+          (price !== 0) 
+          
+          ? 
+          
+          ( <div className="confirm-button-div">
           <button className="confirm-button" onClick={() => validarCart(id)}>
             ADD TO CART
           </button>
-        </div>
+        </div>) 
+          
+          : 
+          
+          (<></>) 
+        }
         <br></br>
         <CardActions>
           <ExpandMore

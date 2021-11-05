@@ -74,7 +74,6 @@ export function Cart(props) {
     login,
     removeCart,
     addDetails,
-    confirmOrder,
     deleteCartLogged,
     clearCart,
     addGift,
@@ -82,7 +81,6 @@ export function Cart(props) {
     gift
   } = props;
 
-  // const [show, setShow] = useState(false);
   const [redirect, setRedirect] = useState(false)
 
   const [checked, setChecked] = React.useState({
@@ -152,8 +150,6 @@ export function Cart(props) {
 
   };
   const handleChangeGift = (e) => setChecked({ ...checked, [e.target.name]: e.target.value })
-  // const handleShow = () => setShow(true);
-  // const handleClose = () => setShow(false);
 
   let history = useHistory();
 
@@ -163,10 +159,6 @@ export function Cart(props) {
   useEffect(() => {
     user.email && getUserInfo(user.email)
   }, [])
-
-  // function mensajeModel() {
-  //   return `Ya posees el/los curso/s!`
-  // }
 
   var result = 0;
   var taxs = 0;
@@ -199,24 +191,6 @@ export function Cart(props) {
       userCart.courseId = cart.map((course) => course.id)
       userCart.email = user.email
 
-      // var matchedIDs = []
-      // var sameId = false;
-      // if (arrIDCourses) {
-      //   for (let i = 0; i < userCart.courseId.length; i++) {
-      //     for (let j = 0; j < arrIDCourses.length; j++) {
-      //       if (userCart.courseId[i] === arrIDCourses[j]) {
-      //         sameId = true;
-      //         matchedIDs.push(userCart.courseId[i])
-      //       }
-      //     }
-      //   }
-      // }
-
-      // if (sameId) {
-      //   // handleShow()
-      // } else {
-      // }
-      //confirmOrder(userCart)
       const res = axios.post(`/purchase/orders_destroy/${user.email}`, Giftorders);
       
       clearCart()
@@ -261,7 +235,6 @@ export function Cart(props) {
                 <th style={{ textAlign: "center" }}>Price</th>
                 <th style={{ textAlign: "center" }}>Gift a Course</th>
                 <th style={{ textAlign: "center" }}>ID</th>
-                {/* <th style={{ textAlign: "center" }}>Sub-Total</th> */}
                 <th style={{ textAlign: "center" }}>Remove</th>
               </tr>
             </thead>
@@ -323,11 +296,6 @@ export function Cart(props) {
                         <p>GIFT</p>
                       </div>
                     </td>
-                    {/* <td style={{ textAlign: "center" }}>
-                    <div className="div-center">
-                      <h3 style={{ color: "red" }}>{Total()}</h3>
-                    </div>
-                  </td> */}
                     <td style={{ textAlign: "center" }}>
                       <div className="div-center">
                         <p>#{course.coursesId}</p>
@@ -379,18 +347,6 @@ export function Cart(props) {
           <br></br>
         </div>
       </div>
-
-      {/* <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>YA POSEE ESTOS CURSOS</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{mensajeModel()}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Ok!
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
 
       {redirect ? <Redirect to="/payment" /> : <></>}
       <Modal show={show2} onHide={handleClose3} style={styles.modal}>

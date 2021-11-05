@@ -20,7 +20,6 @@ function Comments({coursesReviews}) {
             <Paper style={{ padding: "40px 20px" }}>
               <Grid container wrap="nowrap" spacing={2}>
                 <Grid item>
-                  {/* <Avatar alt="Remy Sharp" src={imgLink} /> */}
                 </Grid>
                 <Grid justifyContent="left" item xs zeroMinWidth>
                   <h4 style={{ margin: 0, textAlign: "left", color: "red" }}>{rev.commentUser}</h4>

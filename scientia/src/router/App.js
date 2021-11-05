@@ -24,7 +24,6 @@ import AdminPanel from '../components/Profiles/AdminPanel/AdminPanel';
 import UserPanel from '../components/Profiles/UserPanel/UserPanel';
 import SignUp from '../components/SignUp/SignUp';
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
 import './App.css';
 
 
@@ -47,7 +46,6 @@ function App() {
           <Login />
         </Route>
 
-
         <Route exact path='/signup'>
           <SignUp />
         </Route>
@@ -58,7 +56,6 @@ function App() {
 
         <Route exact path='/mylearning' component={isLogin === true ? MyLearning : Home }  />
      
-
         <Route exact path='/home'>
           <Home />
         </Route>
@@ -89,16 +86,8 @@ function App() {
 
         <Route exact path='/addCourses_step_final' component={isLogin === true ? NewFormLast : Home} />
 
-
         <Route exact path='/userprofile' component={isLogin === true ? (user.isAdmin ? AdminPanel : UserPanel)  : Home} />
         
-      {/*   <Route path='/userprofile'>
-          {user.isAdmin ? <Redirect to="/adminprofile" /> : <UserPanel />}
-        </Route> */}
-{/* 
-        <Route path='/adminprofile'>
-          {user.isAdmin ? <AdminPanel /> : <Redirect to="/" />}
-        </Route> */}
         <Footer />
       </Router>
     </div>

@@ -30,9 +30,7 @@ import {
     CLEAR_CART_TO_PAY,
     REMOVE_ALL_GIFT,
     ADD_FREE_COURSE,
-    SALUDO,
     GET_ALL_CATEGORIES,
-    BIENVENIDO,
     DELETE_COURSE
 } from '../actions/constants';
 

@@ -76,7 +76,7 @@ const handleClickVariantWrongEmail = () => {
     
     const handleDeleteSubmit = () => {
       
-      if (emailUser.emailGift == email) {   
+      if (emailUser.emailGift === email) {   
         deleteCourse(email, id)
         setShow(false)
         window.location.href="/mylearning"

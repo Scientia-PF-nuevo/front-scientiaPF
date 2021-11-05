@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux'
 import CourseCard from '../components/CourseCard/CourseCard'
 import './CourseList.css'
@@ -32,19 +32,6 @@ function CourseList({ courses}) {
     var arrCourse = []
     arrCourse.push(courses)
   }
-
-//  React.useEffect(() => {
-      
-// }, [])
-// if(typeof courses !== "undefined" && typeof courses !== "string" && courses.length >= 1) {
-//   var coursesTopSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(0, 10)
-//   var coursesBestSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(11, 30)
-//   var coursesGoodSeller = courses.map((c) => c.solds).sort((a,b) => b - a).slice(31, 60)
-//   // var mostSolds = courses.sort((a,b) => a - b)
-//   // console.log(mostSolds)
-
-//   // courses.filter((c) =>  )
-// }
 
   return (
     <div className="div-wrapper-course-list">

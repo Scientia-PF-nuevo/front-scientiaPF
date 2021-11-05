@@ -1,4 +1,3 @@
-import { WindowSharp } from '@mui/icons-material';
 import axios from 'axios';
 import {
     getAuth,
@@ -33,7 +32,6 @@ import {
     LOGIN,
     LOGOUT,
     ADD_DETAILS,
-    SET_COURSE_TOAPROVE,
     NEW_USER,
     SET_VIDEO,
     VIDEO_PLAYING,

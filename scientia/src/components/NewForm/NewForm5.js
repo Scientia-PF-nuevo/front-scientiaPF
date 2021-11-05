@@ -16,8 +16,8 @@ export default function NewForm5(props) {
         getGenresCourses()
     }, [])
     const dispatch = useDispatch();
-    const categories = useSelector(state => state.rootReducer.coursesByGenre);
-    const user = useSelector(state => state.rootReducer.user);
+    // const categories = useSelector(state => state.rootReducer.coursesByGenre);
+    // const user = useSelector(state => state.rootReducer.user);
     const reduxer = useSelector(state => state.reducerForm)
 
     const [course, setCourse] = useState({

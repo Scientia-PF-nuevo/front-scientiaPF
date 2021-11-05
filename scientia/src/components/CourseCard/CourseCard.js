@@ -209,20 +209,12 @@ const handleClickVariantWrong = () => {
             ) : (
               <strong>Price : ${price}</strong>
             )}
-            {/* {percentageDiscount > 0 ? (
-              <>
-                <strong style={{ textDecoration: "line-through" }}>
-                  Price : ${price}
-                </strong>{" "}
-                <strong>({percentageDiscount}% OFF) : ${offer.toFixed(2)}</strong>
-              </>
-            ) : (
-              <strong>Price : ${price}</strong>
-            )} */}
           </p>
         </div>
         <div className="info-price-div2">
-          <p>solds:({solds})</p>
+        {
+          (price !== 0) ? (<p><strong>Solds:</strong>({solds})</p>) : (<p></p>)
+        }
         </div>
         <TextRating score={score} />
         <div className="button-container">
@@ -236,7 +228,7 @@ const handleClickVariantWrong = () => {
               </button>
             </Link>
           )}
-          {price == 0 ? (
+          {price === 0 ? (
             bothIds.filter((bId) => bId === id)[0] === id ? (
               <button onClick={handdlePlay} className="cart-button-play">
                 PLAY
