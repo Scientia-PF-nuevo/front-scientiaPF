@@ -97,6 +97,8 @@ const CreatedCourses = ({courses}) => {
     }
   ]
 
+  const credit = courses.credit;
+
 
   return (
       <div className="div-coursesmanagement" style={{ maxWidth: "100%" }}>
@@ -133,6 +135,15 @@ const CreatedCourses = ({courses}) => {
             actionsColumnIndex: -1
           }}
         />
+      <br></br>
+      <div className="credit">
+
+          <h4 >
+          Your Total Credit is: <strong> ${credit}
+          </strong>
+          </h4>
+
+        </div>
       </div>
     ) 
 }

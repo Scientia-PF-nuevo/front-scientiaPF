@@ -64,7 +64,7 @@ export default function NewForm2(props) {
         </div>
         <div className="form-div-container">
             <form>
-                <h1>ADD NEW DESCRPTION</h1>
+                <h1>ADD NEW DESCRIPTION</h1>
                 <br></br>
                 <TextField required 
                 style={{marginBottom:"10px"}}
