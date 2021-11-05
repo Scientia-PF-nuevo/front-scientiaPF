@@ -23,7 +23,7 @@ function MyLearning({ courses, user, getUserInfo }) {
     setValues({ ...values, coupon: value })
   }
 
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
 
     try {
       axios.post(`/users/validateGift/${email}`, values)

@@ -140,7 +140,7 @@ function Details({
               </IconButton>
             </>
           }
-          title={name && name.toUpperCase()}
+          title={`COURSE OF ${name && name.toUpperCase()}`}
           subheader={`Price: $${price - (percentageDiscount / 100) * price}`}
         />
         <CardMedia component="img" height="500" image={url} alt="Paella dish" />

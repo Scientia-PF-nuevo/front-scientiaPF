@@ -91,7 +91,7 @@ const handleClickVariantWrongEmail = () => {
       <div className="button-delete-div">
           <button className="button-delete-course" onClick={handdleDeleteCourse}><p>X</p></button>
       </div>
-        <div className="title-course2"><h5>{name && name.toUpperCase()}</h5></div>
+        <div className="title-course2"><h5>COURSE OF {name && name.toUpperCase()}</h5></div>
         <div className="course-div-card2">
           {url ? (
             <img src={`${url}`} alt="Course" className="Img"></img>
