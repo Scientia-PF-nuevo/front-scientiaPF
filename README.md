@@ -14,8 +14,6 @@ Notifications: Nodemailer (EJS)
 
 Others: Cloudinary
 
-Deploy: https://front-scientia-pf.vercel.app/
-
 ### Objective
 
 - Apply best practices
